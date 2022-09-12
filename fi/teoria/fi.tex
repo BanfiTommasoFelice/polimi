@@ -1,0 +1,69 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[italian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, left=18mm, right=18mm, top=20mm, bottom=20mm]{geometry}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{interval}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{cancel}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{nicefrac}
+\usepackage{enumitem}
+\usepackage{verbatim}
+\usepackage{tabularray}
+\usepackage[T1]{fontenc}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Fondamenti di informatica},
+    % bookmarks=true,
+    bookmarksopen=true,
+    pdfpagemode=UseOutlines,
+    pdfauthor={Amato Michele Pasquale},
+}
+
+\newtheorem{definition}{Definizione}
+
+\title{\huge Fondamenti di informatica}
+\author{Amato Michele Pasquale}
+\date{\today}
+
+\pgfplotsset{compat = newest}
+\makeatletter
+\renewcommand\l@subsection{\@dottedtocline{2}{1.5em}{3em}}
+\makeatother
+\setitemize{noitemsep,topsep=3pt,parsep=0pt,partopsep=0pt}
+\setenumerate{noitemsep,topsep=3pt,parsep=0pt,partopsep=0pt}
+
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+
+\newenvironment{example}
+{
+  \noindent\textsc{\textbf{Esempio}}\hspace{1em}%
+}%
+{\hfill$\nsim$}
+
+\begin{document}
+\pagenumbering{gobble}
+\maketitle
+\vfill
+\begin{center}
+  \emph{Efficienza è fare le cose bene. \\ Efficacia è fare le cose giuste.}
+\end{center}
+\newpage
+\pagenumbering{roman}
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+\part{La rappresentazione dell'informazione}
+\input{01.tex}
+\end{document}

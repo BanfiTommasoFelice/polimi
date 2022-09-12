@@ -1,0 +1,64 @@
+% lezione del 12/09/2022
+
+Il problema che ci si pone è trovare un modo opportuno per rappresentare all'interno di un sistema di calcolo le informazioni in modo efficiente, rispetto alla realtà fisica del sistema e alla loro manipolazione.
+
+\begin{definition}[Alfabeto]
+  Si definisce \textbf{alfabeto} un insieme di simboli utilizzabili e, pertanto, distinguibili tra loro.
+\end{definition}
+
+\begin{definition}[Codice]
+  Si definisce \textbf{codice} l'insieme delle sequenze di simboli o delle regole per definire le combinazioni ammissibili.
+\end{definition}
+
+Dati l'insieme degli elementi da rappresentare e l'insieme delle configurazioni ammissibili, il codice ne definisce la relazione biunivoca.
+Le configurazioni ammissibili hanno tutte egual dimensione. Tale dimensione dipende sia dall'alfabeto, sia dalla quantità di elementi da rappresentare: siano $S$ l'alfabeto di riferimento e $\abs{S}$ la sua cardinalità (ossia il numero di simboli che lo compone), se si vogliono rappresentare $n$ elementi, ogni elemento avrà dimensione:
+$$k=\ceil{\log_{\abs{S}} n}$$
+Al contrario, se gli elementi di un codice hanno lunghezza $k$, le combinazioni ammissibili sono:
+$$n=\abs{S}^k$$
+
+\section{Rappresentazione binaria}
+
+I componenti elettronici che costituiscono il sistema di calcolo sono caratterizzati da una realtà costituita da due stati (condensatore carico/scarico, tensione alta/bassa, etc...). Si effettua, quindi, una mappatura diretta con un sistema costituito da \textbf{due simboli} che, pertanto, si chiama \textbf{binario}. L'alfabeto di riferimento diventa $\left\{ 0,1 \right\}$.
+
+La cifra della codifica (0 o 1) prende il nome di \textbf{bit}, dall'inglese \emph{\textbf{bi}nary digi\textbf{t}}. L'insieme ordinato di 8 bit prende il nome di \textbf{byte}. Come per le cifre decimali, si ha una nomenclatura per le potenze della base:
+\begin{center}
+  \begin{tblr}{colspec={c|c}, cells={c,m}, columns={20mm}}
+    \textbf{Nome} & \textbf{Quantità} \\
+    \hline
+    KB            & $2^{10}$          \\
+    MB            & $2^{20}$          \\
+    GB            & $2^{30}$          \\
+    TB            & $2^{40}$          \\
+  \end{tblr}
+\end{center}
+
+\begin{example}
+  Se si vogliono rappresentare i giorni della settimana usando l'alfabeto binario, si calcola la dimensione del singolo elemento:
+  $$k=\ceil{\log_27}=3$$
+  e si assegna ad ogni combinazione di 3 bit un giorno della settimana distinto:
+  \begin{center}
+    \begin{tblr}{colspec={c|c|c|c|c|c|c}, cells={c,m}, columns={18mm}}
+      Lunedì & Martedì & Mercoledì & Giovedì & Venerdì & Sabato & Domenica \\
+      \hline
+      000    & 001     & 010       & 011     & 100     & 101    & 110      
+    \end{tblr}
+  \end{center}
+  Da notare che non viene utilizzata la combinazione 111, in quanto le combinazioni ammissibili sono $2^3=8$ ma per le necessità del caso ne servono solo 7.
+\end{example}
+
+Nella scelta della codifica da adottare, bisogna tenere a mente alcuni aspetti:
+\begin{itemize}
+  \item l'insieme degli elementi da rappresentare;
+  \item il grado di semplificazione delle operazioni più eseguite;
+  \item il grado di conservazione delle proprietà dell'insieme originale.
+\end{itemize}
+
+L'informazione può essere, per comodità, suddivisa in aree:
+
+\begin{center}
+  \begin{tblr}{colspec={c|c|c|c|c|c}, cells={c,m}, columns={20mm}}
+    \SetCell[c=6]{c} Informazione                                                                       \\ \hline
+    \SetCell[c=3]{c} Numerica &          &           & \SetCell[c=3]{c} Non numerica                    \\ \hline
+    Naturali                  & Relativi & Razionali & Testi                         & Audio & Immagini 
+  \end{tblr}
+\end{center}
