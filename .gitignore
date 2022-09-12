@@ -1,0 +1,14 @@
+*.pdf
+*-blx.bib
+*.aux
+*.dvi
+*.fdb_latexmk
+*.fls
+*.log
+*.run.xml
+*.synctex.gz
+*.toc
+*.ilg
+*.out
+__latexindent_temp.tex
+*.pdf
