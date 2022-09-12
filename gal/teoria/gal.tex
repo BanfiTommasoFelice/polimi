@@ -1,0 +1,86 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[italian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, left=18mm, right=18mm, top=20mm, bottom=20mm]{geometry}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{interval}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{cancel}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{nicefrac}
+\usepackage{enumitem}
+\usepackage{verbatim}
+\usepackage{tabularray}
+\usepackage[T1]{fontenc}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Geometria e algebra lineare},
+    % bookmarks=true,
+    bookmarksopen=true,
+    pdfpagemode=UseOutlines,
+    pdfauthor={Amato Michele Pasquale},
+}
+
+\title{\huge Geometria e algebra lineare}
+\author{Amato Michele Pasquale}
+\date{\today}
+
+\pgfplotsset{compat = newest}
+\makeatletter
+\renewcommand\l@subsection{\@dottedtocline{2}{1.5em}{3em}}
+\makeatother
+\setitemize{noitemsep,topsep=3pt,parsep=0pt,partopsep=0pt}
+\setenumerate{noitemsep,topsep=3pt,parsep=0pt,partopsep=0pt}
+
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+\newtheorem{theorem}{Teorema}
+\newtheorem{definition}{Definizione}
+\newtheorem{lemma}{Lemma}
+\newtheorem{axiom}{Assioma}
+\newtheorem{corollary}{Corollario}
+\renewcommand\qedsymbol{$\blacksquare$}
+\newcommand{\asin}{\arcsin}
+\newcommand{\acos}{\arccos}
+\newcommand{\atan}{\arctan}
+\newcommand{\impl}{\Rightarrow}
+\setitemize{noitemsep,topsep=3pt,parsep=0pt,partopsep=0pt}
+\setenumerate{noitemsep,topsep=3pt,parsep=0pt,partopsep=0pt}
+\newcommand{\triang}[1]{\overset{\triangle}{#1}}
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+\renewcommand{\c}{\gamma}
+\renewcommand{\(}{\left(}
+\renewcommand{\)}{\right)}
+\renewcommand{\mod}[1]{\ \( \mathrm{mod}\ #1 \)}
+
+\newenvironment{example}
+{
+  \noindent\textsc{\textbf{Esempio}}\hspace{1em}%
+}%
+{\hfill$\nsim$}
+
+\begin{document}
+\pagenumbering{gobble}
+\maketitle
+\vfill
+\begin{center}
+  \emph{}
+\end{center}
+\newpage
+\pagenumbering{roman}
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+\part{Vettori e matrici}
+\input{01.tex}
+\end{document}

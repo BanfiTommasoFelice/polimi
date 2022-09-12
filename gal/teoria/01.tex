@@ -1,0 +1,217 @@
+% lezione del 12/09/2022
+
+\section{Vettori}
+
+\begin{definition}[Vettore]
+  Si definisce \textbf{vettore} un insieme ordinato di $n$ elementi.
+\end{definition}
+
+Un vettore si indica con la notazione:
+$$\(x_1,x_2,x_3,...,x_n\)$$
+dove $n$ è il numero di elementi. Un vettore avente 2 elementi prende il nome di ``2--vettore'', quello che ne ha 3 ``3--vettore'' e così via.
+
+\begin{definition}[Somma di vettori]
+  La somma di due vettori aventi lo stesso numero di elementi è un vettore avente la loro stessa dimensione e, per ogni elemento, la somma dei rispettivi elementi.
+  $$\(x_1,x_2,...,x_n\)+\(y_1,y_2,...,y_n\)=\(x_1+y_1,x_2+y_2,...,x_n+y_n\)$$
+\end{definition}
+
+\begin{example}
+  $$\(1,2\)+\(3,4\)=\(4,6\)$$
+\end{example}
+
+\begin{definition}[Prodotto per uno scalare]
+  Il prodotto di uno scalare per un vettore è un vettore avente la stessa dimensione e, per ogni elemento, il prodotto dell'elemento per lo scalare.
+  $$t\(x_1,x_2,...,x_n\)=\(tx_1,tx_2,...,tx_n\)$$
+\end{definition}
+
+\begin{example}
+  $$2\(2,5,-1\)=\(4,10,-2\)$$
+\end{example}
+
+\begin{definition}[Vettore nullo]
+  Si definisce \textbf{vettore nullo} e si indica con $\vec{0}$ un vettore che ha come elementi solo 0.
+  $$\vec{0}=\(0,0,0,...,0\)$$
+\end{definition}
+
+\begin{definition}[Vettore opposto]
+  Si definisce \textbf{vettore opposto} e si indica con $-v$ il prodotto scalare del vettore $v$ per $-1$.
+  $$-v=\(-1\)v$$
+\end{definition}
+
+\begin{example}
+  $$-\(1,-5\)=\(-1,5\)$$
+\end{example}
+
+I vettori godono di alcune proprietà:
+\paragraph*{Proprietà associativa}
+$$\(v_1+v_2\)+v_3=v_1+\(v_2+v_3\)$$
+\paragraph*{Proprietà commutativa}
+$$v_1+v_2=v_2+v_1$$
+\paragraph*{Esistenza dell'elemento neutro}
+$$v+\vec{0}=\vec{0}+v=v$$
+\paragraph*{Esistenza dell'opposto}
+$$v+\(-v\)=\vec{0}$$
+\paragraph*{Proprietà distributiva 1}
+$$t\(v_1+v_2\)=tv_1+tv_2$$
+\paragraph*{Proprietà distributiva 2}
+$$\(t_1+t_2\)v=t_1v+t_2v$$
+\paragraph*{Proprietà associativa mista}
+$$\(ts\)v=t\(sv\)$$
+\paragraph*{Legge di unità}
+$$1v=v$$
+
+\begin{definition}[Differenza tra vettori]
+  La differenza fra due vettori della stessa dimensione è la somma del primo più l'opposto del secondo.
+  $$v_1-v_2=v_1+\(-v_2\)$$
+\end{definition}
+\begin{example}
+  $$\(10,7,8\)-\(2,9,1\)=\(8,-2,7\)$$
+\end{example}
+
+\section{Matrici}
+
+\begin{definition}[Matrice]
+  Si definisce \textbf{matrice} $n\times m$ una tabella avente $n$ righe e $m$ colonne.
+\end{definition}
+\begin{example}
+  $$
+    \begin{pmatrix}
+      1 & 2 & 3 \\
+      4 & 5 & 6 
+    \end{pmatrix}
+  $$
+\end{example}
+\begin{definition}[Matrice quadrata]
+  Si definisce \textbf{matrice quadrata} una matrice avente lo stesso numero di righe e colonne.
+\end{definition}
+\begin{example}
+  $$
+    \begin{pmatrix}
+      1 & 2 \\
+      3 & 4 
+    \end{pmatrix}
+  $$
+\end{example}
+
+Nel caso particolare di una matrice $0\times 0$, la matrice prende il nome di \textbf{matrice vuota}. Le matrici $1\times m$ sono gli $m$--vettori. Le matrici $n\times 1$ prendono il nome di $n$--vettori colonna e sono equiparati agli $n$--vettori.
+
+Una matrice generica $n\times m$ si indica nel seguente modo:
+$$\(a_{ij}\)$$
+
+La matrice avente tutti gli elementi pari a 0 prende il nome di \textbf{matrice nulla}:
+$$
+  \begin{pmatrix}
+    0 & 0 \\
+    0 & 0 
+  \end{pmatrix}
+$$
+
+\begin{definition}[Matrice identità]
+  Si definisce \textbf{matrice identità} una matrice quadrata che ha tutti gli elementi nulli, eccetto quelli sulla diagonale, che sono 1.
+\end{definition}
+\begin{example}
+  $$
+    \begin{pmatrix}
+      1 & 0 & 0 \\
+      0 & 1 & 0 \\
+      0 & 0 & 1 
+    \end{pmatrix}
+  $$
+\end{example}
+
+La matrice identità di lunghezza $n$ prende il nome di \textbf{matrice identità di ordine $n$} e si indica con $I_n$.
+
+\begin{definition}[Somma di matrici]
+  La somma di due matrici della stessa dimensione è una matrice della loro dimensione dove ogni elemento è la somma dei rispettivi altri due.
+  $$\(a_{ij}\)+\(b_{ij}\)=\(a_{ij}+b_{ij}\)$$
+\end{definition}
+
+\begin{example}
+  $$
+    \begin{pmatrix}
+      1  & -2 & 3 \\
+      -1 & 0  & 2 
+    \end{pmatrix}
+    +
+    \begin{pmatrix}
+      5  & 1  & 2 \\
+      -2 & -1 & 4 
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      6  & -1 & 5 \\
+      -3 & -1 & 6 
+    \end{pmatrix}
+  $$
+\end{example}
+
+\begin{definition}[Prodotto per uno scalare]
+  Il prodotto di una matrice per uno scalare è una matrice avente la stessa dimensione e dove ogni elemento è il prodotto dell'elemento per lo scalare.
+  $$t\(a_{ij}\)=\(ta_{ij}\)$$
+\end{definition}
+\begin{example}
+  $$
+    3
+    \begin{pmatrix}
+      1  & -2 & 3 \\
+      -1 & 0  & 2 
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      3  & -6 & 9 \\
+      -3 & 0  & 6 
+    \end{pmatrix}
+  $$
+\end{example}
+
+Le proprietà di cui godono i vettori valgono anche per le matrici.
+
+\begin{definition}[Matrici conformabili]
+  Una matrice $A$ si dice conformabile ad una matrice $B$ se il numero di colonne di $A$ è uguale al numero di righe di $B$.
+\end{definition}
+\begin{example}
+  $$
+    \begin{pmatrix}
+      1 & 2 & 3 \\
+      4 & 5 & 6 
+    \end{pmatrix}
+    \text{conformabile a}
+    \begin{pmatrix}
+      1 & 2 \\
+      3 & 4 \\
+      5 & 6 
+    \end{pmatrix}
+  $$
+\end{example}
+
+\begin{definition}[Prodotto tra matrici]
+  Il prodotto di $A\left( n\times m \right)$ e $B\left( m\times k \right)$, con $A$ conformabile a $B$, è una nuova matrice $C\left( n\times k \right)$ i cui elementi sono dati da:
+  $$c_{ij}=\sum_{t=1}^ma_{it}b_{tj}$$
+\end{definition}
+\begin{example}
+  $$
+    \begin{pmatrix}
+      0 & 2 & -2 \\
+      1 & 0 & 1  
+    \end{pmatrix}
+    \cdot
+    \begin{pmatrix}
+      1 & 1 & 1  & 1  \\
+      0 & 1 & 1  & 0  \\
+      3 & 3 & -1 & -3 
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      -6 & -4 & 4 & 6  \\
+      4  & 4  & 0 & -2 
+    \end{pmatrix}
+  $$
+  $$c_{11}=\begin{pmatrix}0&2&-2\end{pmatrix}\cdot\begin{pmatrix}1&0&3\end{pmatrix}=0+0-6=-6$$
+  $$c_{12}=\begin{pmatrix}0&2&-2\end{pmatrix}\cdot\begin{pmatrix}1&1&3\end{pmatrix}=0+2-6=-4$$
+  $$c_{13}=\begin{pmatrix}0&2&-2\end{pmatrix}\cdot\begin{pmatrix}1&1&-1\end{pmatrix}=0+2+2=4$$
+  $$c_{14}=\begin{pmatrix}0&2&-2\end{pmatrix}\cdot\begin{pmatrix}1&0&-3\end{pmatrix}=0+0+6=6$$
+  $$c_{21}=\begin{pmatrix}1&0&1\end{pmatrix}\cdot\begin{pmatrix}1&0&3\end{pmatrix}=1+0+3=4$$
+  $$c_{22}=\begin{pmatrix}1&0&1\end{pmatrix}\cdot\begin{pmatrix}1&1&3\end{pmatrix}=1+0+3=4$$
+  $$c_{23}=\begin{pmatrix}1&0&1\end{pmatrix}\cdot\begin{pmatrix}1&1&-1\end{pmatrix}=1+0-1=0$$
+  $$c_{24}=\begin{pmatrix}1&0&1\end{pmatrix}\cdot\begin{pmatrix}1&0&-3\end{pmatrix}=1+0-3=-2$$
+\end{example}
