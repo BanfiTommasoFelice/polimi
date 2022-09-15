@@ -17,6 +17,8 @@
 \usepackage{verbatim}
 \usepackage{tabularray}
 \usepackage[T1]{fontenc}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
 
 \hypersetup{
   colorlinks=true,
@@ -31,6 +33,11 @@
 }
 
 \newtheorem{definition}{Definizione}
+\renewcommand{\(}{\left(}
+\renewcommand{\)}{\right)}
+\newcommand{\impl}{\Rightarrow}
+\DeclareMathOperator{\sgn}{sgn}
+\renewcommand{\epsilon}{\varepsilon}
 
 \title{\huge Fondamenti di informatica}
 \author{Amato Michele Pasquale}

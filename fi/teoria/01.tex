@@ -62,3 +62,406 @@ L'informazione può essere, per comodità, suddivisa in aree:
     Naturali                  & Relativi & Razionali & Testi                         & Audio & Immagini 
   \end{tblr}
 \end{center}
+
+% lezione del 13/09/2022
+
+La notazione che si usa in base 10 è una \textbf{notazione posizionale pesata}, vale a dire che ogni cifra vale in base alla posizione che essa occupa all'interno del numero. Il valore del numero, infatti, è dato da
+$$\text{valore}=\sum_{0}^nc_ib^i$$
+dove $c_i$ è la cifra in posizione $i$ e $b$ è la base di riferimento.
+
+\begin{example}
+  $$315_{10}=3\cdot10^2+1\cdot10^1+5\cdot10^0$$
+\end{example}
+
+Nella notazione in base 2, si definisce un codice che associa al valore numerico una configurazione, in cui la cifra più a destra è la cifra meno significativa (\textbf{LSB}, Least Significant Bit), mentre quella più a sinistra è quella più significativa (\textbf{MSB}, Most Significant Bit).
+
+\section{Conversione di base}
+Idealmente, ogni qualvolta si vuole rappresentare una quantità in una certa base, si vogliono implicitamente rappresentare in un'altra base tutte le quantità minori uguali a quella di partenza, non avrebbe senso altrimenti\footnote{se me ne serve solo uno, uso il primo valore disponibile}.
+
+Se $n$ è il valore da rappresentare, significa che in base 2 si avrà bisogno di $k$ bits:
+$$k=\ceil{\log_2\(n+1\)}$$
+\paragraph*{Osservazione} L'argomento del logaritmo è $n+1$ in quanto bisogna anche considerare lo 0.
+
+Per passare da una base $a$ ad una base $b$, con $a<b$, si procede nel seguente modo: si moltiplica ogni coefficiente per la base elevata alla sua posizione e poi si sommano tutti i prodotti ottenuti.
+
+\begin{example}
+  $$1010_2=1\cdot2^3+0\cdot2^2+1\cdot2^1+0\cdot2^0=8+0+2+0=10_{10}$$
+\end{example}
+
+Per passare da una base $a$ ad una base $b$, con $a>b$, si procede nel seguente modo:
+
+\begin{enumerate}
+  \item si divide il numero per la base;
+  \item si prende il resto;
+  \item si ripete il processo con il quoziente ottenuto.
+\end{enumerate}
+
+Il processo si conclude quando il quoziente diventa 0. Il risultato non è altro che la sequenza ordinata dei resti ottenuti, letta al contrario. 
+
+\begin{example}
+  \begin{center}
+    \begin{tblr}{c|c}
+      17 & 1 \\
+      8  & 0 \\
+      4  & 0 \\
+      2  & 0 \\
+      1  & 1 
+    \end{tblr}
+    $$\impl 17_{10}=10001_2$$
+  \end{center}
+\end{example}
+
+Le modalità con cui si trasformano le quantità fra le diverse basi sono interscambiabili, pertanto si dicono metodi.
+
+\section{Modulo e segno}
+
+Nella notazione decimale si utilizza la forma ``modulo e segno'' per esprimere i numeri relativi:
+$$-11\;\;+4$$
+
+Tale ragionamento non si può estendere alla rappresentazione binaria, perché richiederebbe l'introduzione un nuovo simbolo per `$+$' o `$-$'. Pertanto, per convenzione, il primo bit indica il segno, che può essere 0 se è positivo, 1 se è negativo:
+$$+17_{10\text{MS}}=010001_{2\text{MS}}$$
+$$-17_{10\text{MS}}=110001_{2\text{MS}}$$
+$$-23_{10\text{MS}}=110111_{2\text{MS}}$$
+
+Si devono eseguire le operazioni aritmetiche usando la notazione modulo e segno.
+\begin{center}
+  \begin{tblr}{c|c}
+    $
+      \begin{aligned}
+        x & =+11_{10\text{MS}} \\
+        y & =+8_{10\text{MS}}  \\
+        z & =-7_{10\text{MS}}  \\
+      \end{aligned}
+    $
+     & 
+    $
+      \begin{aligned}
+        x+y & =+19_{10\text{MS}} \\
+        x+z & =+4_{10\text{MS}}  \\
+      \end{aligned}
+    $
+  \end{tblr}
+\end{center}
+
+Nella rappresentazione decimale si eseguono i passaggi descritti nel seguente algoritmo:
+
+\begin{algorithm}[H]
+  \caption{Somma di due valori in notazione modulo e segno}\label{algo:sommams}
+  \begin{algorithmic}[1]
+    \If{$\sgn x= \sgn y$}
+    \State $\abs{n}=\abs{x}+\abs{y}$
+    \State $\sgn n=\sgn x$
+    \Else
+    \State $a = \max \(\abs{x},\abs{y}\)$
+    \State $b = \min \(\abs{x},\abs{y}\)$
+    \State $\abs{n}=a-b$
+    \If{$\abs{x}=a$}
+    \State $\sgn n=\sgn a$
+    \Else
+    \State $\sgn n=\sgn b$
+    \EndIf
+    \EndIf
+  \end{algorithmic}
+\end{algorithm}
+
+Tuttavia, per un calcolatore un tal numero di operazioni renderebbe il calcolo proibitivamente lento. Per questo, si introduce una nuova notazione, più efficiente di quella di modulo e segno, incentrata sull'agilità dell'elaborazione delle informazioni.
+
+Ovviamente, la finestra dei valori che si vuole rappresentare si estende anche al negativo, per cui se si vuole rappresentare il $17$, si vuole rappresentare tutti i valori da $-17$ a $17$.
+
+Si descrivono le possibili combinazioni avendo a disposizione 4 bit:
+\begin{center}
+  \begin{tblr}{c|c||c|c}
+    $0000_2$ & $0_{10}$ & $1000_2$ & $-0_{10}$ \\
+    $0001_2$ & $1_{10}$ & $1001_2$ & $-1_{10}$ \\
+    $0010_2$ & $2_{10}$ & $1010_2$ & $-2_{10}$ \\
+    $0011_2$ & $3_{10}$ & $1011_2$ & $-3_{10}$ \\ \hline
+    $0100_2$ & $4_{10}$ & $1100_2$ & $-4_{10}$ \\
+    $0101_2$ & $5_{10}$ & $1101_2$ & $-5_{10}$ \\
+    $0110_2$ & $6_{10}$ & $1110_2$ & $-6_{10}$ \\
+    $0111_2$ & $7_{10}$ & $1111_2$ & $-7_{10}$ \\
+  \end{tblr}
+\end{center}
+
+Si nota subito che lo 0 ha una codifica ridondante:
+$$0000_{2\text{MS}}=1000_{2\text{MS}}=0_{10}$$
+
+Si pone l'attenzione sull'identità:
+$$x+\(-x\)=0$$
+
+Volendo rispettare l'identità con un valore $x=3_{10}$ si ha:
+
+\begin{center}
+  \begin{tblr}{ccccc}
+    $^10$ & $^10$ & $^11$ & $1$ & $+$ \\
+    $1$   & $1$   & $0$   & $1$ & $=$ \\
+    \hline
+    $0$   & $0$   & $0$   & $0$       
+  \end{tblr}
+\end{center}
+
+quindi risulta che $1101_2$ è la codifica di $0011_2$ al negativo. Da questo ragionamento, esteso agli altri numeri risulta che:
+\begin{center}
+  \begin{tblr}{c|c||c|c}
+    $0000_2$ & $0_{10}$ & $1000_2$ & $\pm8_{10}$ \\
+    $0001_2$ & $1_{10}$ & $1001_2$ & $-7_{10}$   \\
+    $0010_2$ & $2_{10}$ & $1010_2$ & $-6_{10}$   \\
+    $0011_2$ & $3_{10}$ & $1011_2$ & $-5_{10}$   \\ \hline
+    $0100_2$ & $4_{10}$ & $1100_2$ & $-4_{10}$   \\
+    $0101_2$ & $5_{10}$ & $1101_2$ & $-3_{10}$   \\
+    $0110_2$ & $6_{10}$ & $1110_2$ & $-2_{10}$   \\
+    $0111_2$ & $7_{10}$ & $1111_2$ & $-1_{10}$   \\
+  \end{tblr}
+\end{center}
+
+Esiste anche un metodo algebrico per trovare l'opposto:
+$$-x=\sim x+1$$
+oppure un metodo grafico:
+\emph{tutti i bit che dall'LSB al primo bit 1 rimangono invariati, mentre tutti gli altri si cambiano}.
+
+L'efficacia di questa notazione sta nella facilità con cui si eseguono le operazioni:
+$$2_{10}+4_{10}=0010_2+0100_2=0110_2=6_{10}$$
+$$-3_{10}+\(-1_{10}\)=1101_2+1111_2=\cancel{1}1100_2=-4_{10}$$
+$$5_{10}+\(-3_{10}\)=0101_2+1101_2=\cancel{1}0010_2=2_{10}$$
+
+Questa notazione prende il nome di complemento in base 2.
+Si chiama complemento in quanto i valori negativi si completano a quelli positivi.
+
+Per passare dalla base 10 alla base 2 in complemento a 2, si effettuano i seguenti passaggi:
+\begin{algorithm}[H]
+  \caption{Conversione da 10MS a 2C2}\label{algo:10to2c2}
+  \begin{algorithmic}[1]
+    \State $n=\abs{x}$
+    \If{$x<0$}
+    \State $n=-n$
+    \EndIf
+  \end{algorithmic}
+\end{algorithm}
+\begin{example}
+  $$x=-13_{10}$$
+  $$\abs{x}=13_{10}=1101_2=01101_{2\text{MS}}\equiv 01101_{2\text{C}2}$$
+  $$x=-\abs{x}=10011_{2\text{C}2}$$
+\end{example}
+
+Si presentano casi ambigui in cui apparentemente sembra che l'aritmetica non funzioni:
+$$5_{10}+3_{10}=0101_2+0011_2=1000_2=-8_{10}$$
+$$-2_{10}+\(-6_{10}\)=1110_2+1010_2=\cancel{1}1000_2=-8_{10}$$
+Si nota che tutti i numeri positivi cominciano con 0 mentre quelli negativi cominciano con 1.
+Convenzionalmente, in virtù di quanto appena detto, la combinazione $1000_2$ assume il valore $-8_{10}$.
+
+Usando la notazione modulo e segno il range dei valori ammissibili è $\interval{-7}{7}$, mentre in complemento a 2 il range è $\interval{-8}{7}$.
+
+Considerando che la dimensione dell'informazione è sempre fissa e determinata, ci si ritrova in casi particolari detti di \textbf{overflow} (\emph{traboccamento}):
+$$6_{10}+4_{10}=0110_2+0100_2=1010_2=-6_{10}$$
+L'overflow è facilmente risolvibile con un aumento dello spazio a disposizione:
+$$6_{10}+4_{10}=00110_2+00100_2=01010_2=10_{10}$$
+Si ha overflow quando due valori concordi generano un valore discorde dai primi due.
+Quando gli operandi sono discordi è impossibile generare overflow.
+
+\paragraph*{Osservazione} L'estensione di un valore in complemento a 2 si esegue ripetendo il MSB quante volte se ne ha bisogno:
+
+\begin{example}
+  $$5_{10}=0101_{2\text{C}2}=000000101_{2\text{C}2}$$
+  $$-5_{10}=1011_{2\text{C}2}=111111011_{2\text{C}2}$$
+\end{example}
+
+\begin{example}
+  $$x=+12_{10\text{MS}}=01100_{2\text{C}2}$$
+  $$y=-3_{10\text{MS}}=101_{2\text{C}2}=11101_{2\text{C}2}$$
+  $$x+y=01100_2+11101_2=\cancel{1}01001_2$$
+  $$x-y=x+\(-y\)=01100_2+00011_2=01111_2$$
+\end{example}
+
+% lezione del 15/09/2022
+
+Per passare dalla base 2 in complemento a 2 alla base 10, si possono verificare due scenari:
+\begin{enumerate}
+  \item il numero è positivo, pertanto lo si converte usando la formula dei pesi;
+  \item il numero è negativo: in questo caso si calcola l'opposto, lo si converte e gli si cambia il segno.
+\end{enumerate}
+\begin{example}
+  $$010110_{2\text{C}2}=22_{10\text{MS}}$$
+  $$1011101_{2\text{C}2}=-35_{10\text{MS}}$$
+\end{example}
+
+\begin{example}
+  provare a usare la base 3, con complemento a 3. % TODO: fare
+\end{example}
+
+\section{Rappresentazione esadecimale}
+Il problema principale con la rappresentazione binaria è l'enorme spazio richiesto. Inoltre, in virtù dell'uso sui calcolatori, la base da cercare deve essere una potenza di 2.
+Per anni è stata utilizzata la base 8, ma ben presto è stata resa obsoleta, in favore della base 16.
+
+Il codice esadecimale si crea associando le cifre esadecimali e combinazioni di 4 bit del codice binario.
+\begin{center}
+  \begin{tblr}{c|c|c}
+    \textbf{esadecimale} & \textbf{binario} & \textbf{decimale} \\\hline
+    0                    & 0000             & 0                 \\
+    1                    & 0001             & 1                 \\
+    2                    & 0010             & 2                 \\
+    3                    & 0011             & 3                 \\
+    4                    & 0100             & 4                 \\
+    5                    & 0101             & 5                 \\
+    6                    & 0110             & 6                 \\
+    7                    & 0111             & 7                 \\
+    8                    & 1000             & 8                 \\
+    9                    & 1001             & 9                 \\
+    A                    & 1010             & 10                \\
+    B                    & 1011             & 11                \\
+    C                    & 1100             & 12                \\
+    D                    & 1101             & 13                \\
+    E                    & 1110             & 14                \\
+    F                    & 1111             & 15                \\
+  \end{tblr}
+\end{center}
+
+Per effettuare la conversione dalla base 2 alla base 16 basta considerare ogni quadrupla e convertirla in loco:
+\begin{center}
+  \begin{tblr}{cccc}
+    0101 & 0101 & 1101 & 1010 \\ \hline
+    5    & 5    & D    & A    
+  \end{tblr}
+\end{center}
+Banalmente, la stessa cosa avviene per il processo inverso.
+
+Al fine di rappresentare attraverso la notazione modulo e segno un numero esadecimale, gli si prepone il segno, facendo la conversione dal binario.
+
+\section{Numeri razionali}
+
+Si vuole rappresentare i valori espressi da:
+$$\frac{m}{n},\; m\in\mathbb{Z},n\in\mathbb{N}/\left\{ 0 \right\}$$
+
+Nella notazione decimale si usa scrivere prima la parte intera, un separatore decimale e poi la parte frazionaria.
+In base 2 si può fare la stessa cosa:
+$$101.01_2=2^2+2^0+2^{-2}=5.25_{10}$$
+Avendo a disposizione una certa quantità bit, si sceglie la parte di essi che contiene la parte frazionaria e quella che contiene la parte intera. 
+
+\begin{example}
+  Si considerano 3 bit per la parte intera e 2 per quella frazionaria. Si ha che il range massimo esprimibile è $\interval{0}{7.75}$, con salti di $0.25$.
+  
+  Tuttavia, se si vuole rappresentare il valore $6.3$, non si può. Al limite, si può esprimere una sua approssimazione, che in questo caso è $6.25$.
+\end{example}
+
+Il fatto che non si possa rappresentare un valore con \textbf{precisione} non è dovuto ad una cattiva gestione dei bit, ma bensì al loro stato di finitezza.
+
+La notazione utilizza si chiama a virgola fissa: viene stabilita la dimensione a priori sia per la parte intera sia per la parte frazionaria.
+In una notazione del genere l'\textbf{errore assoluto} $\epsilon_A$ è costante: si sbaglia sempre della stessa quantità.
+
+Esiste, tuttavia, una notazione alternativa che consente di variare l'errore assoluto e mantenere costante l'errore relativo: la notazione in \textbf{virgola mobile} (\emph{floating point} in inglese).
+L'errore relativo $$\epsilon_R=\frac{\epsilon_A}{\text{valore}}$$
+
+Per rappresentare un numero razionale in base 2, si procede come al solito per la parte intera, ovvero si divide per 2 segnando il resto, ma al contrario per la parte frazionaria, ovvero si moltiplica per 2 segnando l'unità. Un'altra differenza fondamentale è il verso di lettura delle cifre: mentre per la parte intera si procede dal basso verso l'alto, per la parte frazionaria si procede dall'alto verso il basso.
+
+\begin{example}
+  Si vuole rappresentare il numero $13.75$.
+  \begin{center}
+    \begin{minipage}{0.2\linewidth}
+      \begin{center}
+        \begin{tblr}{c|c}
+          13 & 1 \\
+          6  & 0 \\
+          3  & 1 \\
+          1  & 1 \\
+          0  &   
+        \end{tblr}
+      \end{center}
+    \end{minipage}
+    \begin{minipage}{0.2\linewidth}
+      \begin{center}
+        \begin{tblr}{c|c}
+          0.75 &   \\
+          1.5  & 1 \\
+          1.0  & 1 \\
+          0    &   \\
+        \end{tblr}
+      \end{center}
+    \end{minipage}
+  \end{center}
+  $$13.75_{10}=1101.11_2$$
+\end{example}
+
+\begin{example}
+  Si vuole rappresentare il numero $7.32$.
+  \begin{center}
+    \begin{minipage}{0.2\linewidth}
+      \begin{center}
+        \begin{tblr}{c|c}
+          7 & 1 \\
+          3 & 1 \\
+          1 & 1 \\
+          0 &   
+        \end{tblr}
+      \end{center}
+    \end{minipage}
+    \begin{minipage}{0.2\linewidth}
+      \begin{center}
+        \begin{tblr}{c|c}
+          0.32     &          \\
+          0.64     & 0        \\
+          1.28     & 1        \\
+          0.56     & 0        \\
+          1.12     & 1        \\
+          0.24     & 0        \\
+          0.48     & 0        \\
+          0.96     & 0        \\
+          1.92     & 1        \\
+          1.84     & 1        \\
+          $\cdots$ & $\cdots$ 
+        \end{tblr}
+      \end{center}
+    \end{minipage}
+  \end{center}
+  $$7.32_{10}=111.010100011...$$
+\end{example}
+
+Se si considerano i razionali da una diversa prospettiva, si nota che:
+$$13.75_{10}=1.375\cdot 10^1$$
+$$7.32_{10}=7.32\cdot 10^0$$
+Analogamente:
+$$1101.11_2=1.10111\cdot2^3$$
+$$111.010100011_2=1.11010100011\cdot2^2$$
+
+La notazione in virgola mobile, quindi, ha:
+\begin{itemize}
+  \item un bit per il \textbf{segno};
+  \item una parte per l'\textbf{esponente}, a cui viene aggiunto un numero tale che il più piccolo esponente possibile sia 0;
+  \item una parte per la \textbf{mantissa}, ossia la parte frazionaria della notazione scientifica\footnote{si prende la parte frazionaria in quanto la parte intera sarà sempre 1, quindi è inutile sprecare un bit}.
+\end{itemize}
+Lo standard che regola la notazione in virgola mobile è lo \textbf{IEEE 754}. Lo standard prevede 3 versioni:
+\begin{itemize}
+  \item 32 bit: 1 per il segno, 8 per l'esponente, 23 per la mantissa;
+  \item 64 bit: 1 per il segno, 11 per l'esponente, 52 per la mantissa;
+  \item 128 bit: 1 per il segno, 15 per l'esponente, 112 per la mantissa.
+\end{itemize}
+
+Il valore di un numero espresso attraverso lo standard IEEE 754 è dato da:
+$$\text{valore}=\(-1\)^S\(1+M\)\cdot2^E$$
+dove $S$ è il segno, $M$ è la mantissa e $E$ è l'esponente
+
+\paragraph*{Nota bene}
+La costante che bisogna aggiungere all'esponente si chiama ``eccesso'' ed è:
+\begin{itemize}
+  \item 127 per la singola precisione;
+  \item 1023 per la doppia precisione;
+  \item 16383 per la quadrupla precisione.
+\end{itemize}
+
+\begin{example}
+  $$+5.65_{10\text{MS}}$$
+  $$+101.10{1001}_{2\text{MS}}=1.01101001\cdot2^2=01000000101101001100110011001100$$
+  $$-0.028_{10\text{MS}}$$
+  $$-0.00000111001010_2=-1.1100101\cdot2^{-6}=101001111110101...$$
+\end{example}
+
+Lo standard, tuttavia, ha delle falle che vengono compensate dall'introduzione di combinazioni di bit speciali che, proprio per questo, vengono dette \textbf{denormarlizzata}.
+
+\paragraph*{Forma denormarlizzata generale}
+Quando tutti i bit dell'esponente sono 0, la mantissa non è sommata ad 1 ma bensì a 0.
+
+\paragraph*{Zero}
+Quando tutti i bit (indifferentemente dal primo) sono 0, il valore è 0.
+
+\paragraph*{Infinito}
+Quando tutti i bit dell'esponente sono 1 e quelli della mantissa sono tutti 0, il valore è infinito, che può essere sia negativo che positivo.
+
+\paragraph*{NaN}
+Quando tutti i bit dell'esponente sono 1 e almeno uno di quelli della mantissa è 1, il valore non è un numero (\textbf{NaN}, \emph{Not a Number}).
