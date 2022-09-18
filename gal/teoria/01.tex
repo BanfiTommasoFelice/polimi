@@ -215,3 +215,268 @@ Le proprietà di cui godono i vettori valgono anche per le matrici.
   $$c_{23}=\begin{pmatrix}1&0&1\end{pmatrix}\cdot\begin{pmatrix}1&1&-1\end{pmatrix}=1+0-1=0$$
   $$c_{24}=\begin{pmatrix}1&0&1\end{pmatrix}\cdot\begin{pmatrix}1&0&-3\end{pmatrix}=1+0-3=-2$$
 \end{example}
+
+% lezione del 14/09/2022
+
+Il prodotto ``riga per colonna'' gode di alcune proprietà:
+
+\paragraph*{Proprietà associativa}
+$$\(AB\)C=A\(BC\)$$
+\paragraph*{Proprietà distributiva 1}
+$$A\(B+C\)=AB+AC$$
+\paragraph*{Proprietà distributiva 2}
+$$\(A+B\)C=AC+BC$$
+\paragraph*{Proprietà associativa mista}
+$$t\(AB\)=\(tA\)B=A\(tB\)$$
+\paragraph*{Proprietà speciale della matrice identità}
+Sia $A$ una matrice $n\times m$
+$$A=I_nA=AI_m$$
+
+\begin{definition}[Matrice trasposta]
+  La \textbf{trasposta} di una matrice $A$ è la matrice che si ottiene scambiando le righe con le colonne e si indica con $A^T$ o $A'$.
+\end{definition}
+\begin{example}
+  $$
+    A=\begin{pmatrix}
+      1 & 2 & 3 \\
+      4 & 5 & 6 
+    \end{pmatrix}
+  $$
+  $$A'=
+    \begin{pmatrix}
+      1 & 4 \\
+      2 & 5 \\
+      3 & 6 
+    \end{pmatrix}
+  $$
+\end{example}
+
+Una matrice $A$ si dice \textbf{simmetrica} se $A=A'$. Banalmente, se una matrice è simmetrica, allora sarà anche quadrata:
+$$\(a_{ij}\)=\(a_{ji}\)$$
+
+Una matrice $A$ si dice \textbf{antisimmetrica} o emisimmetrica se $A=-A'$. Se una matrice è antisimmetrica, allora sarà quadrata e avrà la diagonale nulla:
+$$\(a_{ij}\)=-\(a_{ji}\)$$
+$$a_{ii}=-a_{ii}\impl a_{ii}=0$$
+
+La trasposta gode di alcune proprietà:
+
+$$\(A+B\)'=A'+B'$$
+$$\(sA\)'=sA'$$
+$$\(A'\)'=A$$
+$$\(AB\)'=B'A'$$
+
+Se una matrice $A$ è quadrata, allora ha senso definire $A^2=AA$ o, più in generale:
+$$A^n=A\cdot A\cdot A\cdots A$$
+Analogamente a quanto avviene per le potenze reali
+$$A^0=I$$
+Inoltre, valgono le proprietà:
+$$A^nA^m=A^{n+m}$$
+$$\(A^n\)^m=A^{nm}$$
+
+\begin{definition}[Matrice invertibile]
+  Una matrice quadrata $A$ si dice \textbf{invertibile} se esiste una matrice quadrata $B$ tale che
+  $$AB=BA=I$$
+  e tale matrice si indica con $A^{-1}$:
+  $$AA^{-1}=A^{-1}A=I$$
+\end{definition}
+
+\begin{theorem}
+  Se la matrice $A$ è invertibile, allora la matrice $A^{-1}$ è unica.
+\end{theorem}
+\begin{proof}
+  Siano $A,B$ due matrici quadrate per cui $AB=BA=I$. Per assurdo, si suppone che anche un'altra matrice $C$ soddisfa la medesima equazione: $AC=CA=I$. 
+  Per le proprietà di sopra, si ha:
+  $$B=BI=B(AC)=(BA)C=IC=C$$
+  Per la catena di uguaglianze, si ha che $B=C$, pertanto $B$ è unica.
+\end{proof}
+
+Se $A$ è una matrice invertibile, allora si pone
+$$A^{-n}=\(A^{-1}\)^n$$
+
+\begin{example}
+  $$A=
+    \begin{pmatrix}
+      0 & 1 \\
+      1 & 0 
+    \end{pmatrix}
+  $$
+  $$A^2=
+    \begin{pmatrix}
+      0 & 1 \\
+      1 & 0 
+    \end{pmatrix}
+    \begin{pmatrix}
+      0 & 1 \\
+      1 & 0 
+    \end{pmatrix}=
+    \begin{pmatrix}
+      1 & 0 \\
+      0 & 1 
+    \end{pmatrix}
+  $$
+  $$A^2=I\impl A^{-1}$$
+  $$A^3=A^2A=IA=A$$
+  $$A^{123}=A$$
+  $$A^{-72}=I$$
+\end{example}
+
+\begin{example}
+  $$A=\begin{pmatrix}
+      0 & 1 & 0 \\
+      0 & 0 & 1 \\
+      0 & 0 & 0 
+    \end{pmatrix}$$
+  $$A^2=\begin{pmatrix}
+      0 & 1 & 0 \\
+      0 & 0 & 1 \\
+      0 & 0 & 0 
+    \end{pmatrix}\begin{pmatrix}
+      0 & 1 & 0 \\
+      0 & 0 & 1 \\
+      0 & 0 & 0 
+    \end{pmatrix}=\begin{pmatrix}
+      0 & 0 & 1 \\
+      0 & 0 & 0 \\
+      0 & 0 & 0 
+    \end{pmatrix}$$
+  $$A^3=AA^2=\begin{pmatrix}
+      0 & 1 & 0 \\
+      0 & 0 & 1 \\
+      0 & 0 & 0 
+    \end{pmatrix}\begin{pmatrix}
+      0 & 0 & 1 \\
+      0 & 0 & 0 \\
+      0 & 0 & 0 
+    \end{pmatrix}=\begin{pmatrix}
+      0 & 0 & 0 \\
+      0 & 0 & 0 \\
+      0 & 0 & 0 
+    \end{pmatrix}=\vec{0}$$
+  $$A^{123}=A^3A^{120}=\vec{0}A^{120}=\vec{0}$$
+  $$A^3A^{-1}=A^2$$
+  $$A^3A^{-1}=\vec{0}$$
+  $$A^2\neq \vec{0}\impl \nexists A^{-1}$$
+\end{example}
+
+\begin{definition}[Determinante]
+  Il \textbf{determinante} è un numero che viene assegnato ad ogni matrice quadrata.
+\end{definition}
+
+Il determinante di una matrice quadrata di ordine 1 è l'unico elemento della matrice stessa:
+$$\det\begin{pmatrix}a\end{pmatrix}=a$$
+Il determinate di una matrice quadrata di ordine 2 è il prodotto di una diagonale meno il prodotto dell'altra diagonale:
+$$\det\begin{pmatrix}a & b \\ c & d\end{pmatrix}=ad-bc$$
+Il determinante di un matrice quadrata di ordine 3 è dato dalla formula:
+$$\det\begin{pmatrix}a_{11}&a_{12}&a_{13}\\a_{21}&a_{22}&a_{23}\\a_{31}&a_{32}&a_{33}\end{pmatrix}=a_{11}a_{22}a_{33}+a_{12}a_{23}a_{31}+a_{13}a_{21}a_{32}-a_{31}a_{22}a_{13}-a_{32}a_{23}a_{11}-a_{33}a_{21}a_{12}$$
+
+\paragraph*{Regola di Sarrus}
+Poiché è difficile ricordare la formula per il calcolo del determinante di una matrice quadrata di ordine 3, si ricorre solitamente alla regola di Sarrus, che consta di un ampliamento della matrice originale, raddoppiandola a destra:
+$$
+  \begin{pmatrix}
+    a_{11} & a_{12} & a_{13} \\
+    a_{21} & a_{22} & a_{23} \\
+    a_{31} & a_{32} & a_{33} \\
+  \end{pmatrix}
+  \mapsto 
+  \begin{pmatrix}
+    a_{11} & a_{12} & a_{13} & a_{11} & a_{12} & a_{13} \\
+    a_{21} & a_{22} & a_{23} & a_{21} & a_{22} & a_{23} \\
+    a_{31} & a_{32} & a_{33} & a_{31} & a_{32} & a_{33} \\
+  \end{pmatrix}
+$$
+Il determinante è la somma dei prodotti sulle diagonali discendenti meno la somma dei prodotti sulle diagonali ascendenti.
+
+\begin{example}
+  $$
+    \det
+    \begin{pmatrix}
+      1 & 2 & -1 \\
+      0 & 2 & -1 \\
+      1 & 1 & 0  
+    \end{pmatrix}=
+    0-2+0+2+1-0=1
+  $$
+\end{example}
+
+\subsection*{Sviluppo di Laplace}
+Lo sviluppo di Laplace è una formula ricorsiva che permette di calcolare il determinante di una matrice di ordine $n$ ricorrendo al calcolo del determinante di una matrice di ordine $n-1$.
+
+\begin{definition}[Sottomatrice]
+  Si definisce sottomatrice di $A$ una matrice ottenuta togliendo ad $A$ un certo numero di righe e/o un certo numero di colonne. Se la sottomatrice è quadrata di ordine $m$ allora prende il nome di minore di ordine $m$.
+\end{definition}
+
+\begin{definition}[Minore complementare]
+  Il minore complementare $M_{ij}$ dell'elemento $a_{ij}$ è il minore che si ottiene togliendo ad $A$ la $i$--esima riga e la $j$--esima colonna.
+\end{definition}
+
+\begin{definition}[Complemento algebrico]
+  Il complemento algebrico di $a_{ij}$ è :
+  $$A_{ij}=\(-1\)^{i+j}\det M_{ij}$$
+\end{definition}
+
+\begin{example}
+  $$A=\begin{pmatrix}
+      1 & 0  & 1 \\
+      2 & 1  & 0 \\
+      1 & -1 & 1 
+    \end{pmatrix}$$
+  $$M_{22}=\begin{pmatrix}
+      1 & 1 \\
+      1 & 1 
+    \end{pmatrix}$$
+  $$A_{22}=\(-1\)^4
+    \det \begin{pmatrix}
+      1 & 1 \\
+      1 & 1 
+    \end{pmatrix}=1-1=0$$
+\end{example}
+
+\begin{theorem}
+  Sia $A$ una matrice $n\times n$. Fissato $i$, il determinante di $A$ è:
+  $$\det A=\sum_{j=1}^na_{ij}A_{ij}$$
+\end{theorem}
+
+\begin{example}
+  \begin{align*}
+    \det
+    \begin{pmatrix}
+      1 & 2 & -1 & 1 \\
+      2 & 0 & 1  & 0 \\
+      1 & 1 & 1  & 1 \\
+      0 & 2 & 1  & 0 
+    \end{pmatrix} & =     
+    -2\det
+    \begin{pmatrix}
+      2 & -1 & 1 \\
+      1 & 1  & 1 \\
+      2 & 1  & 0 
+    \end{pmatrix}
+    -
+    \det
+    \begin{pmatrix}
+      1 & 2 & 1 \\
+      1 & 1 & 1 \\
+      0 & 2 & 0 
+    \end{pmatrix}        \\
+                      & = 
+    -2\(2\det
+    \begin{pmatrix}
+      -1 & 1 \\
+      1  & 1 
+    \end{pmatrix}
+    -
+    \det
+    \begin{pmatrix}
+      2 & 1 \\
+      1 & 1 
+    \end{pmatrix}
+    \)-\(-2\det
+    \begin{pmatrix}
+      1&1\\
+      1&1
+    \end{pmatrix}
+    \)\\
+    &=-2\(2\cdot\(-2\)-1\)-\(-2\cdot0\)\\
+    &=10+0=10
+  \end{align*}
+\end{example}
