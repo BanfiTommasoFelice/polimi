@@ -1,0 +1,378 @@
+\part{Elaborazione dell'informazione}
+
+% lezione del 16/09/2022
+
+\section{Algoritmi}
+
+Un algoritmo è un procedimento, ovvero una sequenza di passi, che a partire da un insieme di dati (\emph{input}), attraverso un numero finito di passi, genera un insieme di dati (\emph{output}).
+
+Ogni algoritmo ha un punto d'inizio e un punto di fine.
+Un algoritmo che non accetta dati di input produce sempre lo stesso output.
+
+% lezione del 19/09/2022
+
+Ogni passo dell'algoritmo si serve di operatori, ossia simboli che indicano un'operazione da effettuare:
+\begin{itemize}
+  \item operatore assegnamento \verb|=|: è un operatore binario e tutto ciò che è alla sua destra, una volta calcolato, viene assegnato alla variabile che si trova alla sua sinistra;
+  \item operatori aritmetici \verb|+ - * / %|: sono operatori binari che effettuano le principali operazioni aritmetiche tra due operandi (rispettivamente somma, differenza, prodotto, quoziente, resto), che possono essere variabili o costanti;
+  \item operatori logici \verb|&&|, \verb!||!, \verb|!|: sono operatori binari, tranne l'ultimo che è unario, che esprimono rispettivamente le verità date dalle proposizioni: $a\wedge b$, $a\vee b$, $\lnot a$;
+  \item operatori relazionali \verb|>|, \verb|<|, \verb|>=|, \verb|<=|, \verb|==|, \verb|!=|: sono operatori binari che esprimono l'uguaglianza e la disuguaglianza degli operandi. 
+\end{itemize}
+
+\begin{example}
+  Algoritmo che calcola e visualizza, dato un numero strettamente positivo, l'area e il perimetro di un cerchio avente come raggio il numero dato.
+  \begin{center}
+    \begin{tikzpicture}[node distance=1.5cm]
+      \node (start) [startstop] {\scshape Inizio};
+      \node (in1) [input, below of=start] {\verb|r|};
+      \node (pro1) [process, below of=in1] {\verb|p = 2 * PI * r|};
+      \node (pro2) [process, below of=pro1] {\verb|a = PI * r * r|};
+      \node (out1) [output, below of=pro2] {\verb|p, a|};
+      \node (stop) [startstop, below of=out1] {\scshape Fine};
+      \draw [arrow] (start) -- (in1);
+      \draw [arrow] (in1) -- (pro1);
+      \draw [arrow] (pro1) -- (pro2);
+      \draw [arrow] (pro2) -- (out1);
+      \draw [arrow] (out1) -- (stop);
+    \end{tikzpicture}
+  \end{center}
+\end{example}
+
+\begin{example}
+  Algoritmo che, dato un numero $s$ intero positivo di secondi, calcola e visualizza le ore, i minuti e i secondi che $s$ quantifica.
+  \begin{center}
+    \begin{tikzpicture}[node distance=1.5cm]
+      \node (start) [startstop] {\scshape Inizio};
+      \node (pro1) [process, below of=start] {\verb|SECS_PER_MIN = 60|};
+      \node (pro2) [process, below of=pro1] {\verb|SECS_PER_HOUR = SECS_PER_MIN * 60|};
+      \node (in) [input, below of=pro2] {\verb|s|};
+      \node (pro3) [process, below of=in] {\verb|h = s / SECS_PER_HOUR|};
+      \node (pro4) [process, below of=pro3] {\verb|s = s % SECS_PER_HOUR|};
+      \node (pro5) [process, below of=pro4] {\verb|m = s / SECS_PER_MIN|};
+      \node (pro6) [process, below of=pro5] {\verb|s = s % SECS_PER_MIN|};
+      \node (out1) [output, below of=pro6] {\verb|h, m, s|};
+      \node (stop) [startstop, below of=out1] {\scshape Fine};
+      \draw [arrow] (start) -- (pro1);
+      \draw [arrow] (pro1) -- (pro2);
+      \draw [arrow] (pro2) -- (in);
+      \draw [arrow] (in) -- (pro3);
+      \draw [arrow] (pro3) -- (pro4);
+      \draw [arrow] (pro4) -- (pro5);
+      \draw [arrow] (pro5) -- (pro6);
+      \draw [arrow] (pro6) -- (out1);
+      \draw [arrow] (out1) -- (stop);
+    \end{tikzpicture}
+  \end{center}
+\end{example}
+
+\begin{example}
+  Algoritmo che, dato un numero $x$, calcola e visualizza il suo valore assoluto.
+  \begin{center}
+    \begin{tikzpicture}[node distance=1.8cm]
+      \node (start) [startstop] {\scshape Inizio};
+      \node (in) [input, below of=start] {\verb|x|};
+      \node (d1) [decision, below of=in] {\verb|x < 0|};
+      \node (p1) [process, left of=d1, xshift=-2cm] {\verb|y = -x|};
+      \node (p2) [process, right of=d1, xshift=2cm] {\verb|y = x|};
+      \node (out) [output, below of=d1] {\verb|y|};
+      \node (stop) [startstop, below of=out] {\scshape Fine};
+      \draw [arrow] (d1) -- node[anchor=north] {sì} (p1);
+      \draw [arrow] (d1) -- node[anchor=north] {no} (p2);
+      \draw [arrow] (start) -- (in);
+      \draw [arrow] (in) -- (d1);
+      \draw [arrow] (out) -- (stop);
+      \draw [arrow] (p1) |- (out);
+      \draw [arrow] (p2) |- (out);
+    \end{tikzpicture}
+  \end{center}
+\end{example}
+
+\begin{example}
+  Algoritmo che, dato un numero $r$ come raggio di una circonferenza, ne calcola l'area e il perimetro, solo se $r$ è positivo, altrimenti attende un nuovo valore.
+  \begin{center}
+    \begin{tikzpicture}[node distance=1.8cm]
+      \node (start) [startstop] {\scshape Inizio};
+      \node (in) [input, below of=start] {\verb|r|};
+      \node (d1) [decision, below of=in] {\verb|r < 0|};
+      \node (p1) [process, below of=d1] {\verb|p = 2 * PI * r|};
+      \node (p2) [process, below of=p1] {\verb|a = PI * r * r|};
+      \node (o1) [output, below of=p2] {\verb|p, a|};
+      \node (stop) [startstop, below of=o1] {\scshape Fine};
+      \draw [arrow] (start) -- (in);
+      \draw [arrow] (in) -- (d1);
+      \draw [arrow] (d1) -- node[anchor=east] {no} (p1);
+      \draw [arrow] (d1.west) |- node[anchor=east] {sì} (in);
+      \draw [arrow] (p1) -- (p2);
+      \draw [arrow] (p2) -- (o1);
+      \draw [arrow] (o1) -- (stop);
+    \end{tikzpicture}
+  \end{center}
+\end{example}
+
+\begin{example}
+  Algoritmo che, dati tre numeri, visualizza 1 se i tre numeri compongono una terna pitagorica, 0 altrimenti.
+  \begin{center}
+    \begin{tikzpicture}[node distance=2cm]
+      \node (start) [startstop] {\scshape Inizio};
+      \node (in) [input, below of=start] {\verb|a, b, c|};
+      \node (d1) [decision, below of=in] {\verb|a > b|};
+      \node (d2) [decision, below left of=d1, xshift=-2cm] {\verb|a > c|};
+      \node (d3) [decision, below right of=d1, xshift=2cm] {\verb|b > c|};
+      \node (p1) [process, below of=d2] {\verb|swap(a, c)|};
+      \node (p2) [process, below of=d3] {\verb|swap(b, c)|};
+      \node (d4) [decision, below of=d1, yshift=-3.5cm] {\verb|a * a + b * b == c * c|};
+      \node (o1) [output, below left of=d4, xshift=-2cm, yshift=-1cm] {\verb|1|};
+      \node (o2) [output, below right of=d4, xshift=2cm, yshift=-1cm] {\verb|0|};
+      \node (stop) [startstop, below of=d4, yshift=-2cm] {\scshape Fine};
+      \draw [arrow] (start) -- (in);
+      \draw [arrow] (in) -- (d1);
+      \draw [arrow] (d1) -| node[anchor=east] {sì} (d2);
+      \draw [arrow] (d1) -| node[anchor=west] {no} (d3);
+      \draw [arrow] (d2) -- node[anchor=east] {sì} (p1);
+      \draw [arrow] (d2) -| node[anchor=south] {no} (d4);
+      \draw [arrow] (d3) -- node[anchor=west] {sì} (p2);
+      \draw [arrow] (d3) -| (d4);
+      \draw [arrow] (p1.east) -| (d4.north);
+      \draw [arrow] (p2.west) -| (d4.north);
+      \draw [arrow] (d4.west) -| node[anchor=east] {sì} (o1);
+      \draw [arrow] (d4.east) -| node[anchor=west] {no} (o2);
+      \draw [arrow] (o1) |- (stop);
+      \draw [arrow] (o2) |- (stop);
+    \end{tikzpicture}
+  \end{center}
+\end{example}
+
+\begin{example}
+  Algoritmo che, dati 10 valori interi, calcola e visualizza il massimo. 
+  \begin{center}
+    \begin{tikzpicture}[node distance=1.5cm]
+      \node (start) [startstop] {\scshape Inizio};
+      \node (p1) [process, below of=start] {\verb|i = 0|};
+      \node (p2) [process, below of=p1] {\verb|m = -INF|};
+      \node (d1) [decision, below of=p2] {\verb|i < 10|};
+      \node (in) [input, below left of=d1, xshift=-2cm] {\verb|x|};
+      \node (d2) [decision, below of=in] {\verb|x > m|};
+      \node (p3) [process, below of=d2] {\verb|m = x|};
+      \node (p4) [process, below of=p3] {\verb|i = i + 1|};
+      \node (f) [dummy, left of=p4, xshift=-1cm] {};
+      \node (g) [dummy, right of=d2, xshift=1cm] {};
+      \node (out) [output, below right of=d1, xshift=2cm] {\verb|m|};
+      \node (stop) [startstop, below of=out] {\scshape Fine};
+      \draw [arrow] (start) -- (p1);
+      \draw [arrow] (p1) -- (p2);
+      \draw [arrow] (p2) -- (d1);
+      \draw [arrow] (d1) -| node[anchor=south] {sì} (in);
+      \draw [arrow] (in) -- (d2);
+      \draw [arrow] (d2) -- node[anchor=east] {sì} (p3);
+      \draw [arrow] (d2) -- node[anchor=south] {no} (g) |- (p4);
+      \draw [arrow] (p3) -- (p4);
+      \draw [arrow] (d1) -| node[anchor=south] {no} (out);
+      \draw [arrow] (out) -- (stop);
+      \draw [arrow] (p4) -- (f) |- (d1.north);
+    \end{tikzpicture}
+  \end{center}
+\end{example}
+
+\begin{example}
+  Algoritmo che, dati 10 valori interi, calcola e visualizza il massimo e il minimo. 
+  \begin{center}
+    \begin{tikzpicture}[node distance=1.5cm]
+      \node (start) [startstop] {\scshape Inizio};
+      \node (p1) [process, below of=start] {\verb|i = 0|};
+      \node (p2) [process, below of=p1] {\verb|M = -INF|};
+      \node (p3) [process, below of=p2] {\verb|m = INF|};
+      \node (d1) [decision, below of=p3] {\verb|i < 10|};
+      \node (in) [input, below left of=d1, xshift=-2cm] {\verb|x|};
+      \node (d2) [decision, below of=in] {\verb|x < m|};
+      \node (p4) [process, below of=d2] {\verb|m = x|};
+      \node (d3) [decision, below of=p4, yshift=-1cm] {\verb|x > M|};
+      \node (p5) [process, below of=d3] {\verb|M = x|};
+      \node (p6) [process, below of=p5] {\verb|i = i + 1|};
+      \node (f) [dummy, right of=d3, xshift=1cm] {};
+      \node (j) [dummy, above of=d3] {};
+      \node (g) [dummy, right of=d2, xshift=1.4cm] {};
+      \node (h) [dummy, left of=p6, xshift=-1cm] {};
+      \node (k) [dummy, right of=p4, xshift=1.2cm] {};
+      \node (out) [output, below right of=d1, xshift=2cm] {\verb|M, m|};
+      \node (stop) [startstop, below of=out] {\scshape Fine};
+      \draw [arrow] (start) -- (p1);
+      \draw [arrow] (p1) -- (p2);
+      \draw [arrow] (p2) -- (p3);
+      \draw [arrow] (p3) -- (d1);
+      \draw [arrow] (d1) -| node[anchor=south] {sì} (in);
+      \draw [arrow] (in) -- (d2);
+      \draw [arrow] (d2) -- node[anchor=east] {sì} (p4);
+      \draw [arrow] (d2) -- node[anchor=south] {no} (g) |- (j) -- (d3.north);
+      \draw [arrow] (p4) -- (k) |- (p6);
+      \draw [arrow] (d3) -- node[anchor=east] {sì} (p5);
+      \draw [arrow] (p5) -- (p6);
+      \draw [arrow] (p6) -- (h) |- (d1.north);
+      \draw [arrow] (d3) -- node[anchor=south] {no} (f) |- (p6);
+      \draw [arrow] (d1) -| node[anchor=south] {no} (out);
+      \draw [arrow] (out) -- (stop);
+    \end{tikzpicture}
+  \end{center}
+\end{example}
+
+\newpage
+
+% lezione del 22/09/2022
+
+\section{Il linguaggio C}
+
+Ogni programma scritto in C, comincia la propria esecuzione dalla funzione \verb|main|:
+
+\begin{verbatim}
+  int main(int argc, char *argv[]) {
+    // codice
+    return 0;
+  }
+\end{verbatim}
+
+Il linguaggio C è un {\bf linguaggio staticamente tipizzato}, ossia per ogni variabile deve essere esplicitamente indicato il tipo.
+La ragione principale di questa scelta è stata la gestione della memoria.
+
+La {\bf dichiarazione} di una variabile si compone di due parti: un tipo e un nome.
+I tipi elementari del C sono:
+\begin{itemize}
+  \item \verb|char|: numero intero a 8 bit, normalmente rappresenta un carattere ASCII;
+  \item \verb|short|: numero intero a 16 bit;
+  \item \verb|int|: numero intero a 32 bit;
+  \item \verb|long|: numero intero a 64 bit;
+  \item \verb|float|: numero razionale a 32 bit;
+  \item \verb|double|: numero razionale a 64 bit;
+  \item \verb|long double|: numero razionale a 128 bit;
+\end{itemize}
+Ad ogni tipo intero può essere preposto la keyword \verb|unsigned|, che trasforma il tipo in naturale.
+
+I nomi delle variabili seguono alcune regole di base:
+\begin{itemize}
+  \item non possono cominciare con una cifra;
+  \item non possono contenere operatori aritmetici;
+  \item non possono contenere spazi o simboli di interpunzione.
+\end{itemize}
+
+La dichiarazione di una variabile è un'{\bf istruzione}.
+Ogni istruzione termina con il carattere `\verb|;|'. Difatti, questo metodo di separazione delle istruzioni consente di comprimere il codice elidendo gli spazi e gli a capo.
+L'istruzione ``\verb|;|'' è un'istruzione valida, ma che non produce effetti.
+
+Il gruppo di istruzioni:
+\begin{verbatim}
+  int a;
+  int b;
+\end{verbatim}
+è equivalente all'unica istruzione:
+\begin{verbatim}
+  int a, b;
+\end{verbatim}
+
+L'istruzione di {\bf assegnamento} è composta da 3 parti: l'assegnando, l'operatore di assegnazione e l'espressione da assegnare
+\begin{verbatim}
+  a = 1;      // assegnamento di un valore costante
+  a = b;      // assegnamento di una variabile
+  a = b * 2;  // assegnamento di un'espressione
+\end{verbatim}
+
+In C, le operazioni tra {\bf variabili} e {\bf costanti} seguono alcune regole di valutazione:
+\begin{verbatim}
+  int   op int   -> int
+  float op float -> float
+  int   op float -> float
+\end{verbatim}
+In generale, qualora due operandi non siano omogenei, il risultato dell'operazione ha il tipo dell'operando che contiene più informazione.
+
+L'operazione che cambia il tipo di una variabile si chiama \textbf{\emph{cast}} (promozione). Nel caso in cui il cast venga fatto automaticamente, viene detto \textbf{implicito}. Altrimenti, viene detto \textbf{esplicito}, e avviene mediante l'istruzione:
+\begin{verbatim}
+  (tipo)variabile
+\end{verbatim}
+
+L'istruzione che consente di acquisire da input i dati è
+\begin{verbatim}
+  scanf(formato, ...);
+\end{verbatim}
+il formato è una stringa che contiene le specifiche del formato di acquisizione ed è caratterizzato da sequenze specifiche di caratteri che indicano i formati e le posizioni:
+\begin{itemize}
+  \item \verb|%d|, \verb|%i|: \verb|int|;
+  \item \verb|%f|, \verb|%g|: \verb|float|;
+  \item \verb|%lf|: \verb|double|;
+  \item \verb|%c|: \verb|char|;
+  \item \verb|%s|: \verb|char*|;
+\end{itemize}
+I vari argomenti della funzione saranno le destinazioni dei vari elementi del formato.
+
+\begin{example}
+  \begin{verbatim}
+    int a, b;
+    float c;
+    scanf("%d", &a);
+    scanf("%f", &c);
+    scanf("%d %d", &a, &b);\end{verbatim}
+\end{example}
+
+L'istruzione che consente di visualizzare l'output è
+\begin{verbatim}
+  printf(formato, ...);
+\end{verbatim}
+Il formato e gli argomenti seguono le stesse regole della \verb|scanf|.
+
+Le stringhe in C possono avere al loro interno caratteri ASCII non stampabili, come a capo o la tabulazione. Questi caratteri sono rappresentabili attraverso le formule di escape, e sono:
+\begin{itemize}
+  \item \verb|\n|: a capo;
+  \item \verb|\t|: tabulazione;
+  \item \verb|\a|: campanella;
+  \item \verb|\r|: ritorno;
+  \item \verb|\0|: terminatore;
+\end{itemize}
+
+\begin{example}
+  \begin{verbatim}
+    int a
+    float b;
+    printf("risultato: %d (%f%%)\n", a, b);\end{verbatim}
+\end{example}
+
+
+Nel linguaggio C esistono le {\bf direttive}, ossia delle istruzioni che non vengono eseguite, ma di cui il compilatore tiene conto. Tra queste le più importanti sono:
+\begin{itemize}
+  \item \verb|#include|: serve a inserire nel codice altro codice contenuto nel file indicato;
+  \item \verb|#define|: consente di indicare degli alias per una sequenza di caratteri.
+\end{itemize}
+
+\begin{example}
+  \begin{verbatim}
+    #include "stdio.h"
+    #include <stdlib.h>
+    
+    #define PI 3.14
+    #define F(X) ((X) - 1)\end{verbatim}
+\end{example}
+
+\begin{example}
+  Scrivere un programma che, dato in input un numero intero strettamente positivo, calcola e visualizza la circonferenza e l'area.
+  \begin{verbatim}
+    #include "stdio.h"
+    #include "math.h"
+    int main(int argc, char **argv) {
+      unsigned int r;
+      scanf("%u", &r);
+      double p, a;
+      p = 2 * M_PI * r;
+      a = M_PI * r * r;
+      printf("%lf %lf", p, a);
+      return 0;
+    }\end{verbatim}
+\end{example}
+
+\begin{example}
+  Scrivere un programma che, dato in input un numero razionale, ne calcola e visualizza l'arrotondamento per difetto.
+  \begin{verbatim}
+    #include "stdio.h"
+    int main(int argc, char **argv) {
+      float x;
+      scanf("%f", &x);
+      int y;
+      y = (int)x;
+      printf("%d", y);
+      return 0;
+    }\end{verbatim}
+\end{example}
