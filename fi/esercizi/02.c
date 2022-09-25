@@ -10,8 +10,8 @@ inferiore a 0.50, per eccesso se non inferiore.
 
 int main(int argc, char **argv) {
   double x;
-  scanf("%lf", &x);
   unsigned y;
+  scanf("%lf", &x);
   y = (unsigned)x;
   printf("%u", y);
   return 0;
