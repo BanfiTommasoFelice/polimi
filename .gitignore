@@ -10,5 +10,6 @@
 *.toc
 *.ilg
 *.out
+*.xdv
 __latexindent_temp.tex
 *.pdf
