@@ -1,15 +1,11 @@
 \part{Elaborazione dell'informazione}
 
-% lezione del 16/09/2022
-
 \section{Algoritmi}
 
 Un algoritmo è un procedimento, ovvero una sequenza di passi, che a partire da un insieme di dati (\emph{input}), attraverso un numero finito di passi, genera un insieme di dati (\emph{output}).
 
 Ogni algoritmo ha un punto d'inizio e un punto di fine.
 Un algoritmo che non accetta dati di input produce sempre lo stesso output.
-
-% lezione del 19/09/2022
 
 Ogni passo dell'algoritmo si serve di operatori, ossia simboli che indicano un'operazione da effettuare:
 \begin{itemize}
@@ -216,8 +212,6 @@ Ogni passo dell'algoritmo si serve di operatori, ossia simboli che indicano un'o
 
 \newpage
 
-% lezione del 22/09/2022
-
 \section{Il linguaggio C}
 
 Ogni programma scritto in C, comincia la propria esecuzione dalla funzione \verb|main|:
@@ -301,7 +295,7 @@ il formato è una stringa che contiene le specifiche del formato di acquisizione
 I vari argomenti della funzione saranno le destinazioni dei vari elementi del formato.
 
 \begin{example}
-  \begin{verbatim}
+\begin{verbatim}
     int a, b;
     float c;
     scanf("%d", &a);
@@ -376,3 +370,65 @@ Nel linguaggio C esistono le {\bf direttive}, ossia delle istruzioni che non ven
       return 0;
     }\end{verbatim}
 \end{example}
+
+Nei programmi C è solito utilizzare l'istruzione \verb|n = n + 1|. Questa operazione è equivalente all'istruzione \verb|n++|. Analogamente, l'istruzione \verb|n = n - 1| è equivalente a \verb|n--|.
+Inoltre, le istruzioni del tipo \verb|n = n op x| sono equivalenti alle istruzioni \verb|n op= x|.
+
+\begin{example}
+  Scrivere un programma che, dato in input un numero intero, ne calcola e visualizza il valore assoluto.
+  \begin{verbatim}
+    #include <stdio.h>
+    int main(int argc, char **argv) {
+      int x;
+      scanf("%d", &x);
+      if (x < 0) 
+        x *= -1;
+      printf("%d", x);
+      return 0;
+    }\end{verbatim}
+\end{example}
+
+Il costrutto di selezione in C è nella forma:
+\begin{verbatim}
+  if (expr)
+    code_true;
+  else
+    code_false;
+\end{verbatim}
+
+La parola chiave \verb|if| valuta l'espressione \verb|expr| e, se vera, esegue l'istruzione \verb|code_true|, altrimenti esegue l'istruzione \verb|code_false|.
+Si può, altresì, eseguire più di un'istruzione, usando i blocchi, ossia sequenze ordinate di istruzioni, che si delimitano dalle parentesi graffe \verb|{ }|: agli occhi della \verb|if|, il blocco appare come un'unica istruzione.
+Si precisa che la parte \verb|else ...| è opzionale, per cui si può omettere quando non serve.
+
+Le espressioni che esprimono un valore di verità sono dette booleane. Esse si servono dei costrutti logici \verb|&&| (congiunzione), \verb!||! (disgiunzione) e \verb|!| (negazione).
+
+\begin{example}
+  Scrivere un programma che, dato in input un numero intero, visualizza `\verb|+|' se il valore è positivo, `\verb|-|' se è negativo e `\verb| |' se è nullo.
+  \begin{verbatim}
+    #include <stdio.h>
+
+    #define POSITIVE '+'
+    #define NEGATIVE '-'
+    #define ZERO ' '
+
+    int main(int argc, char **argv) {
+      int x;
+      char sign;
+      scanf("%d", &x);
+      if (x > 0) sign = POSITIVE;
+      else if (x < 0) sign = NEGATIVE;
+      else sign = ZERO;
+      printf("%c", sign);
+      return 0;
+    }
+  \end{verbatim}
+\end{example}
+
+In C, un'espressione è comunque booleana, ed è vera se il suo valore numerico è diverso da 0.
+Alcuni esempi:
+\begin{itemize}
+  \item \verb|x|: \verb|x!=0|;
+  \item \verb|!a|: \verb|a==0|;
+  \item \verb|5 = a|: errore nella compilazione;
+  \item \verb|a = 5|: sempre vero, dato che ad \verb|a| viene assegnato il valore 5 e il risultato di un'operazione di assegnamento è il valore assegnato.
+\end{itemize}
