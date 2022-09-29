@@ -420,8 +420,7 @@ Le espressioni che esprimono un valore di verità sono dette booleane. Esse si s
       else sign = ZERO;
       printf("%c", sign);
       return 0;
-    }
-  \end{verbatim}
+    }\end{verbatim}
 \end{example}
 
 In C, un'espressione è comunque booleana, ed è vera se il suo valore numerico è diverso da 0.
@@ -432,3 +431,54 @@ Alcuni esempi:
   \item \verb|5 = a|: errore nella compilazione;
   \item \verb|a = 5|: sempre vero, dato che ad \verb|a| viene assegnato il valore 5 e il risultato di un'operazione di assegnamento è il valore assegnato.
 \end{itemize}
+
+Il costrutto di iterazione si presenta sia nella forma a condizione iniziale, sia nella forma a condizione finale:
+\begin{verbatim}
+  while (expr)
+    code;
+\end{verbatim}
+La parola chiave \verb|while| valuta l'espressione \verb|expr| e, finché vera, esegue l'istruzione \verb|code|, reiterandone l'esecuzione.
+\begin{verbatim}
+  do
+    code;
+  while (expr);
+\end{verbatim}
+La parola chiave \verb|do| esegue l'istruzione \verb|code| e successivamente valuta l'espressione \verb|expr| attraverso \verb|while|: finché vera, l'esecuzione di \verb|code| è reiterata.
+
+In entrambi i casi, analogamente al costrutto di selezione, \verb|code| può essere un blocco di istruzioni, consentendo l'esecuzione ripetuta di più istruzioni consecutive.
+
+\begin{example}
+  Scrivere un programma che, dati in input 20 numeri interi, ne calcola e visualizza il valore massimo.
+  \begin{verbatim}
+    #define N 20
+    #include <stdio.h>
+    int main(int argc, char** argv) {
+      unsigned i = N;
+      int n, m = 0x80000000;
+      while (i--) {
+        scanf("%d", &n);
+        if (n > m) m = n;
+      }
+      printf("%d", m);
+      return 0;
+    }\end{verbatim}
+\end{example}
+
+\begin{example}
+  Scrivere un programma che chiede un numero intero (finché esso non è positivo) e ne calcola e visualizza il numero di cifre.
+  \begin{verbatim}
+    #include <stdio.h>
+    int main(int argc, char** argv) {
+      int n, m, tmp;
+      do scanf("%d", &n);
+      while (n <= 0);
+      m   = 0;
+      tmp = n;
+      while (tmp) {
+        tmp /= 10;
+        m++;
+      }
+      printf("%d", m);
+      return 0;
+    }\end{verbatim}
+\end{example}
