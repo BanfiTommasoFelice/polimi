@@ -17,10 +17,8 @@ int main(int argc, char** argv) {
   while (m < MIN || m > MAX);
   for (i = 0; i < N; i++, n /= BASE) binn[i] = n % BASE;
   for (j = 0; j < N; j++, m /= BASE) binm[j] = m % BASE;
-  while (!binn[--i])
-    ;
-  while (!binm[--j])
-    ;
+  while (!binn[--i]) {}
+  while (!binm[--j]) {}
   if (i < j)
     i = j;
   else if (j < i)
