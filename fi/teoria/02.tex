@@ -482,3 +482,54 @@ In entrambi i casi, analogamente al costrutto di selezione, \verb|code| può ess
       return 0;
     }\end{verbatim}
 \end{example}
+
+Il linguaggio C consente l'uso di una struttura dati particolare: l'array. L'array è una struttura dati che contiene dati omogenei, la cui cardinalità è costante e nota a priori. Lo si può immaginare come una cassettiera, dove ogni cassetto contiene un elemento.
+La dichiarazione di un array è nella seguente forma:
+\begin{verbatim}
+  tipo nome[dimensione];
+\end{verbatim}
+Per accedere ad un elemento specifico dell'array, si scrive:
+\begin{verbatim}
+  nome[i];
+\end{verbatim}
+dove \verb|i| è l'indice, ossia un valore numerico che va da 0 a \verb|dimensione - 1|.
+Ai fini della scrittura di codice, l'espressione \verb|nome[i]| è assimilabile ad una variabile e ne eredita tutte le proprietà.
+
+\begin{example}
+  Scrivere un programma che acquisisce 50 valori interi e visualizza i valori superiori al valor medio dei valori acquisiti.
+  \begin{verbatim}
+    #define N 50
+    #include <stdio.h>
+    int main(int argc, char** argv) {
+      int v[N], s, i;
+      float avg;
+      i = 0;
+      s = 0;
+      while (i < N) {
+        scanf("%d", &v[i]);
+        s += v[i++];
+      }
+      avg = (float)s / N;
+      i   = 0;
+      while (i < N) {
+        if (v[i] > avg) printf("%d ", v[i]);
+        i++;
+      }
+      return 0;
+    }\end{verbatim}
+\end{example}
+
+Strettamente legato agli array è il costrutto \verb|for|:
+\begin{verbatim}
+  for (pre; condition; post)
+    code;
+\end{verbatim}
+Esso non è altro che l'abbreviazione di:
+\begin{verbatim}
+  pre;
+  while (condition) {
+    code;
+    post;
+  }
+\end{verbatim}
+
