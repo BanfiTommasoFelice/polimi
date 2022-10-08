@@ -490,7 +490,7 @@ La dichiarazione di un array è nella seguente forma:
 \end{verbatim}
 Per accedere ad un elemento specifico dell'array, si scrive:
 \begin{verbatim}
-  nome[i];
+  nome[i]
 \end{verbatim}
 dove \verb|i| è l'indice, ossia un valore numerico che va da 0 a \verb|dimensione - 1|.
 Ai fini della scrittura di codice, l'espressione \verb|nome[i]| è assimilabile ad una variabile e ne eredita tutte le proprietà.
@@ -533,3 +533,86 @@ Esso non è altro che l'abbreviazione di:
   }
 \end{verbatim}
 
+Il linguaggio C consente di creare array di cardinalità $n$--dimensionale: monodimensionale è un vettore, bidimensionale è una matrice, e così via.
+La dichiarazione di un array bidimensionale è nella forma:
+\begin{verbatim}
+  tipo nome[dim1][dim2];
+\end{verbatim}
+tenendo bene a mente che \verb|dim1| è il numero delle righe e \verb|dim2| è il numero delle colonne.
+Valgono per essi le stesse proprietà degli array monodimensionale, tra cui l'accesso ad un singolo elemento che è:
+\begin{verbatim}
+  nome[i][j]
+\end{verbatim}
+
+\begin{example}
+  Scrivere un programma che acquisisce i valori interi di una matrice $5\times 5$ e calcola e visualizza 1 se si tratta di una matrice identità, 0 altrimenti.
+  \begin{verbatim}
+    #define NR           5
+    #define NC           5
+    #define IDENTITY     1
+    #define NON_IDENTITY 0
+    int main(int argc, char** argv) {
+      int m[NR][NC], s, i, j;
+      for (i = 0; i < NR; i++)
+        for (j = 0; j < NC; j++) scanf("%d", &m[i][j]);
+      s = (NR == NC ? IDENTITY : NON_IDENTITY);
+      for (i = 0; s == IDENTITY && i < NR; i++)
+        for (j = 0; s == IDENTITY && j < NC; j++)
+          if (i == j && m[i][j] != 1)
+            s = NON_IDENTITY;
+          else if (i != j && m[i][j] != 0)
+            s = NON_IDENTITY;
+      printf("%d", s);
+      return 0;
+    }\end{verbatim}
+\end{example}
+
+\paragraph*{Linearizzazione della memoria}
+
+Essendo la memoria contigua, un array bidimensionale non può essere contenuto nella sua forma naturale in memoria. Tuttavia, il segmento di memoria occupato dall'array deve essere contiguo e perciò si ricorre alla linearizzazione dell'array, ossia dell'appiattimento virtuale che consente di considerare una matrice come un vettore. Così, una matrice di dimensione $n\times m$ diventa un vettore $n\cdot m$ e, all'elemento \verb|x[i][j]| corrisponderà l'elemento \verb|y[i * C + j]|, dove \verb|C| è il numero di colonne dichiarato.
+
+Il linguaggio C prevede la dichiarazione di un nuovo tipo, contenente altri tipi di natura non necessariamente omogenea. Questa nuova tipologia di informazione è resa possibile dalla keyword \verb|struct|:
+\begin{verbatim}
+  struct nome_s {
+    tipo v1;
+    tipo v2;
+  };
+\end{verbatim}
+Ogni qualvolta si vuole utilizzare il nuovo tipo, si procede nel seguente modo:
+\begin{verbatim}
+  struct nome_s nome;
+\end{verbatim}
+Per utilizzare i campi della nuova struttura si usa la notazione punto, ossia:
+\begin{verbatim}
+  nome.campo
+\end{verbatim}
+\begin{example}
+  \begin{verbatim}
+    struct data_s {
+      int giorno;
+      int mese;
+      int anno;
+    };
+    ...
+    struct data_s oggi;
+    oggi.giorno = 21;
+  \end{verbatim}
+\end{example}
+
+Per evitare l'uso continuo di \verb|struct|, si fa uso della keyword \verb|typedef|, che si usa nel seguente modo:
+\begin{verbatim}
+  typedef nome_s nome_t;
+\end{verbatim}
+
+\begin{example}
+  \begin{verbatim}
+    typedef struct data_s {
+      int giorno;
+      int mese;
+      int anno;
+    } data_t;
+    ...
+    data_t oggi;
+    oggi.giorno = 21;
+  \end{verbatim}
+\end{example}
