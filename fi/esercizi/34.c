@@ -1,25 +1,25 @@
 /*
-
+Si scriva un programma in C (ANSI 89) che acquisito un valore intero calcola e
+visualizza 1 se è un numero primo, 0 se non lo è, -1 se è un numero negativo.
 */
-
-#define NR           5
-#define NC           5
-#define IDENTITY     1
-#define NON_IDENTITY 0
 
 #include <stdio.h>
 
 int main(int argc, char** argv) {
-  int m[NR][NC], s, i, j;
-  for (i = 0; i < NR; i++)
-    for (j = 0; j < NC; j++) scanf("%d", &m[i][j]);
-  s = (NR == NC ? IDENTITY : NON_IDENTITY);
-  for (i = 0; s == IDENTITY && i < NR; i++)
-    for (j = 0; s == IDENTITY && j < NC; j++)
-      if (i == j && m[i][j] != 1)
-        s = NON_IDENTITY;
-      else if (i != j && m[i][j] != 0)
-        s = NON_IDENTITY;
-  printf("%d", s);
+  int n, p, i;
+  scanf("%d", &n);
+  if (n < 0)
+    p = -1;
+  else {
+    if (n < 4)
+      p = n > 1;
+    else if (n % 2 == 0 || n % 3 == 0)
+      p = 0;
+    else
+      p = 1;
+    for (i = 5; p && i * i <= n; i += 6)
+      if (n % i == 0 || n % (i + 2) == 0) p = 0;
+  }
+  printf("%d", p);
   return 0;
 }

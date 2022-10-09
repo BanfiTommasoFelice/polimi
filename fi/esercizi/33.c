@@ -1,5 +1,8 @@
 /*
-
+Si scriva un programma in C (ANSI 89) che acquisiti due valore naturali che
+devono essere compresi nell’intervallo [1,1023] (e fino a che il vincolo non
+viene rispettato non si procede), calcola e visualizza la loro rappresentazione
+in binario usando lo stesso numero di cifre.
 */
 
 #define MIN  1

@@ -1,5 +1,6 @@
 /*
-
+Si scriva un programma in C (ANSI 89) che acquisisce 50 valori interi e
+visualizza tutti e soli quelli superiori alla media degli stessi.
 */
 
 #define N 50

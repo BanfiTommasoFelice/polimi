@@ -1,5 +1,7 @@
 /*
-
+Si scriva un programma in C (ANSI 89) che acquisito un valore naturale che deve
+essere compreso nell’intervallo [1,1023] (e fino a che non è tale lo richiede),
+calcola e visualizza la sua rappresentazione nel sistema binario.
 */
 
 #define MIN  1
