@@ -6,9 +6,9 @@ Questo repository contiene tutto ciò che ho fatto e farò durante il percorso d
 
 ### Primo semestre
 
-|            Corso            |           Professore            | CFU |
-| :-------------------------: | :-----------------------------: | :-: |
-|  [Fondamenti di informatica](fi/)  |       BOLCHINI Cristiana        | 10  |
+|                Corso                |           Professore            | CFU |
+| :---------------------------------: | :-----------------------------: | :-: |
+|  [Fondamenti di informatica](fi/)   |       BOLCHINI Cristiana        | 10  |
 |    [Analisi matematica 1](am1/)     | CIPRIANI Fabio Eugenio Giovanni | 10  |
 | [Geometria e algebra lineare](gal/) |   MÖSENEDER Frajria Pierluigi   |  8  |
 
