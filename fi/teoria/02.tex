@@ -616,3 +616,25 @@ Per evitare l'uso continuo di \verb|struct|, si fa uso della keyword \verb|typed
     oggi.giorno = 21;
   \end{verbatim}
 \end{example}
+
+La libreria standard del C prevede una specializzazione degli array di caratteri: le stringhe. Esse sono array di caratteri, il cui contenuto è terminato dal carattere terminatore \verb|\0| (valore ASCII 0). Nelle funzioni di input/output, le stringhe hanno il segnaposto \verb|%s|:
+\begin{verbatim}
+  char s[32];
+  scanf("%s", s); /* equivalente: scanf("%s", &s[0]) */
+  printf("%s", s); /* equivalente: printf("%s", &s[0]) */
+\end{verbatim}
+
+La \verb|scanf|, però, ha un limite: non considera gli spazi come caratteri di una stringa. Pertanto, al fine di ottenere stringhe ``complete'', si usa la funzione \verb|gets| contenuta nell'header \verb|stdio.h|:
+\begin{verbatim}
+  #include <stdio.h>
+  ...
+  char s[32];
+  gets(s);
+\end{verbatim}
+
+Ovviamente, il carattere terminatore deve essere in memoria e quindi deve occupare uno spazio all'interno dell'array. A tal fine, considerando \verb|n| come dimensione massima della stringa, in fase di dichiarazione la lunghezza da assegnare sarà \verb|n + 1|:
+\begin{verbatim}
+  #define N 50
+  ...
+  char s[N + 1];
+\end{verbatim}
