@@ -1,7 +1,6 @@
 \documentclass[a4paper,12pt]{article}
 
 \usepackage[italian]{babel}
-\usepackage[utf8]{inputenc}
 \usepackage[a4paper, left=18mm, right=18mm, top=20mm, bottom=20mm]{geometry}
 \usepackage{amssymb}
 \usepackage{mathtools}
@@ -16,7 +15,9 @@
 \usepackage{enumitem}
 \usepackage{verbatim}
 \usepackage{tabularray}
-\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage{bold-extra}
+\usepackage{tabularray}
 
 \hypersetup{
   colorlinks=true,
@@ -62,11 +63,13 @@
 \renewcommand{\(}{\left(}
 \renewcommand{\)}{\right)}
 \renewcommand{\mod}[1]{\ \( \mathrm{mod}\ #1 \)}
+\DeclareMathOperator{\agg}{agg}
+\DeclareMathOperator{\sol}{Sol}
+\renewcommand{\emptyset}{\varnothing}
+\newcommand{\walrus}{\coloneqq}
 
 \newenvironment{example}
-{
-  \noindent\textsc{\textbf{Esempio}}\hspace{1em}%
-}%
+{\par\noindent{\small\bf Esempio}\hspace{0.5em}}
 {\hfill$\nsim$}
 
 \begin{document}
@@ -81,6 +84,8 @@
 \tableofcontents
 \newpage
 \pagenumbering{arabic}
-\part{Vettori e matrici}
 \input{01.tex}
+\input{02.tex}
+% \input{03.tex}
+% \input{04.tex}
 \end{document}
