@@ -1,5 +1,8 @@
 /*
-
+Scrivere un programma in C (ANSI 89) che acquisisce una stringa di al più 100
+caratteri, seguita da una seconda stringa di al più 5 caratteri. Il programma
+calcola e visualizza il numero di volte che nella prima stringa compaiono i
+caratteri della seconda.
 */
 
 #define MAXC 100

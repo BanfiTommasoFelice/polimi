@@ -1,5 +1,8 @@
 /*
-
+Scrivere un programma in C (ANSI 89) che acquisisce una stringa di al più 100
+caratteri e conta e visualizza il numero di vocali e il numero di consonanti in
+essa presente. L’utente inseriscce solamente caratteri alfabetici minuscoli,
+oltre a spazi e caratteri di interpunzione.
 */
 
 #define MAXC  100

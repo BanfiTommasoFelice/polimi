@@ -1,5 +1,6 @@
 /*
-
+Scrivere un programma che acquisisce in ingresso una stringa di al più 100
+caratteri e calcola e visualizza 1 se si tratta di una palindrome, 0 altrimenti.
 */
 
 #define MAXC 100

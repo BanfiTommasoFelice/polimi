@@ -1,5 +1,10 @@
 /*
-
+Scrivere un programma in C (ANSI 89) che acquisisce una sequenza di al più 100
+interi chiedendo per prima cosa all’utente quanti valori intenda inserire e
+verificando che la quantità non superi il vincolo, altrimenti viene chiesta
+nuovamente. Il programma calcola il valore più frequente e la sequenza di valori
+privata del valore più frequente, preceduta dalla lunghezza di tale sequenza
+risultante. A parità di numero di occorrenze si consideri l’intero più piccolo.
 */
 
 #define MAXN 100
