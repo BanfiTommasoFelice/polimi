@@ -1,0 +1,284 @@
+\section{Sistemi lineari}
+
+Si considera il sistema di $m$ equazioni in $n$ incognite:
+$$
+  \begin{cases}
+    a_{11}x_1+a_{12}x_2+\cdots +a_{1n}x_n=b_1 \\
+    a_{21}x_1+a_{22}x_2+\cdots +a_{2n}x_n=b_2 \\
+    \vdots                                    \\
+    a_{m1}x_1+a_{m2}x_2+\cdots +a_{mn}x_n=b_m \\
+  \end{cases}
+$$
+
+La matrice $A\walrus\(a_{ij}\)$ è detta \textbf{matrice dei coefficienti}, il vettore colonna $B\walrus\(b_{i}\)$ è detto \textbf{vettore dei termini noti} e il vettore $X\walrus\(x_i\)$ è detto \textbf{vettore delle incognite}.
+
+Si osserva che il sistema è equivalente a:
+$$AX=B$$
+
+\subsection{Matrice completa}
+
+\begin{definition}[Matrice completa]
+  La \textbf{matrice completa} del sistema $AX=B$ è la matrice $\(A,B\)$.
+\end{definition}
+
+\begin{example}
+  $$
+    \begin{cases}
+      2x+y=1 \\
+      x-y=-1
+    \end{cases}
+    \mapsto
+    \begin{pmatrix}
+      2 & 1  & 1  \\
+      1 & -1 & -1 
+    \end{pmatrix}
+  $$
+\end{example}
+
+\begin{definition}[Soluzione]
+  Una \textbf{soluzione} di un sistema $AX=B$ è un $m$--vettore colonna $\bar{X}$ che soddisfa l'equazione, cioè $A\bar{X}=B$.
+  L'insieme delle soluzioni del sistema si indica con $\sol\(A,B\)$.
+\end{definition}
+
+\begin{definition}[Sistema omogeneo]
+  Un sistema $AX=B$ si dice \textbf{omogeneo} se $B=\vec{0}$.
+\end{definition}
+
+\begin{theorem}[Legge di sovrapposizione]
+  Se $X_1,X_2$ sono soluzioni di un sistema omogeneo, anche $X_1+X_2$ lo è.  
+  Se $X$ è soluzione di un sistema omogeneo, allora anche $tX$ lo è.
+\end{theorem}
+\begin{proof}
+  $$A\(X_1+X_2\)=AX_1+AX_2=\vec{0}+\vec{0}=\vec{0}$$
+  $$A\(tX\)=tAX=t\vec{0}=\vec{0}$$
+\end{proof}
+
+Si suppone che $AX=B$ abbia soluzione $X_P$. Allora tutte le soluzioni del sistema sono date da $X_P+Y\ \forall Y\in\sol\(A,0\)$. In simboli:
+$$\sol\(A,B\)=X_P+\sol\(A,0\)$$
+
+\begin{proof}
+  Se $Y\in\sol\(A,0\)$ allora
+  $$A\(X_P+Y\)=AX_P+AY=B+\vec{0}=B$$
+  Se $X'\in\sol\(A,B\)$ sia $Y=X'-X_P$ cosicché $X'=X_P+Y$ si ha che
+  $$AY=A\(X'-X_P\)=AX'-AX_P=B-B=\vec{0}$$
+  quindi
+  $$X'=X_P+Y,\ Y\in\sol\(A,0\)$$.
+\end{proof}
+
+\begin{example}
+  $$
+    \begin{cases}
+      x+y=0 \\
+      x-y=2 \\
+    \end{cases}
+    \mapsto
+    \begin{pmatrix}
+      1 & 1  & 0 \\
+      1 & -1 & 2 \\
+    \end{pmatrix}
+  $$
+  $$
+    X_P=
+    \begin{pmatrix}
+      1  \\
+      -1 \\
+    \end{pmatrix}
+  $$
+  Ogni soluzione si scrive come $X_P+Y$ dove $Y$ è soluzione di 
+  $$
+    \begin{cases}
+      x+y=0 \\
+      x-y=0 \\
+    \end{cases}
+    \impl
+    Y=
+    \begin{pmatrix}
+      0 \\
+      0 \\
+    \end{pmatrix}
+  $$
+  Pertanto $X_P$ è l'unica soluzione.
+\end{example}
+
+\begin{example}
+  $$
+    \begin{cases}
+      x+y+z=1  \\
+      2x+3z=2  \\
+      x-y+2z=1 \\
+    \end{cases}
+    \impl
+    \begin{cases}
+      x+y+z=1 \\
+      2x+3z=2 \\
+      2x+3z=2 \\
+    \end{cases}
+    \impl
+    \begin{cases}
+      2x+2y+2z=2 \\
+      2x+3z=2    \\
+    \end{cases}
+    \impl
+  $$
+  $$
+    \impl
+    \begin{cases}
+      x+y+z=1 \\
+      -2y+z=0 \\
+    \end{cases}
+    \impl
+    \begin{cases}
+      z=2y     \\
+      x+y+2y=1 \\
+    \end{cases}
+    \impl
+    \begin{cases}
+      z=2y   \\
+      x+3y=1 \\
+    \end{cases}
+    \impl
+    \begin{cases}
+      y=\frac{1}{2}z   \\
+      x=1-\frac{3}{2}z \\
+    \end{cases}
+  $$
+  Le soluzioni sono date da:
+  $$
+    \begin{pmatrix}
+      1 \\
+      0 \\
+      0
+    \end{pmatrix}
+    +
+    z
+    \begin{pmatrix}
+      -\nicefrac{3}{2} \\
+      \nicefrac{1}{2}  \\
+      1                \\
+    \end{pmatrix}
+  $$
+\end{example}
+
+\subsection{Metodo di Gauss--Jordan}
+
+\begin{definition}[Pivot]
+  In una matrice qualsiasi il primo elemento non nullo di una riga viene chiamato \textbf{pivot} della riga.
+\end{definition}
+  
+\begin{definition}[Matrice a gradini]
+  Una matrice si dice \textbf{a gradini} se il pivot di ogni riga è in una colonna successiva a quella del pivot della riga precedente.
+  In particolare, in una matrice a gradini, se una riga è nulla allora tutte le righe successive devono essere nulle.
+\end{definition}
+  
+
+Si definiscono operazioni elementari di riga, operanti su una matrice:
+\begin{itemize}
+  \item scambiare due righe;
+  \item moltiplicare una riga per $n\in\mathbb{R}\setminus\left\{ 0 \right\}$;
+  \item sommare ad una riga un multiplo di un'altra riga.
+\end{itemize}
+Si scrive $A\sim B$ se $B$ si ottiene a partire da $A$ mediante una sequenza di operazioni elementari di riga.
+
+Il metodo di Gauss--Jordan consiste nel trasformare una matrice completa in una matrice a gradini.
+
+\begin{example}
+  $$
+    \begin{pmatrix}
+      1 & 1  & 1 & 1 \\
+      2 & 0  & 3 & 2 \\
+      1 & -1 & 2 & 1 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 1  & 1 & 1 \\
+      1 & -1 & 2 & 1 \\
+      2 & 0  & 3 & 2 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 1  & 1 & 1 \\
+      0 & -2 & 1 & 0 \\
+      2 & 0  & 3 & 2 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 1  & 1 & 1 \\
+      0 & -2 & 1 & 0 \\
+      0 & -2 & 1 & 0 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 1  & 1 & 1 \\
+      0 & -2 & 1 & 0 \\
+      0 & 0  & 0 & 0 \\
+    \end{pmatrix}
+  $$
+  $$
+    \begin{pmatrix}
+      1 & 1  & 2 & 2 \\
+      2 & 0  & 4 & 2 \\
+      1 & -1 & 2 & 0 \\
+      0 & 2  & 0 & 2 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 1  & 2 & 2  \\
+      0 & -2 & 0 & -2 \\
+      0 & -2 & 0 & -2 \\
+      0 & 2  & 0 & 2  \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 1  & 2 & 2  \\
+      0 & -2 & 0 & -2 \\
+      0 & 0  & 0 & 0  \\
+      0 & 0  & 0 & 0  \\
+    \end{pmatrix}
+  $$
+  $$
+    \begin{pmatrix}
+      0 & 2  & 1  & 0 & 1  \\
+      0 & 3  & -1 & 1 & 1  \\
+      1 & 1  & -2 & 1 & 0  \\
+      1 & -1 & -3 & 1 & -1 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & -1 & -3 & 1 & -1 \\
+      1 & 1  & -2 & 1 & 0  \\
+      0 & 3  & -1 & 1 & 1  \\
+      0 & 2  & 1  & 0 & 1  \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & -1 & -3 & 1 & -1 \\
+      0 & 2  & 1  & 0 & 1  \\
+      0 & 3  & -1 & 1 & 1  \\
+      0 & 2  & 1  & 0 & 1  \\
+    \end{pmatrix}
+    \sim
+  $$
+  $$
+    \sim
+    \begin{pmatrix}
+      1 & -1 & -3           & 1 & -1           \\
+      0 & 2  & 1            & 0 & 1            \\
+      0 & 0  & -\frac{5}{2} & 1 & -\frac{1}{2} \\
+      0 & 0  & 0            & 0 & 0            \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & -1 & -3 & 1 & -1 \\
+      0 & 2  & 1  & 0 & 1  \\
+      0 & 0  & -5 & 2 & -1 \\
+      0 & 0  & 0  & 0 & 0  \\
+    \end{pmatrix}
+  $$  
+\end{example}
+
+
+Un sistema si dice a gradini se la sua matrice completa lo è. Dato che ogni matrice può essere trasformata mediante una sequenza di operazioni elementari di riga in una matrice a gradini, ogni sistema è equivalente ad una sistema a gradini: basta ridurre la sua matrice a gradini.
+
+In un sistema a gradini le variabili che corrispondono ai pivot sono dette \textbf{variabili vincolate}, mentre le altre variabili sono dette \textbf{variabili libere}.
+La soluzione del sistema si trova sostituendo i vari coefficienti con la matrice completa. In particolare, se l'ultimo pivot è nell'ultima colonna, il sistema non ha soluzione.
+
