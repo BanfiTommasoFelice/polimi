@@ -67,10 +67,18 @@
 \DeclareMathOperator{\sol}{Sol}
 \renewcommand{\emptyset}{\varnothing}
 \newcommand{\walrus}{\coloneqq}
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\dabs}[1]{\left\lvert\left\lvert #1 \right\rvert\right\rvert}
+\renewcommand{\sp}[1]{\left< #1 \right>}
+\DeclareMathOperator{\nul}{null}
+\DeclareMathOperator{\rk}{rk}
 
 \newenvironment{example}
 {\par\noindent{\small\bf Esempio}\hspace{0.5em}}
 {\hfill$\nsim$}
+\newenvironment{observation}
+{\par\noindent{\small\bf Osservazione}\hspace{0.5em}}
+{\hfill}
 
 \begin{document}
 \pagenumbering{gobble}
@@ -87,5 +95,5 @@
 \input{01.tex}
 \input{02.tex}
 \input{03.tex}
-% \input{04.tex}
+\input{04.tex}
 \end{document}

@@ -1,0 +1,802 @@
+\section{Spazi vettoriali}
+
+\subsection{Vettori liberi}
+
+I vettori fisici sono quantità caratterizzate da un verso, una direzione e un modulo.
+Un modo di rappresentare i vettori fisici è dato dall'uso dei segmenti orientati.
+
+\begin{center}
+  \begin{tikzpicture}[scale=1.5]
+    \draw[-stealth] (0,0) node[label={$P$}] {} -- (3,1) node[label={$Q$}] {};
+  \end{tikzpicture}
+\end{center}
+In un segmento orientato $PQ$:
+\begin{itemize}
+  \item la lunghezza (ossia la distanza fra $P$ e $Q$) è il modulo del vettore;
+  \item la retta passante per i due estremi è la direzione;
+  \item l'ordine dei due estremi indica il verso.
+\end{itemize}
+Il segmento $PP$ rappresenta il vettore nullo.
+
+\begin{definition}[Equipollenza]
+  Due segmenti si dicono \textbf{equipollenti} se hanno in comune lunghezza, direzione e verso.
+\end{definition}
+
+\begin{definition}[Vettore libero]
+  Un \textbf{vettore libero} è la classe di equipollenza di un segmento orientato, ossia l'insieme dei segmenti orientati che sono equipollenti fra loro. Il vettore libero individuato dal segmento orientato $PQ$ si indica con $\vec{PQ}$. In particolare, il vettore nullo è $\vec{0}$.
+\end{definition}
+
+\begin{definition}[Legge di Galileo]
+  La somma di due vettori liberi è congruente al segmento orientato che congiunge l'origine del primo vettore con la destinazione del secondo vettore:
+  $$\vec{PQ}+\vec{QR}\walrus\vec{PR}$$
+  \begin{center}
+    \begin{tikzpicture}[scale=1.2]
+      \draw[-stealth] (0,0) node[label={$P$}] {} -- (2,2) node[label={$Q$}] {};
+      \draw[-stealth] (2,2) node[label={$Q$}] {} -- (5,0) node[label={$R$}] {};
+      \draw[-stealth] (0,0) -- (5,0);
+    \end{tikzpicture}
+  \end{center}
+\end{definition}
+
+\begin{definition}[Prodotto scalare]
+  Il prodotto di un vettore libero $\vec{v}$ per uno scalare $t\in\reals$ è un vettore libero che ha:
+  \begin{itemize}
+    \item modulo $t\dabs{\vec{v}}$;
+    \item stessa direzione;
+    \item stesso verso se $t>0$, verso opposto se $t<0$.
+  \end{itemize}
+  \begin{center}
+    \begin{tikzpicture}[scale=1.2]
+      \draw[-stealth] (0,0) -- (2,0) node[midway,above] {$\vec{v}$};
+      \draw[-stealth] (0,-1) -- (4,-1) node[midway,above] {$2\vec{v}$};
+      \draw[-stealth] (0,-2) -- (-1,-2) node[midway,above] {$-\frac{1}{2}\vec{v}$};
+    \end{tikzpicture}
+  \end{center}
+\end{definition}
+
+\begin{theorem}[Regola del parallelogramma]
+  La somma di due vettori liberi $\vec{v}$ e $\vec{w}$ è la diagonale del parallelogramma che ha per lati i due vettori.
+  \begin{center}
+    \begin{tikzpicture}[scale=1.2]
+      \draw[-stealth] (0,0) node[label={$P$}] {} -- (1,2) node[label={$Q$}] {};
+      \draw[-stealth] (0,0) -- (4,0) node[label={$S$}] {};
+      \draw[-stealth] (0,0) -- (5,2) node[label={$R$}] {};
+      \draw[dashed] (4,0) -- (5,2);
+      \draw[dashed] (1,2) -- (5,2);
+    \end{tikzpicture}
+  \end{center}
+  $$\vec{PQ}+\vec{PS}=\vec{PR}$$
+\end{theorem}
+\begin{proof}
+  Per la legge di Galileo, $\vec{PQ}+\vec{QR}=\vec{PR}$ e $\vec{PS}+\vec{SR}=\vec{PR}$. Poiché i lati opposti di un parallelogramma sono congruenti ($\vec{PQ}\cong\vec{SR}$ e $\vec{PS}\cong\vec{QR}$), si ha:
+  $$\vec{PQ}+\vec{PS}=\vec{PR}$$
+\end{proof}
+
+\subsubsection*{Proprietà}
+
+Le proprietà di cui godono i vettori liberi sono analoghe a quelle dei vettori, per cui:
+\begin{itemize}
+  \item $(\vec{v}+\vec{w})+\vec{u}=\vec{v}+(\vec{w}+\vec{u})$
+  \item $\vec{v}+\vec{w}=\vec{w}+\vec{v}$
+  \item $\vec{v}+\vec{0}=\vec{v}$
+  \item $\vec{v}+(-1)\vec{v}=\vec{0}$
+  \item $t(\vec{v}+\vec{w})=t\vec{v}+t\vec{w}$
+  \item $(t+s)\vec{v}=t\vec{v}+s\vec{v}$
+  \item $(ts)\vec{v}=t(s\vec{v})$
+  \item $1\vec{v}=\vec{v}$
+\end{itemize}
+
+\begin{lemma}
+  Sia $\vec{PQ}$ un qualsiasi vettore libero.
+  $$\vec{QP}=-\vec{PQ}$$
+\end{lemma}
+\begin{proof}
+  $$\vec{PQ}+\vec{QP}=\vec{PP}=\vec{0}\impl\vec{QP}=-\vec{PQ}$$
+\end{proof}
+
+\subsection{Sistema di assi cartesiano}
+
+\subsubsection*{Nel piano}
+Dare un sistema di assi cartesiani nel piano equivale a fissare un punto $O$ e i vettori $\vec{OU_1}$ e $\vec{OU_2}$, ortogonali fra loro, detti \textbf{versori degli assi cartesiani} e indicati rispettivamente con $\vec{i}$ e $\vec{j}$.
+
+Il sistema di assi cartesiani individuato da $O$ e $\vec{i}$ e $\vec{j}$ si indica con $$S\walrus\(O,\left\{ \vec{i},\vec{j} \right\}\)$$
+
+Se $\vec{v}$ è un vettore, allora si può scrivere $\vec{v}=\vec{OP}$. La coppia $\(x,y\)$ delle \textbf{coordinate} di $P$ è detta 2--vettore delle coordinate di $\vec{v}$ e si nota che $\vec{v}=x\vec{i}+y\vec{j}$.
+
+Questo ha delle conseguenze non trascurabili.
+Se $\(x_1,y_1\)$ è il 2--vettore delle coordinate di $\vec{v_1}$ e $\(x_2,y_2\)$ è il 2--vettore delle coordinate di $\vec{v_2}$, allora il 2--vettore delle coordinate di $\vec{v_1}+\vec{v_2}$ è $\(x_1+x_2,y_1+y_2\)$.
+Se $\(x,y\)$ è il 2--vettore delle coordinate di $\vec{v}$, allora $\(tx,ty\)$ è il 2--vettore delle coordinate di $t\vec{v}$.
+
+Siano $a$ il 2--vettore delle coordinate del vettore libero $\vec{v}$ e $b$ il 2--vettore delle coordinate del vettore libero $\vec{w}$. Allora, $\vec{v}+\vec{w}=a+b$ e $t\vec{v}=ta$.
+
+\subsubsection*{Nello spazio}
+Quanto visto per i vettori nel piano vale anche per i vettori nello spazio:
+\begin{itemize}
+  \item si hanno tre versori $\vec{i}$, $\vec{j}$ e $\vec{k}$;
+  \item il 3--vettore delle coordinate di $\vec{v}=\vec{OP}$ è la tripla $\(x,y,z\)$ delle coordinate di $P$;
+  \item si ha che $\vec{v}=x\vec{i}+y\vec{j}+z\vec{k}$.
+\end{itemize}
+
+\subsection{Spazi vettoriali}
+
+\begin{definition}[Spazio vettoriale]
+  Uno \textbf{spazio vettoriale} è un insieme $V$ su cui è definita:
+  \begin{itemize}
+    \item un'operazione di \textbf{somma} che associa a due elementi $v,w$ un elemento $v+w\in V$;
+    \item un'operazione di \textbf{prodotto scalare} che associa ad un elemento $v$ un elemento $tv\in V$.
+  \end{itemize}
+\end{definition}
+Inoltre, devono necessariamente valere le seguenti proprietà:
+\begin{itemize}
+  \item $(v+w)+u=v+(w+u)$
+  \item $v+w=w+v$
+  \item $v+0=v$
+  \item $v+(-1)v=0$
+  \item $t(v+w)=tv+tw$
+  \item $(t+s)v=tv+sv$
+  \item $(ts)v=t(sv)$
+  \item $1v=v$
+\end{itemize}
+
+L'insieme di tutti gli $n$--vettori si indica con $\reals^n$.
+L'insieme di tutte le matrici $n\times m$ si indica con $\reals^{n\times m}$.
+L'insieme dei polinomi si indica con $\reals\left[ x \right]$.
+L'insieme dei polinomi di grado minore o uguale a $n$ si indica con $\reals_n\left[ x \right]$.
+
+\begin{definition}[Sottospazio]
+  Un \textbf{sottospazio} di uno spazio vettoriale $V$ è un sottoinsieme non vuoto $W$ tale che $v,w\in W\impl v+w\in W\wedge v\in W,t\in \reals\impl tv\in W$.
+\end{definition}
+
+\begin{example}
+  $R_n\left[ x \right]$ è un sottospazio di $R\left[ x \right]$.
+\end{example}
+
+\begin{example}
+  Se $V$ è uno spazio vettoriale allora $V$ è un sottospazio di se stesso.
+\end{example}
+
+\begin{example}
+  Se $AX=0$ è un sistema omogeneo di $n$ equazioni e $m$ incognite, allora l'insieme delle soluzioni $\sol \(A,0\)$ è un sottospazio di $\reals^m$, per la legge di sovrapposizione.
+  \begin{proof}
+    L'insieme delle soluzioni non è mai vuoto, perché $0$ è una soluzione.
+    Per la legge di sovrapposizione:
+    $$x_1,x_2 \text{ soluzioni}\impl x_1+x_2 \text{ soluzione}$$
+    $$x\text{ soluzione}\impl tx \text{ soluzione}$$
+  \end{proof}
+\end{example}
+
+\begin{theorem}
+  $\vec{0}$ appartiene ad ogni sottospazio.  
+\end{theorem}
+\begin{proof}
+  Se $W$ è un sottospazio, allora non è vuoto. Sia $w\in W$, allora $(-1)w\in W$ e quindi $w+(-1)w=\vec{0}\in W$.
+\end{proof}
+\begin{corollary}
+  Se $\vec{0}$ non appartiene ad un insieme $W$, allora $W$ non può essere un sottospazio.
+\end{corollary}
+
+Se $W$ è un sottospazio di $V$, allora con la somma e il prodotto per uno scalare indotte da $V$, $W$ è uno spazio vettoriale. Ne segue che ogni proprietà che vale per gli spazi vettoriali, vale anche per tutti i sottospazi.
+
+\begin{example}
+  \begin{itemize}
+    \item $\left\{ \(x,y\):2x-y=1 \right\}$ non è un sottospazio in quanto 0 non è una soluzione;
+    \item $\left\{ \(x,y\):x^2+y^2=1 \right\}$ non è un sottospazio in quanto 0 non è una soluzione;
+    \item $\left\{ \(x,y\):x^2-y^2=0 \right\}$ non è un sottospazio in quanto non è chiuso rispetto alla somma;
+    \item $\left\{ \(x,y\):x^2+y^2=0 \right\}$ non è un sottospazio in quanto non è chiuso rispetto al prodotto scalare.
+  \end{itemize}
+\end{example}
+
+\subsection{Spazi generati}
+
+\begin{definition}[Combinazione lineare]
+  In uno spazio vettoriale $V$, si dice che il vettore $v$ è una \textbf{combinazione lineare} dei vettori $v_1,v_2,...,v_k$ se
+  $$v=a_1v_1+a_2v_2+\cdots+a_kv_k$$
+  con $a_1,a_2,...,a_k\in\reals$ detti \textbf{coefficienti della combinazione lineare}.
+\end{definition}
+
+\begin{example}
+  $\(1,3,-1,4\)$ è combinazione lineare di $\(1,1,0,1\)$, $\(1,0,1,1\)$, $\(0,0,0,1\)$, infatti
+  $$\(1,3,-1,4\)=2\(1,1,0,1\)-\(1,0,1,1\)+3\(0,0,0,1\)$$
+\end{example}
+
+\begin{definition}[Vettori linearmente dipendenti]
+  I vettori $v_1,v_2,...,v_n$ si dicono \textbf{linearmente dipendenti} se esiste una combinazione lineare di essi con coefficienti non tutti nulli.
+\end{definition}
+\begin{example}
+  I vettori $\(1,0,1\), \(1,1,1\), \(-1,1,-1\)$ sono linearmente dipendenti:
+  $$\(1,0,1\) -\frac{1}{2}\(1,1,1\) +\frac{1}{2}\(-1,1,-1\)=\(0,0,0\)$$
+\end{example}
+\begin{lemma}
+  Due vettori sono linearmente dipendenti se e solo se uno è un multiplo dell'altro.
+\end{lemma}
+\begin{proof}
+  Siano $v$ e $w$ due vettori. Perché essi siano linearmente dipendenti, si deve verificare:
+  $$a,b\in\reals\setminus\left\{ 0 \right\}$$
+  $$av+bw=\vec{0}$$
+  $$av=-bw\impl v=-\frac{b}{a}w$$
+\end{proof}
+
+\begin{definition}[Vettori linearmente indipendenti]
+  I vettori $v_1,v_2,...,v_n$ si dicono \textbf{linearmente indipendenti} se non sono linearmente dipendenti, vale a dire esiste una sola combinazione lineare ed è quella nulla.
+  Per convenzione $\emptyset$ è linearmente indipendente.
+\end{definition}
+\begin{example}
+  I vettori $\(1,1,1\), \(1,1,0\), \(1,0,0\)$ sono linearmente indipendenti:
+  $$a\(1,1,1\) +b\(1,1,0\) +c\(1,0,0\)=\(0,0,0\)$$
+  $$\(a,a,a\) +\(b,b,0\) +\(c,0,0\)=\(0,0,0\)$$
+  $$
+    \(a+b+c,a+b,a\)=\(0,0,0\)
+    \iff
+    \begin{cases}
+      a+b+c=0 \\
+      a+b=0   \\
+      a=0     \\
+    \end{cases}
+    \iff
+    \begin{cases}
+      a=0 \\
+      b=0 \\
+      c=0 \\
+    \end{cases}
+  $$
+\end{example}
+
+\begin{definition}[Spazio generato]
+  È detto \textbf{spazio generato} l'insieme di tutte le combinazioni lineari dei vettori $v_1,v_2,\dots,v_n$ è  e lo si indica con $L\(v_1,v_2,...,v_n\)$, oppure $\sp{v_1,v_2,...,v_n}$ oppure $\mathrm{span}\(v_1,v_2,...,v_n\)$. Per convenzione $\sp{\emptyset} = \left\{ 0 \right\}$.
+\end{definition}
+Lo spazio generato da $v_1,v_2,...,v_n$ è un sottospazio. Infatti:
+\begin{itemize}
+  \item non è vuoto: $\vec{0}\in\sp{v_1,v_2,...,v_n}$;
+  \item è chiuso rispetto alla somma: $\(a_1v_1+a_2v_2+\cdots+a_nv_n\)+\(b_1v_1+b_2v_2+\cdots+b_nv_n\)=\(a_1+b_1\)v_1+\(a_2+b_2\)v_2+\cdots+\(a_n+b_n\)v_n\in \sp{v_1,v_2,...,v_n}$;
+  \item è chiuso rispetto al prodotto per uno scalare: $t\(a_1v_1+a_2v_2+\cdots+a_nv_n\)=ta_1v_1+ta_2v_2+\cdots+ta_nv_n\in \sp{v_1,v_2,...,v_n}$.
+\end{itemize}
+
+Lo spazio generato da $v_1,v_2,...,v_n$ è il più piccolo sottospazio che contiene $v_1,v_2,...,v_n$, nel senso che $\sp{v_1,v_2,...,v_n}$ contiene $v_1,v_2,...,v_n$ e se $W$ è un sottospazio che contiene $v_1,v_2,...,v_n$, allora $\sp{v_1,v_2,...,v_n}$ è contenuto in $W$.
+
+\begin{definition}[Insieme di generatori]
+  Si dice che $\left\{ v_1,v_2,...,v_n \right\}$ è un \textbf{insieme di generatori} per lo spazio $V$ se $\sp{v_1,v_2,...,v_n}=V$: si dice che $V$ è generato da $v_1,v_2,...,v_n$ oppure che $v_1,v_2,...,v_n$ generano $V$.
+\end{definition}
+
+\begin{example}
+  $\(1,0,0\),\(0,1,0\),\(0,0,1\)$ generano $\reals^3$, infatti se $\(x,y,z\)$ è un generico 3--vettore, allora:
+  $$\(x,y,z\)=x\(1,0,0\)+y\(0,1,0\)+z\(0,0,1\)$$
+\end{example}
+
+\begin{definition}[Spazio finitamente generato]
+  Uno spazio vettoriale $V$ si dice \textbf{finitamente generato} se esiste un insieme finito $\left\{ v_1,v_2,...,v_n \right\}$ di vettori che generano $V$.
+\end{definition}
+
+\begin{definition}[Base]
+  Una \textbf{base} di uno spazio vettoriale $V$ finitamente generato è un insieme $\left\{ v_1,v_2,...,v_n \right\}$ di generatori di $V$ linearmente indipendente.
+\end{definition}
+
+\begin{theorem}[Teorema della base]
+  Sia $V$ uno spazio finitamente generato. Allora:
+  \begin{itemize}
+    \item $V$ ha una base e tutte le basi di $V$ hanno lo stesso numero di elementi;
+    \item ogni insieme linearmente indipendente in $V$ è contenuto in una base di $V$;
+    \item ogni insieme di generatori di $V$ contiene una base.
+  \end{itemize}
+\end{theorem}
+
+\begin{definition}[Dimensione]
+  Il numero elementi di una qualsiasi base di uno spazio $V$ è detto \textbf{dimensione} di $V$ e lo si indica con $\dim V$.
+\end{definition}
+
+\begin{example}
+  $$\dim \reals^3=3$$
+  $$\dim \left\{ 0 \right\}=0$$
+\end{example}
+\paragraph*{Base canonica}
+Sia $e_i\walrus\(0,0,\dots,0,0,1,0,0,\dots,0\)\in \reals^n$. È detta \textbf{base canonica} l'insieme $C^n\walrus\left\{ e_1,e_2,\dots,e_n \right\}$.
+
+\begin{example}
+  $$V=\sp{\(1,1,0\),\(1,2,-1\)}$$
+  $\left\{ \(1,1,0\),\(1,2,-1\) \right\}$ è un insieme di generatori di $\left<\(1,1,0\),\(1,2,-1\)\right>$. 
+  $$a\(1,1,0\)+b\(1,2,-1\)=\vec{0}\impl\(a+b,a+2b,-b\)=\vec{0}$$
+  $$
+    \begin{cases}
+      a+b=0  \\
+      a+2b=0 \\
+      -b=0   \\
+    \end{cases}
+    \impl
+    a=b=0
+  $$
+  Quindi l'insieme dei generatori $\left\{ \(1,1,0\),\(1,2,-1\) \right\}$ è linearmente indipendente e, pertanto, una base di $\sp{\(1,1,0\),\(1,2,-1\)}$.
+\end{example}
+
+\paragraph*{Assenza di una base per uno spazio infinito}
+Si considera lo spazio $\reals\left[ n \right]$.
+Per il principio di identità dei polinomi (che dice che due polinomi sono uguali se e solo se hanno coefficienti uguali) l'insieme $\left\{ x^0,x^1,x^2,\dots,x^n \right\}$ è linearmente indipendente $\forall n\in\mathbb{N}$.
+$\vec{0}$ di $\reals\left[ x \right]$ è il polinomio nullo $P(x)=0$. Poiché $P(n)=\vec{0}\impl a_0=a_1=\cdots=a_n=0$ e poiché si può sempre aggiungere un elemento all'insieme del polinomio, l'insieme è sempre indipendente.
+Per assurdo, se $\reals\left[ n \right]$ fosse di dimensione finita e $\dim \reals\left[ n \right]=k$, allora, per il teorema della base, $\left\{ x^0,x^1,x^2,\dots,x^n \right\}$ sarebbe contenuto in una base di e quindi $k\ge n\;\forall n$.
+
+
+\begin{example}
+  È $\left\{\(1,2\),\(2,1\)\right\}$ una base di $\reals^2$?
+  
+  \noindent Si verifica che l'insieme sia indipendente:
+  $$a\(1,2\)+b\(2,1\)=0\impl\(a,2a\)+\(2b,b\)=0$$
+  $$
+    \begin{cases}
+      a+2b=0 \\
+      2a+b=0 \\
+    \end{cases}
+    \impl
+    \begin{cases}
+      2a=-4b  \\
+      -4b+b=0 \\
+    \end{cases}
+    \impl
+    \begin{cases}
+      3b=0 \\
+      2a=0
+    \end{cases}
+    \impl
+    a=b=0
+  $$
+  Si verifica che l'insieme generi $\reals^2$:
+  $$
+    \begin{cases}
+      a+2b=x \\
+      2a+b=y \\
+    \end{cases}
+    \impl
+    \begin{cases}
+      2x-4b=2a  \\
+      2x-4b+b=y \\
+    \end{cases}
+    \impl
+    \begin{cases}
+      x=a+2b  \\
+      y=2x-3b \\
+    \end{cases}
+  $$
+  Quindi l'insieme è un generatore ed è indipendente, il che vuol dire che è una base.
+\end{example}
+
+\begin{theorem}
+  Sia $V$ uno spazio di dimensione finita. Se $W$ è un sottospazio di $V$ allora anche $W$ è di dimensione finita e $\dim W\le \dim V$.
+\end{theorem}
+
+\begin{theorem}
+  Sia $V$ uno spazio di dimensione finita. Se $W$ è un sottospazio di $V$ e $\dim W=\dim V$ allora $V=W$.
+\end{theorem}
+\begin{proof}
+  Sia $n=\dim V=\dim W$. Sia $w=\left\{ w_1,w_2,\dots,w_n \right\}$ una base di $W$. Siccome $w$ è linearmente indipendente allora, per il teorema della base, è contenuto in una base $b$ di $V$. Dato che $b$ ha $n$ elementi, si ha che $b=w$. In particolare, $W=\sp{w}=\sp{b}=V$.
+\end{proof}
+
+\begin{theorem}
+  Sia $V$ uno spazio di dimensione finita. Se $v_1,v_2,\dots,v_k$ sono linearmente indipendenti in $V$, allora $k\le \dim V$.
+\end{theorem}
+\begin{proof}
+  Siccome $v=\left\{ v_1,v_2,\dots,v_k \right\}$ è linearmente indipendente allora, per il teorema della base, è contenuto in una base $b$ di $V$. Si ha che $k\le \dim V$.
+\end{proof}
+
+\begin{theorem}
+  Sia $V$ uno spazio di dimensione finita. Se $v_1,v_2,\dots,v_k$ generano $V$ allora $\dim V\le k$.
+\end{theorem}
+\begin{proof}
+  Siccome $v=\left\{ v_1,v_2,\dots,v_k \right\}$ genera $V$ allora, per il teorema della base, contiene una base $b$ di $V$. Si ha che $k\ge \dim V$.
+\end{proof}
+
+\begin{theorem}
+  Sia $V$ uno spazio di dimensione finita. Se $v_1,v_2,\dots,v_k$ sono linearmente indipendenti e $\dim V=k$ allora $v_1,v_2,\dots,v_k$ è una base di $V$.
+\end{theorem}
+\begin{proof}
+  Siccome $v=\left\{ v_1,v_2,\dots,v_k \right\}$ è linearmente indipendente allora, per il teorema della base, è contenuto in una base $b$ di $V$. Dato che $b$ ha $k$ elementi, ne segue che $b=v$.
+\end{proof}
+
+\begin{theorem}
+  Sia $V$ uno spazio di dimensione finita. Se $v_1,v_2,\dots,v_k$ generano $V$ e $\dim V=k$, allora $\left\{ v_1,v_2,\dots,v_k \right\}$ è una base di V.
+\end{theorem}
+\begin{proof}
+  Siccome $v=\left\{ v_1,v_2,\dots,v_k \right\}$ è generatore di $V$ allora, per il teorema della base, è contiene una base $b$ di $V$. Dato che $b$ ha $k$ elementi, ne segue che $b=v$.
+\end{proof}
+
+\paragraph*{Notazione} Sia $A$ una matrice $n\times m$. Si indicano $A_i$ l'$i$--esima riga e $A^i$ l'$i$--esima colonna.
+
+\begin{definition}[Spazio riga e colonna]
+  Sia $A$ una matrice $n\times m$.
+  Si definisce spazio riga $\sp{A_i}=\sp{A_1,A_2,\dots,A_n}$ di $A$ lo spazio generato dalle righe di $A$ e spazio colonna $\sp{A^i}=\sp{A^1,A^2,\dots,A^m}$ lo spazio generato dalle colonne di $A$.
+\end{definition}
+
+\begin{observation}
+  Se $A$ è una matrice $n \times m$ e $X\walrus\(x_1,x_2,\dots,x_m\)'$, allora:
+  $$AX=\sum_{i=1}^mx_iA^i$$
+\end{observation}
+\begin{proof}
+  $$e_i\walrus\(0,0,\dots,0,0,1,0,0,\dots,0\)'\in \reals^n$$
+  $$Ae_i=A^i$$
+  $$AX=A\(\sum_{i=1}^mx_ie_i\)=\sum_{i=1}^mx_iAe_i=\sum_{i=1}^mx_iA^i$$
+\end{proof}
+
+\begin{observation}
+  Se ad una matrice $A$ si applicano le operazioni elementari di riga, allora lo spazio riga non cambia (questo non accade però per lo spazio colonna, che invece cambia).
+\end{observation}
+\begin{proof}
+  Le operazioni elementari di riga sono 3:
+  \begin{enumerate}
+    \item scambio di righe;
+    \item prodotto di una riga per uno scalare;
+    \item somma di una riga ad un'altra.
+  \end{enumerate}
+  Sia $A$ una matrice $n\times m$.
+  Lo scambio di righe non produce alcun effetto sullo spazio riga:
+  $$\sp{A_1,\dots,A_i,\dots,A_j,\dots,A_n}=\sp{A_1,\dots,A_j,\dots,A_i,\dots,A_n}$$
+  Il prodotto di una riga per uno scalare non produce alcun effetto sullo spazio riga:
+  $$\sp{A_1,\dots,A_i,\dots,A_n}=\sp{A_1,\dots,tA_i,\dots,A_n}$$
+  La somma di una riga ad un'altra non produce alcun effetto sullo spazio riga:
+  $$a_1A_1+\cdots+a_iA_i+\cdots+a_j\(tA_i+A_j\)+\cdots+a_nA_n=$$
+  $$=a_1A_1+\cdots+\(a_i+a_jt\)A_i+\cdots+a_jA_j+\cdots+a_nA_n$$
+  $$\sp{A_1,\dots,A_i,\dots,A_j,\dots,A_n}=\sp{A_1,\dots, A_i,\dots,tA_i+A_j,\dots,A_n}$$
+\end{proof}
+
+Quindi, ogni matrice $A$ può essere trasformata in una matrice a gradini $B$ attraverso una serie di operazioni di riga. Se una matrice $B$ è a gradini, allora le sue righe non nulle sono linearmente indipendenti e quindi sono una base del suo spazio riga.
+
+Quindi, se $B$ è una riduzione a gradini di $A$, allora $\sp{A}=\sp{B}$. In particolare le righe non nulle di $B$ sono una base dello spazio riga di $A$ e la sua dimensione è il numero dei pivot di $B$.
+
+\begin{example}
+  $$
+    \begin{pmatrix}
+      1 & 1  & 2 & 2 \\
+      2 & 0  & 4 & 2 \\
+      1 & -1 & 2 & 0 \\
+      0 & 2  & 0 & 2 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 1  & 2 & 2  \\
+      0 & -2 & 0 & -2 \\
+      0 & -2 & 0 & -2 \\
+      0 & 2  & 0 & 2  \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 1 & 2 & 2 \\
+      0 & 1 & 0 & 1 \\
+      0 & 0 & 0 & 0 \\
+      0 & 0 & 0 & 0 \\
+    \end{pmatrix}
+  $$
+  $$
+    \mathfrak{B} =\left\{ \(1,1,2,2\),\(0,1,0,1\) \right\}
+  $$
+  $$
+    \dim\mathfrak{B}=2
+  $$
+\end{example}
+
+\begin{example}
+  $$
+    \begin{pmatrix}
+      0 & 0 & 2 & 2 & -1 & 1 \\
+      1 & 1 & 2 & 1 & 1  & 1 \\
+      1 & 1 & 4 & 3 & 0  & 2 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 1 & 2 & 1 & 1  & 1 \\
+      1 & 1 & 4 & 3 & 0  & 2 \\
+      0 & 0 & 2 & 2 & -1 & 1 \\
+    \end{pmatrix}
+    \sim
+  $$
+  $$
+    \sim
+    \begin{pmatrix}
+      1 & 1 & 2 & 1 & 1  & 1 \\
+      0 & 0 & 2 & 2 & -1 & 1 \\
+      0 & 0 & 2 & 2 & -1 & 1 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 1 & 2 & 1 & 1  & 1 \\
+      0 & 0 & 2 & 2 & -1 & 1 \\
+      0 & 0 & 0 & 0 & 0  & 0 \\
+    \end{pmatrix}
+  $$
+  Siccome la dimesione dello spazio generato è 2, le righe della matrice non sono linearmente indipendenti.
+\end{example}
+\begin{example}
+  $$
+    \begin{pmatrix}
+      1  & 2 & 2 & 2 \\
+      1  & 0 & 1 & 1 \\
+      1  & 2 & 3 & 0 \\
+      -1 & 1 & 1 & 1 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1  & 0 & 1 & 1 \\
+      1  & 2 & 2 & 2 \\
+      1  & 2 & 3 & 0 \\
+      -1 & 1 & 1 & 1 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0 & 1 & 1  \\
+      0 & 2 & 1 & 1  \\
+      0 & 2 & 2 & -1 \\
+      0 & 1 & 2 & 2  \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0 & 1 & 1  \\
+      0 & 2 & 1 & 1  \\
+      0 & 0 & 1 & -2 \\
+      0 & 0 & 3 & 3  \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0 & 1 & 1  \\
+      0 & 2 & 1 & 1  \\
+      0 & 0 & 1 & -2 \\
+      0 & 0 & 0 & 3  \\
+    \end{pmatrix}
+  $$
+  Siccome la dimesione dello spazio generato è 4, le righe della matrice sono linearmente indipendenti.
+\end{example}
+
+\subsection{Operazioni}
+
+\begin{definition}[Spazio somma]
+  Se $U,W$ sono sottospazi di uno stesso spazio $V$, allora lo \textbf{spazio somma} è:
+  $$U+W\walrus \left\{ u+w:u\in U,w\in W \right\}$$
+\end{definition}
+
+\begin{definition}[Spazio intersezione]
+  Se $U,W$ sono sottospazi di uno stesso spazio $V$, allora lo \textbf{spazio intersezione} è:
+  $$U\cap W\walrus \left\{ v:v\in U\wedge v\in W \right\}$$
+\end{definition}
+
+\begin{observation}
+  Se $U,W$ sono sottospazi di uno stesso spazio $V$, allora $U+W$ e $U\cap W$ sono sottospazi di $V$.
+\end{observation}
+\begin{proof}
+  \hfill\break
+  \noindent Spazio somma $U+W$:
+  \begin{itemize}
+    \item $0\in U+W$
+    \item $v,z\in U+W\impl v+z\in U+W \because v+z=(u_1+w_1)+(u_2+w_2)=(u_1+u_2)+(w_1+w_2)$
+    \item $v\in U+W\impl kv\in U+W\because kv=k(u+w)=ku+kw$
+  \end{itemize}
+  
+  \noindent Spazio intersezione $U\cap W$:
+  \begin{itemize}
+    \item $0\in U\cap W$
+    \item $v,z\in U\cap W\impl v+z\in U\cap W \because v+z=(u_1+w_1)+(u_2+w_2)=(u_1+u_2)+(w_1+w_2)$
+    \item $v\in U\cap W\impl kv\in U\cap W\because kv=k(u+w)=ku+kw$
+  \end{itemize}
+\end{proof}
+
+\begin{theorem}[Formula di Grassmann]
+  $$\dim\(U+W\)+\dim \(U\cap W\)=\dim U+\dim W$$
+\end{theorem}
+
+\begin{definition}[Somma diretta]
+  Si dice che uno spazio $V$ è \textbf{somma diretta} di due sottospazi $U,W$ se $V=U+W$ e $U\cap W=\left\{ 0 \right\}$. Si indica come:
+  $$V=U \oplus W$$
+\end{definition}
+
+\begin{definition}[Complemento]
+  Se $U$ è un sottospazio di $V$, un \textbf{complemento} di $U$ è un sottospazio $W$ tale che $V=U\oplus W$.
+\end{definition}
+
+\begin{example}
+  $$U\walrus \left\{ (x,y):x=y \right\}$$
+  $$W\walrus \left\{ (x,y):x=-y \right\}$$
+  $W$ è complemento di $U$ in $\reals^2$.
+\end{example}
+
+\paragraph*{Osservazione} 
+$V=U\oplus W$ se e solo se ogni vettore $v\in V$ può essere scritto univocamente come $v=u+w, u\in U, w\in W$.
+\begin{proof}
+  Sia $V=U\oplus W$, allora $v\in V$ può essere scritto come:
+  $$v\in V=u+w, u\in U, w\in W$$
+  Se, per assurdo, si suppone che tale scrittura non sia univoca, allora:
+  $$v=u'+w'\impl u'+w'=u+w\impl u'-u=w'-w$$
+  $$u'-u\in U,\ w'-w\in W$$
+  $$u'-u\in U\cap W\impl u'-u=0\impl u=u'$$
+  $$w'-w\in U\cap W\impl w'-w=0\impl w=w'$$
+  
+  Se $v\in V$ si scrive in modo univoco come $u+w,\ u\in U,\ w\in W$, allora
+  $$V=U+W$$
+  Inoltre, se $v\in U\cap W$:
+  $$v\in U\wedge v\in W\impl v=0\impl V=U\oplus W$$
+\end{proof}
+
+\begin{definition}[Proiezione]
+  Sia $V=U\oplus W$, dato $v\in V$, possiamo scrivere in modo univoco $v=u+w,\ u\in U,\ w\in W$.
+  Il vettore $u$ è detto \textbf{proiezione} di $v$ su $U$, relativa alla somma diretta $V=U\oplus W$.
+\end{definition}
+
+\subsection{Rango e nullità}
+
+\begin{definition}[Spazio nullo]
+  Lo \textbf{spazio nullo} di una matrice $A$ è $\sol \(A,0\)$ e si indica con $N\(A\)$.
+\end{definition}
+
+\begin{definition}[Immagine]
+  L'\textbf{immagine} di una matrice $A$ è lo spazio colonna della matrice e lo si indica con $R\(A\)$.
+\end{definition}
+
+\begin{definition}[Nullità]
+  La dimensione di $N(A)$ è detta \textbf{nullità} di A e la si indica con $null(A)$:
+  $$\nul A=\dim N(A)=\dim \sol \(A,0\)$$
+\end{definition}
+
+\begin{definition}[Rango]
+  La dimensione di $R(A)$ è detta \textbf{rango} di $A$ e la si indica con $\rk A$, quindi se $A$ è una matrice $n\times m$:
+  $$\rk A=\dim R(A)=\dim\sp{A^1,A^2,\dots,A^m}$$
+  Si nota che $\rk A\le \min \left\{ n,m \right\}$.
+\end{definition}
+
+\begin{theorem}[Teorema del rango]
+  Il rango di una matrice $A$ è uguale al rango di $A'$:
+  $$\rk A=\rk A'$$
+\end{theorem}
+\begin{proof}
+  Sia $A$ una matrice $n\times m$ e sia $r\walrus rk(A)$. Sia $B$ la base di $\sp{A^1,A^2,\dots,A^m}$ e $C$ la matrice avente per colonne gli elementi di $B$. Allora si ha che ogni colonna di $A$ è una combinazione lineare delle colonne di $C$:
+  $$A^j=\sum_{i=1}^n k_{ij}C^i$$ % FIXME: forse l'indice deve arrivare ad m
+  
+  Sia $K=\(k_{ij}\)$. Siccome $A^j=CK^j$, si ha che $A=CK$ e quindi $A'=K'C'$. In particolare, le colonne di $A'$ sono combinazioni lineari delle colonne di $K'$ e quindi $\sp{A'^i}\subseteq \sp{K'^i}$.
+  Pertanto $\rk A'\le \rk K'$ e dato che $K$ è $r\times m$, $\rk K'\le r$ e quindi $\rk A'\le r = \rk A$.
+  Analogamente, scambiando i ruoli, si ha che $\rk A \le \rk A'$. Si conclude che $\rk A = \rk A'$.
+\end{proof}
+
+\paragraph*{Conseguenze}
+Sia $r\walrus \rk A$:
+\begin{itemize}
+  \item la dimensione dello spazio riga è $r$;
+  \item la dimesione dello spazio colonna è $r$;
+  \item il massimo numero di colonne linearmente indipendenti è $r$;
+  \item il massimo numero di righe linearmente indipendenti è $r$.
+\end{itemize}
+
+\begin{example}
+  $$
+    A=
+    \begin{pmatrix}
+      1 & 1  & 2 & 2 \\
+      2 & 0  & 4 & 2 \\
+      1 & -1 & 2 & 0 \\
+      0 & 2  & 0 & 2 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 1  & 2 & 2  \\
+      0 & -2 & 0 & -2 \\
+      0 & -2 & 0 & -2 \\
+      0 & 2  & 0 & 2  \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 1 & 2 & 2 \\
+      0 & 1 & 0 & 1 \\
+      0 & 0 & 0 & 0 \\
+      0 & 0 & 0 & 0 \\
+    \end{pmatrix}
+  $$
+  $$\rk A = 2$$
+\end{example}
+
+\paragraph*{Metodo dei perni}
+Il metodo dei perni consente di calcolare una base di uno spazio, partendo dalla matrice ridotta dei vettori colonna che generano tale spazio. Esso consiste nel trasformare la matrice dei vettori colonna che generano uno spazio in una matrice a gradini. La base è formata dai vettori originali nelle colonne che contengono un pivot.
+
+\begin{theorem}[Nullità più rango]
+  Se $A$ è una matrice $n\times m$, allora:
+  $$\nul A+\rk A=m$$
+  Il teorema è un caso speciale del teorema della dimensione.
+\end{theorem}
+
+\begin{example}
+  $$
+    A=
+    \begin{pmatrix}
+      1 & 1  & 2 & 2 \\
+      2 & 0  & 4 & 2 \\
+      1 & -1 & 2 & 0 \\
+      0 & 2  & 0 & 2 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 1  & 2 & 2  \\
+      0 & -2 & 0 & -2 \\
+      0 & -2 & 0 & -2 \\
+      0 & 2  & 0 & 2  \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 1 & 2 & 2 \\
+      0 & 1 & 0 & 1 \\
+      0 & 0 & 0 & 0 \\
+      0 & 0 & 0 & 0 \\
+    \end{pmatrix}
+  $$
+  $$\rk A = 2$$
+  $$\nul A=m-\rk A=4-2=2$$
+\end{example}
+\begin{example}
+  $$
+    A=
+    \begin{pmatrix}
+      1 & 1  & 2 & 2 \\
+      2 & 0  & 4 & 2 \\
+      1 & -1 & 2 & 0 \\
+      0 & 2  & 0 & 2 \\
+    \end{pmatrix}
+  $$
+  $$
+    \begin{pmatrix}
+      A & 0 \\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      1 & 1  & 2 & 2 & 0 \\
+      2 & 0  & 4 & 2 & 0 \\
+      1 & -1 & 2 & 0 & 0 \\
+      0 & 2  & 0 & 2 & 0 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 1 & 2 & 2 & 0 \\
+      0 & 1 & 0 & 1 & 0 \\
+      0 & 0 & 0 & 0 & 0 \\
+      0 & 0 & 0 & 0 & 0 \\
+    \end{pmatrix}
+  $$
+  $$\rk A=2\impl \nul A = 4-2=2$$
+  $$
+    \begin{cases}
+      x_1+x_2+2x_3+2x_4=0 \\
+      x_2+x_4=0           \\
+    \end{cases}
+  $$
+  Dato che i pivot sono $x_1$ e $x_2$, allora essi sono anche le variabili vincolate. Viceversa $x_3$ e $x_4$ sono libere.
+  $$
+    \begin{cases}
+      x_1 +x_2=-2x_3-2x_4 \\
+      x_2=-x_4            \\
+    \end{cases}
+    \impl
+    \begin{cases}
+      x_1=-2x_3-x_4 \\
+      x_2=-x_4      \\
+    \end{cases}
+  $$
+  $$
+    \begin{pmatrix}
+      x_1 \\
+      x_2 \\
+      x_3 \\
+      x_4 \\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      -2x_3-x_4 \\
+      -x_4      \\
+      x_3       \\
+      x_4       \\
+    \end{pmatrix}
+    =
+    x_3
+    \begin{pmatrix}
+      -2 \\
+      0  \\
+      1  \\
+      0  \\
+    \end{pmatrix}
+    +x_4
+    \begin{pmatrix}
+      -1 \\
+      -1 \\
+      0  \\
+      1  \\
+    \end{pmatrix}
+  $$
+  $\left\{ \(-2,0,1,0\),\(-1,-1,0,1\) \right\}$ genera le soluzioni del sistema.
+  Dato che $\nul A=2$, l'insieme è una base.
+  $N(A)$ è, quindi, $\sp{\(-2,0,1,0\),\(-1,-1,0,1\)}$.
+\end{example}
