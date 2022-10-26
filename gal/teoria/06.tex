@@ -1,0 +1,366 @@
+\section{Autovalori e autovettori}
+
+\begin{definition}[Matrici simili]
+  Due matrici quadrate $A$ e $B$ si dicono simili se esiste una matrice invertibile $M$, tale che:
+  $$M^{-1}AM=B$$
+\end{definition}
+
+\begin{definition}[Matrice diagonale]
+  Una matrice si dice diagonale se è nella forma:
+  $$
+    \begin{pmatrix}
+      \lambda_1 & 0         & 0         & 0         \\
+      0         & \lambda_2 & 0         & 0         \\
+      0         & 0         & \lambda_3 & 0         \\
+      0         & 0         & 0         & \lambda_4 \\
+    \end{pmatrix}
+  $$
+\end{definition}
+
+\begin{definition}[Matrice diagonalizzabile]
+  Una matrice si dice diagonalizzabile se è simile ad una matrice diagonale.
+\end{definition}
+
+\begin{example}
+  $$
+    A=
+    \begin{pmatrix}
+      1 & 2 \\
+      0 & 2 \\
+    \end{pmatrix}
+  $$
+  $$
+    M=
+    \begin{pmatrix}
+      1 & 2 \\
+      0 & 1 \\
+    \end{pmatrix}
+  $$
+  $$
+    M^{-1}=
+    \begin{pmatrix}
+      1 & -2 \\
+      0 & 1  \\
+    \end{pmatrix}
+  $$
+  $$
+    M^{-1}AM=
+    \begin{pmatrix}
+      1 & -2 \\
+      0 & 1  \\
+    \end{pmatrix}
+    \begin{pmatrix}
+      1 & 2 \\
+      0 & 2 \\
+    \end{pmatrix}
+    \begin{pmatrix}
+      1 & 2 \\
+      0 & 1 \\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      1 & 0 \\
+      0 & 2 \\
+    \end{pmatrix}
+  $$
+\end{example}
+
+\begin{example}
+  $$
+    A=
+    \begin{pmatrix}
+      0 & 1 \\
+      0 & 0 \\
+    \end{pmatrix}
+  $$
+  $$A^2=\vec{0}$$
+  Se, per assurdo, $A$ fosse diagonalizzabile, esisterebbe $M$ tale che
+  $$
+    M^{-1}AM=
+    \begin{pmatrix}
+      \lambda_1 & 0         \\
+      0         & \lambda_2 \\
+    \end{pmatrix}
+  $$
+  $$
+    \begin{pmatrix}
+      \lambda_1^2 & 0           \\
+      0           & \lambda_2^2 \\
+    \end{pmatrix}
+    =\(M^{-1}AM\)^2
+  $$
+\end{example}
+
+\begin{definition}[Autovalore]
+  Sia $A$ una matrice quadrata di ordine $n$. Si dice che $\lambda\in\reals$ è un \textbf{autovalore} per $A$ se $\exists v\in\reals^n\setminus\left\{ 0 \right\}:Av=\lambda v$.
+\end{definition}
+
+\begin{definition}[Autovettore]
+  Se $\lambda\in\reals$ è un autovalore di una matrice $A$, allora un vettore $v$ non nullo tale che $Av=\lambda v$ viene chiamato \textbf{autovettore} di $A$, relativo all'autovalore $\lambda$.
+  Analogamente, se $v$ è un autovettore di $A$ e $Av=\lambda v$, allora $\lambda$ è detto autovalore di $A$ relativo all'autovettore $v$.
+\end{definition}
+
+\begin{example}
+  $$
+    A=
+    \begin{pmatrix}
+      0 & 1 \\
+      1 & 0 \\
+    \end{pmatrix}
+  $$
+  $\pm1$ sono autovalori di $A$ in relazione agli autovettori $\(1,\pm1\)$.
+\end{example}
+
+\begin{theorem}
+  Una matrice $A$ quadrata di ordine $n$ è diagonalizzabile se e solo se esiste una base di $\reals^n$ formata da autovettori di $A$.
+\end{theorem}
+\begin{proof}
+  Sia $\diag\(\lambda_1,\dots,\lambda_n\)$ la matrice diagonale che ha $\lambda_1,\dots,\lambda_n$ sulla diagonale.
+  
+  Se $A$ è diagonalizzabile, allora esiste una matrice invertibile $M$ tale che $M^{-1}AM=\diag\(\lambda_1,\dots,\lambda_n\)$ quindi $AM=M\diag\(\lambda_1,\dots,\lambda_n\)$.
+  Allora:
+  $$AM=\(AM^1,\dots,AM^n\)=M\diag\(\lambda_1,\dots,\lambda_n\)=\(\lambda_1M^1,\dots,\lambda_nM^n\)\impl AM^i=\lambda_iM^i$$
+  Pertanto, $M^1,\dots,M^n$ sono autovettori.
+  Siccome $M$ è invertibile, $\det M\neq 0$ e quindi $R(M)$ forma una base di $\reals^n$.
+  
+  Viceversa, se una base di $\reals^n$ è formata da autovettori di $A$. Sia $M=\(M^1,\dots,M^n\)$ la matrice che ha per colonne i vettori della base di $\reals^n$, $M$ è invertibile, perché il suo determinante è diverso da 0. Si ha che:
+  $$AM^i=\lambda_i M^i\impl AM=\(\lambda_1M^1,\dots,\lambda_nM^n\)=M\diag\(\lambda_1,\dots,\lambda_n\)$$
+  $$M^{-1}AM=\diag\(\lambda_1,\dots,\lambda_n\)$$
+\end{proof}
+
+Una matrice modale è la matrice che ha per colonne gli elementi di una base di autovettori di $A$, mentre la matrice diagonale simile ad $A$ è la matrice che ha sulla diagonale gli autovalori di $A$. Per diagonalizzare una matrice $A$ basta quindi trovare gli autovalori di $A$ e una base formata dagli autovettori.
+
+Lo strumento che consente di calcolare gli autovalori di una matrice è il polinomio caratteristico.
+
+\begin{definition}[Polinomio caratteristico]
+  Sia $A$ una matrice quadrata di ordine $n$. La funzione di una variabile reale
+  $$p\(t\)\walrus \det \(A-tI\)$$
+  è un polinomio di grado $n$ che è chiamato polinomio caratteristico di $A$ e lo si indica con $p_A\(t\)$
+\end{definition}
+
+\begin{example}
+  $$
+    A=
+    \begin{pmatrix}
+      1 & 2 \\
+      0 & 2 \\
+    \end{pmatrix}
+  $$
+  $$
+    p_A\(t\)=\det \(
+    \begin{pmatrix}
+      1 & 2 \\
+      0 & 2 \\
+    \end{pmatrix}
+    -t
+    \begin{pmatrix}
+      1 & 0 \\
+      0 & 1 \\
+    \end{pmatrix}
+    \)
+    =
+    \begin{vmatrix}
+      1-t & 2   \\
+      0   & 2-t \\
+    \end{vmatrix}
+    = \(1-t\)\(2-t\)=t^2-3t+2
+  $$
+\end{example}
+
+\begin{example}
+  $$
+    A=
+    \begin{pmatrix}
+      0 & 1 \\
+      1 & 0 \\
+    \end{pmatrix}
+  $$
+  $$
+    p_A\(t\)=\det \(
+    \begin{pmatrix}
+      0 & 1 \\
+      1 & 0 \\
+    \end{pmatrix}
+    -t
+    \begin{pmatrix}
+      1 & 0 \\
+      0 & 1 \\
+    \end{pmatrix}
+    \)
+    =
+    \begin{vmatrix}
+      -t & 1  \\
+      1  & -t \\
+    \end{vmatrix}
+    = t^2-1
+  $$
+\end{example}
+
+\begin{theorem}
+  Gli autovalori di $A$ sono le radici del polinomio caratteristico di $A$, cioè $\lambda$ è autovalore di $A$ se e solo se $p_A\(\lambda\)=0$.
+\end{theorem}
+\begin{proof}
+  $\lambda$ è un autovalore se e solo se esiste un vettore non nullo tale che $Av=\lambda v$:
+  $$Av=\lambda v\iff Av-\lambda v=0\iff \(A-\lambda I\)v=0$$
+  Il sistema $\(A-\lambda I\)v=0$ ha una soluzione non nulla se e solo se:
+  $$\det \(A-\lambda I\)=0\iff p_A\(\lambda\)=0$$
+\end{proof}
+
+\begin{observation}
+  Una matrice quadrata di ordine $n$ ha al più $n$ autovalori.
+\end{observation}
+\begin{proof}
+  Essendo il polinomio di grado $n$, il numero delle sue radici è al più $n$.
+\end{proof}
+
+Se $\lambda$ è un autovalore di $A$ allora gli autovettori relativi a $\lambda$ sono le soluzioni non nulle del sistema lineare:
+$$AX=\lambda X\iff \(A-\lambda I\)X=0$$
+Tuttavia, per ogni autovalore, ci sono infiniti autovettori.
+
+\begin{definition}[Autospazio]
+  L'insieme delle soluzioni del sistema lineare $\(A-\lambda I\)X=0$ è detto \textbf{autospazio} relativo all'autovettore $\lambda$.
+\end{definition}
+
+% TODO: migliorare la forma
+
+L'autospazio è l'insieme di tutti gli autovettori relativi a $\lambda$ unito con $\left\{ 0 \right\}$. Ovviamente, l'autospazio è un sottospazio.
+
+\begin{definition}[Molteplicità geometrica]
+  La dimensione di un autospazio è detta \textbf{molteplicità geometrica} dell'autovalore $\lambda$ e la si indica con $m_g\(\lambda\)$.
+\end{definition}
+$$m_g\(\lambda\)=\dim \sol \(A-\lambda I,0\)=\dim N\(A-\lambda I\)=\nul \(A-\lambda I\)=n-\rk \(A-\lambda I\)$$
+
+\begin{example}
+  $$
+    A=
+    \begin{pmatrix}
+      0 & 1 & 0 \\
+      1 & 0 & 0 \\
+      0 & 0 & 1 \\
+    \end{pmatrix}
+  $$
+  $$
+    p_A\(t\)=
+    \begin{vmatrix}
+      -t & 1  & 0   \\
+      1  & -t & 0   \\
+      0  & 0  & 1-t \\
+    \end{vmatrix}
+    =
+    \(1-t\)
+    \begin{vmatrix}
+      -t & 1  \\
+      1  & -t \\
+    \end{vmatrix}
+    =
+    \(1-t\)\(t^2-1\)
+  $$
+  $$p_A\(t\)=0\iff t=\pm1$$
+  $$\lambda_1 = 1$$
+  $$
+    m_g\(\lambda_1\)=3-\rk 
+    \begin{pmatrix}
+      -1 & 1  & 0 \\
+      1  & -1 & 0 \\
+      0  & 0  & 0 \\
+    \end{pmatrix}
+    =3-1=2
+  $$
+  $$\lambda_2 = -1$$
+  $$
+    m_g\(\lambda_1\)=3-\rk 
+    \begin{pmatrix}
+      1 & 1 & 0 \\
+      1 & 1 & 0 \\
+      0 & 0 & 2 \\
+    \end{pmatrix}
+    =3-2=1
+  $$
+  $$
+    \reals_1^3=N\(A-I\)=N
+    \begin{pmatrix}
+      -1 & 1  & 0 \\
+      1  & -1 & 0 \\
+      0  & 0  & 0 \\
+    \end{pmatrix}
+    =\sp{
+      \begin{pmatrix}
+        1 \\
+        1 \\
+        0 \\
+      \end{pmatrix}
+      ,
+      \begin{pmatrix}
+        0 \\
+        0 \\
+        1 \\
+      \end{pmatrix}
+    }
+  $$
+  $$
+    \reals_{-1}^3=N\(A+I\)=N
+    \begin{pmatrix}
+      1 & 1 & 0 \\
+      1 & 1 & 0 \\
+      0 & 0 & 2 \\
+    \end{pmatrix}
+    =\sp{
+      \begin{pmatrix}
+        -1 \\
+        1  \\
+        0  \\
+      \end{pmatrix}
+    }
+  $$
+  $$
+    \reals^3=
+    \sp{
+      \begin{pmatrix}
+        1 \\
+        1 \\
+        0 \\
+      \end{pmatrix}
+      ,
+      \begin{pmatrix}
+        0 \\
+        0 \\
+        1 \\
+      \end{pmatrix}
+      ,
+      \begin{pmatrix}
+        -1 \\
+        1  \\
+        0  \\
+      \end{pmatrix}
+    }
+  $$
+  $A$ è diagonalizzabile con % TODO: migliorare la forma
+  $$
+    M=
+    \begin{pmatrix}
+      1 & 0 & -1 \\
+      1 & 0 & 1  \\
+      0 & 1 & 0  \\
+    \end{pmatrix}
+  $$
+  $$
+    M^{-1}AM=
+    \begin{pmatrix}
+      1 & 0 & 0  \\
+      0 & 1 & 0  \\
+      0 & 0 & -1 \\
+    \end{pmatrix}
+  $$
+\end{example}
+
+\begin{lemma}
+  Sia $A$ una matrice quadrata di ordine $n$. Siano $\lambda_1,\dots,\lambda_r$ gli autovalori distinti di $A$. Se $v_i$ è l'autovettore relativo a $\lambda_i$, allora i vettori $v_1,\dots,v_r$ sono linearmente indipendenti. Si dice che autovettori relativi a autovalori distinti sono linearmente indipendenti.
+\end{lemma}
+
+\begin{theorem}[Primo criterio di diagonalizzabilità]
+  Se la matrice quadrata $A$ di ordine $n$ ha $n$ autovalori distinti, allora la matrice è diagonalizzabile.
+\end{theorem}
+\begin{proof}
+  Gli $n$ autovettori $v_1,\dots,v_n$ sono indipendenti in $\reals^n$ e quindi sono una base.
+\end{proof}
+
