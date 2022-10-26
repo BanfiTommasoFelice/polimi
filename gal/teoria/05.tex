@@ -1,0 +1,826 @@
+\section{Trasformazioni lineari}
+
+\subsection{Funzioni}
+
+\begin{definition}[Funzione]
+  Dati due insiemi $A$ e $B$, una \textbf{funzione} $f: A\to B$ è una legge che associa a ogni elemento di $A$ uno ed un solo elemento di $B$ che si indica con $f(a)$.
+\end{definition}
+\begin{definition}[Funzione iniettiva, suriettiva e biiettiva]
+  Una funzione si dice \textbf{iniettiva} se $f(a_1)=f(a_2)\impl a_1=a_2$. Una funzione si dice \textbf{suriettiva} se $\forall b\in B\exists a\in A:f(a)=b$. Una funzione si dice \textbf{biiettiva} se è iniettiva e suriettiva.
+\end{definition}
+\begin{definition}[Funzione identità]
+  La \textbf{funzione identità} $I_A:A\to A$ è definita come $I_A\(a\)\walrus a$.
+\end{definition}
+\begin{definition}[Funzione composta]
+  Dati gli insiemi $A$, $B$, $C$ e le funzioni $f:A\to B$ e $g:B\to C$, la \textbf{funzione composta} $g\circ f$ è definita come:
+  $$g\circ f:A\to C\walrus g(f(a))$$
+\end{definition}
+\begin{definition}[Funzione invertibile]
+  Una funzione $f:A\to B$ si dice \textbf{invertibile} se esiste una funzione $g:B\to A$, tale che
+  $$g\circ f = I_A$$
+  $$f\circ g = I_B$$
+  Se $f$ è una funzione invertibile, allora la funzione $g$ è unica e la si indica con $f^{-1}$.
+\end{definition}
+\begin{lemma}
+  Una funzione è invertibile se e solo se è biiettiva.
+\end{lemma}
+
+\subsection{Trasformazioni lineari}
+
+\begin{definition}[Trasformazione lineare]
+  Dati due spazi vettoriali $V$ e $W$, una \textbf{trasformazione lineare} da $V$ in $W$ è una funzione $f:V\to W$ tale che, dati $v_1,v_2\in V$:
+  $$f(v_1+v_2)=f(v_1)+f(v_2)$$
+  e dato $v\in V$ e $t\in\reals$:
+  $$f(tv)=tf(v)$$
+\end{definition}
+
+\begin{observation}
+  Se $T:V\to W$ è una trasformazione lineare, allora $T(0)=0$.
+\end{observation}
+\begin{proof}
+  $$T(0)=T(0+0)=T(0)+T(0)\impl T(0)=0$$
+\end{proof}
+
+Se $A$ è una matrice $n\times m$, la funzione $T_A:R^m\to R^n$, definita come $T_A(X)\walrus AX$, è una trasformazione lineare.
+\begin{proof}
+  $$T_A(X_1+X_2)=A\(X_1+X_2\)=AX_1+AX_2=T_A(X_1)+T_A(X_2)$$
+  $$T_A(tX)=A\(tX\)=tAX=tT_A(X)$$
+\end{proof}
+
+\begin{example}
+  $$
+    A\walrus
+    \begin{pmatrix}
+      0 & 1 \\
+      1 & 0 \\
+    \end{pmatrix}
+  $$
+  $$
+    T_A
+    \begin{pmatrix}
+      x \\
+      y \\  
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      y \\
+      x \\
+    \end{pmatrix}
+  $$
+  $$
+    A\walrus
+    \begin{pmatrix}
+      1 & 0 & 1 \\
+      0 & 1 & 1 \\
+    \end{pmatrix}
+  $$
+  $$
+    T_A
+    \begin{pmatrix}
+      x \\
+      y \\
+      z \\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      x+z \\
+      y+z \\
+    \end{pmatrix}
+  $$
+\end{example}
+
+\begin{theorem}
+  Se $T:R^m\to R^n$ è una trasformazione lineare, sia $v_i=T(e_i)$ e sia $A\(n\times m\)$, tale che $A\walrus\(v_1,v_2,\dots,v_m\)$.
+  Allora, $T=T_A$.
+\end{theorem}
+\begin{proof}
+  $$
+    T\(X\)=T
+    \begin{pmatrix}
+      x_1    \\
+      x_2    \\
+      \vdots \\
+      v_m    \\
+    \end{pmatrix}
+    =\sum_{i=1}^mx_iT\(e_i\)=\sum_{i=1}^mx_iv_i=AX
+  $$
+\end{proof}
+
+La matrice $A$ è chiamata matrice associata a $T$, o rappresentativa di $T$, nelle basi canoniche.
+\begin{definition}[Nucleo]
+  Se $T:V\to W$ è una trasformazione lineare, l'insieme 
+  $$\ker T\walrus\left\{ v\in V:T(v)=\vec{0} \right\}$$
+  è detto \textbf{nucleo} di $T$.
+\end{definition}
+
+\begin{definition}[Immagine]
+  Se $T:V\to W$ è una trasformazione lineare, l'insieme
+  $$\im T\walrus\left\{ w\in W:\exists v\in V:w=T(v) \right\}$$
+  è detto \textbf{immagine} di $T$.
+\end{definition}
+
+\begin{lemma}
+  Il nucleo e l'immagine di una trasformazione lineare $T:V\to W$ sono sottospazi vettoriali rispettivamente di $V$ e $W$.
+\end{lemma}
+\begin{proof}
+  $$T(0)=0\impl 0 \in \ker T$$
+  $$v,w\in \ker T\impl T(v+w)=T(v)+T(w)=0+0=0\in \ker T$$
+  $$v\in \ker T, t\in \reals\impl T(tv)=tT(v)=t0=0\in \ker T$$
+\end{proof}
+
+\begin{observation}
+  $$\ker T_A=N(A)$$
+  $$\dim \ker T_A=\nul A$$
+\end{observation}
+\begin{proof}
+  $$\ker T_A=\left\{ v:T_A(v)=0 \right\}=\left\{ v:Av=0 \right\}=N(A)$$
+\end{proof}
+
+\begin{observation}
+  $$\im T_A=R(A)$$
+  $$\dim \im T_A=\rk A$$
+\end{observation}
+\begin{proof}
+  $$\im T_A=\left\{ T_A(v):v\in\reals^n \right\}=\left\{ Av:v\in\reals^n \right\}=\left\{ \sum_{i=0}^mx_iA^i \right\}=R\(A\)$$
+\end{proof}
+
+\begin{lemma}
+  $T:V\to W$ è iniettiva se e solo se $\ker T=\left\{ 0 \right\}$.
+\end{lemma}
+\begin{proof}
+  Sia $T$ iniettiva. Sia $v\in \ker T$.
+  Allora $T(v)=0$. Sapendo che $T(0)=0$, allora $v=0$. Pertanto, $\ker T = \left\{ 0 \right\}$.
+  
+  Sia $\ker T=\left\{ 0 \right\}$. Allora:
+  $$T(v)=T(w)\impl T(v)-T(w)=0$$
+  Per la linearità delle trasformazioni lineari:
+  $$T(v-w)=0\impl v-w\in \ker T\impl v-w=0\impl v=w$$
+  Pertanto, $T$ è iniettiva.
+\end{proof}
+
+\begin{lemma}
+  $T:V\to W$ è suriettiva se e solo se $\im T=W$.
+\end{lemma}
+\begin{proof}
+  Sia $T$ suriettiva. Sia $w\in W$. Allora:
+  $$\exists v\in V:T\(v\)=w\impl w\in \im T\impl W=\im T$$
+  
+  Sia $\im T=W$. Sia $w\in W$. Allora:
+  $$w\in \im T\impl \exists v\in V:T\(v\)=w$$
+  Pertanto, $T$ è suriettiva.
+\end{proof}
+
+\begin{theorem}[Teorema della dimensione]
+  Se $T:V\to W$ è una trasformazione lineare e $V$ è di dimensione finita, allora $\im T$ è di dimensione finita e, in particolare:
+  $$\dim V=\dim \ker T+\dim \im T$$
+\end{theorem}
+\begin{proof}
+  Sia $v\walrus\(v_1,\dots,v_k\)$ una base di $\ker T$.
+  La si completa ad una base di $V$ $\left\{ v_1,\dots,v_k,v_{k+1},\dots,v_n \right\}$.
+  $\left\{ T(v_{k+1}),\dots,T(v_n) \right\}$ è linearmente indipendente se:
+  $$x_1T(v_{k+1})+x_2T(v_{k+2})+\cdots+x_{n-k}T(v_n)=0$$
+  $$T(x_1v_{k+1})+T(x_2v_{k+2})+\cdots+T(x_{n-k}v_n)=0$$
+  $$T(x_1v_{k+1}+x_2v_{k+2}\cdots+x_{n-k}v_n)=0$$
+  $$x_1v_{k+1}+x_2v_{k+2}\cdots+x_{n-k}v_n\in \ker T$$
+  Ne segue che:
+  $$x_1v_{k+1}+x_2v_{k+2}\cdots+x_{n-k}v_n=y_1v_1+y_2v_2+\cdots+y_kv_k$$
+  $$x_1v_{k+1}+x_2v_{k+2}\cdots+x_{n-k}v_n-y_1v_1-y_2v_2-\cdots-y_kv_k=0$$
+  Dato che $\left\{ v_1,\dots,v_k,v_{k+1},\dots,v_n \right\}$ è linearmente indipendente, allora $x_1=x_2=x_{n-k}=0$.
+  Inoltre, $\left\{ T(v_{k+1}),\dots,T(v_n) \right\}$ genera $\im T$, infatti, se $T\(v\)\in \im T$ e:
+  $$v=y_1v_1+y_2v_2+\cdots+y_kv_k+x_1v_{k+1}+x_2v_{k+2}\cdots+x_{n-k}v_n$$
+  si ha che:
+  \begin{align*}
+    T(v) & = y_1T(v_1)+y_2T(v_2)+\cdots+y_kT(v_k)+x_1T(v_{k+1})+x_2T(v_{k+2})\cdots+x_{n-k}T(v_n) \\
+         & =x_1T(v_{k+1})+x_2T(v_{k+2})\cdots+x_{n-k}T(v_n)                                       
+  \end{align*}
+  Pertanto, $\left\{ T(v_{k+1}),\dots,T(v_n) \right\}$ è una base di $\im T$.
+  Infine, essendo una base, si ha che:
+  $$\dim \im T=n-k=\dim V-\dim \ker T$$
+  $$\dim V=\dim \ker T+\dim \im T$$
+\end{proof}
+
+\begin{corollary}
+  Se $A$ è una matrice $n\times m$, si ha che:
+  $$m=\nul A + \rk A$$
+\end{corollary}
+\begin{proof}
+  Per il teorema della dimesione
+  $$\dim \im T_A+\dim \ker T_A = \dim \reals^m$$
+  $$
+    \begin{cases}
+      \dim \im T_A = \rk A \\
+      \dim \ker T_A=\nul A \\
+      \dim \reals^m=m      \\
+    \end{cases}
+    \impl m=\nul A + \rk A
+  $$
+\end{proof}
+
+\begin{corollary}
+  Siano $V$ e $W$ spazi vettoriali di dimesione finita e $T:V\to W$ una trasformazione lineare.
+  Se $T$ è iniettiva, allora $\dim V\le \dim W$.
+  Se $T$ è suriettiva, allora $\dim V\ge \dim W$.
+\end{corollary}
+\begin{proof}
+  \hfill\break
+  \noindent
+  Sia $T$ iniettiva:
+  $$\dim V=\dim \ker T+\dim \im T=0+\dim \im T\le \dim W$$
+  Sia $T$ suriettiva:
+  $$\dim V=\dim \ker T+\dim \im T=\dim \ker T + \dim W \ge \dim W$$
+\end{proof}
+
+\begin{corollary}
+  Siano $V$ e $W$ spazi vettoriali di dimesione finita e $T:V\to W$ una trasformazione lineare.
+  Se $\dim V=\dim W$, allora $T$ è iniettiva se e solo se è biiettiva.
+\end{corollary}
+\begin{proof}
+  Sia $T$ iniettiva:
+  $$\dim V = \dim \ker T+\dim \im T=0+\dim \im T=\dim W$$
+  $$\im T\subseteq W\impl \im T = W$$
+  Pertanto, $T$ è anche suriettiva, e di conseguenza biiettiva.
+  Se $T$ biiettiva, allora è per definizione iniettiva.
+\end{proof}
+
+\begin{corollary}
+  Siano $V$ e $W$ spazi vettoriali di dimesione finita e $T:V\to W$ una trasformazione lineare.
+  Se $\dim V=\dim W$, allora $T$ è suriettiva se e solo se è biiettiva.
+\end{corollary}
+\begin{proof}
+  Sia $T$ suriettiva:
+  $$\dim V = \dim \ker T+\dim \im T=\dim \ker T+\dim W$$
+  $$\dim V=\dim \ker T + \dim V\impl \dim \ker T=0\impl \ker T=\left\{ 0 \right\}$$
+  Pertanto, $T$ è anche iniettiva, e di conseguenza biiettiva.
+  Se $T$ biiettiva, allora è per definizione suriettiva.
+\end{proof}
+
+\begin{corollary}
+  Siano $V$ e $W$ spazi vettoriali di dimesione finita e $T:V\to W$ una trasformazione lineare.
+  Se $T$ è biiettiva, allora $\dim V=\dim W$.
+\end{corollary}
+\begin{proof}
+  Dato che $T$ è iniettiva, $\dim V\le \dim W$. Dato che $T$ è suriettiva, $\dim V\ge \dim W$.
+  Pertanto, $\dim V=\dim W$.
+\end{proof}
+
+\begin{lemma}
+  Se $T:V\to W$, $S:W\to U$ sono trasformazioni lineari, allora $S\circ T:T\to U$ è una trasformazione lineare.
+\end{lemma}
+\begin{proof}
+  \begin{align*}
+    S\circ T\(v_1+v_2\) & =S(T(v_1+v_2))               \\
+                        & =S(T(v_1)+T(v_2))            \\
+                        & =S(T(v_1))+S(T(v_2))         \\
+                        & =S\circ T(v_1)+S\circ T(v_2) 
+  \end{align*}
+  $$S\circ T(tv)=S(T(tv))=S(tT(v))=tS(T(v))=t\(S\circ T(v)\)$$
+\end{proof}
+
+\begin{theorem}
+  Sia A una matrice $n\times m$ e B una matrice $m\times k$, allora $T_A\circ T_B=T_{AB}$
+\end{theorem}
+\begin{proof}
+  $$T_A:\reals^m\to\reals^n$$
+  $$T_B:\reals^k\to\reals^m$$
+  $$T_A\circ T_B:\reals^k\to\reals^n$$
+  $$T_A\circ T_B\(X\)=T_A(T_B(X))=ABX=T_{AB}(X)\impl T_A\circ T_B = T_{AB}$$
+\end{proof}
+
+\begin{lemma}
+  Se $T:V\to W$ è una trasformazione lineare biiettiva, allora $T^{-1}:W\to V$ è lineare.
+\end{lemma}
+\begin{proof}
+  $$v_1\walrus T^{-1}(w_1)\impl T(v_1)=w_1$$
+  $$v_2\walrus T^{-1}(w_2)\impl T(v_2)=w_2$$
+  $$T^{-1}\(w_1+w_2\)=T^{-1}(T(v_1)+T(v_2))=T^{-1}(T(v_1+v_2))=v_1+v_2=T^{-1}(w_1)+T^{-1}(w_2)$$
+  $$v\walrus T^{-1}(w)\impl T(v)=w$$
+  $$T^{-1}(tw)=T^{-1}(tT(v))=T^{-1}(T(tv))=tv=tT^{-1}(w)$$
+\end{proof}
+
+\begin{lemma}
+  Sia $A$ una matrice $n\times m$, allora $T_A$ è invertibile se e solo se $n=m$ e $A$ è invertibile. Inoltre:
+  $$T_A^{-1}=T_{A^{-1}}$$
+\end{lemma}
+\begin{proof}
+  $$T_A:\reals^m\to\reals^n$$
+  $$T_A^{-1}:\reals^n\to\reals^m$$
+  Per il teorema della dimensione, $n=m$.
+  $$T_A:\reals^n\to\reals^n$$
+  $$T_A^{-1}:\reals^n\to\reals^n$$
+  $$T_A^{-1}=T_B$$
+  $$I_{\reals^n}:\reals^n\to\reals^n=T_C$$
+  $$T_C(X)=CX=X\iff C=I$$
+  $$T_A\circ T_B=I_{\reals^n}=T_{I_n}\impl T_{AB}=T_{I_n}\impl AB=I_n\impl B=A^{-1}$$
+  $$T_B\circ T_A=I_{\reals^n}=T_{I_n}\impl T_{BA}=T_{I_n}\impl BA=I_n\impl B=A^{-1}$$
+\end{proof}
+
+\begin{theorem}
+  Se $A$ è una matrice quadrata di ordine $n$, allora:
+  $$\rk A=n\iff \det A\neq 0$$
+  In particolare, $v_1,v_2,\dots,v_n$ in $\reals^n$ formano una base di $\reals^n$ se e solo se il determinante della matrice che ha per righe (o per colonne) i vettori dati è diverso da 0.
+\end{theorem}
+\begin{proof}
+  $\det A\neq 0$ se e solo se $A$ è invertibile se e solo se $T_A$ è invertibile se e solo se $T_A$ è suriettiva.
+  Sia $T_A$ suriettiva:
+  $$\im T_A=\reals^n\impl R\(A\)=\reals^n\impl \dim R\(A\)=\rk A = n$$
+  Sia $\rk A = n$:
+  $$\rk A=n=\dim R(A)=\dim \reals^n\impl \dim \im T_A=\dim \reals^n$$
+  $$\im T_A\subseteq\reals^n\impl \im T_A=\reals^n$$
+  Pertanto, $T_A$ è suriettiva.
+\end{proof}
+
+Se $A$ è una matrice quadrata di ordine $n$, allora sono equivalenti:
+\begin{itemize}
+  \item $\det A\neq 0$;
+  \item $\exists A^{-1}$;
+  \item $\rk A=n$;
+  \item le righe di $A$ formano una base di $\reals^n$;
+  \item le colonne di $A$ formano una base di $\reals^n$.
+\end{itemize}
+
+\begin{example}
+  $$A\walrus\left\{ \(1,2\),\(2,1\) \right\}$$
+  $$\det A = 1-4=-3$$
+  $\sp{A}$ è una base di $\reals^2$.
+\end{example}
+
+\paragraph*{Metodo dei determinanti minori}
+
+Sia $A$ una matrice $n\times m$. Il rango di $A$ è uguale al massimo $r$ per cui esiste un minore $M$ di ordine $r$ il cui determinante sia diverso da 0. In alternativa, si può dire che il rango di $A$ è il massimo ordine di un determinante minore non nullo.
+
+\begin{example}
+  $$
+    A\walrus
+    \begin{pmatrix}
+      1 & 0 & 2  & 1 \\
+      1 & 0 & -1 & 2 \\
+      2 & 0 & 1  & 3 \\
+    \end{pmatrix}
+  $$
+  $$
+    M_1=
+    \begin{pmatrix}
+      1 \\
+    \end{pmatrix}
+  $$
+  $$\det M_1=1\impl \rk A \ge 1$$
+  $$
+    M_2=
+    \begin{pmatrix}
+      2  & 1 \\
+      -1 & 2 \\
+    \end{pmatrix}
+  $$
+  $$\det M_2=4+1=5\impl \rk A \ge 2$$
+  $$
+    M_3=
+    \begin{pmatrix}
+      1 & 2  & 1 \\
+      1 & -1 & 2 \\
+      2 & 1  & 3 \\
+    \end{pmatrix}
+  $$
+  $$
+    \det M_3=
+    \begin{vmatrix}
+      -1 & 2 \\
+      1  & 3 \\
+    \end{vmatrix}
+    -
+    \begin{vmatrix}
+      2 & 1 \\
+      1 & 3 \\
+    \end{vmatrix}
+    +
+    2\begin{vmatrix}
+      2  & 1 \\
+      -1 & 2 \\
+    \end{vmatrix}
+    =0
+    \impl \rk A < 3
+  $$
+  $$\rk A=2$$
+\end{example}
+
+\paragraph*{Metodo degli orlati o di Kronecker}
+Se $A$ è una matrice $n\times m$ e $M$ è un minore di $A$ di ordine $r$, un minore orlato di $M$ è un minore di $A$ di ordine $n+1$ che si ottiene aggiungendo a $M$ una riga ed una colonna.
+Sia $A$ una matrice $n\times m$. Se $M$ è un minore di $A$ di ordine $r$ tale che $\det M\neq 0$ e ogni minore orlato di $M$ ha determinante nullo, allora $\rk A=r$.
+
+\begin{example}
+  $$
+    A\walrus
+    \begin{pmatrix}
+      1 & 0 & 2  & -1 \\
+      1 & 1 & -1 & 0  \\
+      0 & 1 & 0  & 1  \\
+    \end{pmatrix}
+  $$
+  $$
+    M_1=
+    \begin{pmatrix}
+      1 \\
+    \end{pmatrix}
+  $$
+  $$\det M_1 = 1\impl \rk A\ge 1$$
+  $$
+    M_2=
+    \begin{pmatrix}
+      1 & 0 \\
+      1 & 1 \\
+    \end{pmatrix}
+  $$
+  $$
+    \det M_2 = 1\impl \rk A\ge 2
+  $$
+  $$
+    M_3=
+    \begin{pmatrix}
+      1 & 0 & 2  \\
+      1 & 1 & -1 \\
+      0 & 1 & 0  \\
+    \end{pmatrix}
+  $$
+  $$
+    \det M_3=
+    \begin{vmatrix}
+      1 & 2  \\
+      1 & -1 \\
+    \end{vmatrix}
+    =-3\impl \rk A\ge 3
+  $$
+  $$\rk A = 3$$
+\end{example}
+
+
+\begin{example}
+  $$
+    A\walrus
+    \begin{pmatrix}
+      1  & 0 & 1  & 0 \\
+      2  & 0 & 2  & 0 \\
+      -1 & 0 & -1 & 0 \\
+    \end{pmatrix}
+  $$
+  $$
+    M_1=
+    \begin{pmatrix}
+      1 \\
+    \end{pmatrix}
+  $$
+  $$\det M_1=1\impl \rk A\ge 1$$
+  $$
+    M_2\in\left\{ 
+    \begin{pmatrix}
+      1 & 0 \\
+      2 & 0 \\
+    \end{pmatrix}
+    ,
+    \begin{pmatrix}
+      1  & 0 \\
+      -1 & 0 \\
+    \end{pmatrix}
+    ,
+    \begin{pmatrix}
+      1 & 1 \\
+      2 & 2 \\
+    \end{pmatrix}
+    ,
+    \begin{pmatrix}
+      1  & 1  \\
+      -1 & -1 \\
+    \end{pmatrix}
+    ,
+    \begin{pmatrix}
+      1 & 0 \\
+      2 & 0 \\
+    \end{pmatrix}
+    ,
+    \begin{pmatrix}
+      1  & 0 \\
+      -1 & 0 \\
+    \end{pmatrix}
+    \right\}
+  $$
+  $$
+    \det M_2=0\impl \rk A<2
+  $$
+  $$\rk A = 1$$
+\end{example}
+
+\begin{example}
+  Determinare per quali valori del parametro $k$ la seguente matrice ha rango 2.
+  $$
+    A\walrus
+    \begin{pmatrix}
+      k   & k+1  & -1 \\
+      k-2 & -k-1 & k  \\
+    \end{pmatrix}
+  $$
+  
+  $$M_1=-1\impl \rk A\ge 1$$
+  $$
+    M_2\in\left\{ 
+    \begin{pmatrix}
+      k   & -1 \\
+      k-2 & k  \\
+    \end{pmatrix}
+    ,
+    \begin{pmatrix}
+      k+1  & -1 \\
+      -k-1 & k  \\
+    \end{pmatrix}
+    \right\}
+  $$
+  $$
+    \det M_2\neq 0\impl k^2+k-2\neq0\vee k(k+1)-k-1\neq0\impl \(k\neq1\wedge k\neq -2\) \vee k\neq\pm1
+  $$
+  $$k\neq 1\wedge \(k\neq -2\vee k\neq -1\)$$
+\end{example}
+
+\subsection{Applicazioni ai sistemi lineari}
+
+\begin{theorem}
+  Un sistema lineare $AX=B$ ha $\infty^k$ soluzioni se ha almeno una soluzione e $\nul A=k$.
+  Se un sistema $AX=B$ ha soluzione, allora le soluzioni sono $X_P+N\(A\)$.
+  Se il sistema ha $\infty^k$ soluzioni, allora tutte le soluzioni si possono scrivere come $X_P+t_1X_1+\cdots+t_kX_k$, dove $\left\{ X_1,\dots,X_k \right\}$ è una base di $N(A)$.
+\end{theorem}
+
+Se il sistema $AX=B$ ha $\infty^k$ soluzioni, allora l'espressione $X=X_P+t_1X_1+\cdots+t_kX_k$ che descrive le soluzioni in termini di $k$ parametri viene chiamata \textbf{soluzione generale}.
+
+\begin{observation}
+  In generale, $v$ è combinazione lineare di $v_1,\dots,v_k$ se e solo se
+  $\sp{v_1,\dots,v_k}=\sp{v_1,\dots,v_k,v}$
+\end{observation}
+\begin{proof}
+  Se $v$ è combinazione lineare di $v_1,\dots,v_k$, allora:
+  $$\sp{v_1,\dots,v_k}\subseteq\sp{v_1,\dots,v_k,v}\wedge\sp{v_1,\dots,v_k,v}\subseteq\sp{v_1,\dots,v_k}\impl \sp{v_1,\dots,v_k}=\sp{v_1,\dots,v_k,v}$$
+  Se $\sp{v_1,\dots,v_k}=\sp{v_1,\dots,v_k,v}$, allora:
+  $$v\in\sp{v_1,\dots,v_k,v}\impl v\in\sp{v_1,\dots,v_k}$$
+  Pertanto, $v$ è combinazione lineare di $v_1,\dots,v_k$.
+\end{proof}
+
+\begin{theorem}[Teorema di Rouché--Capelli]
+  Sia $A$ una matrice $n\times m$ e si consideri il sistema lineare di $n$ equazioni e $m$ incognite $AX=B$. Il sistema ha soluzione se e solo se $r\walrus\rk A=\rk \(A,B\)$. In tal caso il sistema ha $\infty^{m-r}$.
+\end{theorem}
+\begin{proof}
+  Il sistema ha soluzione se e solo se $\exists \bar{X}:A\bar{X}=B$. Si ha:
+  $$\bar{x_1}A^1+\cdots+\bar{x_m}A^m=B$$
+  Pertanto, $\sp{A^1,\dots,A^m}=\sp{A^1,\dots,A^m,B}$, da cui
+  $$R\(A\)=R\(A\vert B\)$$
+  Dire che i due spazi colonna sono uguali, equivale a dire che i ranghi sono uguali:
+  $$\rk A=\rk \(A\vert B\)$$
+  Viceversa, se $\rk A=\rk \(A\vert B\)$, allora:
+  $$\dim R\(A\)=\dim R\(A\vert B\)$$
+  e, poiché $R\(A\)\subseteq R\(A\vert B\)$, allora:
+  $$R\(A\)=R\(A\vert B\)$$
+  
+  Se $r\walrus \rk A=\rk \(A\vert B\)$, allora il sistema ha $\infty^{m-r}$ soluzioni, poiché, per il teorema del rango più nullità:
+  $$\nul A = m-\rk A=m-r$$
+\end{proof}
+
+\begin{example}
+  Determinare per quali valori $k$ il sistema ha soluzione.
+  $$
+    \begin{cases}
+      kx+(k+1)y-z=2       \\
+      (k-2)x-(k+1)y+kz=-2 \\
+    \end{cases}
+  $$
+  $$
+    A=
+    \begin{pmatrix}
+      k   & k+1  & -1 \\
+      k-2 & -k-1 & k  \\
+    \end{pmatrix}
+  $$
+  $$
+    \(A\vert B\)=
+    \begin{pmatrix}
+      k   & k+1  & -1 & 2  \\
+      k-2 & -k-1 & k  & -2 \\
+    \end{pmatrix}
+  $$
+  $$
+    M=
+    \begin{pmatrix}
+      k+1  & -1 \\
+      -k-1 & k  \\
+    \end{pmatrix}
+  $$
+  $$\rk A=2\iff\det M\neq 0\iff \(k+1\)\(k-1\)\neq 0\iff k\neq \pm1\impl \rk \(A\vert B\)=2$$
+  $$
+    k=1\impl \rk A=1\impl \rk \(A\vert B\)=\rk
+    \begin{pmatrix}
+      1  & 2  & -1 & 2  \\
+      -1 & -2 & 1  & -2 \\
+    \end{pmatrix}
+    =1
+  $$
+  $$
+    k=-1\impl \rk A = 2\impl \rk \(A\vert B\)=\rk
+    \begin{pmatrix}
+      -1 & 0 & -1 & 2 \\
+      -3 & 0 & -1 & 2 \\
+    \end{pmatrix}
+    =2
+  $$
+  In conclusione, il sistema ha sempre soluzione.
+\end{example}
+
+\subsection{Sistemi crameriani}
+
+\begin{definition}[Sistema crameriano]
+  Un sistema di $n$ equazioni e $n$ incognite è detto \textbf{crameriano}.
+\end{definition}
+
+\begin{theorem}[Teorema di Cramer]
+  Sia $A$ una matrice quadrata di ordine $n$. Il sistema crameriano $AX=B$ ha un'unica soluzione $S=A^{-1}B$ se e solo se $\det A\neq 0$.
+\end{theorem}
+\begin{proof}
+  $$\det A\neq0\iff \exists A^{-1}$$
+  $$AX=B$$
+  $$A^{-1}AX=A^{-1}B\iff IX=A^{-1}B\iff X=A^{-1}B$$
+  
+  Se il sistema ha un'unica soluzione, allora $\rk A=\rk\(A,B\)$ e $n-\rk A=0\iff n=\rk A$. Pertanto, $\det A\neq0$.
+\end{proof}
+
+\begin{observation}
+  Il teorema di Cramer non dice che se $\det A=0$ allora il sistema non ha soluzione, bensì che, se $\det A=0$, il sistema o non ha soluzione o ha più soluzioni diverse.
+\end{observation}
+
+\begin{theorem}
+  Sia $AX=B$ un sistema crameriano e $\det A\neq 0$. Sia $S=A^{-1}B$ la soluzione del sistema. Allora:
+  $$S_i=\frac{\det f(A,B,i)}{\det A}$$
+  dove $f(A,B,i)$ è la matrice che si ottiene sostituendo alla $i$--esima colonna di $A$ il vettore $B$.
+\end{theorem}
+\begin{proof}
+  Sia $S$ soluzione del sistema crameriano $AX=B$.
+  $$AS=B$$
+  $$S_1A^1+S_2A^2+\cdots+S_nA^n=B$$
+  \begin{align*}
+    f(A,B,i) & =\(A^1,\dots,A^{i-1},B,A^{i+1},\dots,A^n\)                           \\
+             & =\(A^1,\dots,A^{i-1},S_1A^1+S_2A^2+\cdots+S_nA^n,A^{i+1},\dots,A^n\) 
+  \end{align*}
+  \begin{align*}
+    \det f(A,B,i) & =\det \(A^1,\dots,A^{i-1},S_1A^1+S_2A^2+\cdots+S_nA^n,A^{i+1},\dots,A^n\) \\
+                  & =S_1\det \(A^1,\dots,A^{i-1},A^1,A^{i+1},\dots,A^n\)+                     \\
+                  & +S_2\det \(A^1,\dots,A^{i-1},A^2,A^{i+1},\dots,A^n\)+                     \\
+                  & +\cdots+S_i\det \(A^1,\dots,A^{i-1},A^i,A^{i+1},\dots,A^n\)+\cdots+       \\
+                  & +S_n\det \(A^1,\dots,A^{i-1},A^n,A^{i+1},\dots,A^n\)                      \\
+                  & =0+0+\dots+S_i\det A+\cdots+0                                             \\
+                  & =S_i\det A                                                                
+  \end{align*}
+  $$S_i=\frac{\det f(A,B,i)}{\det A}$$
+\end{proof}
+
+\begin{example}
+  $$
+    \begin{cases}
+      x+y-z=1  \\
+      x-y+z=1  \\
+      -x+y+z=1 \\
+    \end{cases}
+  $$
+  $$
+    A=
+    \begin{pmatrix}
+      1  & 1  & -1 \\
+      1  & -1 & 1  \\
+      -1 & 1  & 1  \\
+    \end{pmatrix}
+  $$
+  $$\det A = -2$$
+  $$
+    S_1=\frac{ 
+      \begin{vmatrix}
+        1 & 1  & -1 \\
+        1 & -1 & 1  \\
+        1 & 1  & 1  \\
+      \end{vmatrix}
+    }{-4}=\frac{-4}{-4}=1
+  $$
+  $$
+    S_2=\frac{ 
+      \begin{vmatrix}
+        1  & 1 & -1 \\
+        1  & 1 & 1  \\
+        -1 & 1 & 1  \\
+      \end{vmatrix}
+    }{-4}=\frac{-4}{-4}=1
+  $$
+  $$
+    S_3=\frac{ 
+      \begin{vmatrix}
+        1  & 1  & 1 \\
+        1  & -1 & 1 \\
+        -1 & 1  & 1 \\
+      \end{vmatrix}
+    }{-4}=\frac{-4}{-4}=1
+  $$
+  $$S=\(1,1,1\)$$
+\end{example}
+
+\begin{example}
+  Determinare per quali valori di $k$ il sistema ha un'unica soluzione, e calcolarla.
+  $$
+    \begin{cases}
+      (k+1)x+z=1     \\
+      x+(1-k)y+z=-1  \\
+      2x+(1+k)y+2z=k \\
+    \end{cases}
+  $$
+  $$
+    A=
+    \begin{pmatrix}
+      k+1 & 0   & 1 \\
+      1   & 1-k & 1 \\
+      2   & 1+k & 2 \\
+    \end{pmatrix}
+  $$
+  $$\exists!\ \mathrm{soluzione}\iff\det A\neq0$$
+  $$
+    \det A=
+    \(k+1\)
+    \begin{vmatrix}
+      1-k & 1 \\
+      1+k & 2 \\  
+    \end{vmatrix}
+    +
+    \begin{vmatrix}
+      1 & 1-k \\
+      2 & 1+k \\
+    \end{vmatrix}
+    =\(k+1\)\(1-3k\)+\(3k-1\)=-k\(3k-1\)=k-3k^2
+  $$
+  $$\det A\neq0\iff k\neq0\vee k\neq\nicefrac{1}{3}$$
+  $$
+    S_1=\frac{
+      \begin{vmatrix}
+        1  & 0   & 1 \\
+        -1 & 1-k & 1 \\
+        k  & 1+k & 2 \\
+      \end{vmatrix}
+    }{k-3k^2}
+    =\frac{
+      \begin{vmatrix}
+        1-k & 1 \\
+        1+k & 2 \\
+      \end{vmatrix}
+      +
+      \begin{vmatrix}
+        -1 & 1-k \\
+        k  & 1+k \\ 
+      \end{vmatrix}
+    }{k-3k^2}
+    =\frac{k^2-5k}{k-3k^2}=\frac{k-5}{1-3k}
+  $$
+  $$
+    S_2=\frac{
+      \begin{vmatrix}
+        k+1 & 1  & 1 \\
+        1   & -1 & 1 \\
+        2   & k  & 2 \\
+      \end{vmatrix}
+    }{k-3k^2}
+    =\frac{
+      -
+      \begin{vmatrix}
+        1 & 1 \\
+        k & 2 \\
+      \end{vmatrix}
+      -
+      \begin{vmatrix}
+        k+1 & 1 \\
+        2   & 2 \\
+      \end{vmatrix}
+      -
+      \begin{vmatrix}
+        k+1 & 1 \\
+        2   & k \\
+      \end{vmatrix}
+    }{k-3k^2}
+    =\frac{-2k-k^2}{k-3k^2}=\frac{k+2}{3k-1}
+  $$
+  $$
+    S_3=\frac{
+      \begin{vmatrix}
+        k+1 & 0   & 1  \\
+        1   & 1-k & -1 \\
+        2   & 1+k & k  \\
+      \end{vmatrix}
+    }{k-3k^2}
+    =\frac{
+      \(k+1\)
+      \begin{vmatrix}
+        1-k & -1 \\
+        1+k & k  \\
+      \end{vmatrix}
+      +
+      \begin{vmatrix}
+        1 & 1-k \\
+        2 & 1+k \\
+      \end{vmatrix}
+    }{k-3k^2}
+    =\frac{k^2-k^3+6k}{k-3k^2}=\frac{k^2-k-6}{3k-1}
+  $$
+\end{example}
