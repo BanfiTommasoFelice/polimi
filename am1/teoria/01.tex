@@ -1,0 +1,381 @@
+\section{Introduzione}
+
+\subsection{Insiemi}
+
+La teoria degli insiemi è assiomatica, per cui non vi è una definizione di insieme, principalmente per il fatto che il concetto primitivo di insieme è insito nella conoscenza umana.
+
+Un insieme è composto da elementi.
+La scrittura $a\in A$ indica che l'elemento $a$ appartiene (è un elemento di) ad $A$. La scrittura $a\not\in A$ indica che $a$ non appartiene ad $A$.
+La scrittura $A\subseteq B$ indica che l'insieme $A$ è contenuto o è uguale a $B$. La scrittura $A \subset B$ indica che l'insieme $A$ è contenuto strettamente in $B$.
+
+
+Sugli insiemi si possono effettuare alcune operazioni:
+\paragraph*{Unione}
+$$A \cup B=\left\{ x:x\in A\vee x\in B \right\}$$
+\paragraph*{Intersezione}
+$$A \cap B=\left\{ x:x\in A\wedge x\in B \right\}$$
+\paragraph*{Complementare}
+$$A \setminus B=\left\{ x:x\in A\wedge x\notin B \right\}$$
+
+L'insieme che non contiene alcun elemento è detto \textbf{insieme vuoto} e si indica con il simbolo $\emptyset$. Per esso valgono le proprietà.
+$$A\cup \emptyset=A$$
+$$A\cap \emptyset=\emptyset$$
+
+Un'operazione di particolare importanza è il \textbf{prodotto cartesiano}:
+$$A\times B=\left\{ \(a,b\):a\in A\wedge b\in B \right\}$$
+$$A\times B\times C=\left\{ \(a,b,c\):a\in A\wedge b\in B\wedge c\in C \right\}$$
+$$A\times A=A^2$$
+
+\subsection{Logica}
+
+Una proposizione del tipo
+$$p\impl q$$
+indica una conseguenza logica, ossia \emph{se $p$, allora $q$}. Se vale questa proposizione, si dice che:
+\begin{itemize}
+  \item $p$ è condizione sufficiente di $q$;
+  \item $q$ è condizione necessaria di $p$;
+\end{itemize}
+
+Nel caso in cui $p\impl q$ e, allo stesso tempo, $q\impl p$, allora le due proposizioni sono \textbf{logicamente equivalenti} e si dice che $p$ è condizione necessaria e sufficiente per $q$, e si indica con $p\iff q$.
+
+Se $p\impl q$, per il principio del terzo escluso $\lnot p\impl \lnot q$.
+
+\subsection{Insiemi numerici}
+
+Si possono distinguere alcuni insiemi particolari detti \textbf{insiemi numerici}, che contengono i numeri:
+\begin{itemize}
+  \item $\mathbb{P}\walrus\left\{ 2,3,5,7,11,\dots \right\}$
+  \item $\mathbb{N}\walrus\left\{ 0,1,2,3,4,\dots \right\}$
+  \item $\mathbb{Z}\walrus\left\{ 0,\pm1,\pm2,\pm3,\dots \right\}$
+  \item $\mathbb{Q}\walrus\left\{ \frac{m}{n}:n,m\in\mathbb{Z},n\neq 0 \right\}$
+  \item $\mathbb{R}\walrus\left\{ \mathrm{reali} \right\}$
+  \item $\mathbb{C}\walrus\left\{ a+ib:a,b\in\mathbb{R} \right\}$
+\end{itemize}
+
+Mentre i passaggi tra i vari insiemi sono di natura algebrica, il passaggio da $\mathbb{Q}$ a $\mathbb{R}$ è di natura analitica, introducendo il concetto di distanza.
+
+Gli insiemi numerici sono legati da una catena di sottoinsiemi:
+$$\mathbb{P}\subset\mathbb{N}\subset\mathbb{Z}\subset\mathbb{Q}\subset\mathbb{R}\subset\mathbb{C}$$
+
+\subsection{Grafici}
+
+\begin{definition}[Grafico]
+  L'insieme $G\subset A\times B$ è detto \textbf{grafico} se:
+  $$\(x,y\)\in G\wedge \(x,z\)\in G\impl y=z$$
+\end{definition}
+
+\begin{definition}[Dominio]
+  Sia $G$ un grafico in $A\times B$. Si definisce \textbf{dominio}:
+  $$D\walrus \left\{ x\in A:\exists y\in B : \(x,y\)\in G \right\}$$
+\end{definition}
+\begin{definition}[Immagine]
+  Sia $G$ un grafico in $A\times B$. Si definisce \textbf{immagine}:
+  $$\mathrm{Im}\(G\)\walrus \left\{ y\in B:\exists x\in D : \(x,y\)\in G \right\}$$
+\end{definition}
+
+\begin{definition}[Funzione associata]
+  Si definisce \textbf{funzione associata} al grafico $G\subset A\times B$ l'insieme dei valori $b$ per cui:
+  $$\forall a\in D\ \exists!\ b\in\mathrm{Im}\(G\):\(a,b\)\in G$$
+  La funzione associata si indica con la scrittura $f(a)$ e, più in generale, si descrive come:
+  $$f:D\rightarrow \mathrm{Im}(G)$$ 
+\end{definition}
+Per costruzione
+$$G=\left\{ \(a,f(a)\)\in A\times B, a\in D \right\}$$
+\begin{example}
+  Grafico associato ad una funzione
+  $$f(x)=\frac{2x-1}{x^2-1}$$
+  $$D(f)\walrus \left\{ x:x^2\neq 1 \right\}=\left\{ x:x\neq \pm1 \right\}$$
+  $$G(f)\walrus \left\{ \(x,f(x)\)\in \mathbb{R}:x\in D(f) \right\}=\left\{ \(x,\frac{2x-1}{x^2-1}\):x\neq \pm1 \right\}\subset \mathbb{R}$$
+\end{example}
+
+\subsection{Funzioni}
+
+\begin{definition}[Funzione iniettiva]
+  Una funzione $f: A\to B$ è \textbf{iniettiva} se
+  $$a_1,a_2\in A$$
+  $$f(a_1)=f(a_2)\impl a_1=a_2$$
+  ovvero
+  $$a_1,a_2\in A$$
+  $$a_1\neq a_2\impl f(a_1)\neq f(a_2)$$
+\end{definition}
+
+\begin{definition}[Funzione suriettiva]
+  Una funzione $f: A\to B$ è \textbf{suriettiva} se
+  $$\mathrm{Im}\(f\)\walrus \mathrm{Im}\(G(f)\)=\left\{ f(a)\in B,a\in A \right\}=B$$
+  ovvero
+  $$\forall b\in B \exists a\in A : b = f(a)$$
+\end{definition}
+
+\begin{definition}[Funzione biiettiva]
+  Una funzione $f: A\to B$ è \textbf{biiettiva}, o biunivoca, se è sia iniettiva sia suriettiva.
+\end{definition}
+
+\subsection{Cardinalità}
+
+$A$ e $B$ hanno la stessa cardinalità se $\exists f:A\to B$ biiettiva ed hanno lo stesso numero di elementi:
+$$\#\(A\)=\#\(B\)$$
+
+\begin{definition}[Insieme infinito]
+  Un insieme $A$ è \textbf{infinito} se ha la stessa cardinalità di un suo sottoinsieme proprio, cioè:
+  $$\exists f:A\to A'\;\mathrm{biiettiva}:A'\subset A$$
+\end{definition}
+
+\begin{definition}[Insieme finito]
+  Un insieme $A$ si dice \textbf{finito} se non è infinito: $\#\(A\)<+\infty$.
+\end{definition}
+
+\begin{example}
+  $$\#\(\mathbb{N}\)=+\infty$$
+  $$f:\mathbb{N}\to \mathbb{N}'\walrus\left\{ \text{naturali pari} \right\}$$
+  $$f\(n\)\walrus 2n,\ n\in\mathbb{N}$$
+  $$\mathbb{N}'\subset \mathbb{N}$$
+  $$f(n)=f(m)\impl 2n=2m\impl n=m\impl f\ \mathrm{iniettiva}$$
+  $$\text{Im}\(f\)=\mathbb{N}\impl f\ \mathrm{suriettiva}$$
+  Analogamente a quanto detto per $\mathbb{N}$, anche $\mathbb{N}'$ è infinito, così come $\mathbb{N}''\walrus \left\{ \text{naturali dispari} \right\}$:
+  $$g:\mathbb{N}\to \mathbb{N}''$$
+  $$g(n)\walrus2n+1$$
+  In particolare, si ha:
+  $$\mathbb{N}'\cup\mathbb{N}''=\mathbb{N}$$
+  $$\mathbb{N}'\cap\mathbb{N}''=\emptyset$$
+\end{example}
+\begin{example}
+  $A\walrus\left\{ 1,2 \right\}$ è finito: $\nexists f:A\to A'$ biettiva con $A'\subset A$. Infatti: se $A'\walrus\left\{ 1 \right\}$, allora ogni $f:A\to A'$ non è iniettiva poiché $f(1)=1=f(2)$; se $A'\walrus\left\{ 2 \right\}$ ogni $f:A\to A'$ non è iniettiva poiché $f(1)=2=f(2)$.
+\end{example}
+
+Difatti, ogni insieme $A$ che la stessa cardinalità di
+$$\left\{ 1,2,3,...,n \right\}$$
+si dice che ha cardinalità $n$:
+$$\#\(A\)=n$$
+
+Si dice che $A$ ha cardinalità minore di $B$ se $\nexists f:A\to B$ suriettiva:
+$$\#\(A\)<\#\(B\)$$
+
+\begin{example}
+  $$\#\(\mathbb{Z}\)=\#\(\mathbb{N}\)$$
+  $$\#\(\mathbb{Q}\)=\#\(\mathbb{N}\)$$
+  $$\#\(\mathbb{R}\)>\#\(\mathbb{N}\)$$
+\end{example}
+
+\begin{definition}[Insieme delle parti]
+  Sia $X$ un insieme. Si definisce \textbf{insieme delle parti} $\mathcal{P}$ l'insieme di tutti i sottoinsiemi di $X$.
+\end{definition}
+
+\begin{observation}
+  $$\#\(\mathcal{P}(X)\)>\#\(X\)$$
+\end{observation}
+
+\subsection{Principio di induzione}
+
+\begin{theorem}[Principio di induzione]
+  Sia $n_0\in\mathbb{N}$ e $\forall n\ge n_0$ sia $P\(n\)$ un predicato. Se $P\(n_0\)\wedge P\(n\)\impl P\(n+1\)$, allora $P\(n\)$ è vero $\forall n\ge n_0$.
+\end{theorem}
+\begin{proof}
+  Si considera l'insieme dei predicati veri e si osserva che è in biiezione con $\mathbb{N}$.
+\end{proof}
+
+\begin{lemma}[Somme di Gauss]
+  $$\sum_{a=1}^na=\frac{n\(n+1\)}{2}\ \forall n\ge 1$$
+\end{lemma}
+\begin{proof}
+  $$P\(n\): \sum_{a=1}^na=\frac{n\(n+1\)}{2}$$
+  $$P\(1\): 1 = \frac{1\cdots2}{2}=1$$
+  Sia $P\(n\)$ vero.
+  $$\sum_{a=1}^{n+1}a=n+1+\sum_{a=1}^{n}a=n+1+\frac{n\(n+1\)}{2}=\frac{2n+2+n^2+n}{2}=\frac{n^2+3n+2}{2}=\frac{\(n+1\)\(n+2\)}{2}$$
+  Per induzione, $P\(n\)$ è vero $\forall n\ge1$.
+\end{proof}
+
+\begin{lemma}[Somme geometriche]
+  Sia $q\in \mathbb{Q}\setminus\left\{ 1 \right\}$. 
+  $$\sum_{k=0}^nq^k=\frac{1-q^{n+1}}{1-q}\ \forall n\ge1$$
+\end{lemma}
+\begin{proof}
+  $$P\(n\):\sum_{k=0}^nq^k=\frac{1-q^{n+1}}{1-q}$$
+  $$P\(1\): q^0+q^1=\frac{1-q^2}{1-q}\iff 1+q=\frac{1-q^2}{1-q}\iff \(1+q\)\(1-q\)=1-q^2$$
+  Sia $P\(n\)$ vero.
+  $$\sum_{k=0}^{n+1}q^k=q^{n+1}+\sum_{k=0}^{n}q^k=q^{n+1}+\frac{1-q^{n+1}}{1-q}=\frac{q^{n+1}-q^{n+2}+1-q^{n+1}}{1-q}=\frac{1-q^{n+2}}{1-q}$$
+  Per induzione, $P\(n\)$ è vero $\forall n\ge 1$.
+\end{proof}
+
+\begin{observation}
+  L'equazione $x^2=2$ non ha soluzione in $\mathbb{Q}$.
+\end{observation}
+\begin{proof}
+  Per assurdo:
+  $$x=\frac{m}{n}\in\mathbb{Q}$$
+  $$x^2=2\iff \frac{m^2}{n^2}=2\iff m^2=2n^2$$
+  $m$ è pari, in quanto quadrato di un numero pari. Allo stesso modo, anche $n$ è pari:
+  $$2n^2=m^2=\(2p\)^2=4p^2\iff n^2=2p^2$$
+  Pertanto $m$ ed $n$ hanno un fattore in comune, ma, poiché si può sempre ipotizzare che siano coprimi, si verifica l'assurdo.
+\end{proof}
+
+\begin{lemma}[Disuguaglianza di Bernoulli]
+  $$\(1+x\)^n\ge1+nx\ \forall x>-1,\forall n\ge0$$
+\end{lemma}
+\begin{proof}
+  $$n=0\impl \(1+x\)^n\ge1+nx \because 1\ge 1$$
+  $$\(1+x\)^{n+1}=\(1+x\)\(1+x\)^n\ge\(1+x\)\(1+nx\)$$
+  $$1+\(n+1\)x=1+nx+x$$
+  $$\(1+x\)\(1+nx\)\ge1+nx+x$$
+  $$1+nx+x+nx^2\ge1+nx+x$$
+  $$nx^2\ge0\iff n\ge 0$$
+  Per induzione, $\(1+x\)^n\ge1+nx\ \forall x>-1,\forall n\ge0$.
+\end{proof}
+
+\subsection{Intervalli}
+
+\begin{definition}[Intervallo, in $\mathbb{Q}$]
+  Siano $a,b\in\mathbb{Q}:a<b$:
+  \begin{itemize}
+    \item l'insieme $\ointv{a}{b}\walrus\left\{ x\in\mathbb{Q}:a<x<b \right\}$ è detto \textbf{intervallo aperto};
+    \item l'insieme $\intv{a}{b}\walrus\left\{ x\in\mathbb{Q}:a\le x\le b \right\}$ è detto \textbf{intervallo chiuso};
+    \item l'insieme $\lintv{a}{b}\walrus\left\{ x\in\mathbb{Q}:a<x\le b \right\}$ è detto \textbf{intervallo semiaperto a sinistra};
+    \item l'insieme $\rintv{a}{b}\walrus\left\{ x\in\mathbb{Q}:a\le x<b \right\}$ è detto \textbf{intervallo semiaperto a destra}.
+  \end{itemize}
+\end{definition}
+
+\begin{definition}[Insieme limitato]
+  Un insieme $A\subset \mathbb{Q}$ è \textbf{limitato} se è contenuto in un intervallo, ossia $\exists a,b\in\mathbb{Q},a<b:A\subset\ointv{a}{b}$.
+\end{definition}
+
+\begin{observation}
+  Ogni insieme finito ($\#\(A\)<\infty$) è finito.
+\end{observation}
+
+\begin{observation}
+  Se $A$ e $B$ sono insiemi limitati, allora anche $A\cup B$ e $A\cap B$ sono limitati.
+\end{observation}
+
+\subsection{Funzione modulo}
+
+\begin{definition}[Modulo]
+  La funzione \textbf{modulo} è definita come:
+  $$f:\mathbb{Q}\to\mathbb{Q}$$
+  $$
+    f\(x\)\walrus
+    \abs{x}\walrus
+    \begin{cases}
+      +x & x\ge0 \\
+      -x & x<0   \\
+    \end{cases}
+  $$
+\end{definition}
+
+\begin{observation}
+  La funzione modulo non è iniettiva.
+\end{observation}
+\begin{proof}
+  $$f(-1)=1=f(1)$$
+\end{proof}
+
+\begin{observation}
+  La funzione modulo non è suriettiva.
+\end{observation}
+\begin{proof}
+  $$f:\mathbb{Q}\to\mathbb{Q}^+$$
+\end{proof}
+
+\begin{definition}[Distanza euclidea]
+  Dati $a,b\in\mathbb{Q}$, la distanza tra $a$ e $b$ è $\abs{a-b}$.
+\end{definition}
+
+La funzione modulo gode di alcune importanti proprietà:
+\begin{itemize}
+  \item $\abs{x}=0\iff x=0$
+  \item $\abs{x}=\abs{-x}$
+  \item $\abs{xy}=\abs{x}\cdot\abs{y}$
+  \item $\abs{x+y}\le \abs{x}+\abs{y}$
+  \item $\abs{x-y}\le \abs{x-z}+\abs{z-y}$
+\end{itemize}
+
+\subsection{Coefficienti binomiali}
+
+\begin{definition}[Fattoriale]
+  La funzione $f:\mathbb{N}\to\mathbb{N}$, definita come:
+  $$f(n)\walrus n!\walrus\prod_{k=1}^nk$$
+  è detta \textbf{fattoriale}. Per definizione $0!=1$.
+\end{definition}
+
+\begin{definition}[Coefficiente binomiale]
+  Siano $n,k\in\mathbb{N}$, tali che $0\le k\le n$ e $n\ge1$. Il \textbf{coefficiente binomiale} ``$n$ su $k$'' è:
+  $$\binom{n}{k} = \frac{n!}{k!\(n-k\)!}$$
+\end{definition}
+
+\begin{lemma}
+  $$\binom{n}{0}=1$$
+\end{lemma}
+\begin{proof}
+  $$\binom{n}{0}=\frac{n!}{0!n!}=\frac{n!}{n!}=1$$
+\end{proof}
+
+\begin{lemma}
+  $$\binom{n}{1}=n$$
+\end{lemma}
+\begin{proof}
+  $$\binom{n}{1}=\frac{n!}{1!\(n-1\)!}=\frac{n\cdot\(n-1\)!}{\(n-1\)!}=n$$
+\end{proof}
+
+\begin{lemma}
+  $$\binom{n}{k}=\binom{n}{n-k}$$
+\end{lemma}
+\begin{proof}
+  $$\binom{n}{n-k}=\frac{n!}{\(n-k\)!\(n-n+k\)!}=\frac{n!}{k!\(n-k\)!}=\binom{n}{k}$$
+\end{proof}
+
+\begin{corollary}
+  $$\binom{n}{n}=1$$
+\end{corollary}
+\begin{proof}
+  $$\binom{n}{n}=\binom{n}{0}=1$$
+\end{proof}
+
+\begin{lemma}
+  $$\binom{n}{k}=\binom{n-1}{k-1}+\binom{n-1}{k}$$
+\end{lemma}
+\begin{proof}
+  \begin{align*}
+    \binom{n-1}{k-1}+\binom{n-1}{k} & =\frac{\(n-1\)!}{\(k-1\)!\(n-k\)!}+\frac{\(n-1\)!}{k!\(n-k-1\)!} \\
+                                    & =\frac{k\(n-1\)!+\(n-k\)\(n-1\)!}{k!\(n-k\)!}                    \\
+                                    & =\frac{\(k+n-k\)\(n-1\)!}{k!\(n-k\)!}                            \\
+                                    & =\frac{n\(n-1\)!}{k!\(n-k\)!}                                    \\
+                                    & =\frac{n!}{k!\(n-k\)!}                                           \\
+                                    & =\binom{n}{k}                                                    
+  \end{align*}
+\end{proof}
+
+\paragraph*{Triangolo di Tartaglia}
+Utilizzando le proprietà del coefficiente binomiale, si costruisce una struttura per il calcolo efficiente dello stesso, che prende il nome di triangolo di Tartaglia. Si costruisce una tabella che ha per righe i valori di $n$ e per colonne i valori di $k$; per le proprietà del coefficiente binomiale, la colonna corrispondente a $k=0$ sarà $1$, come anche la diagonale $n=k$. Per concludere si usa l'ultima proprietà, per cui il valore di una cella è la somma delle due di sopra.
+
+\begin{center}
+  \begin{tblr}{c|c|c|c|c|c|c|c|c|c}
+      & 0 & 1 & 2  & 3  & 4  & 5  & 6  & 7 & 8 \\ \hline
+    1 & 1 & 1                                  \\ \hline
+    2 & 1 & 2 & 1                              \\ \hline
+    3 & 1 & 3 & 3  & 1                         \\ \hline
+    4 & 1 & 4 & 6  & 4  & 1                    \\ \hline
+    5 & 1 & 5 & 10 & 10 & 5  & 1               \\ \hline
+    6 & 1 & 6 & 15 & 20 & 15 & 6  & 1          \\ \hline
+    7 & 1 & 7 & 21 & 35 & 35 & 21 & 7  & 1     \\ \hline
+    8 & 1 & 8 & 28 & 56 & 70 & 56 & 28 & 8 & 1 \\
+  \end{tblr}
+\end{center}
+
+\begin{theorem}[Binomio di Newton]
+  $$\(a+b\)^n=\sum_{k=0}^n\binom{n}{k}a^{k}b^{n-k}=\sum_{k=0}^n\binom{n}{k}a^{n-k}b^{k}$$
+  $$\forall a,b\in\mathbb{Q},\ \forall n\ge1$$
+\end{theorem}
+\begin{proof}
+  $$n=1\impl \(a+b\)^1=\binom{1}{0}a^0b^1+\binom{1}{1}a^1b^0=b+a$$
+  Sia vero $\(a+b\)^n=\sum_{k=0}^n\binom{n}{k}a^{k}b^{n-k}$.
+  \begin{align*}
+    \(a+b\)^{n+1}&=\(a+b\)\(a+b\)^n\\
+    &=\(a+b\)\sum_{k=0}^n\binom{n}{k}a^{k}b^{n-k}\\
+    &=\sum_{k=0}^n\binom{n}{k}a^{k+1}b^{n-k}+\sum_{k=0}^n\binom{n}{k}a^{k}b^{n-k+1}\\
+    &=\sum_{k=1}^{n+1}\binom{n}{k-1}a^{k}b^{n-k+1}+\sum_{k=0}^n\binom{n}{k}a^{k}b^{n-k+1}\\
+    &=\binom{n}{n}a^{n+1}b^0+\sum_{k=1}^{n}\binom{n}{k-1}a^{k}b^{n-k+1}+\sum_{k=1}^n\binom{n}{k}a^{k}b^{n-k+1}+\binom{n}{0}a^0b^{n+1}\\
+    &=a^{n+1}+b^{n+1}+\sum_{k=1}^{n}\(\binom{n}{k-1}+\binom{n}{k}\)a^{k}b^{n-k+1}\\
+    &=a^{n+1}+b^{n+1}+\sum_{k=1}^{n}\binom{n+1}{k}a^{k}b^{n-k+1}\\
+    &=\binom{n+1}{0}a^{n+1}b^0+\binom{n+1}{0}a^0b^{n+1}+\sum_{k=1}^{n}\binom{n+1}{k}a^{k}b^{n-k+1}\\
+    &=\sum_{k=0}^{n+1}\binom{n+1}{k}a^{k}b^{n-k+1}
+  \end{align*}
+  Per induzione, la tesi è verificata $\forall n\ge1$.
+\end{proof}

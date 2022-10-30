@@ -1,0 +1,105 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[italian]{babel}
+\usepackage[a4paper, left=18mm, right=18mm, top=20mm, bottom=20mm]{geometry}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{interval}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{cancel}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{nicefrac}
+\usepackage{enumitem}
+\usepackage{verbatim}
+\usepackage{tabularray}
+\usepackage{bold-extra}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Analisi matematica 1},
+    % bookmarks=true,
+    bookmarksopen=true,
+    pdfpagemode=UseOutlines,
+    pdfauthor={Amato Michele Pasquale},
+}
+
+\title{\huge Analisi matematica 1}
+\author{Amato Michele Pasquale}
+\date{\today}
+
+\pgfplotsset{compat = newest}
+\makeatletter
+\renewcommand\l@subsection{\@dottedtocline{2}{1.5em}{3em}}
+\makeatother
+\setitemize{noitemsep,topsep=3pt,parsep=0pt,partopsep=0pt}
+\setenumerate{noitemsep,topsep=3pt,parsep=0pt,partopsep=0pt}
+
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+\newtheorem{theorem}{Teorema}
+\newtheorem{definition}{Definizione}
+\newtheorem{lemma}{Lemma}
+\newtheorem{axiom}{Assioma}
+\newtheorem{corollary}{Corollario}
+\renewcommand\qedsymbol{$\blacksquare$}
+\newcommand{\asin}{\arcsin}
+\newcommand{\acos}{\arccos}
+\newcommand{\atan}{\arctan}
+\newcommand{\impl}{\Rightarrow}
+\setitemize{noitemsep,topsep=3pt,parsep=0pt,partopsep=0pt}
+\setenumerate{noitemsep,topsep=3pt,parsep=0pt,partopsep=0pt}
+\newcommand{\triang}[1]{\overset{\triangle}{#1}}
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+\renewcommand{\c}{\gamma}
+\renewcommand{\(}{\left(}
+\renewcommand{\)}{\right)}
+\renewcommand{\mod}[1]{\ \( \mathrm{mod}\ #1 \)}
+\renewcommand{\emptyset}{\varnothing}
+\newcommand{\walrus}{\coloneqq}
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\l}{\ell}
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\complex}{\mathbb{C}}
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\im}{Im}
+\renewcommand{\r}{\rho}
+\renewcommand{\t}{\theta}
+
+\intervalconfig{soft open fences}
+\newcommand{\intv}[2]{\interval[scaled]{#1}{#2}}
+\newcommand{\ointv}[2]{\ointerval[scaled]{#1}{#2}}
+\newcommand{\lintv}[2]{\linterval[scaled]{#1}{#2}}
+\newcommand{\rintv}[2]{\rinterval[scaled]{#1}{#2}}
+
+\newenvironment{example}
+{\par\noindent{\small\bf Esempio}\hspace{0.5em}}
+{\hfill$\nsim$}
+\newenvironment{observation}
+{\par\noindent{\small\bf Osservazione}\hspace{0.5em}}
+{\hfill}
+
+\allowdisplaybreaks
+
+\begin{document}
+\pagenumbering{gobble}
+\maketitle
+\vfill
+\begin{center}
+  \emph{}
+\end{center}
+\newpage
+\pagenumbering{roman}
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+\include{01.tex}
+\include{02.tex}
+\include{03.tex}
+\end{document}

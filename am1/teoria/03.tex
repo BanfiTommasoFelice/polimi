@@ -1,0 +1,256 @@
+\section{Numeri complessi}
+
+% TODO: aggiungere grafici dove vi è un TODO vuoto
+
+\subsection{Costruzione}
+
+\begin{definition}[Campo complesso]
+  $$\complex\walrus\reals\times\reals=\reals^2$$
+  $$\complex\ni z\walrus\(a,b\)\in\reals^2$$
+\end{definition}
+
+% TODO: inserire piano di Gauss
+
+\begin{definition}[Somma in $\complex$]
+  $$z,w\in\complex$$
+  $$z\walrus\(a,b\)$$
+  $$w\walrus\(c,d\)$$
+  $$z+w\walrus\(a+c,b+d\)$$
+\end{definition}
+
+% TODO
+
+\begin{definition}[Prodotto in $\complex$]
+  $$z,w\in\complex$$
+  $$z\walrus\(a,b\)$$
+  $$w\walrus\(c,d\)$$
+  $$z\cdot w\walrus\(ac-bd,ad+bc\)$$
+\end{definition}
+
+% TODO
+
+\subsubsection*{Proprietà}
+
+\begin{itemize}
+  \item $z+w=w+z$
+  \item $zw=wz$
+  \item $z+\(w+v\)=\(z+w\)+v$
+  \item $z\(wv\)=\(zw\)v$
+  \item $z\(w+t\)=zw+zt$
+\end{itemize}
+
+L'elemento neutro della somma è $\(0,0\)$, mentre quello del prodotto è $\(1,0\)$. % TODO: dimostrare
+
+% TODO: da rivedere la forma
+
+\paragraph*{Immersione di $\reals$ in $\complex$}
+$$f:\reals\to\complex\quad f\(x\)\walrus\(x,0\)$$
+$f$ è iniettiva:
+$$f(x)=f(y)\iff \(x,0\)=\(y,0\)\iff x=y$$
+
+$$f(x)+f(y)=\(x,0\)+\(y,0\)=\(x+y,0\)=f(x+y)$$
+$$f(x)f(y)=\(x,0\)\(y,0\)=\(xy-0,0+0\)=f(xy)$$
+
+\subsection{Forma algebrica}
+
+$$z=\(a,b\)\in\complex$$
+$$\complex \ni i\walrus\(0,1\)$$
+\begin{align*}
+  z & =\(a,b\)             \\
+    & =\(a,0\)+\(0,b\)     \\
+    & =f(a)+\(0,1\)\(b,0\) \\
+    & =f(a)+\(0,1\)f(b)    \\
+    & =a+\(0,1\)b          \\
+    & =a+ib                
+\end{align*}
+
+\begin{observation}
+  $$i^2=\(0,1\)\(0,1\)=\(0-1,0+0\)=f(-1)=-1\iff i^2+1=0$$
+\end{observation}
+
+\subsection{Operazioni}
+
+$$\(a+ib\)+\(c+id\)=\(a+c\)+i\(b+d\)$$
+$$\(a+ib\)+\(c+id\)=\(ac-bd\)+i\(ad+bc\)$$
+$$-\(a+ib\)=-a-ib$$ % TODO
+$$z^{-1}=\frac{1}{z}=\frac{1}{a+ib}=\frac{a}{a^2+b^2}-i\frac{b}{a^2+b^2}$$
+
+\begin{definition}[Parte reale e immaginaria]
+  Sia $\complex\ni z\walrus a+ib$. $a$ è detta \textbf{parte reale} di $z$, mentre $b$ è detta \textbf{parte immaginaria} di $z$. Si indicano rispettivamente con $\re\(z\)$ e $\im\(z\)$.
+\end{definition}
+
+\begin{definition}[Coniugato]
+  Il \textbf{coniugato} di $\complex\ni z\walrus a+ib$ è:
+  $$\bar{z}\walrus a-ib$$
+\end{definition}
+
+% TODO
+
+\begin{definition}[Modulo in $\complex$]
+  Sia $\complex\ni z\walrus a+ib$.
+  $$\abs{z}=\sqrt{a^2+b^2}$$
+\end{definition}
+
+% TODO
+
+\begin{observation}
+  Mentre $\abs{z}$ è la distanza di $z$ dall'origine, $\abs{z-w}$ è la distanza fra $z$ e $w$.
+  % TODO
+\end{observation}
+
+\begin{lemma}
+  $$\abs{z}=\abs{-z}$$
+  % TODO
+\end{lemma}
+
+\begin{lemma}
+  $$\abs{z}=\abs{\bar{z}}$$
+\end{lemma}
+
+\begin{lemma}
+  $$\bar{z+w}=\bar{z}+\bar{w}$$ % FIXME: la barra sopra non è lunga abbastanza
+\end{lemma}
+
+\begin{lemma}
+  $$\bar{zw}=\bar{z}\bar{w}$$ % FIXME: la barra sopra non è lunga abbastanza
+\end{lemma}
+
+\begin{lemma}
+  $$\abs{z}=\sqrt{z\bar{z}}\iff \abs{z}^2=z\bar{z}$$
+\end{lemma}
+\begin{proof}
+  $$z\bar{z}=\(a+ib\)\(a-ib\)=a^2-iab+iab-i^2b=a^2+b^2=\abs{z}^2$$
+\end{proof}
+
+\begin{lemma}
+  $$\frac{1}{z}=\frac{\bar{z}}{\abs{z}^2}$$
+\end{lemma}
+\begin{proof}
+  $$\frac{1}{z}=\frac{1}{z}\cdot\frac{\bar{z}}{\bar{z}}=\frac{\bar{z}}{z\bar{z}}=\frac{\bar{z}}{\abs{z}^2}$$
+\end{proof}
+
+\begin{lemma}[Disuguaglianza triangolare]
+  $$\abs{z+w}\le \abs{z}+\abs{w}$$
+  $$\abs{z_1-z_2}\le \abs{z_1-z_3}+\abs{z_3-z_2}$$ 
+  % TODO
+\end{lemma}
+
+\subsection{Forma trigonometrica}
+
+Sia $\complex\ni z\neq0$. Allora:
+$$z=z\frac{\abs{z}}{\abs{z}}=\abs{z}\frac{z}{\abs{z}}=\r w$$
+$$\r=\abs{z}\quad w=\frac{z}{\abs{z}}$$
+$$\abs{w}=\abs{\frac{z}{\abs{z}}}=\frac{\abs{z}}{\abs{\abs{z}}}=\frac{\abs{z}}{\abs{z}}=1$$
+$$w=\(\cos\t,\sin\t\)$$
+$$z=\r\(\cos\t+i\sin\t\)$$
+$$\re\(z\)=\r\cos\t$$
+$$\im\(z\)=\r\sin\t$$
+$$\t\walrus \arg\(z\)$$
+
+\begin{theorem}[I formula di De Moivre]
+  $$z_1=\r_1\(\cos\t_1+i\sin\t_1\)$$
+  $$z_2=\r_2\(\cos\t_2+i\sin\t_2\)$$
+  $$z_1z_2=\r_1\r_2\(\cos\(\t_1+\t_2\)+i\sin\(\t_1+\t_2\)\)$$
+\end{theorem}
+\begin{proof}
+  \begin{align*}
+    z_1z_2 & =\r_1\(\cos\t_1+i\sin\t_1\)\r_2\(\cos\t_2+i\sin\t_2\)                              \\
+           & =\r_1\r_2\(\cos\t_1\cos\t_2+i\cos\t_1\sin\t_2+i\sin\t_1\cos\t_2-\sin\t_1\sin\t_2\) \\
+           & =\r_1\r_2\(\cos\(\t_1+\t_2\)+i\sin\(\t_1+\t_2\)\)                                  
+  \end{align*}
+\end{proof}
+
+% TODO
+
+\begin{corollary}
+  $$z=\r\(\cos\t+i\sin\t\)$$
+  $$z^n=\r^n\(\cos n\t+i\sin n\t\)$$
+\end{corollary}
+
+\begin{theorem}[II formula di De Moivre]
+  Sia $\complex\setminus\left\{ 0 \right\}\ni w\walrus\r\(\cos\t+i\sin\t\)$ e $n\in\mathbb{N}\setminus\left\{ 0 \right\}$. Allora l'equazione $z^n=w$ ha esattamente $n$ soluzioni, ossia:
+  $$z_k^n=w\quad \forall k\in\rintv{0}{n}$$
+  In particolare:
+  $$z_k=\r^{\nicefrac{1}{n}}\(\cos\t_k+i\sin\t_k\)\quad \t_k=\frac{\t}{n}+\frac{2\pi}{n}k$$
+\end{theorem}
+\begin{proof}
+  \begin{align*}
+    z_k^n & =\(\r^{\nicefrac{1}{n}}\(\cos\t_k+i\sin\t_k\)\)^n \\
+          & =\r^{\nicefrac{n}{n}}\(\cos n\t_k+i\sin n\t_k\)   \\
+          & =\r\(\cos\(\t+2k\pi\)+i\sin\(\t+2k\pi\)\)         \\
+          & =\r\(\cos\t+i\sin\t\)                             \\
+          & =w                                                
+  \end{align*}
+\end{proof}
+
+% TODO
+
+\begin{corollary}
+  Le $n$ radici $n$--esime di $w\in\complex\setminus\left\{ 0 \right\}$ sono i vertici di un poligono regolare di $n$ lati, inscritto nella circonferenza centrata in $0\in\complex$ e di raggio $\r^{\nicefrac{1}{n}}$.
+\end{corollary}
+
+\begin{definition}[Polinomio]
+  Un \textbf{polinomio} è una funzione:
+  $$P_n:\complex\to\complex\quad P_n\(z\)\walrus\sum_{i=0}^nc_iz^i$$
+  $n$ è detto \textbf{grado} del polinomio e $\left\{ c_i:0\le i\le n \right\}\subset\complex$ è l'insieme dei \textbf{coefficienti} del polinomio.
+\end{definition}
+
+\begin{definition}[Equazione algebrica]
+  Sia $P_n$ un polinomio di grado $n$. L'equazione $P(z)=0$ prende il nome di \textbf{equazione algebrica}. 
+\end{definition}
+
+\begin{theorem}[Teorema fondamentale dell'algebra]
+  Un'equazione algebrica di grado $n$ ha $N$ soluzioni $w\walrus\left\{ w_i:1\le i\le N \right\}$, cui corrispondono gli indici $m\walrus\left\{ m_i:1\le i\le N \right\}$ tali per cui $\sum m_i=n$. Tali indici si dicono \textbf{molteplicità} di $w$.
+  $$P_n(z)=c_n\(z-w_1\)^{m_1}\cdots\(z-w_N\)^{m_N}$$
+\end{theorem}
+
+\subsection{Trasformazioni del piano di Gauss}
+
+\subsubsection*{Traslazione}
+
+Sia $z_0\in\complex$.
+$$T:\complex\to\complex\quad T\(z\)\walrus z+z_0$$
+% TODO
+
+\subsubsection*{Rotazione}
+
+Sia $w\in\complex:\abs{w}=1$.
+$$R:\complex\to\complex\quad R\(z\)\walrus wz$$
+% TODO
+
+\subsubsection*{Dilatazione}
+
+Sia $\reals\ni\r>0$.
+$$D:\complex\to\complex\quad D\(z\)\walrus \r z$$
+% TODO
+
+\subsubsection*{Inversione}
+
+$$I:\complex\to\complex\quad I\(z\)\walrus -z$$
+% TODO
+
+\subsubsection*{Simmetria con l'asse reale}
+
+$$S:\complex\to\complex\quad S\(z\)\walrus \bar{z}$$
+% TODO
+
+\subsubsection*{Funzione di Zukeowski}
+
+$$f:\complex\setminus\left\{ 0 \right\}\to\complex\quad f\(z\)\walrus \frac{1}{2}\(z+\frac{1}{z}\)$$
+
+\begin{example}
+  $$\complex\ni z:\abs{z}=1$$
+  $$f\(z\)=\frac{1}{2}\(z+\frac{1}{z}\)=\frac{1}{2}\(z+\frac{\bar{z}}{\abs{z}^2}\)=\frac{1}{2}\(z+\bar{z}\)=\frac{1}{2}\re\(z\)$$
+\end{example}
+
+% TODO
+% il disegno è più complicato: si deve disegnare la trasformazione come due grafici, il primo mostra una circonferenza e delle rette, parallele all'asse delle ascisse, che vengono curvate dalla circonferenza (similmente a quanto accade con la gravità), il secondo mostra gli effetti della trasformazione, ossia un segmento dove prima c'era la circonferenza e rette parallele all'asse reale dove prima c'erano curve. il tutto è completato da frecce circolari che indicano il passaggio diretto e inverso della trasformazione (quindi, da sinistra a destra una freccia f, da destra a sinistra una freccia f^{-1})
+
+\begin{observation}
+  La funzione non è un'isometria, perciò non conserva le distanze, ma bensì gli angoli.
+\end{observation}
+
+\subsection{Forma esponenziale}
+
+$$z=\r\(\cos\t+i\sin\t\)=\r e^{i\t}$$
+$$zw=\r_1\r_2\(\cos\(\t_1+\t_2\)+i\sin\(\t_1+\t_2\)\)=\r_1\r_2 e^{i\(\t_1+\t_2\)}$$
