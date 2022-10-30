@@ -638,3 +638,162 @@ Ovviamente, il carattere terminatore deve essere in memoria e quindi deve occupa
   ...
   char s[N + 1];
 \end{verbatim}
+
+Un sottoprogramma può essere definito come un programma indipendente, che però opera in una prospettiva più ridotta rispetto a quella globale del \verb|main|.
+Un sottoprogramma produce effetti, altrimenti la sua chiamata sarebbe inutile.
+Un sottoprogramma può avere a disposizione una quantità di informazioni date in input dal chiamante e, a sua volta, restituisce come output una certa quantità di informazioni.
+
+La dichiarazione di un sottoprogramma avviene mediante la seguente scrittura:
+\begin{verbatim}
+  tipo nome(parametri...) {
+    codice;
+    return ...;
+  }
+\end{verbatim}
+
+Nel caso più semplice, ossia senza input e senza output, essa diventa:
+\begin{verbatim}
+  void f(void) {
+    ...
+  }
+\end{verbatim}
+
+Il tipo \verb|void| è un tipo particolare: indica, infatti, l'assenza di un tipo preciso.
+Come tipo di ritorno, il \verb|void| indica che il sottoprogramma non restituisce alcuna informazione. Come argomento, esso indica che non vi è necessario alcun parametro, e, peraltro, rende illegale il passaggio di parametri al sottoprogramma.
+
+Il caso senza input, ma con un singolo output è:
+\begin{verbatim}
+  int f() {
+    ...
+    return x;
+  }
+\end{verbatim}
+
+Nel caso in cui sia presente l'input e sia presente l'output:
+\begin{verbatim}
+  int f(int n) {
+    ...
+    return x;
+  }
+\end{verbatim}
+
+La chiamata di un sottoprogramma avviene mediante il costrutto:
+\begin{verbatim}
+  void f() { ... }
+  int g() { ... }
+  ...
+  f();
+  x = g();
+\end{verbatim}
+
+\begin{example}
+  Sottoprogramma che calcola e restituisce 1 se un numero è primo, 0 altrimenti.
+  \begin{verbatim}
+    int prime(int n) {
+      int i, p;
+      p = 1;
+      if (n <= 0) p = -1;
+      else if (n < 4) p = n > 1;
+      else if (n % 2 == 0) p = 0;
+      else if (n % 3 == 0) p = 0;
+      for (i = 5; p && i * i <= n; i += 6)
+        if (n % i == 0 || n % (i + 2) == 0)
+          p = 0;
+      return p;
+    }
+  \end{verbatim}
+\end{example}
+
+La disposizione dei vari sottoprogrammi all'interno del sorgente, avviene secondo lo schema:
+\begin{verbatim}
+  #define ...
+  #include <...>
+  typedef ...
+
+  /* prototipi */
+  void f(void);
+  int g(int);
+
+  int main(int argc, char** argv) {
+    ...
+    return 0;
+  }
+
+  /* implementazioni */
+  
+  void f() {
+    ...
+  }
+
+  int g(int n) {
+    ...
+    return x;
+  }
+\end{verbatim}
+
+Qualora fosse necessario passare come input un array, si procede nel seguente modo:
+\begin{verbatim}
+  int f(int v[]);
+\end{verbatim}
+Analogamente, per passare un array bidimensionale, si scrive:
+\begin{verbatim}
+  #define C 10
+  int f(int m[][C]);
+\end{verbatim}
+\paragraph*{Osservazione}
+Nella dichiarazione di un parametro bidimensionale, si rende necessaria la dichiarazione del numero di colonne della matrice. Questo è dovuto al fatto che la memoria è lineare, ed, per accedere ad un elemento della matrice, si deve necessariamente conoscere il numero delle colonne.
+
+Inoltre, si rende necessario l'utilizzo di un parametro per indicare la lunghezza del vettore o le dimensioni della matrice. Per cui, le dichiarazioni diventano:
+\begin{verbatim}
+  #define C 10
+  int f(int n, int v[]);
+  int g(int n, int m, int m[][C]);
+\end{verbatim}
+
+La libreria standard del C fornisce molte funzioni utili:
+\begin{itemize}
+  \item \verb|size_t strlen(const char *)|: calcola la lunghezza di una stringa;
+  \item \verb|int strcmp(const char *, const char *)|: calcola la lunghezza di una stringa;
+  \item 
+\end{itemize}
+
+Le variabili fino ad ora dichiarate sono solo copie di quelle originali (passaggio parametri per copia valore). Pertanto, qualora si modifichi< tale variabile, la variabile originale non subirebbe alcuna modifica. Per ovviare a questa problematica, si ricorre ai puntatori (passaggio parametri per copia riferimento). Un puntatore è una variabile che contiene un indirizzo di memoria. L'operatore che consente, a partire da una variabile, di ottenerne l'indirizzo è \verb|&|. Nella dichiarazione di una funzione si scrive:
+\begin{verbatim}
+  void f(int* p);
+\end{verbatim}
+L'utilizzo della variabile originale, invece, avviene mediante l'operatore di derefenziazione \verb|*|:
+\begin{verbatim}
+  *p
+\end{verbatim}
+La chiamata alla funzione, invece, è:
+\begin{verbatim}
+  int n;
+  f(&n);
+\end{verbatim}
+\paragraph*{Osservazione}
+Quando si passa un array, poiché le forme \verb|v| e \verb|&v[0]| sono equivalenti, si capisce bene che, in realtà, si passa l'indirizzo del primo elemento. Questo permette un risparmio di memoria (non bisogna fare una copia dell'array) e un'indicizzazione coerente dell'array (\verb|v[i]|, ossia \verb|*(&v[0 + i])|).
+
+Il passaggio per copia valore introduce la tematica dello scope, o visibilità. In C, ogni variabile è visibile nel blocco di appartenenza. Le variabili globali, essendo al di fuori di qualsiasi blocco, sono sempre visibili, a patto che la loro dichiarazione sia precedente al loro utilizzo.
+
+\paragraph*{Lo stack}
+
+Sullo stack viene allocato tutto lo spazio necessario al funzionamento del programma.
+Viene creato il cosiddetto record di attivazione, ossia una zona di memoria riservata ai parametri passati alla funzione e al valore di ritorno.
+Inoltre, è necessario avere l'indirizzo da dove il chiamante chiama, per poter ritornare dopo l'esecuzione della funzione.
+
+Ci sono poi alcune informazioni di servizio e lo spazio dedicato alle variabili locali.
+
+Quindi, la struttura è la seguente:
+\begin{itemize}
+  \item variabili locali
+  \item informazioni di servizio
+  \item indirizzo di ritorno
+  \item parametri attuali
+  \item valore di ritorno
+\end{itemize}
+% TODO: fare una grafica per la struttura dello stack
+
+Da un punto di vista macroscopico, ogni volta che si chiama una funzione, lo stack costruisce un blocco logico costituito dagli elementi cui sopra, che vengono impilati nello stack:
+
+% TODO: fare due blocchi, equivalenti a due funzioni
+
