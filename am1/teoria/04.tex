@@ -1,0 +1,309 @@
+\section{Funzioni di variabile reale}
+
+In questa sezione, l'oggetto di studio sarà una funzione $f:D\to\reals$, $D\subseteq\reals$.
+
+\subsection{Limiti}
+
+\begin{definition}[Limite]
+  Sia $x_0\in D'$. Si dice che $f$ ha limite $\l\in\reals$ in $x_0$ se:
+  $$\forall\epsilon>0\ \exists\ \delta\(\epsilon\)>0:x\in D\wedge\abs{x-x_0}<\delta\(\epsilon\)\wedge x\neq x_0\impl \abs{f(x)-\l}<\epsilon$$
+\end{definition}
+
+\begin{definition}[Asintoto verticale]
+  $$\lim_{x\to x_0}f\(x\)=\pm\infty$$
+  se:
+  $$\forall M\in\reals\ \exists\ \delta\(M\)>0:x\in D\wedge 0<\abs{x-x_0}<\delta\(M\)\impl f\(x\)\gtrless  M$$
+  oppure:
+  $$\forall M\in\reals\ \exists\ \delta\(M\)>0:x\in D\setminus\left\{ x_0 \right\}\cap\ointv{x_0-\delta\(M\)}{x_0+\delta\(M\)}\impl f\(x\)\in\substack{\ointv{M}{+\infty}\\\ointv{-\infty}{M}}$$
+  % TODO
+\end{definition}
+
+\begin{definition}[Asintoto orizzontale]
+  $$\lim_{x\to\pm\infty}f\(x\)=\l$$
+  se:
+  $$\forall\epsilon>0\ \exists\ N\in\reals:x\in D\wedge x\gtrless N\impl \abs{f\(x\)-\l}<\epsilon$$
+  % TODO
+\end{definition}
+
+\begin{definition}
+  $$\lim_{x\to+\infty}f\(x\)=\pm\infty$$
+  se:
+  $$\forall M\in\reals\ \exists\ N\(M\)\in\reals:x\in D\wedge x>N\(M\)\impl f\(x\)\gtrless M$$
+  % TODO
+\end{definition}
+
+\begin{definition}
+  $$\lim_{x\to-\infty}f\(x\)=\pm\infty$$
+  se:
+  $$\forall M\in\reals\ \exists\ N\(M\)\in\reals:x\in D\wedge x<N\(M\)\impl f\(x\)\gtrless M$$
+  % TODO
+\end{definition}
+
+\begin{definition}[Limite da destra]
+  $$\lim_{x\to x_0^+}f\(x\)=\l$$
+  se:
+  $$\forall\epsilon>0\ \exists\ \delta\(\epsilon\)>0:x\in D\setminus\left\{ x_0 \right\}\wedge x_0<x<x_0+\delta\(\epsilon\)\impl\abs{f\(x\)-\l}<\epsilon$$
+  % TODO
+\end{definition}
+
+\begin{definition}[Limite da sinistra]
+  $$\lim_{x\to x_0^-}f\(x\)=\l$$
+  se:
+  $$\forall\epsilon>0\ \exists\ \delta\(\epsilon\)>0:x\in D\setminus\left\{ x_0 \right\}\wedge x_0-\delta\(\epsilon\)<x<x_0\impl\abs{f\(x\)-\l}<\epsilon$$
+  % TODO
+\end{definition}
+
+\subsubsection*{Proprietà}
+
+\begin{theorem}[Unicità del limite]
+  Se $\exists\ \lim_{x\to x_0}f\(x\)=\l$, allora tale limite è unico.
+\end{theorem}
+\begin{proof}
+  Per assurdo:
+  $$\lim_{x\to x_0}f\(x\)=\l_1\quad \lim_{x\to x_0}f\(x\)=\l_2$$
+  Allora:
+  $$0\le\abs{\l_1-\l_2}=\abs{\l_1-f\(x\)+f\(x\)-\l_2}\le\abs{f\(x\)-\l_1}+\abs{f\(x\)-\l_2}\le0+0$$
+  $$\abs{\l_1-\l_2}=0\iff \l_1-\l_2=0\iff \l_1=\l_2$$
+\end{proof}
+
+\begin{theorem}
+  Se $\exists\ \lim_{x\to x_0}f\(x\)=\l$, allora $f$ è localmente limitata vicino a $x_0$.
+\end{theorem}
+\begin{proof}
+  $$x\in\ointv{x_0-\delta\(\epsilon\)}{x_0+\delta\(\epsilon\)}\cap\(D\setminus\left\{ x_0 \right\}\)\impl f\(x\)\in\ointv{\l-\epsilon}{\l+\epsilon}$$
+\end{proof}
+
+\begin{theorem}[Somma]
+  $$
+    \begin{cases}
+      \exists\ \l_1\walrus\lim_{x\to x_0}f\(x\) \\
+      \exists\ \l_2\walrus\lim_{x\to x_0}g\(x\) \\
+    \end{cases}
+    \impl
+    \lim_{x\to x_0}\(f\(x\)+g\(x\)\)=\(\lim_{x\to x_0}f\(x\)\)+\(\lim_{x\to x_0}g\(x\)\)
+  $$
+\end{theorem}
+
+\begin{theorem}[Prodotto]
+  $$
+    \begin{cases}
+      \exists\ \l_1\walrus\lim_{x\to x_0}f\(x\) \\
+      \exists\ \l_2\walrus\lim_{x\to x_0}g\(x\) \\
+    \end{cases}
+    \impl
+    \lim_{x\to x_0}f\(x\)g\(x\)=\(\lim_{x\to x_0}f\(x\)\)\cdot\(\lim_{x\to x_0}g\(x\)\)
+  $$
+\end{theorem}
+
+\begin{observation}
+  Talvolta si verifica che il limite della somma o prodotto di due funzioni esista, nonostante i due limiti, presi singolarmente, non esistano.
+\end{observation}
+
+\begin{theorem}[Quoziente]
+  $$
+    \begin{cases}
+      \exists\ \l_1\walrus\lim_{x\to x_0}f\(x\) \\
+      \exists\ \l_2\walrus\lim_{x\to x_0}g\(x\) \\
+    \end{cases}
+    \impl
+    \lim_{x\to x_0}\frac{f\(x\)}{g\(x\)}=\frac{\lim_{x\to x_0}f\(x\)}{\lim_{x\to x_0}g\(x\)}
+  $$
+\end{theorem}
+
+\begin{theorem}[Permanenza del segno]
+  $$
+    \begin{cases}
+      \exists\ \l\walrus\lim_{x\to x_0}f\(x\) \\
+      f\(x\)\gtreqless 0                      \\
+    \end{cases}
+    \impl
+    \l\gtreqless0
+  $$
+\end{theorem}
+
+\begin{theorem}
+  Se $\exists\ \l\walrus\lim_{x\to x_0}f\(x\)$, e $\l>0$, allora $f$ è localmente positiva vicino a $x_0$.
+\end{theorem}
+\begin{proof}
+  $$\epsilon\walrus\nicefrac{\l}{2}$$
+  $$\l-\epsilon<f\(x\)<\l+\epsilon\iff \nicefrac{1}{2}\l<f\(x\)<\nicefrac{3}{2}\l$$
+  $$\l>0\impl \nicefrac{1}{2}\l\ge0\impl 0\le f\(x\)$$
+\end{proof}
+
+\begin{theorem}[Monotonia]
+  Siano $f,g,h$ tre funzioni tali che, vicino a $x_0$, valga:
+  $$f\(x\)\le g\(x\)\le h\(x\)$$
+  Allora:
+  $$\lim_{x\to x_0}f\(x\)\le\lim_{x\to x_0}g\(x\)\le\lim_{x\to x_0}h\(x\)$$
+\end{theorem}
+
+\begin{theorem}[Teorema del confronto]
+  Siano $f,g,h$ tre funzioni tali che, vicino a $x_0$, valga:
+  $$f\(x\)\le g\(x\)\le h\(x\)$$
+  Allora:
+  $$\exists\ \l=\lim_{x\to x_0}f\(x\)=\lim_{x\to x_0}h\(x\)\impl \lim_{x\to x_0}g\(x\)=\l$$
+\end{theorem}
+\begin{proof}
+  $$f\(x\)\le g\(x\)\le h\(x\)$$
+  $$\lim_{x\to x_0}f\(x\)\le\lim_{x\to x_0}g\(x\)\le\lim_{x\to x_0}h\(x\)$$
+  $$\lim_{x\to x_0}f\(x\)-\l\le\lim_{x\to x_0}g\(x\)-\l\le\lim_{x\to x_0}h\(x\)-\l$$
+  $$0\le\lim_{x\to x_0}g\(x\)-\l\le0$$
+  $$\lim_{x\to x_0}g\(x\)-\l=0\iff \lim_{x\to x_0}g\(x\)=\l$$
+\end{proof}
+
+\begin{theorem}[Limite di funzione composta]
+  $$f:D_f\to\reals\quad g:D_g\to\reals$$
+  $$\im\(f\)\subseteq D\(g\)$$
+  La funzione composta $g\circ f:D_f\to\reals$ ha, allora, senso e, in particolare:
+  $$
+    \begin{cases}
+      x_0\in D_f'                              \\
+      \exists\ y_0\walrus\lim_{x\to x_0}f\(x\) \\
+      y_0\in D_g'                              \\
+      \exists\ \l\walrus\lim_{y\to y_0}g\(y\)  \\
+    \end{cases}
+    \impl
+    \lim_{x\to x_0}g\circ f=\lim_{x\to x_0}g\(f\(x\)\)=\l
+  $$
+\end{theorem}
+\begin{proof}
+  $$\lim_{y\to y_0}g\(y\)=\l\iff \forall\epsilon>0\ \exists\ \delta\(\epsilon\)>0:\abs{y-y_0}<\delta\(\epsilon\)\impl \abs{g\(y\)-\l}<\epsilon$$
+  $$y_0=\lim_{x\to x_0}f\(x\)\impl\epsilon'\walrus\delta\(\epsilon\)\impl\exists\ \delta'\(\epsilon'\)>0:\abs{x-x_0}<\delta'\(\epsilon'\)\impl\abs{f\(x\)-y_0}<\epsilon'$$
+  $$\abs{x-x_0}<\epsilon'\impl\abs{g\(f\(x\)\)-\l}<\epsilon$$
+\end{proof}
+
+\subsection{Continuità}
+
+\begin{definition}[Continuità]
+  Sia $x_0\in D'$. Se $f$ ha limite $\l\in\reals$ in $x_0$, e $\l=f\(x\)$, si dice che $f$ è \textbf{continua} in $x_0$:
+  $$\lim_{x\to x_0}f\(x\)=\l\quad\mathrm{oppure}\quad\lim_{x\to x_0}f\(x\)=f\(x_0\)$$
+  % TODO
+\end{definition}
+
+\begin{definition}[Classe C] % TODO: verificare che il nome sia corretto
+  Sia $D\subseteq\reals$.
+  $$C\(D\)\walrus\left\{ f:D\to\reals\ \vert\ \forall x_0\in D\impl\lim_{x\to x_0}f\(x\)=f\(x_0\) \right\}$$
+\end{definition}
+
+\subsubsection*{Proprietà}
+
+\begin{lemma}
+  $f,g\in C\(D\)\impl f+g\in C\(D\)$
+\end{lemma}
+\begin{lemma}
+  $f,g\in C\(D\)\impl f\cdot g\in C\(D\)$
+\end{lemma}
+\begin{lemma}
+  $f,g\in C\(D\)\wedge g\neq0\impl \nicefrac{f}{g}\in C\(D\)$
+\end{lemma}
+\begin{lemma}
+  $f:\ointv{a}{b}\to\ointv{c}{d}$ biiettiva e continua $\impl f^{-1}\ointv{c}{d}\to\ointv{a}{b}$ biiettiva e continua.
+\end{lemma}
+\begin{lemma}
+  $$f\in C\(D_f\)\quad g\in C\(D_g\)$$
+  $$\im\(f\)=D_g\impl g\circ f\in C\(D_f\)$$
+\end{lemma}
+
+\begin{lemma}[Continuità delle funzioni costanti]
+  Sia $c\in\reals$ fissato.
+  $$f:\reals\to\reals\quad f\(x\)\walrus c$$
+  $$f\in C\(\reals\)$$
+  % TODO
+\end{lemma}
+\begin{proof}
+  Sia $x_0\in\reals$.
+  $$\epsilon>\abs{f\(x\)-f\(x_0\)}=\abs{c-c}=0$$
+  $$\forall\delta\wedge x\in\ointv{x_0-\delta}{x_0+\delta}$$
+  $$\lim_{x\to x_0}f\(x\)=f\(x_0\)=c$$
+\end{proof}
+
+\begin{lemma}[Continuità dell'identità]
+  $$f:\reals\to\reals\quad f\(x\)\walrus x$$
+  $$f\in C\(\reals\)$$
+  % TODO
+\end{lemma}
+\begin{proof}
+  Sia $x_0\in\reals$.
+  $$\epsilon>\abs{f\(x\)-f\(x_0\)}=\abs{x-x_0}$$
+  Sia $\delta\(\epsilon\)\walrus\epsilon$.
+  $$\abs{x-x_0}<\delta\(\epsilon\)\impl\abs{f\(x\)-f\(x_0\)}<\epsilon$$
+\end{proof}
+
+\begin{lemma}[Continuità di funzioni inverse]
+  Sia $f:\ointv{a}{b}\to\reals$ una funzione iniettiva e continua in $\ointv{a}{b}$. Ha senso definire la sua inversa:
+  $$f^{-1}:\im\(f\)\to\ointv{a}{b}\quad \(f^{-1}\circ f\)\(x\)=x\quad \(f\circ f^{-1}\)\(y\)=y$$
+  e, in particolare, $f^{-1}$ è continua nel suo dominio.
+\end{lemma}
+
+\begin{lemma}[Continuità di potenze]
+  $$f_n:\reals\to\reals\quad f_n\(x\)\walrus x^n$$
+  $$\forall n\ge0\quad f_n\in C\(\reals\)$$
+\end{lemma}
+\begin{proof}
+  Sia $f_n\in C\(\reals\)$.
+  $$f_{n+1}\(x\)=x^{n+1}=x\cdot x^n=x\cdot f_n\(x\)\in C\(\reals\)$$
+  Poiché $C\(\reals\)\ni f_0\(x\)=1$, per induzione, $\forall n\ge0\ f_n\in C\(\reals\)$.
+\end{proof}
+
+\begin{lemma}[Continuità di polinomi]
+  $$f_n:\reals\to\reals\quad f_n\(x\)\walrus \sum_{k=0}^nc_kx^k$$
+  $$\forall n\ge0\quad f_n\in C\(\reals\)$$
+\end{lemma}
+\begin{proof}
+  Un polinomio di grado $n$ è funzione continua in quanto somma di prodotti di funzioni continue.
+\end{proof}
+
+\begin{lemma}[Continuità di quozienti]
+  Siano $P,Q$ polinomi.
+  $$f:D_f\to\reals\quad f\(x\)\walrus \frac{P\(x\)}{Q\(x\)}$$
+  $$D_f\walrus\left\{ x\in\reals:Q\(x\)\neq0 \right\}$$
+  $$P,Q\in C\(\reals\)\impl f\in C\(D_f\)$$
+\end{lemma}
+
+\begin{theorem}[Teorema di Weierstrass]
+  Sia $f\in C\(\intv{a}{b}\)$. Allora $f$ ammette un massimo ed un minimo globali in $\intv{a}{b}$:
+  $$\exists\ x_m,x_M\in\intv{a}{b}:f\(x_m\)\le f\(x\)\le f\(x_M\)\quad \forall x\in\intv{a}{b}$$
+\end{theorem}
+\begin{proof}
+  Sia $\(\reals\cup\left\{ +\infty \right\}\)\ni M\walrus\sup \im \(f\)$. Per le proprietà del $\sup$, $\exists\ \left\{ y_n \right\}\subset \im\(f\)$ convergente a $M$:
+  $$\lim_{n\to+\infty}y_n=M$$
+  Se $y_n=M$, allora $M=\max \im\(f\)$.
+  Altrimenti, sia $y_n\neq M\ \forall n$. Si ha:
+  $$y_n\neq y_m \quad \forall n,m:n\neq m$$
+  Quindi $\exists\ \left\{ x_n \right\}\subset \intv{a}{b}$ tale che $y_n=f\(x_n\)$. Di conseguenza $n\neq m\impl x_n\neq x_m$ e, pertanto, $\left\{ x_n \right\}\subset\intv{a}{b}$ è un insieme limitato e infinito. Per il teorema di Bolzano--Weierstrass $\left\{ x_n \right\}$ ammette almeno un punto di accumulazione $x_M\in\intv{a}{b}$. Esiste quindi una sottosuccessione $\left\{ x_{n_k} \right\}\subseteq\left\{ x_n \right\}$ convergente a $x_M$:
+  $$\lim_{k}x_{n_k}=x_M$$
+  Allora:
+  $$M=\lim_{n}y_n=\lim_{k}y_{n_k}=\lim_{k}f\(x_{n_k}\)=f\(\lim_{k}x_{n_k}\)=f\(x_M\)\in\reals$$
+  Per cui $f$ è superiormente limitata e inoltre $M\in\im\(f\)$, da cui $M=\max\im\(f\)$.
+\end{proof}
+% TODO
+
+
+\begin{theorem}[Teorema degli zeri]
+  Sia $f\in C\(\intv{a}{b}\)$. 
+  $$f\(a\)f\(b\)<0\impl\exists\ x_0\in\ointv{a}{b}:f\(x_0\)=0$$
+\end{theorem}
+\begin{proof}
+  $$a_0=a\quad b_0=b\quad c=\frac{a_0+b_0}{2}$$
+  Se $f\(c\)=0$ la tesi è dimostrata. Sia quindi $\intv{a_1}{b_1}$ uno tra gli intervalli $\intv{a_0}{c}$ e $\intv{c}{b_0}$ tale che $f\(a_1\)f\(b_1\)<0$.
+  Iterando per dicotomia, se $f\(\frac{a_n+b_n}{2^n}\)=0$ la tesi è dimostrata. Altrimenti, si ha una successione decrescente di intervalli:
+  $$\intv{a_{n+1}}{b_{n+1}}\subset\intv{a_n}{b_n}\subset\cdots\subset\intv{a_0}{b_0}$$
+  $$f\(a_n\)f\(b_0\)<0\ \forall n$$
+  Per la convergenza delle successioni monotone limitate, $\exists\ x_0\walrus\lim_n a_n=\lim_n b_n$.
+  Passando al limite, per la continuità di $f$ e per la permanenza del segno, si ha:
+  $$\lim_n f\(a_n\)f\(b_n\)\le\lim_n 0\iff f\(x_0\)f\(x_0\)\le0\iff f\(x_0\)^2\le0\iff f\(x_0\)=0$$
+\end{proof}
+% TODO
+
+\begin{corollary}[Teorema dei valori intermedi]
+  Sia $f\in C\(\intv{a}{b}\)$ e $x_m,x_M$ rispettivamente, i suoi punti di minimo e massimo. Allora:
+  $$\forall\lambda\in\ointv{m}{M}\ \exists\ x_\lambda\in\intv{a}{b}:f\(x_\lambda\)=\lambda$$
+  In altre parole, $\im\(f\)=\intv{m}{M}$, ovvero $\mathcal{G}\(f\)\subseteq\intv{a}{b}\times\intv{m}{M}$.
+\end{corollary}
+\begin{proof}
+  Senza ledere la generalità della tesi, si suppone che $x_m<x_M$. Per il teorema degli zeri, la funzione $g\(x\)\walrus f\(x\)-\lambda$, si ha:
+  $$g\(x_m\)=f\(x_m\)-\lambda<0$$
+  $$g\(x_M\)=f\(x_M\)-\lambda>0$$
+  $$g\(x_m\)g\(x_M\)<0\impl \exists\ x_\lambda\in\ointv{x_m}{x_M}:\(f\(x_\lambda\)-\lambda=0\iff f\(x_\lambda\)=\lambda\)$$
+\end{proof}
+% TODO
