@@ -18,7 +18,6 @@ int dominant(int[R][C]);
 
 int main(int argc, char** argv) {
   int m[R][C], i, j;
-  freopen("input.txt", "r", stdin);
   for (i = 0; i < R; i++)
     for (j = 0; j < C; j++) scanf("%d", &m[i][j]);
   i = dominant(m);

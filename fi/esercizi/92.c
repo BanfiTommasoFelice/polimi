@@ -19,7 +19,6 @@ void color(int, int, int[], int, int);
 
 int main(int argc, char** argv) {
   int n, m, *g, x, y;
-  freopen("input.txt", "r", stdin);
   scanf("%d%d", &n, &m);
   g = malloc(n * m * sizeof(int));
   for (x = 0; x < n; x++)
