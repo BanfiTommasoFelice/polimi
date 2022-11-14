@@ -797,3 +797,33 @@ Da un punto di vista macroscopico, ogni volta che si chiama una funzione, lo sta
 
 % TODO: fare due blocchi, equivalenti a due funzioni
 
+\subsection{Ricorsione}
+
+La ricorsione è una metodologia risolutiva che consiste nello scrivere un sottoprogramma che chiama se stesso.
+Per ovvi motivi, è necessaria una condizione che consente alla funzione di chiudere il ciclo della ricorsione.
+
+\begin{example}
+  \begin{verbatim}
+    int factorial(int n) {
+      int f;
+      if (n < 2) f = 1;
+      else f = n * factorial(n - 1);
+      return f;
+    }
+  \end{verbatim}
+\end{example}
+
+\subsection{Argomenti da riga di comando}
+
+Il valore numerico \verb|argc| contiene il numero di elementi dell'array \verb|argv|. L'array \verb|argv| contiene le stringhe degli argomenti passati al programma da riga di comando:
+\begin{verbatim}
+  gcc test.c -o test -ansi
+\end{verbatim}
+Al programma \verb|gcc| vengono passati come argomenti \verb|argc| pari a 5 e \verb|argv| che contiene le stringhe \verb|{ "gcc", "test.c", "-o", "test", "-ansi" }|.
+
+Risultano utili, al fine di utilizzare gli argomenti da riga di comando, le funzioni della libreria standard:
+\begin{itemize}
+  \item \verb|int atoi(const char*)|
+  \item \verb|long atol(const char*)|
+  \item \verb|double atof(const char*)|
+\end{itemize}
