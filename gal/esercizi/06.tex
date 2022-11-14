@@ -1,0 +1,1453 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[italian]{babel}
+\usepackage[a4paper, left=18mm, right=18mm, top=20mm, bottom=20mm]{geometry}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{interval}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{cancel}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{nicefrac}
+\usepackage{enumitem}
+\usepackage{verbatim}
+\usepackage{tabularray}
+\usepackage{bold-extra}
+\usepackage{tabularray}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Esercizi geometria e algebra lineare},
+    % bookmarks=true,
+    bookmarksopen=true,
+    pdfpagemode=UseOutlines,
+    pdfauthor={Amato Michele Pasquale},
+}
+
+\title{\huge Geometria e algebra lineare\\\Large Esercitazione}
+\author{Amato Michele Pasquale}
+\date{\today}
+
+\pgfplotsset{compat = newest}
+\makeatletter
+\renewcommand\l@subsection{\@dottedtocline{2}{1.5em}{3em}}
+\makeatother
+\setitemize{noitemsep,topsep=3pt,parsep=0pt,partopsep=0pt}
+\setenumerate{noitemsep,topsep=3pt,parsep=0pt,partopsep=0pt}
+
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+\newtheorem{theorem}{Teorema}
+\newtheorem{definition}{Definizione}
+\newtheorem{lemma}{Lemma}
+\newtheorem{axiom}{Assioma}
+\newtheorem{corollary}{Corollario}
+\renewcommand\qedsymbol{$\blacksquare$}
+\newcommand{\asin}{\arcsin}
+\newcommand{\acos}{\arccos}
+\newcommand{\atan}{\arctan}
+\newcommand{\impl}{\Rightarrow}
+\setitemize{noitemsep,topsep=3pt,parsep=0pt,partopsep=0pt}
+\setenumerate{noitemsep,topsep=3pt,parsep=0pt,partopsep=0pt}
+\newcommand{\triang}[1]{\overset{\triangle}{#1}}
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+\renewcommand{\c}{\gamma}
+\renewcommand{\(}{\left(}
+\renewcommand{\)}{\right)}
+\renewcommand{\mod}[1]{\ \( \mathrm{mod}\ #1 \)}
+\DeclareMathOperator{\agg}{agg}
+\DeclareMathOperator{\sol}{Sol}
+\renewcommand{\emptyset}{\varnothing}
+\newcommand{\walrus}{\coloneqq}
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\dabs}[1]{\left\lvert\left\lvert #1 \right\rvert\right\rvert}
+\renewcommand{\sp}[1]{\left< #1 \right>}
+\DeclareMathOperator{\nul}{null}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\diag}{diag}
+\renewcommand{\l}{\lambda}
+
+\newcounter{nexercise}
+\newcommand{\exercisecnt}{\stepcounter{nexercise}\thenexercise}
+
+\newenvironment{exercise}
+{\newpage\par\noindent{\bf\Large Esercizio \exercisecnt}\vspace{1em}\hfill\break}
+{\hfill\vspace{1cm}}
+\newenvironment{solution}
+{\par\noindent{\bf\large Soluzione}\vspace{1em}\hfill\break}
+{\hfill}
+
+
+\begin{document}
+\pagenumbering{gobble}
+\maketitle
+\newpage
+\pagenumbering{arabic}
+
+\begin{exercise}
+  Data la matrice:
+  $$
+    A=
+    \begin{pmatrix}
+      1 & 3 & 4 \\
+      1 & 2 & 1 \\
+      1 & 1 & 2 \\
+    \end{pmatrix}
+  $$
+  Verificare che $\bar{\l}=1$ è un suo autovalore e trovare un autovettore relativo a $\bar{\l}$.
+\end{exercise}
+\begin{solution}
+  \begin{align*}
+    p_A\left( t \right) & = 
+    \begin{vmatrix}
+      1-t & 3   & 4   \\
+      1   & 2-t & 1   \\
+      1   & 1   & 2-t \\
+    \end{vmatrix}
+    \\
+                        & = 
+    \left( 1-t \right)
+    \begin{vmatrix}
+      2-t & 1   \\
+      1   & 2-t \\
+    \end{vmatrix}
+    -3
+    \begin{vmatrix}
+      1 & 1   \\
+      1 & 2-t \\
+    \end{vmatrix}
+    +4
+    \begin{vmatrix}
+      1 & 2-t \\
+      1 & 1   \\
+    \end{vmatrix}
+    \\
+                        & = 
+    \left( 1-t \right)\left( 4+t^2-4t-1 \right)-3\left( 2-t-1 \right)+4\left( 1-2+t \right)
+    \\
+                        & = 
+    \left( 1-t \right)\left( t^2-4t+3 \right)-3\left( 1-t \right)+4\left( t-1 \right)
+    \\
+                        & = 
+    \left( 1-t \right)\left( t^2-4t+3-3-4 \right)
+    \\
+                        & = 
+    \left( 1-t \right)\left( t^2-4t-4 \right)
+  \end{align*}
+  $$p_A\left( t \right)=0\iff t\in\left\{ 1,2\pm\sqrt{2} \right\}$$
+  $\bar{\l}=1$ è un autovalore di $A$.
+  $$
+    A-\bar{\l}I=
+    \begin{pmatrix}
+      0 & 3 & 4 \\
+      1 & 1 & 1 \\
+      1 & 1 & 1 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 1 & 1 \\
+      0 & 3 & 4 \\
+      0 & 0 & 0 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 1 & 1               \\
+      0 & 1 & \nicefrac{4}{3} \\
+      0 & 0 & 0               \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0 & -\nicefrac{1}{3} \\
+      0 & 1 & \nicefrac{4}{3}  \\
+      0 & 0 & 0                \\
+    \end{pmatrix}
+  $$
+  $$
+    N\left( A-\bar{\l}I \right)=\sp{
+      \begin{pmatrix}
+        \nicefrac{1}{3}  \\
+        -\nicefrac{4}{3} \\
+        1                \\
+      \end{pmatrix}
+    }=\sp{
+      \begin{pmatrix}
+        1  \\
+        -4 \\
+        3  \\
+      \end{pmatrix}
+    }
+  $$
+  $\left( -1,4,3 \right)$ è un autovettore di $A$ relativo all'autovalore $\bar{\l}$.
+\end{solution}
+
+\begin{exercise}
+  Data la matrice:
+  $$
+    A=
+    \begin{pmatrix}
+      1 & 3 & 1  \\
+      3 & 1 & -1 \\
+      0 & 0 & k  \\
+    \end{pmatrix}
+  $$
+  Stabilire per quali valori $k$ la matrice $A$ è diagonalizzabile.
+\end{exercise}
+\begin{solution}
+  $$
+    p_A\left( t \right)=
+    \begin{vmatrix}
+      1-t & 3   & 1   \\
+      3   & 1-t & -1  \\
+      0   & 0   & k-t \\
+    \end{vmatrix}
+    =
+    \left( k-t \right)
+    \begin{vmatrix}
+      1-t & 3   \\
+      3   & 1-t \\
+    \end{vmatrix}
+    =
+    \left( k-t \right)\left( t^2-2t-8 \right)
+  $$
+  $$p_A\left( t \right)=0\iff t\in \left\{ k,-2,4 \right\}$$
+  Per il primo criterio di diagonalizzabilità, $A$ è diagonalizzabile se $k\notin\left\{ -2,4 \right\}$.
+\end{solution}
+
+\begin{exercise}
+  Data la matrice:
+  $$
+    A=
+    \begin{pmatrix}
+      1 & k^2 \\
+      3 & h   
+    \end{pmatrix}
+  $$
+  Stabilire per quali valori $k$ e $h$ la matrice $A$ è diagonalizzabile.
+\end{exercise}
+\begin{solution}
+  $$
+    p_A\left( t \right)=
+    \begin{vmatrix}
+      1-t & k^2 \\
+      3   & h-t \\
+    \end{vmatrix}
+    =
+    \left( 1-t \right)\left( h-t \right)-3k^2
+    =
+    t^2+\left( -1-h \right)t+\left( h-3k^2 \right)
+  $$
+  $$\Delta=\left( -1-h \right)^2-4\left( h-3k^2 \right)=h^2-2h+12k^2+1=\left( h-1 \right)^2+12k^2$$
+  $$\Delta\ge0\ \forall\left( h,k \right)\in\reals^2$$
+  $$\Delta=0\iff h-1=0\wedge k=0\iff h=1\wedge k=0$$
+  $A$ è diagonalizzabile per $h\neq 1\vee k\neq0$ per il primo criterio di diagonalizzabilità, poiché si hanno due radici del polinomio caratteristico.
+  $$h=1\wedge k=0\iff p_A\left( t \right)=t^2-2t+1=\left( t-1 \right)^2$$
+  $$p_A\left( t \right)=0\iff t=1$$
+  $$
+    A-I=
+    \begin{pmatrix}
+      0 & 0 \\
+      3 & 0 \\  
+    \end{pmatrix}
+  $$ 
+  $$m_g\left( 1 \right)=\nul\left( A-I \right)=1$$
+  $$m_a\left( 1 \right)=2$$
+  Pertanto, se $h=1\wedge k=0$, la matrice non è diagonalizzabile.
+\end{solution}
+
+\begin{exercise}
+  Data la matrice:
+  $$
+    A=
+    \begin{pmatrix}
+      1 & 2 & 0 \\
+      6 & 0 & 0 \\
+      3 & 2 & 1 \\
+    \end{pmatrix}
+  $$
+  Stabilire se è diagonalizzabile e, in caso affermativo, trovare la relativa matrice diagonale e modale.
+\end{exercise}
+\begin{solution}
+  $$
+    p_A\left( t \right)=
+    \begin{vmatrix}
+      1-t & 2  & 0   \\
+      6   & -t & 0   \\
+      3   & 2  & 1-t \\
+    \end{vmatrix}
+    =
+    \left( 1-t \right)
+    \begin{vmatrix}
+      1-t & 2  \\
+      6   & -t \\
+    \end{vmatrix}
+    =
+    \left( 1-t \right)\left( t^2-t-12 \right)
+  $$
+  $$p_A\left( t \right)=0\iff t\in\left\{ 1,-3,4 \right\}$$
+  $A$ è diagonalizzabile per il primo criterio di diagonalizzabilità.
+  $$
+    A-1\cdot I=
+    \begin{pmatrix}
+      0 & 2  & 0 \\
+      6 & -1 & 0 \\
+      3 & 2  & 0 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      0 & 1 & 0 \\
+      6 & 0 & 0 \\
+      3 & 0 & 0 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0 & 0 \\
+      0 & 1 & 0 \\
+      0 & 0 & 0 \\
+    \end{pmatrix}
+  $$
+  $$
+    N\left( A-1\cdot I \right)=\sp{
+      \begin{pmatrix}
+        0 \\
+        0 \\
+        1 \\
+      \end{pmatrix}
+    }
+  $$
+  $$
+    A+3 I=
+    \begin{pmatrix}
+      4 & 2 & 0 \\
+      6 & 3 & 0 \\
+      3 & 2 & 4 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      2 & 1 & 0 \\
+      3 & 2 & 4 \\
+      0 & 0 & 0 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      2 & 1 & 0 \\
+      1 & 1 & 4 \\
+      0 & 0 & 0 \\
+    \end{pmatrix}
+    \sim
+  $$
+  $$
+    \sim
+    \begin{pmatrix}
+      1 & 1 & 4 \\
+      2 & 1 & 0 \\
+      0 & 0 & 0 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 1  & 4  \\
+      0 & -1 & -8 \\
+      0 & 0  & 0  \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0 & -4 \\
+      0 & 1 & 8  \\
+      0 & 0 & 0  \\
+    \end{pmatrix}
+  $$
+  $$
+    N\left( A+3I \right)=\sp{
+      \begin{pmatrix}
+        4  \\
+        -8 \\
+        1  \\
+      \end{pmatrix}
+    }
+  $$
+  $$
+    A-4I=
+    \begin{pmatrix}
+      -3 & 2  & 0  \\
+      6  & -4 & 0  \\
+      3  & 2  & -3 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      3 & -2 & 0  \\
+      3 & 2  & -3 \\
+      0 & 0  & 0  \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      3 & -2 & 0  \\
+      0 & 4  & -3 \\
+      0 & 0  & 0  \\
+    \end{pmatrix}
+    \sim
+  $$
+  $$
+    \sim
+    \begin{pmatrix}
+      3 & -2 & 0                \\
+      0 & 1  & -\nicefrac{3}{4} \\
+      0 & 0  & 0                \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      3 & 0 & -\nicefrac{6}{4} \\
+      0 & 1 & -\nicefrac{3}{4} \\
+      0 & 0 & 0                \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0 & -\nicefrac{1}{2} \\
+      0 & 1 & -\nicefrac{3}{4} \\
+      0 & 0 & 0                \\
+    \end{pmatrix}
+  $$
+  $$
+    N\left( A-4I \right)=\sp{
+      \begin{pmatrix}
+        2 \\
+        3 \\
+        4 \\
+      \end{pmatrix}
+    }
+  $$
+  La matrice modale è:
+  $$
+    \begin{pmatrix}
+      0 & 4  & 2 \\
+      0 & -8 & 3 \\
+      1 & 1  & 4 \\
+    \end{pmatrix}
+  $$
+  La matrice diagonale è:
+  $$
+    \begin{pmatrix}
+      1 & 0  & 0 \\
+      0 & -3 & 0 \\
+      0 & 0  & 4 \\
+    \end{pmatrix} 
+  $$
+\end{solution}
+
+\begin{exercise}
+  Data la matrice:
+  $$
+    A=
+    \begin{pmatrix}
+      0  & 1 & 0 \\
+      1  & 3 & 3 \\
+      -1 & 4 & 4 \\
+    \end{pmatrix}
+  $$
+  Stabilire se è diagonalizzabile e, in caso affermativo, trovare la relativa matrice diagonale e modale.
+\end{exercise}
+\begin{solution}
+  \begin{align*}
+    p_A\left( t \right) & = 
+    \begin{vmatrix}
+      -t & 1   & 0   \\
+      1  & 3-t & 3   \\
+      -1 & 4   & 4-t \\
+    \end{vmatrix}
+    \\
+                        & = 
+    -t
+    \begin{vmatrix}
+      3-t & 3   \\
+      4   & 4-t \\
+    \end{vmatrix}
+    -
+    \begin{vmatrix}
+      1  & 3   \\
+      -1 & 4-t \\
+    \end{vmatrix}
+    \\
+                        & = 
+    -t\left( t^2-7t \right)-\left( 7-t \right) 
+    \\
+                        & = 
+    -t^2\left( t-7 \right)+\left( t-7 \right)
+    \\
+                        & = 
+    \left( t-7 \right)\left( -t^2+1 \right)
+  \end{align*}
+  $$p_A\left( t \right)=0\iff t\in \left\{ 7,\pm1 \right\}$$
+  $A$ è diagonalizzabile per il primo criterio di diagonalizzabilità.
+  $$
+    A-7I=
+    \begin{pmatrix}
+      -7 & 1  & 0  \\
+      1  & -4 & 3  \\
+      -1 & 4  & -3 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1  & -4 & 3 \\
+      -7 & 1  & 0 \\
+      0  & 0  & 0 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & -4  & 3  \\
+      0 & -27 & 21 \\
+      0 & 0   & 0  \\
+    \end{pmatrix}
+    \sim
+  $$
+  $$
+    \sim
+    \begin{pmatrix}
+      1 & -4 & 3  \\
+      0 & 9  & -7 \\
+      0 & 0  & 0  \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & -4 & 3                \\
+      0 & 1  & -\nicefrac{7}{9} \\
+      0 & 0  & 0                \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0 & -\nicefrac{1}{9} \\
+      0 & 1 & -\nicefrac{7}{9} \\
+      0 & 0 & 0                \\
+    \end{pmatrix}
+  $$
+  $$
+    N\left( A-7I \right)=\sp{
+      \begin{pmatrix}
+        1 \\
+        7 \\
+        9 \\
+      \end{pmatrix}
+    }
+  $$
+  $$
+    A+1\cdot I=
+    \begin{pmatrix}
+      1  & 1 & 0 \\
+      1  & 4 & 3 \\
+      -1 & 4 & 5 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 1 & 0 \\
+      1 & 4 & 3 \\
+      0 & 8 & 8 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 1 & 0 \\
+      0 & 3 & 3 \\
+      0 & 1 & 1 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 1 & 0 \\
+      0 & 1 & 1 \\
+      0 & 0 & 0 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0 & -1 \\
+      0 & 1 & 1  \\
+      0 & 0 & 0  \\
+    \end{pmatrix}
+  $$
+  $$
+    N\left( A+1\cdot I \right)=\sp{
+      \begin{pmatrix}
+        1  \\
+        -1 \\
+        1  \\
+      \end{pmatrix}
+    }
+  $$
+  $$
+    A-1\cdot I=
+    \begin{pmatrix}
+      -1 & 1 & 0 \\
+      1  & 2 & 3 \\
+      -1 & 4 & 3 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & -1 & 0 \\
+      0 & 3  & 3 \\
+      0 & 6  & 6 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & -1 & 0 \\
+      0 & 1  & 1 \\
+      0 & 0  & 0 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0 & 1 \\
+      0 & 1 & 1 \\
+      0 & 0 & 0 \\
+    \end{pmatrix}
+  $$
+  $$
+    N\left( A-1\cdot I \right)=\sp{
+      \begin{pmatrix}
+        -1 \\
+        -1 \\
+        1  \\
+      \end{pmatrix}
+    }
+  $$
+  La matrice modale è:
+  $$
+    \begin{pmatrix}
+      1 & 1  & -1 \\
+      7 & -1 & -1 \\
+      9 & 1  & 1  \\
+    \end{pmatrix}
+  $$
+  La matrice diagonale è:
+  $$
+    \begin{pmatrix}
+      7 & 0  & 0 \\
+      0 & -1 & 0 \\
+      0 & 0  & 1 \\
+    \end{pmatrix} 
+  $$
+\end{solution}
+
+\begin{exercise}
+  Data la matrice:
+  $$
+    A=
+    \begin{pmatrix}
+      3  & 0 & 0  \\
+      3  & 3 & 6  \\
+      -4 & 0 & -5 \\
+    \end{pmatrix}
+  $$
+  Verificare che $A$ sia diagonalizzabile. Calcolare una base $B$ formata da autovettori di $A$. Calcolare la matrice rappresentativa di $T_A$ nella base $B$.
+\end{exercise}
+\begin{solution}
+  $$
+    p_A\left( t \right)=
+    \begin{vmatrix}
+      3-t & 0   & 0    \\
+      3   & 3-t & 6    \\
+      -4  & 0   & -5-t \\
+    \end{vmatrix}
+    =
+    \left( 3-t \right)
+    \begin{vmatrix}
+      3-t & 6    \\
+      0   & -5-t \\
+    \end{vmatrix}
+    =
+    \left( 3-t \right)\left( 3-t \right)\left( -5-t \right)
+  $$
+  $$p_A\left( t \right)=0\iff t\in\left\{ 3,-5 \right\}$$
+  $$m_a\left( 3 \right)=2$$
+  $$m_a\left( -5 \right)=1$$
+  $$
+    m_g\left( 3 \right)=3-\rk
+    \begin{pmatrix}
+      0  & 0 & 0  \\
+      3  & 0 & 6  \\
+      -4 & 0 & -8 \\
+    \end{pmatrix}
+    =3-1=2
+  $$
+  $$
+    m_g\left( -5 \right)=3-\rk
+    \begin{pmatrix}
+      8  & 0 & 0 \\
+      3  & 8 & 6 \\
+      -4 & 0 & 0 \\
+    \end{pmatrix}
+    =3-2=1
+  $$
+  $A$ è diagonalizzabile per il secondo criterio di diagonalizzabilità.
+  $$
+    A-3I=
+    \begin{pmatrix}
+      0  & 0 & 0  \\
+      3  & 0 & 6  \\
+      -4 & 0 & -8 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0 & 2 \\
+      0 & 0 & 0 \\
+      0 & 0 & 0 \\
+    \end{pmatrix}
+  $$
+  $$
+    N\left( A-3I \right)=\sp{
+      \begin{pmatrix}
+        0 \\
+        1 \\
+        0 \\
+      \end{pmatrix}
+      ,
+      \begin{pmatrix}
+        -2 \\
+        0  \\
+        1  \\
+      \end{pmatrix}
+    }
+  $$
+  $$
+    A+5I=
+    \begin{pmatrix}
+      8  & 0 & 0 \\
+      3  & 8 & 6 \\
+      -4 & 0 & 0 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0 & 0 \\
+      3 & 8 & 6 \\
+      0 & 0 & 0 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0 & 0 \\
+      0 & 8 & 6 \\
+      0 & 0 & 0 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0 & 0               \\
+      0 & 1 & \nicefrac{3}{4} \\
+      0 & 0 & 0               \\
+    \end{pmatrix}
+  $$
+  $$
+    N\left( A+5I \right)=\sp{
+      \begin{pmatrix}
+        0  \\
+        -3 \\
+        4  \\  
+      \end{pmatrix}
+    }
+  $$
+  $$
+    B=\left\{ 
+    \begin{pmatrix}
+      0 \\
+      1 \\
+      0 \\
+    \end{pmatrix}
+    ,
+    \begin{pmatrix}
+      -2 \\
+      0  \\
+      1  \\
+    \end{pmatrix}
+    ,
+    \begin{pmatrix}
+      0  \\
+      -3 \\
+      4  \\  
+    \end{pmatrix}
+    \right\}
+  $$
+  La matrice rappresentativa di $T_A$ nella base $B$ non è altro che la matrice diagonale:
+  $$
+    \begin{pmatrix}
+      3 & 0 & 0  \\
+      0 & 3 & 0  \\
+      0 & 0 & -5 \\
+    \end{pmatrix}
+  $$
+\end{solution}
+
+\begin{exercise}
+  Dato $k\in\reals$, sia:
+  $$
+    A_k=
+    \begin{pmatrix}
+      1 & k & 0 \\
+      k & 1 & k \\
+      0 & 1 & 1 \\
+    \end{pmatrix}
+  $$
+  \begin{enumerate}
+    \item verificare che $\left( 1,0,-1 \right)$ è una autovettore di $A_k\ \forall k$ e calcolarne il relativo autovalore;
+    \item determinare se esiste una base $B$ di $\reals^3$ formata da autovettori di $A_1$ e in tal caso calcolarla;
+    \item determinare per quali valori di $k$ la matrice $A_k$ non è diagonalizzabile.
+  \end{enumerate}
+\end{exercise}
+\begin{solution}
+  $$
+    \begin{pmatrix}
+      1 & k & 0 \\
+      k & 1 & k \\
+      0 & 1 & 1 \\
+    \end{pmatrix}
+    \begin{pmatrix}
+      1  \\
+      0  \\
+      -1 \\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      1  \\
+      0  \\
+      -1 \\
+    \end{pmatrix}
+    =
+    \l
+    \begin{pmatrix}
+      1  \\
+      0  \\
+      -1 \\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      \l  \\
+      0   \\
+      -\l \\
+    \end{pmatrix}
+  $$
+  $$
+    \begin{pmatrix}
+      1  \\
+      0  \\
+      -1 \\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      \l  \\
+      0   \\
+      -\l \\
+    \end{pmatrix}
+    \iff \l=1
+  $$
+  $\left( 1,0,-1 \right)$ è un autovettore di $A_k\ \forall k$, con relativo autovalore $1$.
+  $$
+    A_1=
+    \begin{pmatrix}
+      1 & 1 & 0 \\
+      1 & 1 & 1 \\
+      0 & 1 & 1 \\
+    \end{pmatrix}
+  $$
+  \begin{align*}
+    p_{A_1}\left( t \right)
+     & = 
+    \begin{vmatrix}
+      1-t & 1   & 0   \\
+      1   & 1-t & 1   \\
+      0   & 1   & 1-t \\
+    \end{vmatrix}
+    \\
+     & = 
+    \left( 1-t \right)
+    \begin{vmatrix}
+      1-t & 1   \\
+      1   & 1-t \\
+    \end{vmatrix}
+    -
+    \begin{vmatrix}
+      1 & 1   \\
+      0 & 1-t \\
+    \end{vmatrix}
+    \\
+     & = 
+    \left( 1-t \right)\left( t^2+2t \right)-\left( 1-t \right)
+    \\
+     & = 
+    \left( 1-t \right)\left( t^2+2t-1 \right)
+  \end{align*}
+  $$p_{A_1}\left( t \right)=0\iff t\in\left\{ 1,1\pm\sqrt{2} \right\}$$
+  $$
+    A_1-I=
+    \begin{pmatrix}
+      0 & 1 & 0 \\
+      1 & 0 & 1 \\
+      0 & 1 & 0 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0 & 1 \\
+      0 & 1 & 0 \\
+      0 & 0 & 0 \\
+    \end{pmatrix}
+  $$
+  $$
+    N\left( A_1-I \right)=\sp{
+      \begin{pmatrix}
+        -1 \\
+        0  \\
+        1  \\
+      \end{pmatrix}
+    }
+  $$
+  $$
+    A_1-\left( 1-\sqrt{2} \right)I=
+    \begin{pmatrix}
+      \sqrt{2} & 1        & 0        \\
+      1        & \sqrt{2} & 1        \\
+      0        & 1        & \sqrt{2} \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      2 & \sqrt{2} & 0        \\
+      1 & \sqrt{2} & 1        \\
+      0 & 1        & \sqrt{2} \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0        & -1       \\
+      1 & \sqrt{2} & 1        \\
+      0 & 1        & \sqrt{2} \\
+    \end{pmatrix}
+    \sim
+  $$
+  $$
+    \sim
+    \begin{pmatrix}
+      1 & 0        & -1       \\
+      0 & \sqrt{2} & 2        \\
+      0 & 1        & \sqrt{2} \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0 & -1        \\
+      0 & 2 & 2\sqrt{2} \\
+      0 & 1 & \sqrt{2}  \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0 & -1       \\
+      0 & 1 & \sqrt{2} \\
+      0 & 0 & 0        \\
+    \end{pmatrix}
+  $$
+  $$
+    N\left( A_1-\left( 1-\sqrt{2} \right)I \right)=\sp{
+      \begin{pmatrix}
+        1         \\
+        -\sqrt{2} \\
+        1         \\
+      \end{pmatrix}
+    }
+  $$
+  $$
+    A-\left( 1+\sqrt{2} \right)I=
+    \begin{pmatrix}
+      -\sqrt{2} & 1         & 0         \\
+      1         & -\sqrt{2} & 1         \\
+      0         & 1         & -\sqrt{2} \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1  & -\sqrt{2} & 1         \\
+      -2 & \sqrt{2}  & 0         \\
+      0  & 1         & -\sqrt{2} \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & -\sqrt{2} & 1         \\
+      0 & -\sqrt{2} & 2         \\
+      0 & 1         & -\sqrt{2} \\
+    \end{pmatrix}
+    \sim
+  $$
+  $$
+    \sim
+    \begin{pmatrix}
+      1 & -\sqrt{2} & 1         \\
+      0 & -2        & 2\sqrt{2} \\
+      0 & 1         & -\sqrt{2} \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & -\sqrt{2} & 1         \\
+      0 & 1         & -\sqrt{2} \\
+      0 & 0         & 0         \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & -\sqrt{2} & 1  \\
+      0 & \sqrt{2}  & -2 \\
+      0 & 0         & 0  \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0 & -1        \\
+      0 & 1 & -\sqrt{2} \\
+      0 & 0 & 0         \\
+    \end{pmatrix}
+  $$
+  $$
+    N\left( A-\left( 1+\sqrt{2} \right)I \right)=\sp{
+      \begin{pmatrix}
+        1        \\
+        \sqrt{2} \\
+        1        \\
+      \end{pmatrix}
+    }
+  $$
+  $$
+    B=\left\{ 
+    \begin{pmatrix}
+      -1 \\
+      0  \\
+      1  \\
+    \end{pmatrix}
+    ,
+    \begin{pmatrix}
+      1         \\
+      -\sqrt{2} \\
+      1         \\
+    \end{pmatrix}
+    ,
+    \begin{pmatrix}
+      1        \\
+      \sqrt{2} \\
+      1        \\
+    \end{pmatrix}
+    \right\}
+  $$
+  $$
+    \reals^3=\sp{
+      \begin{pmatrix}
+        -1 \\
+        0  \\
+        1  \\
+      \end{pmatrix}
+      ,
+      \begin{pmatrix}
+        1         \\
+        -\sqrt{2} \\
+        1         \\
+      \end{pmatrix}
+      ,
+      \begin{pmatrix}
+        1        \\
+        \sqrt{2} \\
+        1        \\
+      \end{pmatrix}
+    }
+  $$
+  \begin{align*}
+    p_{A_k}\left( t \right)
+     & = 
+    \begin{vmatrix}
+      1-t & k   & 0   \\
+      k   & 1-t & k   \\
+      0   & 1   & 1-t \\
+    \end{vmatrix}
+    \\
+     & = 
+    \left( 1-t \right)
+    \begin{vmatrix}
+      1-t & k   \\
+      1   & 1-t \\
+    \end{vmatrix}
+    -k
+    \begin{vmatrix}
+      k & k   \\
+      0 & 1-t \\
+    \end{vmatrix}
+    \\
+     & = 
+    \left( 1-t \right)\left( 1+t^2-2t-k \right)-k\left( k-kt \right)
+    \\
+     & = 
+    \left( 1-t \right)\left( t^2-2t+1-k \right)-k^2\left( 1-t \right)
+    \\
+     & = 
+    \left( 1-t \right)\left( t^2-2t+1-k -k^2\right)
+  \end{align*}
+  $t^2-2t+1-k-k^2=0\iff \left( t-1 \right)^2-k\left( 1+k \right)=0\iff \left( t-1 \right)^2=k\left( 1+k \right)\iff \left( t-1 \right)^2= k+k^2 \iff t-1=\pm\sqrt{k+k^2}\iff t=1\pm\sqrt{k+k^2}$
+  $$p_{A_k}\left( t \right)=0\iff t\in\left\{ 1,1\pm\sqrt{k+k^2} \right\}$$
+  $$k+k^2=k(1+k)=0\iff k\in\left\{ -1,0 \right\}$$
+  $$k+k^2<0\iff -1<k<0$$
+  La matrice $A_k$ non è diagonalizzabile per $-1<k<0$.
+  $$k=0\impl m_a\left( 1 \right)=3 \wedge m_g\left( 1 \right)=2$$
+  $$k=-1\impl m_a\left( 1 \right)=3 \wedge m_g\left( 1 \right)=1$$
+  La matrice $A_k$ non è diagonalizzabile per $k=-1\vee k=0$.
+\end{solution}
+
+\begin{exercise}
+  Dato $h\in\reals$, sia:
+  $$
+    A_h=
+    \begin{pmatrix}
+      1 & 1 & h \\
+      1 & 1 & 1 \\
+      h & 1 & 1 \\
+    \end{pmatrix}
+  $$
+  \begin{enumerate}
+    \item verificare che $\left( -1,0,1 \right)$ è un autovettore di $A_h$, e in tal caso calcolarne il relativo autovalore;
+    \item calcolare una matrice $M$ tale che $M^{-1}A_1M$ è diagonale;
+    \item verificare che l'insieme $B$ formato dalle colonne di $M$ è una base di $\reals^3$ e calcolare la matrice $T_{A_1}$ in $B$.
+  \end{enumerate}
+\end{exercise}
+\begin{solution}
+  $$
+    \begin{pmatrix}
+      1 & 1 & h \\
+      1 & 1 & 1 \\
+      h & 1 & 1 \\
+    \end{pmatrix}
+    \begin{pmatrix}
+      -1 \\
+      0  \\
+      1  \\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      h-1 \\
+      0   \\
+      1-h \\
+    \end{pmatrix}
+    =
+    \l
+    \begin{pmatrix}
+      -1 \\
+      0  \\
+      1  \\
+    \end{pmatrix}
+    \iff
+    \l=1-h
+  $$
+  $\l=1-h$ è l'autovalore di $A_h$ relativo all'autovettore $\left( -1,0,1 \right)$.
+  $$
+    A_1=
+    \begin{pmatrix}
+      1 & 1 & 1 \\
+      1 & 1 & 1 \\
+      1 & 1 & 1 \\
+    \end{pmatrix}
+  $$
+  \begin{align*}
+    p_{A_1}\left( t \right)
+     & = 
+    \begin{vmatrix}
+      1-t & 1   & 1   \\
+      1   & 1-t & 1   \\
+      1   & 1   & 1-t \\
+    \end{vmatrix}
+    \\
+     & = 
+    \left( 1-t \right)
+    \begin{vmatrix}
+      1-t & 1   \\
+      1   & 1-t \\
+    \end{vmatrix}
+    -
+    \begin{vmatrix}
+      1 & 1   \\
+      1 & 1-t \\
+    \end{vmatrix}
+    +
+    \begin{vmatrix}
+      1 & 1-t \\
+      1 & 1   \\
+    \end{vmatrix}
+    \\
+     & = 
+    \left( 1-t \right)\left( t^2-2t \right)-\left( -t \right)+ t 
+    \\
+     & = 
+    t\left( 1-t \right)\left( t-2 \right)+2t
+    \\
+     & = 
+    t\left( \left( 1-t \right)\left( t-2 \right)+2 \right)
+    \\
+     & = 
+    t\left( 3t-t^2 \right)
+    \\
+     & = 
+    t^2\left( 3-t \right)
+  \end{align*}
+  $$p_{A_1}\left( t \right)=0\iff t\in\left\{ 0,3 \right\}$$
+  $$
+    A_1-0\cdot I=
+    \begin{pmatrix}
+      1 & 1 & 1 \\
+      1 & 1 & 1 \\
+      1 & 1 & 1 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 1 & 1 \\
+      0 & 0 & 0 \\
+      0 & 0 & 0 \\
+    \end{pmatrix}
+  $$
+  $$
+    N\left( A_1-0\cdot I \right)=\sp{
+      \begin{pmatrix}
+        -1 \\
+        1  \\
+        0  \\
+      \end{pmatrix}
+      ,
+      \begin{pmatrix}
+        -1 \\
+        0  \\
+        1  \\
+      \end{pmatrix}
+    }
+  $$
+  $$
+    A_1-3I=
+    \begin{pmatrix}
+      -2 & 1  & 1  \\
+      1  & -2 & 1  \\
+      1  & 1  & -2 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 1  & -2 \\
+      0 & -3 & 3  \\
+      0 & 3  & -3 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 1 & -2 \\
+      0 & 1 & -1 \\
+      0 & 0 & 0  \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0 & -1 \\
+      0 & 1 & -1 \\
+      0 & 0 & 0  \\
+    \end{pmatrix}
+  $$
+  $$
+    N\left( A_1-3I \right)=\sp{
+      \begin{pmatrix}
+        1 \\
+        1 \\
+        1 \\
+      \end{pmatrix}
+    }
+  $$
+  $$
+    M=
+    \begin{pmatrix}
+      -1 & -1 & 1 \\
+      1  & 0  & 1 \\
+      0  & 1  & 1 \\
+    \end{pmatrix}
+  $$
+  $$
+    M^{-1}A_1M=
+    \begin{pmatrix}
+      0 & 0 & 0 \\
+      0 & 0 & 0 \\
+      0 & 0 & 3 \\
+    \end{pmatrix}
+  $$
+  $$
+    \det M=
+    \begin{vmatrix}
+      -1 & -1 & 1 \\
+      1  & 0  & 1 \\
+      0  & 1  & 1 \\
+    \end{vmatrix}
+    =
+    -
+    \begin{vmatrix}
+      -1 & 1 \\
+      1  & 1 \\
+    \end{vmatrix}
+    +
+    \begin{vmatrix}
+      -1 & -1 \\
+      1  & 0  \\
+    \end{vmatrix}
+    =
+    1+1+1=3
+    \impl
+    \rk M=3
+    \impl
+    R\left( M \right)=\reals^3
+  $$
+  $$
+    B=\left\{ 
+    \begin{pmatrix}
+      -1 \\
+      1  \\
+      0  \\
+    \end{pmatrix}
+    ,
+    \begin{pmatrix}
+      -1 \\
+      0  \\
+      1  \\
+    \end{pmatrix}
+    ,
+    \begin{pmatrix}
+      1 \\
+      1 \\
+      1 \\
+    \end{pmatrix}
+    \right\}
+  $$
+  $$
+    \begin{pmatrix}
+      1 & 1 & 1 \\
+      1 & 1 & 1 \\
+      1 & 1 & 1 \\
+    \end{pmatrix}
+    \begin{pmatrix}
+      -1 \\
+      1  \\
+      0  \\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      0 \\
+      0 \\
+      0 \\
+    \end{pmatrix}
+  $$
+  $$
+    \begin{pmatrix}
+      -1 & -1 & 1 & 0 \\
+      1  & 0  & 1 & 0 \\
+      0  & 1  & 1 & 0 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0  & 1 & 0 \\
+      0 & -1 & 2 & 0 \\
+      0 & 1  & 1 & 0 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0 & 1 & 0 \\
+      0 & 1 & 1 & 0 \\
+      0 & 0 & 3 & 0 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0 & 0 & 0 \\
+      0 & 1 & 0 & 0 \\
+      0 & 0 & 1 & 0 \\
+    \end{pmatrix}
+  $$
+  $$
+    \begin{pmatrix}
+      1 & 1 & 1 \\
+      1 & 1 & 1 \\
+      1 & 1 & 1 \\
+    \end{pmatrix}
+    \begin{pmatrix}
+      -1 \\
+      0  \\
+      1  \\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      0 \\
+      0 \\
+      0 \\
+    \end{pmatrix}
+  $$
+  $$
+    \begin{pmatrix}
+      -1 & -1 & 1 & 0 \\
+      1  & 0  & 1 & 0 \\
+      0  & 1  & 1 & 0 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0  & 1 & 0 \\
+      0 & -1 & 2 & 0 \\
+      0 & 1  & 1 & 0 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0 & 1 & 0 \\
+      0 & 1 & 1 & 0 \\
+      0 & 0 & 3 & 0 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0 & 0 & 0 \\
+      0 & 1 & 0 & 0 \\
+      0 & 0 & 1 & 0 \\
+    \end{pmatrix}
+  $$
+  $$
+    \begin{pmatrix}
+      1 & 1 & 1 \\
+      1 & 1 & 1 \\
+      1 & 1 & 1 \\
+    \end{pmatrix}
+    \begin{pmatrix}
+      1 \\
+      1 \\
+      1 \\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      3 \\
+      3 \\
+      3 \\
+    \end{pmatrix}
+  $$
+  $$
+    \begin{pmatrix}
+      -1 & -1 & 1 & 3 \\
+      1  & 0  & 1 & 3 \\
+      0  & 1  & 1 & 3 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0  & 1 & 3 \\
+      0 & -1 & 2 & 6 \\
+      0 & 1  & 1 & 3 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0 & 1 & 3 \\
+      0 & 1 & 1 & 3 \\
+      0 & 0 & 3 & 9 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0 & 1 & 3 \\
+      0 & 1 & 1 & 3 \\
+      0 & 0 & 1 & 3 \\
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+      1 & 0 & 0 & 0 \\
+      0 & 1 & 0 & 0 \\
+      0 & 0 & 1 & 3 \\
+    \end{pmatrix}
+  $$
+  La matrice rappresentativa di $T_{A_1}$ nella base $B$ è:
+  $$
+    \begin{pmatrix}
+      0 & 0 & 0 \\
+      0 & 0 & 0 \\
+      0 & 0 & 3 \\
+    \end{pmatrix}
+  $$
+\end{solution}
+
+\end{document}
