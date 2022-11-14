@@ -50,5 +50,5 @@ int check(char s[], char fmt[]) {
       v = 0;
     else if (fmt[i] == DIGIT && !ISDIGIT(s[i]))
       v = 0;
-  return v;
+  return s[i] == fmt[i] && v;
 }
