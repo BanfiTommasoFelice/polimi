@@ -10,8 +10,9 @@
 
 #define ERROR(x)                                                               \
   do {                                                                         \
-    fprintf(stderr, "%s:%u @ %s: %s", __FILE__, __LINE__, #x,                 \
+    fprintf(stderr, "%s:%u @ %s: %s", __FILE__, __LINE__, #x,                  \
             strerror(errno));                                                  \
+    abort();                                                                   \
   } while (0)
 
 #endif
