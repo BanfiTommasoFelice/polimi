@@ -13,4 +13,3 @@ AllowAllParametersOfDeclarationOnNextLine: false
 AllowShortBlocksOnASingleLine: Always
 AllowShortIfStatementsOnASingleLine: WithoutElse
 AlwaysBreakTemplateDeclarations: Yes
-PointerAlignment: Right
