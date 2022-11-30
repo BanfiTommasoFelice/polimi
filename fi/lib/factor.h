@@ -2932,17 +2932,17 @@ static const u64 reciprocal[] = {
 };
 
 u16 lookup(u16 n) {
-  const u32 P = sizeof(primes) / sizeof(u16);
+  const u32 __P = sizeof(primes) / sizeof(u16);
   u32 i;
-  for (i = 0; i < P && n % primes[i]; i++) {}
-  return (i == P ? 1u : primes[i]);
+  for (i = 0; i < __P && n % primes[i]; i++) {}
+  return (i == __P ? 1u : primes[i]);
 }
 
 u32 reduce(u32 n) {
-  const u32 R = sizeof(reciprocal) / sizeof(u64);
+  const u32 __R = sizeof(reciprocal) / sizeof(u64);
   u32 i;
-  for (i = 0; i < R && reciprocal[i] * n >= reciprocal[i]; i++) {}
-  return (i == R ? n : primes[i]);
+  for (i = 0; i < __R && reciprocal[i] * n >= reciprocal[i]; i++) {}
+  return (i == __R ? n : primes[i]);
 }
 
 typedef struct montgomery_s {
@@ -2970,18 +2970,18 @@ u64 montgomery_mul(montgomery_t *s, u64 x, u64 y) {
 }
 
 u64 pollard(u64 n) {
-  const u32 MIN = 10;
-  const u32 MAX = 20;
+  const u32 __MIN = 10;
+  const u32 __MAX = 20;
   u32 q, i, j;
   u64 x, y, p, g;
   montgomery_t space;
   montgomery_init(&space, n);
   y = 2;
-  for (q = MIN; q < MAX; q++) {
+  for (q = __MIN; q < __MAX; q++) {
     x = y;
     p = 1;
-    for (i = 0; i < (1u << q); i += (1u << MIN)) {
-      for (j = 0; j < (1u << MIN); j++) {
+    for (i = 0; i < (1u << q); i += (1u << __MIN)) {
+      for (j = 0; j < (1u << __MIN); j++) {
         y = montgomery_mul(&space, y, y) + 1;
         p = montgomery_mul(&space, p, x > y ? x - y : y - x);
       }
