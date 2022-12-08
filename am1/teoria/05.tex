@@ -1,0 +1,768 @@
+\section{Calcolo differenziale}
+
+\begin{definition}[Derivata]
+  $$f:\ointv{a}{b}\to\reals$$
+  $f$ è \textbf{derivabile} in $x_0\in\ointv{a}{b}$ se:
+  $$\exists\ f'\left(x_0\right)\walrus\lim_{x\to x_0}\frac{f\left(x\right)-f\left(x_0\right)}{x-x_0}\in\reals$$
+  $f'(x_0)$ è detta \textbf{derivata} prima di $f$ in $x_0$.
+\end{definition}
+
+% TODO
+
+\begin{observation}
+  La derivata prima è il coefficiente angolare della retta tangente a $\mathcal{G}\left(f\right)$ in $\left(x_0,f\left(x_0\right)\right)$:
+  $$y=f\left(x_0\right)+f'\left(x_0\right)\left(x-x_0\right)$$
+\end{observation}
+
+\begin{lemma}
+  Se $f:\ointv{a}{b}\to\reals$ è derivabile in $x_0\in\ointv{a}{b}$ allora $\exists\ R:\ointv{a}{b}\to\reals$ (funzione resto) tale che:
+  $$f\left(x\right)=f\left(x_0\right)+f'\left(x_0\right)\left(x-x_0\right)+R\left(x\right)$$
+  $$\lim_{x\to x_0}\frac{R\left(x\right)}{x-x_0}=0$$
+\end{lemma}
+\begin{proof}
+  $$R\left(x\right)\walrus f\left(x\right)-\left(f\left(x_0\right)+f'\left(x\right)\left(x-x_0\right)\right)$$
+  $$f\left(x\right)=f\left(x_0\right)+f'\left(x_0\right)\left(x-x_0\right)+R\left(x\right)$$
+  \begin{align*}
+    \lim_{x\to x_0}\frac{R\left(x\right)}{x-x_0} & =\lim_{x\to x_0}\left(\frac{f\left(x\right)-f\left(x_0\right)}{x-x_0}-f'\left(x_0\right)\right) \\
+                                                 & =\lim_{x\to x_0}\frac{f\left(x\right)-f\left(x_0\right)}{x-x_0}-f'\left(x_0\right)              \\
+                                                 & =f'\left(x_0\right)-f'\left(x_0\right)=0                                                        
+  \end{align*}
+\end{proof}
+% TODO
+
+\begin{theorem}[Continuità delle funzioni derivabili]
+  $$f:\ointv{a}{b}\to\reals\quad x_0\in\ointv{a}{b}$$
+  $$\exists\ f'\left(x_0\right)\impl \lim_{x\to x_0}f\left(x\right)=f\left(x_0\right)$$
+\end{theorem}
+\begin{proof}
+  \begin{align*}
+    \lim_{x\to x_0}\left(f\left(x\right)-f\left(x_0\right)\right) & =\lim_{x\to x_0}\frac{\left(x-x_0\right)\left(f\left(x\right)-f\left(x_0\right)\right)}{x-x_0} \\
+                                                                  & =\lim_{x\to x_0}\frac{f\left(x\right)-f\left(x_0\right)}{x-x_0}\cdot\left(x-x_0\right)         \\
+                                                                  & =f'\left(x_0\right)\lim_{x\to x_0}\left(x-x_0\right)                                           \\
+                                                                  & =0                                                                                             
+  \end{align*}
+\end{proof}
+
+\begin{observation}
+  Non è vero il contrario: per esempio la funzione ... % TODO: trovare funzione
+\end{observation}
+
+\begin{lemma}[Derivabilità delle funzioni costanti]
+  Sia $c\in\reals$ fissato.
+  $$f:\reals\to\reals\quad f\left(x\right)\walrus c$$
+  $$f'\left(x_0\right)=0\quad \forall x_0\in\reals$$
+\end{lemma}
+% TODO
+\begin{proof}
+  $$f'\left(x_0\right)=\lim_{x\to x_0}\frac{f\left(x\right)-f\left(x_0\right)}{x-x_0}=\lim_{x\to x_0}\frac{c-c}{x-x_0}=0$$
+\end{proof}
+
+\begin{lemma}[Derivabilità dell'identità]
+  $$f:\reals\to\reals\quad f\left(x\right)\walrus x$$
+  $$f'\left(x_0\right)=1\quad \forall x_0\in\reals$$
+\end{lemma}
+% TODO
+\begin{proof}
+  $$f'\left(x_0\right)=\lim_{x\to x_0}\frac{f\left(x\right)-f\left(x_0\right)}{x-x_0}=\lim_{x\to x_0}\frac{x-x_0}{x-x_0}=1$$
+\end{proof}
+
+\begin{lemma}[Derivabilità del seno]
+  $$f:\reals\to\reals\quad f\left(x\right)\walrus \sin x$$
+  $$f'\left(x_0\right)=\cos x_0\quad \forall x_0\in\reals$$
+\end{lemma}
+\begin{proof}
+  \begin{align*}
+    f'\left(x_0\right) & =\lim_{x\to x_0}\frac{f\left(x\right)-f\left(x_0\right)}{x-x_0}               \\
+                       & =\lim_{h\to0}\frac{f\left(x_0+h\right)-f\left(x_0\right)}{h}                  \\
+                       & =\lim_{h\to0}\frac{f\left(x_0+h\right)-f\left(x_0\right)}{h}                  \\
+                       & =\lim_{h\to0}\frac{\sin\left(x_0+h\right)-\sin x_0}{h}                        \\
+                       & =\lim_{h\to0}\frac{\sin x_0\cos h+\sin h\cos x_0-\sin x_0}{h}                 \\
+                       & =\lim_{h\to0}\frac{\sin x_0\left(\cos h-1\right)+\sin h\cos x_0}{h}           \\
+                       & =\lim_{h\to0}\frac{\sin x_0\left(\cos h-1\right)}{h}+\frac{\sin h\cos x_0}{h} \\
+                       & =\lim_{h\to0}\frac{\sin h}{h}\cos x_0                                         \\
+                       & =\cos x_0                                                                     
+  \end{align*}
+\end{proof}
+
+\begin{lemma}[Derivabilità del coseno]
+  $$f:\reals\to\reals\quad f\left(x\right)\walrus \cos x$$
+  $$f'\left(x\right)=-\sin x$$
+\end{lemma}
+\begin{proof}
+  \begin{align*}
+    f'\left(x\right) & =\lim_{h\to0}\frac{f\left(x+h\right)-f\left(x\right)}{h}                  \\
+                     & =\lim_{h\to0}\frac{\cos\left(x+h\right)-\cos x}{h}                        \\                                      
+                     & =\lim_{h\to0}\frac{\cos x\cos h-\sin x\sin h-\cos x}{h}                   \\                                      
+                     & =\lim_{h\to0}\frac{\cos x\left(\cos h-1\right)-\sin x\sin h}{h}           \\                                      
+                     & =\lim_{h\to0}\frac{\cos x\left(\cos h-1\right)-\sin x\sin h}{h}           \\                                      
+                     & =\lim_{h\to0}\frac{\cos x\left(\cos h-1\right)}{h}-\frac{\sin x\sin h}{h} \\                                      
+                     & =-\lim_{h\to0}\frac{\sin x\sin h}{h}                                      \\                                      
+                     & =-\lim_{h\to0}\frac{\sin h}{h}\sin x                                      \\                                      
+                     & =-\sin x                                                                  
+  \end{align*}
+\end{proof}
+
+\subsection{Regole di derivazione}
+
+\begin{theorem}[Regola della somma]
+  $$\left( af+bg \right)'\left( x \right)=af'\left( x \right)+bg'\left( x \right)$$
+\end{theorem}
+\begin{proof}
+  \begin{align*}
+    \left( af+bg \right)'\left( x \right) & =\lim_{h\to0}\frac{af\left( x+h \right)+bg\left( x+h \right)-af\left( x \right)-bg\left( x \right)}{h}                     \\
+                                          & =\lim_{h\to0}a\frac{f\left( x+h \right)-f\left( x \right)}{h}+\lim_{h\to0}b\frac{g\left( x+h \right)-g\left( x \right)}{h} \\
+                                          & =a\lim_{h\to0}\frac{f\left( x+h \right)-f\left( x \right)}{h}+b\lim_{h\to0}\frac{g\left( x+h \right)-g\left( x \right)}{h} \\
+                                          & =af'\left( x \right)+bg'\left( x \right)                                                                                   
+  \end{align*}
+\end{proof}
+
+\begin{theorem}[Regola del prodotto]
+  $$\left( fg \right)'\left( x \right)=f'\left( x \right)g\left( x \right)+f\left( x \right)g'\left( x \right)$$
+\end{theorem}
+\begin{proof}
+  \begin{align*}
+    \left( fg \right)'\left( x \right) & =\lim_{h\to0}\frac{f\left( x+h \right)g\left( x+h \right)-f\left( x \right)g\left( x \right)}{h}                                                                                           \\
+                                       & =\lim_{h\to0}\frac{\left( f\left( x+h \right)-f\left( x \right) \right)g\left( x+h \right)+f\left( x \right)\left( g\left( x+h \right)-g\left( x \right) \right)}{h}                       \\
+                                       & =\lim_{h\to0}\frac{\left( f\left( x+h \right)-f\left( x \right) \right)g\left( x+h \right)}{h}+\lim_{h\to0}\frac{f\left( x \right)\left( g\left( x+h \right)-g\left( x \right) \right)}{h} \\
+                                       & =f'\left( x \right)\lim_{h\to0}g\left( x+h \right)+f\left( x \right)g'\left( x \right)                                                                                                     \\
+                                       & =f'\left( x \right)g\left( x \right)+f\left( x \right)g'\left( x \right)                                                                                                                   
+  \end{align*}
+\end{proof}
+
+\begin{theorem}[Regola della catena]
+  $$\left( g\circ f \right)'\left( x \right)=g'\left( f\left( x \right) \right)f'\left( x \right)$$
+\end{theorem}
+\begin{proof}
+  \begin{align*}
+    \left( g\circ f \right)'\left( x \right) & =\lim_{h\to0}\frac{g\left( f\left( x+h \right) \right)-g\left( f\left( x \right) \right)}{h}                                                                                          \\
+                                             & =\lim_{h\to0}\frac{g\left( f\left( x+h \right) \right)-g\left( f\left( x \right) \right)}{f\left( x+h \right)-f\left( x \right)}\cdot \frac{f\left( x+h \right)-f\left( x \right)}{h} \\
+                                             & =f'\left( x \right) \lim_{z\to y}\frac{g\left( z \right)-g\left( y \right)}{z-y}                                                                                                      \\
+                                             & =g'\left( y \right)f'\left( x \right)                                                                                                                                                 \\
+                                             & =g'\left( f\left( x \right) \right)f'\left( x \right)                                                                                                                                 
+  \end{align*}
+\end{proof}
+
+\begin{theorem}[Regola dell'inversa]
+  $$\left( f^{-1} \right)'\left( y \right)=\frac{1}{f'\left( f^{-1}\left( y \right) \right)}$$
+\end{theorem}
+\begin{proof}
+  % TODO: dimostrazione geometrica
+  Poiché le rette tangenti a $\mathcal{G}\left( f \right)$ e $\mathcal{G}\left( f^{-1} \right)$ in $\left( x,y \right)$ e $\left( y,x \right)$ hanno coefficienti angolari cui prodotto è $1$, si ha che:
+  $$\left( f^{-1} \right)'\left( y \right)f'\left( x \right)=1\iff \left( f^{-1} \right)'\left( y \right)=\frac{1}{f'\left( x \right)}=\frac{1}{f'\left( f^{-1}\left( y \right) \right)}$$
+\end{proof}
+
+\begin{lemma}[Derivata di potenze]
+  $$f_n\left( x \right)\walrus x^n$$
+  $$f_n'\left( x \right)=nx^{n-1}$$
+\end{lemma}
+\begin{proof}
+  Sia $n=0$:
+  $$f_0\left( x \right)=1\iff f_0'\left( x \right)=0=0x^{-1}$$
+  Sia $f_n'\left( x \right)=nx^{n-1}$.
+  $$f_{n+1}\left( x \right)=x^{n+1}=x\cdot x^n$$
+  $$f_{n+1}'\left( x \right)=\left( x\cdot x^n \right)'=nx^{n-1}x+x^n=nx^n+x^n=\left( n+1 \right)x^n$$
+  La tesi è dimostrata per induzione $\forall n\ge0$. Analogamente, si dimostra la tesi $\forall n\in\mathbb{Z},x\neq0$.
+\end{proof}
+
+\begin{lemma}[Derivata di polinomi]
+  $$P_n\left( x \right)\sum_{k=0}^nc_kx^k$$
+  $$P_n'\left( x \right)=\sum_{k=0}^nc_k\cdot k\cdot x^{k-1}=\sum_{k=1}^nc_k\cdot k\cdot x^{k-1}=\sum_{k=0}^{n-1}c_{k+1}\cdot \left( k+1 \right)\cdot x^{k}$$
+\end{lemma}
+
+\begin{theorem}[Regola del quoziente]
+  $$\left( \frac{f}{g} \right)'\left( x \right)=\frac{f'\left( x \right)g\left( x \right)-f\left( x \right)g'\left( x \right)}{\left( g\left( x \right) \right)^2}$$
+\end{theorem}
+% TODO: dimostrare
+
+
+% FIXME: dare un nome giusto
+\subsection{Teorema di Lagrange}
+
+\begin{lemma}[Lemma di Fermat]
+  Sia $f:\ointv{a}{b}\to\reals$ una funzione cui $x_0\in\ointv{a}{b}$ è un punto di estremo, massimo o minimo. Se $f$ è derivabile in $x_0$, allora $f\left( x_0 \right)=0$. I punti in cui la derivata si annulla si dicono \textbf{stazionari}.
+\end{lemma}
+\begin{proof}
+  Sia $x_0\in\ointv{a}{b}$ un punto di massimo:
+  $$f\left( x \right)\le f\left( x_0 \right)\ \forall x\in\ointv{a}{b}$$
+  Se $x>x_0$ si ha:
+  $$\frac{f\left( x \right)-f\left( x_0 \right)}{x-x_0}\le0$$
+  e quindi, per la permanenza del segno:
+  $$f'_+\left( x_0 \right)=\lim_{x\to x_0^+}\frac{f\left( x \right)-f\left( x_0 \right)}{x-x_0}\le0$$
+  Se $x<x_0$ si ha:
+  $$\frac{f\left( x \right)-f\left( x_0 \right)}{x-x_0}\ge0$$
+  e quindi, per la permanenza del segno:
+  $$f'_-\left( x_0 \right)=\lim_{x\to x_0^-}\frac{f\left( x \right)-f\left( x_0 \right)}{x-x_0}\ge0$$
+  Ne segue che, poiché derivabile in $x_0$:
+  $$0\le f'_-\left( x_0 \right)=f'_+\left( x_0 \right)\le 0$$
+  e quindi:
+  % $$\Updownarrow$$
+  $$f'\left( x_0 \right)=0$$
+  Analogamente si dimostra che anche i punti di minimo hanno derivata nulla.
+\end{proof}
+
+\begin{example}
+  $$f\left( x \right)=x^3-x\qquad f'\left( x \right)=3x^2-1$$
+  $$f'\left( x \right)=0\iff x=\pm\frac{1}{\sqrt{3}}$$
+\end{example}
+
+% TODO: copiare limiti notevoli da 29/02
+
+\begin{corollary}
+  Sia $f:\ointv{a}{b}\to\reals$ una funzione. I suoi punti di estremo sono da ricercarsi nell'unione $A\cup B$ degli insiemi $A$ (dei punti critici) e $B$ (dei punti singolari):
+  $$A\walrus\left\{ x\in\ointv{a}{b}:\exists\ f'\left( x \right)\wedge f'\left( x \right)=0 \right\}$$
+  $$B\walrus\left\{ x\in\ointv{a}{b}:\nexists\ f'\left( x \right) \right\}$$
+\end{corollary}
+
+\begin{example}
+  $$
+    f\left( x \right)=\abs{x}
+    \qquad
+    f'\left( x \right)=
+    \begin{cases}
+      +1 & x>0 \\
+      -1 & x<0 \\
+    \end{cases}
+  $$
+  $$A=\emptyset\qquad B=\left\{ 0 \right\}$$
+  $$f\left( 0 \right)=0\le f\left( x \right)\ \forall x\in\reals$$
+\end{example}
+
+\begin{theorem}[Teorema di Lagrange]
+  Sia $f\in\mathcal{C}\left( \intv{a}{b} \right)$ derivabile in $\ointv{a}{b}$. Allora $\exists\ c\in\ointv{a}{b}$, tale che:
+  $$f'\left( c \right)=\frac{f\left( b \right)-f\left( a \right)}{b-a}$$
+  % TODO
+\end{theorem}
+\begin{proof}
+  Sia $g:\intv{a}{b}\to\reals$ definita come:
+  $$g\left( c \right)\walrus f\left( a \right)+\frac{f\left( b \right)-f\left( a \right)}{b-a}\left( x-a \right)$$
+  Si osserva che $g$ ha grado $\le 1$.
+  Inoltre, $g\left( a \right)=f\left( a \right)$ e $g\left( b \right)=f\left( b \right)$. Per cui, il grafico di $g$ è la retta passante per $\left( a,f\left( a \right) \right)$ e $\left( b,f\left( b \right) \right)$, avente coefficiente angolare $\frac{f\left( b \right)-f\left( a \right)}{b-a}$.
+  $g$ è sia continua in $\reals$, sia derivabile in $\reals$. Infatti, la sua derivata è:
+  $$g'\left( x \right)=\frac{f\left( b \right)-f\left( a \right)}{b-a}$$
+  
+  Sia $h:\intv{a}{b}\to\reals$ definita come:
+  $$h\left( x \right)=f\left( x \right)-g\left( x \right)$$
+  Si osserva che $h\left( a \right)=f\left( a \right)-g\left( a \right)=0$ e $h\left( b \right)=f\left( b \right)-g\left( b \right)=0$. Inoltre, $h$ è continua in $\intv{a}{b}$ e derivabile in $\ointv{a}{b}$. Per il teorema di Weierstrass, $h$ ammette $x_m,x_M$ come punti di minimo e massimo globale, rispettivamente minimo e massimo. Se $x_m,x_M\in\left\{ a,b \right\}$, allora:
+  $$
+    \begin{cases}
+      h\left( a \right)=0 \\
+      h\left( b \right)=0 \\
+    \end{cases}
+    \impl
+    h\left( x \right)=0
+    \impl
+    f\left( x \right)=g\left( x \right)
+    \impl
+    f'\left( x \right)=g'\left( x \right)=\frac{f\left( b \right)-f\left( a \right)}{b-a}
+  $$
+  Altrimenti, per il lemma di Fermat, si ha:
+  $$h'\left( x_m \right)=0=f\left( x_m \right)-g\left( x_m \right)\impl f'\left( x_m \right)=g'\left( x_m \right)=\frac{f\left( b \right)-f\left( a \right)}{b-a}$$
+  $$h'\left( x_M \right)=0=f\left( x_M \right)-g\left( x_M \right)\impl f'\left( x_M \right)=g'\left( x_M \right)=\frac{f\left( b \right)-f\left( a \right)}{b-a}$$
+\end{proof}
+
+\begin{theorem}[Teorema di Rolle]
+  Sia $f\in\mathcal{C}\left( \intv{a}{b} \right)$ derivabile in $\ointv{a}{b}$. Se $f\left( a \right)=f\left( b \right)$, allora $\exists\ c\in\ointv{a}{b}:f'\left( c \right)=0$.
+\end{theorem}
+\begin{proof}
+  Per il teorema di Lagrange, $\exists\ c\in\ointv{a}{b}$, tale che:
+  $$f'\left( c \right)=\frac{f\left( b \right)-f\left( a \right)}{b-a}=\frac{0}{b-a}=0$$
+\end{proof}
+
+\begin{theorem}[Test di monotonia]
+  Sia $f:\ointv{a}{b}\to\reals$ derivabile in $\ointv{a}{b}$. Allora:
+  \begin{itemize}
+    \item $f$ è crescente se e solo se $f'\left( x \right)\ge0\ \forall x\in\ointv{a}{b}$;
+    \item $f$ è decrescente se e solo se $f'\left( x \right)\le0\ \forall x\in\ointv{a}{b}$.
+  \end{itemize}
+\end{theorem}
+\begin{proof}
+  Sia $f$ crescente:
+  $$a<x<y<b\impl\frac{f\left( y \right)-f\left( x \right)}{y-x}\ge0$$
+  Per il teorema della permanenza del segno:
+  $$f'\left( x \right)=\lim_{y\to x}\frac{f\left( y \right)-f\left( x \right)}{y-x}\ge0\ \forall x\in\ointv{a}{b}$$
+  
+  Viceversa, se $f'\left( x \right)\ge0\ \forall x\in\ointv{a}{b}$, allora, per il teorema di Lagrange sull'intervallo $\intv{x}{y}$, $\exists\ c\in\ointv{x}{y}$:
+  $$0\le f'\left( c \right)=\frac{f\left( y \right)-f\left( x \right)}{y-x}\impl f\left( x \right)\le f\left( y \right)$$
+  ossia $f$ è crescente.
+  
+  Analogamente si dimostra che $f'\left( z \right)\le0\iff f\left( x \right)\ge f\left( y \right)\ \forall x,y,z\in\ointv{a}{b}:x<y$.
+\end{proof}
+
+\begin{corollary}[Caratterizzazione delle funzioni costanti]
+  Sia $f:\ointv{a}{b}\to\reals$ derivabile. Allora $f$ è costante se e solo se $f'\left( x \right)=0\ \forall x\in\ointv{a}{b}$.
+\end{corollary}
+\begin{proof}
+  Sia $f$ costante. Allora $f'\left( x \right)=0\ \forall x\in\ointv{a}{b}$.
+  Viceversa, sia $f'\left( x \right)=0\ \forall x\in\ointv{a}{b}$. Allora, per il test di monotonia, $f$ è sia crescente sia decrescente, e quindi costante.
+\end{proof}
+
+\begin{corollary}
+  Sia $f:D\to\reals$ una funzione derivabile in $D$ e sia $D$ unione di intervalli. Allora $f$ è localmente costante se e solo se $f'\left( x \right)=0\ \forall x\in D$.
+\end{corollary}
+
+\begin{theorem}[Criterio di derivabilità]
+  Sia $f:\ointv{a}{b}\to\reals\in\mathcal{C}\left( \ointv{a}{b} \right)$. Sia $x_0\in\ointv{a}{b}$. Se $f$ è derivabile in $\ointv{a}{b}\setminus\left\{ x_0 \right\}$ e:
+  $$\reals\ni\l\walrus f'_-\left( x_0 \right)=f'_+\left( x_0 \right)$$
+  allora $f$ è derivabile anche in $x_0$ e, in particolare:
+  $$f'\left( x_0 \right)=\l$$
+  In più, $f'$ è continua in $x_0$:
+  $$\lim_{x\to x_0}f'\left( x \right)=f'\left( x_0 \right)$$
+\end{theorem}
+\begin{proof}
+  Sia $x\in\ointv{x_0}{b}$. Per il teorema di Lagrange, $\exists\ c\left( x \right)$, tra $x_0$ e $x$, tale che:
+  $$f'\left( c\left( x \right) \right)=\frac{f\left( x \right)-f\left( x_0 \right)}{x-x_0}$$
+  Quindi:
+  $$\lim_{x\to x_0^+}\frac{f\left( x \right)-f\left( x_0 \right)}{x-x_0}=\lim_{x\to x_0^+}f'\left( c\left( x \right) \right)$$
+  Poiché $x_0<c\left( x \right)<x$, $\lim c\left( x \right)=x_0$ e, pertanto, per il limite di funzione composta, si ha:
+  $$\lim_{x\to x_0^+}f'\left( c\left( x \right) \right)=f'\left( \lim_{x\to x_0^+}c\left( x \right) \right)=f'\left( x_0 \right)=\l$$ 
+  
+  Analogamente:
+  $$\lim_{x\to x_0^-}\frac{f\left( x \right)-f\left( x_0 \right)}{x-x_0}=\l$$
+  e quindi:
+  $$\exists\ \lim_{x\to x_0}\frac{f\left( x \right)-f\left( x_0 \right)}{x-x_0}=\l\iff \exists\ f'\left( x_0 \right)=\l$$
+\end{proof}
+
+\subsection{Punti particolari}
+
+\begin{definition}[Discontinuità eliminabile]
+  Sia $f:\ointv{a}{x_0}\cup\ointv{x_0}{b}\to\reals$ continua. $x_0$ è \textbf{discontinuità eliminabile} se:
+  $$\exists\ \l\walrus\lim_{x\to x_0}f\left( x \right)$$
+  poiché esiste un'estensione continua di $f$ in $\ointv{a}{b}$:
+  $$
+    \tilde{f}\left( x \right)\walrus
+    \begin{cases}
+      f\left( x \right) & x\neq x_0 \\
+      \l                & x=x_0     \\
+    \end{cases}
+  $$
+  $$\lim_{x\to x_0}\tilde{f}\left( x \right)=\lim_{x\to x_0}f\left( x \right)=\l=\tilde{f}\left( x_0 \right)$$
+\end{definition}
+
+\begin{example}
+  $$f\left( x \right)=\atan\frac{1}{\abs{x}}$$
+  $$\lim_{x\to0}f\left( x \right)=\atan\frac{1}{0^+}=\atan\left( +\infty \right)=\nicefrac{\pi}{2}$$
+  $$
+    \tilde{f}\left( x \right)=
+    \begin{cases}
+      \atan\frac{1}{\abs{x}} & x\neq0 \\
+      \nicefrac{\pi}{2}      & x=0    \\
+    \end{cases}
+  $$
+  % TODO
+\end{example}
+
+\begin{definition}[Punto angoloso]
+  Sia $f:\ointv{a}{b}\to\reals$. $x_0\in\ointv{a}{b}$ è detto \textbf{punto angoloso} se:
+  $$f'_-\left( x_0 \right)\neq f'_+\left( x_0 \right)$$
+  % TODO
+\end{definition}
+
+\begin{example}
+  $$f\left( x \right)=\abs{x}$$
+  $x_0=0$ è punto angoloso:
+  $$f'_-\left( 0 \right)=-1\qquad f'_+\left( 0 \right)=+1$$
+\end{example}
+
+\begin{definition}[Flesso verticale]
+  Sia $f:\ointv{a}{b}\to\reals$. $x_0\in\ointv{a}{b}$ è un \textbf{flesso verticale} se:
+  $$f'_\pm\left( x_0 \right)=+\infty \vee f'_\pm\left( x_0 \right)=-\infty$$
+  % TODO
+\end{definition}
+
+\begin{example}
+  $$f\left( x \right)=x^{\nicefrac{1}{3}}$$
+  $$f'\left( x \right)=\frac{1}{3}x^{-\nicefrac{2}{3}}$$
+  $0$ è flesso verticale:
+  $$f'_\pm\left( 0 \right)=+\infty$$
+\end{example}
+
+\begin{definition}[Cuspide]
+  Sia $f:\ointv{a}{b}\to\reals$. $x_0\in\ointv{a}{b}$ è un \textbf{cuspide} se:
+  $$f'_\pm\left( x_0 \right)=\pm\infty \vee f'_\pm\left( x_0 \right)=\mp\infty$$
+  % TODO
+\end{definition}
+
+\begin{example}
+  $$f\left( x \right)=\sqrt{\abs{x}}$$
+  $$f'\left( x \right)=\frac{\sgn x}{2\sqrt{\abs{x}}}$$
+  $0$ è cuspide:
+  $$f'_\pm\left( 0 \right)=\pm\infty$$
+\end{example}
+
+\subsection{Funzione esponenziale}
+
+Si definisce la funzione $s_n:\reals^+\to\reals$ come segue:
+$$s_n\left( x \right)\walrus\sum_{k=0}^n\frac{x^k}{k!}$$
+
+\begin{theorem}
+  $\forall x>0$ fissato, la successione $\left\{ s_n\left( x \right) \right\}_{n=0}^{+\infty}\subset\intv{0}{+\infty}$ è monotona.
+\end{theorem}
+\begin{proof}
+  $$s_{n+1}\left( x \right)-s_n\left( x \right)=\frac{x^{n+1}}{\left( n+1 \right)!}>0$$
+  Pertanto la successione è crescente.
+\end{proof}
+
+\begin{theorem}
+  $\forall x>0$ fissato, la successione $\left\{ s_n\left( x \right) \right\}_{n=0}^{+\infty}\subset\intv{0}{+\infty}$ è superiormente limitata.
+\end{theorem}
+\begin{proof}
+  \begin{align*}
+    s_n\left( x \right) & =\sum_{k=0}^n\frac{x^k}{k!}                                                                                                      \\
+                        & =\sum_{k=0}^{m-1}\frac{x^k}{k!}+\sum_{k=m}^n\frac{x^k}{k!}                                                                       \\
+                        & =s_{m-1}\left( x \right)+\sum_{k=m}^n\frac{x^k}{k!}                                                                              \\
+                        & =s_{m-1}\left( x \right)+\sum_{k=m}^n\frac{x^k}{k\left( k-1 \right)\cdots\left( m+1 \right)m\left( m-1 \right)\cdot 1}           \\
+                        & \le s_{m-1}\left( x \right)+\sum_{k=m}^n\frac{x^k}{m\cdot m\cdots m\left( m-1 \right)\cdot 1}                                    \\
+                        & =s_{m-1}\left( x \right)+\sum_{k=m}^n\frac{x^k}{m^{k-m} m!}                                                                      \\
+                        & =s_{m-1}\left( x \right)+\left( \sum_{k=m}^n\frac{x^{k-m}}{m^{k-m}} \right)\frac{x^m}{\left( m-1 \right)!}                       \\
+                        & =s_{m-1}\left( x \right)+\frac{x^m}{\left( m-1 \right)!}\sum_{k=m}^n\left( \frac{x}{m} \right)^{k-m}                             \\
+                        & =s_{m-1}\left( x \right)+\frac{x^m}{\left( m-1 \right)!}\sum_{k=0}^{n-m}\left( \frac{x}{m} \right)^{k}                           \\
+                        & =s_{m-1}\left( x \right)+\frac{x^m}{\left( m-1 \right)!}\cdot \frac{1-\left( \nicefrac{x}{n} \right)^{n-m+1}}{1-\nicefrac{x}{m}} \\
+                        & \le s_{m-1}\left( x \right)+\frac{x^m}{\left( m-1 \right)!}\cdot \frac{1}{1-\nicefrac{x}{m}}                                     \\
+                        & \le s_{m-1}\left( x \right)+\frac{x^m}{\left( m-1 \right)!}\cdot \frac{m}{m-x}                                                   
+  \end{align*}
+  Pertanto:
+  $$s_n\left( x \right)\le s_{m-1}\left( x \right)+\frac{x^m}{\left( m-1 \right)!}\cdot \frac{m}{m-x}\quad \forall n,m:n>m$$
+  e quindi $\left\{ s_n\left( x \right) \right\}$ è superiormente limitata.
+\end{proof}
+
+Per il teorema di convergenza delle successioni monotone e limitate:
+$$\exists\ s\left( x \right)\walrus \lim_{n\to\infty}s_n\left( x \right)$$
+Si osserva che:
+$$s\left( x \right)\ge s_n\left( x \right)\ge s_1\left( x \right)=1+x$$
+Inoltre, si definisce il comportamento di $s$ per valori negativi di $x$:
+$$s\left( x \right)\walrus\frac{1}{s\left( -x \right)}\quad \forall x<0$$
+\begin{observation}
+  \begin{align*}
+    x>0 & \impl s\left( x \right)\ge1   \\
+    x<0 & \impl 0<s\left( x \right)\le1 \\
+    x=0 & \impl s\left( x \right)=1     
+  \end{align*}
+\end{observation}
+
+\begin{definition}[$e$]
+  Si definisce $e$, o numero di Nepero, il valore:
+  $$e\walrus s\left( 1 \right)=\lim_{n\to+\infty}\sum_{k=0}^n\frac{1}{k!}$$
+\end{definition}
+
+\begin{observation}
+  $$e\in\ointv{2}{3}$$
+\end{observation}
+\begin{proof}
+  $$s\left( 1 \right)> s_1\left( 1 \right)=1+1=2$$
+  $$s\left( 1 \right)< s_1\left( 1 \right)+\frac{1^2}{1!}\cdot\frac{2}{2-1}=2+2=4$$
+  $$s\left( 1 \right)< s_3\left( 1 \right)+\frac{1^4}{3!}\cdot\frac{4}{4-1}=\frac{8}{3}+\frac{4}{18}=\frac{26}{9}<3$$
+\end{proof}
+
+\begin{theorem}[Equazione funzionale della funzione esponenziale]
+  Siano $x,y\in\reals$.
+  $$s\left( x \right)s\left( y \right)=s\left( x+y \right)$$
+\end{theorem}
+\begin{proof}
+  $$s_n\left( x \right)s_n\left( y \right)=\left( \sum_{i=0}^n\frac{x^i}{i!} \right)\cdot\left( \sum_{j=0}^n\frac{y^j}{j!} \right)=\sum_{i,j}^n\frac{x^iy^i}{i!j!}$$
+  Sia $m\walrus i+j$, cioè $j=m-i$. Allora:
+  $$s_n\left( x \right)s_n\left( y \right)=\sum_{i,j}^n\frac{x^iy^i}{i!j!}=\sum_{m=0}^{2n}\sum_{k=0}^n\frac{x^ky^{m-k}}{k!\left( m-k \right)!}=\sum_{m=0}^{2n}\frac{1}{m!}\sum_{k=0}^m\binom{m}{k}x^ky^{m-k}=s_{2n}\left( x+y \right)$$
+  Passando al limite:
+  $$\lim_{n\to+\infty}s_n\left( x \right)s_n\left( y \right)=\lim_{n\to+\infty}s_{2n}\left( x+y \right)\iff s\left( x \right)s\left( y \right)=s\left( x+y \right)$$
+\end{proof}
+
+Il teorema di cui sopra giustifica la notazione:
+$$e^x\walrus s\left( x \right)$$
+L'equazione funzionale è infatti rispettata, in quanto:
+$$e^xe^y=e^{x+y}$$
+
+\begin{theorem}[Monotonia della funzione esponenziale]
+  Siano $0<x<y$, allora:
+  $$e^x< e^y$$
+\end{theorem}
+\begin{proof}
+  $$s_n\left( x \right)\le s_n\left( y \right)$$
+  $$\lim_ns_n\left( x \right)\le \lim_ns_n\left( y \right)$$
+  $$s\left( x \right)\le s\left( y \right)$$
+  $$e^x\le e^y$$
+  Quindi $s$ è monotona su $\ointv{0}{+\infty}$.
+  
+  Sia $x\le y\iff y-x\ge0$ e $s\left( x \right)=s\left( y \right)$. Si ha:
+  $$1=s\left( y \right)s\left( x \right)^{-1}=s\left( y \right)s\left( -x \right)=s\left( y-x \right)\ge1+\left( y-x \right)\ge1$$
+  $$\impl y-x=0\impl y=x$$
+  Pertanto, $s$ è strettamente monotona e quindi invertibile su $\ointv{0}{+\infty}$.
+\end{proof}
+
+\begin{theorem}[Continuità di $e^x$]
+  $$s\in\mathcal{C}\left( \reals \right)$$
+\end{theorem}
+\begin{proof}
+  Sia $x>0$.
+  \begin{align*}
+    0\le e^x-e^0 & =\lim_n\sum_{k=0}^n\frac{x^k}{k!}-1                          \\
+                 & =\lim_n\sum_{k=1}^n\frac{x^k}{k!}                            \\
+                 & =\lim_n\sum_{k=0}^{n-1}\frac{x^{k+1}}{\left( k+1 \right)!}   \\
+                 & =x\cdot\lim_n\sum_{k=0}^{n-1}\frac{x^k}{\left( k+1 \right)!} \\
+                 & \le x\cdot \lim_n\sum_{k=0}^{n-1}\frac{x^k}{k!}              \\
+                 & =xe^x                                                        
+  \end{align*}
+  Se $0<x<1$:
+  $$0\le e^x-e^0\le xe^x\le xe\le 3x$$
+  $$0\le \lim_{x\to0^+}\left( e^x-e^0 \right)\le \lim_{x\to0^+}3x=0\impl \lim_{x\to0^+}e^x=1$$
+  Per la definizione di $e^x$ per $x<0$ si ha:
+  $$\lim_{x\to0^-}e^x=1$$
+  Pertanto:
+  $$\lim_{x\to0}e^x=1=e^0$$
+  Quindi $s$ è continua in $x=0$.
+  Da ciò risulta anche che, per $x\ge0$:
+  $$\lim_{y\to x}e^y=\lim_{y\to x}e^{y-x+x}=\lim_{y\to x}e^xe^{y-x}=e^x\cdot\lim_{y\to x}e^{y-x}=e^x\cdot\lim_{h\to0}e^h=e^x$$
+  Da cui, per $x<0$:
+  $$\lim_{y\to x}e^y=\lim_{y\to x}\frac{1}{e^{-y}}=\frac{1}{e^{-x}}=e^x$$
+  Pertanto $s$ è continua $\forall x\in\reals$.
+\end{proof}
+
+\begin{theorem}[Derivata della funzione esponenziale]
+  $$s'\left( x \right)=s\left( x \right)$$
+\end{theorem}
+\begin{proof}
+  \begin{align*}
+    \frac{d}{dx} e^x & = \frac{d}{dx} \left( \frac{x^0}{0!} + \frac{x^1}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots \right)                                                           \\
+                     & = \frac{d}{dx} \left( 1 \right) + \frac{d}{dx} \left( x \right) + \frac{d}{dx} \left( \frac{x^2}{2!} \right) + \frac{d}{dx} \left( \frac{x^3}{3!} \right) + \cdots \\
+                     & = 0 + 1 + \frac{x^1}{1!} + \frac{x^2}{2!} +\cdots                                                                                                                  \\
+                     & = e^x                                                                                                                                                              
+  \end{align*}
+\end{proof}
+
+\begin{lemma}[Limiti agli estremi della funzione esponenziale]
+  $$\lim_{x\to+\infty} e^x=+\infty$$
+  $$\lim_{x\to-\infty} e^x=0^+$$
+\end{lemma}
+\begin{proof}
+  $$e^x\ge 1+x\impl \lim_{x\to+\infty}e^x\ge\lim_{x\to+\infty}\left( 1+x \right)=+\infty\impl \lim_{x\to+\infty}e^x=+\infty$$
+  $$\lim_{x\to-\infty}e^x=\lim_{x\to+\infty}\frac{1}{e^x}=\frac{1}{+\infty}=0^+$$
+\end{proof}
+
+\begin{observation}
+  Essendo strettamente crescente, l'immagine della funzione esponenziale è $$\im\left( s \right)=\ointv{0}{+\infty}$$
+\end{observation}
+
+Poiché la funzione esponenziale è strettamente crescente, allora essa risulta essere invertibile. La sua funzione inversa è detta \emph{logaritmo naturale} ed è denotata dal simbolo $\ln$. Il suo dominio non è altro che l'immagine della funzione esponenziale, per cui:
+$$\mathcal{D}\left( \ln \right)=\ointv{0}{+\infty}\qquad \im \left( \ln \right)=\reals$$
+Essendo l'inversa della funzione esponenziale, valgono le seguenti relazioni:
+$$e^{\ln x}=x\qquad \ln e^x=x$$
+\begin{observation}
+  Per il teorema di continuità della funzione inversa, $\ln\in\mathcal{C}\left( \ointv{0}{+\infty} \right)$.
+\end{observation}
+
+\begin{theorem}[Derivata del logaritmo naturale]
+  $$\frac{d}{dx}\ln x=\frac{1}{x}$$
+\end{theorem}
+\begin{proof}
+  Per la regola dell'inversa, si ha:
+  $$\ln'x=\frac{1}{e^{\ln x}}=\frac{1}{x}$$
+\end{proof}
+
+\subsection{Teorema di de L'Hôspital}
+
+\begin{theorem}[Teorema di de L'Hôspital]
+  Siano $f:\ointv{a}{b}\to\reals$ e $g:\ointv{a}{b}\to\reals$ due funzioni derivabili, tali che $g'\left( x \right)\neq0$. Se:
+  $$\lim_{x\to a^+}f\left( x \right)=\lim_{x\to a^+}g\left( x \right)=0$$
+  $$\exists\ \l\walrus\lim_{x\to a^+}\frac{f'\left( x \right)}{g'\left( x \right)}$$
+  Allora:
+  $$\exists\ \lim_{x\to a^+}\frac{f\left( x \right)}{g\left( x \right)}=\l$$
+\end{theorem}
+\begin{proof}
+  $$f\left( a \right)\walrus0\qquad g\left( a \right)\walrus0$$
+  Sia $x\in\ointv{a}{b}$ fissato. Si ha che $f,g\in\mathcal{C}\left( \intv{a}{x} \right)$. Poiché $f,g$ sono derivabili in $\ointv{a}{b}$, allora $f,g\in\mathcal{C}\left( \ointv{a}{b} \right)$ e, per costruzione, $f,g\in\mathcal{C}\left( \left\{ a \right\} \right)$.
+  Inoltre, $f,g$ sono derivabili in $\ointv{a}{x}$.
+  
+  Per il teorema di Lagrange, applicato alla funzione $h:\intv{a}{x}\to\reals$, definita come $h\left( y \right)\walrus f\left( x \right)g\left( y \right)-f\left( y \right)g\left( x \right)$, si ha:
+  $$\exists\ y\left( x \right)\in\ointv{a}{x}:h'\left( y\left( x \right) \right)=\frac{h\left( x \right)-h\left( a \right)}{x-a}=0$$
+  Da cui:
+  $$f\left( x \right)g'\left( y\left( x \right) \right)-f'\left( y\left( x \right) \right)g\left( x \right)=0\impl \frac{f\left( x \right)}{g\left( x \right)}=\frac{f'\left( y\left( x \right) \right)}{g'\left( y\left( x \right) \right)}$$
+  Passando al limite:
+  $$\lim_{x\to a^+}y\left( x \right)=a^+$$
+  $$\lim_{x\to a^+}\frac{f\left( x \right)}{g\left( x \right)}=\lim_{x\to a^+}\frac{f'\left( y\left( x \right) \right)}{g'\left( y\left( x \right) \right)}=\lim_{x\to a^+}\frac{f'\left( x \right)}{g'\left( x \right)}=\l$$
+\end{proof}
+
+\begin{example}
+  $$\lim_{x\to0}\frac{e^x-1}{x}\stackrel{\text{dH}}{=}\lim_{x\to0}\frac{e^x}{1}=e^0=1$$
+\end{example}
+
+\begin{example}
+  $$\lim_{x\to0}\frac{\sin x}{x}\stackrel{\text{dH}}{=}\lim_{x\to0}\frac{\cos x}{1}=\frac{1}{1}=1$$
+\end{example}
+
+\begin{example}
+  $$\lim_{x\to0}\frac{1-\cos x}{x^2}\stackrel{\text{dH}}{=}\lim_{x\to0}\frac{\sin x}{2x}\stackrel{\text{dH}}{=}\lim_{x\to0}\frac{\cos x}{2}=\frac{1}{2}$$
+\end{example}
+
+\subsection{Gerarchia degli infiniti}
+
+$$\lim_{x\to+\infty}\frac{x}{e^{\theta x}}\stackrel{\text{dH}}{=}\lim_{x\to+\infty}\frac{1}{\theta e^{\theta x}}=0^+\qquad \theta>0$$
+
+$$\lim_{x\to+\infty}\frac{x^\a}{e^{\b x}}=\lim_{x\to+\infty}\left( \frac{x}{e^{\nicefrac{\b}{a}x}} \right)^\a=0^+\qquad \a,\b>0$$
+
+% FIXME: guardare la registrazione per capire
+
+\subsection{Taylor} % FIXME: pensare ad un nome più appropriato
+
+\begin{definition}[Derivata di ordine $n\ge2$]
+  Siano $f:\ointv{a}{b}\to\reals$ e $x_0\in\ointv{a}{b}$, tali che $f$ sia derivabile in $x_0\in\ointv{a'}{b'}\subset\ointv{a}{b}$. Se $f':\ointv{a'}{b'}\to\reals$ è derivabile in $x_0$, si dice che $f$ è 2 volte derivabile in $x_0$ e si pone:
+  $$f''\left( x_0 \right)\walrus\left( f' \right)'\left( x_0 \right)$$
+  detta \textbf{derivata seconda} di $f$ in $x_0$.
+  In generale, se $f$ è $n-1$ volte derivabile in $x_0\in\ointv{a'}{b'}\subset\ointv{a}{b}$ e la derivata di ordine $n-1$, $f^{\left( n-1 \right)}$, è a sua volta derivabile in $x_0$, si dirà che $f$ è $n$ volte derivabile e, in particolare:
+  $$f^{\left( n \right)}\left( x_0 \right)\walrus\left( f^{\left( n-1 \right)} \right)'\left( x_0 \right)=\frac{d^n f}{d x^n}\left( x_0 \right)$$
+\end{definition}
+
+\begin{example}
+  \begin{gather*}
+    f\left( x \right)=e^x\\
+    f'\left( x \right)=e^x\\
+    f''\left( x \right)=e^x\\
+    \vdots\\
+    f^{\left( n \right)}\left( x \right)=e^x
+  \end{gather*}
+\end{example}
+
+\begin{example}
+  \begin{gather*}
+    f\left( x \right)=+\sin x\\
+    f^{\left( 1 \right)}\left( x \right)=+\cos x\\
+    f^{\left( 2 \right)}\left( x \right)=-\sin x\\
+    f^{\left( 3 \right)}\left( x \right)=-\cos x\\
+    f^{\left( 4 \right)}\left( x \right)=+\sin x\\
+    \vdots
+  \end{gather*}
+\end{example}
+
+\begin{example}
+  \begin{gather*}
+    f\left( x \right)=\ln x\\
+    f^{\left( 1 \right)}=x^{-1}\\
+    f^{\left( 2 \right)}=-x^{-2}\\
+    f^{\left( 3 \right)}=2x^{-3}\\
+    f^{\left( 4 \right)}=-6x^{-4}\\
+    \vdots\\
+    f^{\left( n \right)}=\left( -1 \right)^{n-1}\left( n-1 \right)!x^{-n}
+  \end{gather*}
+\end{example}
+
+\begin{observation}
+  Sia $P$ un polinomio di grado $n$. Se $\mathbb{N}\ni m>n$, allora:
+  $$P^{\left( m \right)}\left( x \right)=0$$
+\end{observation}
+
+\begin{theorem}[Taylor con resto di Peano]
+  Sia $f:\ointv{a}{b}\to\reals$ derivabile $n\ge1$ volte in $x_0\in\ointv{a}{b}$. Si definisce il suo \textbf{polinomio di Taylor} $T$ di ordine $n$ in $x_0$ come:
+  $$T_{n,x_0}^f\left(x\right)\walrus \sum_{k=0}^n\frac{f^{\left(k\right)}\left(x_0\right)}{k!}\left(x-x_0\right)^k=f\left( x_0 \right)+f'\left( x_0 \right)\left( x-x_0 \right)+\cdots+\frac{f^{\left(n\right)}\left(x_0\right)}{n!}\left(x-x_0\right)^n$$
+  Allora $\exists$ una \textbf{funzione resto} $R$ di ordine $n$ in $x_0$:
+  $$R_{n,x_0}^f:\ointv{a}{b}\to\reals$$
+  $$f\left(x\right)=T_{n,x_0}^f\left(x\right)+R_{n,x_0}^f\left(x\right)$$
+  e il resto è infinitesimo di ordine maggiore di $n$ per $x\to x_0$:
+  $$\lim_{x\to x_0}\frac{R_{n,x_0}^f\left( x \right)}{\left( x-x_0 \right)^n}=\lim_{x\to x_0}\frac{f\left(x\right)-T_{n,x_0}^f\left(x\right)}{\left(x-x_0\right)^n}=0$$
+  Quindi: 
+  $$R_{n,x_0}^f\left(x\right)=o\left(\left(x-x_0\right)^n\right)$$
+  $$f\left(x\right)=T_{n,x_0}^f\left(x\right)+o\left(\left(x-x_0\right)^n\right)$$
+\end{theorem}
+\begin{proof}
+  $$R_{n,x_0}^f\left(x\right)\walrus f\left(x\right)-T_{n,x_0}^f\left(x\right)$$
+  \begin{align*}
+    \lim_{x\to x_0}\frac{R_{n,x_0}^f\left( x \right)}{\left( x-x_0 \right)^n} & =\lim_{x\to x_0}\frac{f\left(x\right)-T_{n,x_0}^f\left(x\right)}{\left(x-x_0\right)^n}                                                                                                                                                              \\
+                                                                              & \stackrel{\text{dH}}{=}\lim_{x\to x_0}\frac{f'\left(x\right)-\left(T_{n,x_0}^f\right)'\left(x\right)}{n\left(x-x_0\right)^{n-1}}                                                                                                                    \\
+                                                                              & =\lim_{x\to x_0}\frac{f'\left(x\right)-\left(\sum_{k=0}^n\frac{f^{\left(k\right)}\left(x_0\right)}{k!}\left(x-x_0\right)^{k}\right)'}{n\left(x-x_0\right)^{n-1}}                                                                                    \\
+                                                                              & =\lim_{x\to x_0}\frac{f'\left(x\right)-\left(\sum_{k=1}^n\frac{f^{\left(k\right)}\left(x_0\right)}{k\left(k-1\right)!}k\left(x-x_0\right)^{k-1}\right)}{n\left(x-x_0\right)^{n-1}}                                                                  \\
+                                                                              & \stackrel{\text{dH}}{=}\lim_{x\to x_0}\frac{f^{\left(n-1\right)}\left(x\right)-\left(f^{\left(n-1\right)}\left(x_0\right)+f^{\left(n\right)}\left(x_0\right)\left(x-x_0\right)\right)}{n\left(n-1\right)\cdots3\cdot2\cdot1\cdot\left(x-x_0\right)} \\
+                                                                              & =\frac{1}{n!}\cdot\lim_{x\to x_0}\left(\frac{f^{\left(n-1\right)}\left(x\right)-f^{\left(n-1\right)}\left(x_0\right)}{x-x_0}-f^{\left(n\right)}\left(x_0\right)\right)                                                                              \\
+                                                                              & =\frac{1}{n!}\cdot\left(\left(\lim_{x\to x_0}\frac{f^{\left(n-1\right)}\left(x\right)-f^{\left(n-1\right)}\left(x_0\right)}{x-x_0}\right)-f^{\left(n\right)}\left(x_0\right)\right)                                                                 \\
+                                                                              & =\frac{1}{n!}\cdot\left(f^{\left(n\right)}\left(x_0\right)-f^{\left(n\right)}\left(x_0\right)\right)                                                                                                                                                \\
+                                                                              & =0                                                                                                                                                                                                                                                  
+  \end{align*}
+\end{proof}
+
+\begin{example}
+  $$f\left(x\right)=e^x$$
+  $$f^{\left(n\right)}\left(x\right)=e^x\quad \forall n\in\mathbb{N}$$
+  $$T_{n,0}^f\left(x\right)=\sum_{k=0}^n\frac{1}{k!}\left(x-0\right)^k=\sum_{k=0}^n\frac{x^k}{k!}$$
+\end{example}
+
+\begin{definition}[$o$]
+  Siano $f,g:\ointv{a}{b}\to\reals$, si dice che $f$ è $o$ di $g$ per $x\to x_0$ se:
+  $$\lim_{x\to x_0}\frac{f\left(x\right)}{g\left(x\right)}=0$$
+  e si scrive $f\left(x\right)=o\left(g\left(x\right)\right)$.
+\end{definition}
+
+\begin{example}
+  $$\lim_{x\to 0}\frac{1-\cos x}{x}=0$$
+  $$\impl 1-\cos x=o\left(x\right)\quad x\to0$$
+\end{example}
+
+\begin{theorem}[Taylor con resto di Lagrange]
+  Sia $f:\ointv{a}{b}\to\reals$ derivabile $n+1$ volte in $\ointv{a}{b}$. Sia $x\in\ointv{a}{b}$ fissato, allora esiste $c$ tra $x$ e $x_0$ ($\abs{c-x_0}<\abs{x-x_0}$), tale che:
+  $$f\left(x\right)=T_{n,x_0}^f\left(x\right)+\frac{f^{\left(n+1\right)}\left(c\right)}{\left(n+1\right)!}\left(x-x_0\right)^{n+1}$$
+  In particolare, con $n=0$ è il teorema di Lagrange.
+\end{theorem}
+
+\begin{corollary}
+  Se $M_n\walrus \sup \abs{f^{\left(n\right)}\left(x\right)}<+\infty$, allora:
+  $$\abs{f\left(x\right)-T_{n,x_0}^f\left(x\right)}\le \frac{M_{n+1}}{\left(n+1\right)!}\left(b-a\right)^{n+1}$$
+\end{corollary}
+
+\begin{theorem}[Formula di Stirling]
+  $$n!\sim  \sqrt{2\pi n}\left(\frac{n}{e}\right)^n\quad n\to+\infty$$
+\end{theorem}
+
+\begin{example}
+  Sia $\reals\ni A>0$. Vale:
+  $$\lim_n\frac{A^n}{n!}=\lim_n\frac{A^n}{\sqrt{2\pi n}\left(\frac{n}{e}\right)^n}=\lim_n\left(2\pi n\right)^{-\nicefrac{1}{2}}\left(\frac{A\cdot e}{n}\right)^n=0$$
+  Cioè $A^n=o\left(n!\right)$ per $n\to+\infty$.
+\end{example}
+
+\begin{example}
+  $$f\left(x\right)=e^x\quad x_0=0\quad T\left(x\right)=\sum_{k=0}^n\frac{x^k}{k!}$$
+  $$M_n=\sup_{x\in\ointv{a}{b}}\abs{f^{\left(n\right)}\left(x\right)}=\sup_{x\in\ointv{a}{b}} e^x=e^b$$
+  $$\abs{e^x-\sum_{k=0}^n\frac{x^k}{k!}}\le\frac{e^b}{\left(n+1\right)!}\left(b-a\right)^{n+1}\xrightarrow{n\to+\infty}0$$
+\end{example}
+
+\subsection{Concavità e convessità}
+
+\begin{definition}[Convessità]
+  Se $f:\ointv{a}{b}\to\reals$ derivabile in $\ointv{a}{b}$ è convessa se il suo grafico sta al di sopra di tutte le sue rette tangenti:
+  % TODO: fare una curva convessa e disegnare 3 rette tangenti
+  ossia:
+  $$f\left(x\right)\ge f\left(x_0\right)+f'\left(x_0\right)\left(x-x_0\right)\qquad \forall x\in \ointv{a}{b}$$
+\end{definition}
+
+\begin{definition}[Concavità]
+  Se $f:\ointv{a}{b}\to\reals$ derivabile in $\ointv{a}{b}$ è concava se il suo grafico sta al di sotto di tutte le sue rette tangenti:
+  % TODO: fare una curva concava e disegnare 3 rette tangenti
+  ossia:
+  $$f\left(x\right)\le f\left(x_0\right)+f'\left(x_0\right)\left(x-x_0\right)\qquad \forall x\in \ointv{a}{b}$$
+\end{definition}
+
+\begin{theorem}[Criterio di concavità/convessità]
+  Sia $f:\ointv{a}{b}\to\reals$ derivabile 2 volte. Allora:
+  \begin{itemize}
+    \item $f$ è convessa $\rimpl f^{\left(2\right)}\left(x\right)\ge0\ \forall x\in\ointv{a}{b}$
+    \item $f$ è concava $\rimpl f^{\left(2\right)}\left(x\right)\le0\ \forall x\in\ointv{a}{b}$
+  \end{itemize}
+\end{theorem}
+\begin{proof}
+  Per il teorema di Taylor--Lagrange all'ordine $n=1$, si ha che $\exists\ c:\abs{c-x_0}<\abs{x-x_0}$, tale che:
+  $$f\left(x\right)=T_{1,x_0}^f\left(x\right)+\frac{f^{\left(2\right)}\left(c\right)}{2!}\left(x-x_0\right)^{2}\ge \left(f^{\left(2\right)}\left(c\right)\ge0\right)\ge T_{1,x_0}^f\left(x\right) =f\left(x_0\right)+f'\left(x_0\right)\left(x-x_0\right)$$
+  Analogamente si dimostra per la concavità.
+\end{proof}
+
+\begin{example}
+  $$f\left( x \right)=x^2\qquad f'\left( x \right)=2x\qquad f''\left( x \right)=2$$
+  Poiché $f''\left( x \right)>0\ \forall x\in\reals$, $f$ è convessa in $\reals$.
+\end{example}
+
+\begin{example}
+  $$f\left( x \right)=0\qquad f'\left( x \right)=x^{-1}\qquad f''\left( x \right)=-x^{-2}$$
+  Poiché $f''\left( x \right)<0\ \forall x\in\reals$, $f$ è concava nel suo dominio. 
+\end{example}
+
+\begin{definition}[Flessi]
+  I punti dove cambia la concavità di $f$, cioè dove $f^{\left(2\right)}$ cambia segno sono detti \textbf{flessi}.
+\end{definition}
+
+\begin{example}
+  $$f\left( x \right)=x^3\qquad f'\left( x \right)=3x^2\qquad f''\left( x \right)=6x$$
+  $$f''\left( x \right)>0\iff x>0\qquad f''\left( x \right)<0\iff x<0$$
+  Pertanto $x=0$ è un flesso.
+\end{example}
