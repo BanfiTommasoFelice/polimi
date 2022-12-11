@@ -1,0 +1,458 @@
+\section[Calcolo integrale]{Calcolo integrale secondo Riemann}
+
+\begin{definition}[Partizione di intervalli]
+  Sia $I\walrus\intv{a}{b}\subset\reals$. Una partizione $P\walrus\left\{ I_k \right\}_{k=1}^n$ è una famiglia finita di intervalli $I_k\walrus\intv{x_k}{x_{k+1}}\subset I:x_0=a,x_n=b$, tali che:
+  $$I=\bigcup_{k=1}^nI_k$$
+  $$k\neq j\impl I_k\cap I_j=\emptyset \vee I_k \cap I_j=\left\{ x \right\}$$
+\end{definition}
+
+\begin{definition}
+  La lunghezza di un intervallo $I_k=\intv{x_k}{x_{k+1}}$ è:
+  $$\abs{I_k}=\abs{\intv{x_k}{x_{k+1}}}=x_{k+1}-x_k$$
+\end{definition}
+
+\begin{definition}[Classe $\mathcal{P}$]
+  Si definisce classe $\mathcal{P}$ di un intervallo $I$ l'insieme di tutte le partizioni di $I$.
+\end{definition}
+
+\begin{definition}[Somme inferiori e superiori]
+  Sia $f:I\to\reals$ una funzione limitata.
+  Sia $P=\left\{ I_k \right\}_{k=1}^n\in\mathcal{P}\left( I \right)$.
+  
+  \noindent Si definisce somma inferiore di $f$ in $P$:
+  $$s\left( f,P \right)\walrus \sum_{k=1}^n\abs{I_k}\cdot \inf_{I_k}f$$
+  ossia la somma delle aree dei più piccoli rettangoli sotto $\mathcal{G}\left( f \right)$ sui vari $I_k$.
+  
+  \noindent Si definisce somma superiore di $f$ in $P$:
+  $$S\left( f,P \right)\walrus \sum_{k=1}^n\abs{I_k}\cdot \sup_{I_k}f$$
+  ossia la somma delle aree dei più grandi rettangoli sotto $\mathcal{G}\left( f \right)$
+  sui vari $I_k$.
+\end{definition}
+% TODO: 2 grafici con stessa curva; nel primo si prendono le somme inferiori, nel secondo le somme superiori; mettere x_0, x_n e i vari I_k
+
+\begin{observation}
+  $$-\infty<s\left( f,P \right)\le S\left( f,P \right)<+\infty$$
+\end{observation}
+
+\begin{definition}[Integrale inferiore]
+  $$\underbar{I}\left( f \right)\walrus \sup\left\{ s\left( f,P \right):P\in \mathcal{P}\left( I \right) \right\}$$
+\end{definition}
+
+\begin{definition}[Integrale superiore]
+  $$\bar{I}\left( f \right)\walrus \inf\left\{ S\left( f,P \right):P\in \mathcal{P}\left( I \right) \right\}$$
+\end{definition}
+
+\begin{observation}
+  $$\underbar{I}\left( f \right)\le \bar{I}\left( f \right)$$
+\end{observation}
+
+\begin{definition}[Integrale di Riemann]
+  Se $\underbar{I}\left( f \right)=\bar{I}\left( f \right)$, allora si dice che $f$ è integrabile, secondo Riemann, sull'intervallo $I\walrus\intv{a}{b}$ e il valore comune è detto \textbf{integrale} di $f$ su $I$:
+  $$\int_If=\int_If\left( x \right)\,dx=\underbar{I}\left( f \right)=\bar{I}\left( f \right)=\int_a^bf\left( x \right)\,dx$$
+\end{definition}
+
+\begin{example}
+  \emph{Funzione di Dirichlet}
+  $$
+    f:\intv{0}{1}\to\reals\qquad f\left( x \right)=
+    \begin{cases}
+      0 & x\in\intv{0}{1}\cap\mathbb{Q}      \\
+      1 & x\in\intv{0}{1}\setminus\mathbb{Q} \\
+    \end{cases}
+  $$
+  $$s\left( f,P \right)=0\quad \forall P\in\mathcal{P}\left( I \right)\impl \underbar{I}=0$$
+  $$S\left( f,P \right)=1\quad \forall P\in\mathcal{P}\left( I \right)\impl \bar{I}=1$$
+  $$\underbar{I}\neq\bar{I}\iff \nexists \int_If$$
+\end{example}
+
+\begin{theorem}[Integrabilità delle funzioni continue]
+  Sia $f\in C\left( \intv{a}{b} \right)$. Allora $f$ è integrabile in $\intv{a}{b}$.
+\end{theorem}
+
+\begin{definition}[Classe $\mathcal{R}$]
+  Si definisce classe $\mathcal{R}$ (`R' sta per ``Riemann'') di un intervallo $I$ l'insieme l'insieme di tutte le funzioni integrabili su $I$.
+\end{definition}
+
+\begin{observation}
+  $$\mathcal{C}\left( I \right)\subset\mathcal{R}\left( I \right)$$
+\end{observation}
+
+\subsection{I teorema fondamentale del calcolo integrale}
+
+\begin{definition}[Primitiva]
+  Sia $f:\ointv{a}{b}\to\reals$. Una funzione $F:\ointv{a}{b}\to\reals$ è detta \textbf{primitiva} di $f$ se $F$ è derivabile e $F'\left( x \right)=f\left( x \right)\ \forall x\in\ointv{a}{b}$.
+\end{definition}
+
+\begin{example}
+  $$f\left( x \right)=x^2\qquad F\left( x \right)=\frac{1}{3}x^3$$
+  $$F'\left( x \right)=\frac{1}{3}\cdot 3\cdot x^2=x^2=f\left( x \right)$$
+\end{example}
+
+\begin{example}
+  $$f\left( x \right)=\frac{1}{x}\qquad F\left( x \right)=\ln \abs{x}$$
+  $$F'\left( x \right)=\frac{\sgn x}{x}=f\left( x \right)$$
+\end{example}
+
+\begin{lemma}
+  Due primitive $F$ e $G$ di $f$ differiscono per una costante su $\intv{a}{b}$.
+\end{lemma}
+\begin{proof}
+  $$F'=f\qquad G'=f$$
+  $$\left( F-G \right)'=F'-G'=f-f=0$$
+  Pertanto, $F-G$ è costante su $\intv{a}{b}$.
+\end{proof}
+
+\begin{theorem}[I teorema fondamentale del calcolo]
+  Sia $f\in\mathcal{R}\left( I \right)$, con $I=\intv{a}{b}\subset\reals$. Sia $F:\ointv{a}{b}\to\reals$ una primitiva di $f$. Allora:
+  $$\int_a^bf\left( x \right)\,dx=F\left( b \right)-F\left( a \right)$$
+\end{theorem}
+\begin{proof}
+  Per ogni partizione $P=\left\{ I_k \right\}_{k=1}^n$, con $I_k=\intv{x_k}{x_{k+1}}:x_0=a,x_n=b$, si ha:
+  $$F\left( b \right)-F\left( a \right)=F\left( x_n \right)-F\left( x_0 \right)=\sum_{k=1}^{n}\left( F\left( x_k \right)-F\left( x_{k-1} \right) \right)$$
+  Per il teorema di Lagrange, applicato ad $F$ su $\intv{x_{k-1}}{x_k}$, $\exists\ y_k\in\ointv{x_{k-1}}{x_k}$, tale che:
+  $$\frac{F\left( x_k \right)-F\left( x_{k-1} \right)}{x_k-x_{k-1 }}=F'\left( y_k \right)=f\left( y_k \right)$$
+  ossia:
+  $$F\left( x_k \right)-F\left( x_{k-1} \right)=f\left( y_k \right)\cdot\left( x_k-x_{k-1} \right)=\abs{I_k}\cdot f\left( y_k \right)$$
+  Pertanto:
+  $$F\left( b \right)-F\left( a \right)=\sum_{k=1}^{n}\left( F\left( x_k \right)-F\left( x_{k-1} \right) \right)=\sum_{k=1}^{n}\abs{I_k}f\cdot\left( y_k \right)$$
+  Poiché $y_k\in\ointv{x_{k-1}}{x_k}$, allora $\inf_{I_k}f\le f\left( y_k \right)\le \sup_{I_k} f$ e, inoltre:
+  $$\sum_{k=1}^{n}\abs{I_k}\cdot\inf_{I_k}f \le\sum_{k=1}^{n}\abs{I_k}\cdot f\left( y_k \right)\le\sum_{k=1}^{n}\abs{I_k}\cdot\sup_{I_k}f$$
+  ossia:
+  $$s\left( f,P \right)\le F\left( b \right)-F\left( a \right)\le S\left( f,P \right)$$
+  Passando al limite:
+  $$\sup\left\{ s\left( f,P \right):P\in \mathcal{P}\left( I \right) \right\}\le F\left( b \right)-F\left( a \right)\le \inf\left\{ S\left( f,P \right):P\in \mathcal{P}\left( I \right) \right\}$$
+  $$\underbar{I}\le F\left( b \right)-F\left( a \right)\le \bar{I}$$
+  Ma, poiché per ipotesi $f$ è integrabile, e quindi $\underbar{I}=\bar{I}$, allora:
+  $$F\left( b \right)-F\left( a \right)=\underbar{I}=\bar{I}=\int_a^bf\left( x \right)\,dx$$
+\end{proof}
+
+\begin{example}
+  $$f\left( x \right)=x^2\quad F\left( x \right)=\frac{1}{3}x^3$$
+  $$\int_0^1x^2\,dx=\frac{1}{3}\cdot1^3-\frac{1}{2}\cdot0^3=\frac{1}{3}$$
+\end{example}
+
+\begin{example}
+  \emph{Legge dei gas perfetti}
+  $$pV=nRT$$
+  dove $p$, $V$, $n$, $R$, $T$ sono, rispettivamente, pressione, volume, quantità di sostanza, costante dei gas, temperatura assoluta.
+  $$\int_{V_A}^{V_B}p\left( V \right)\,dV=\int_{V_A}^{V_B}\frac{nRT}{V}\,dV=nRT\ln V_B-nRT\ln V_A=nRT\ln\frac{V_B}{V_A}$$
+\end{example}
+
+\subsection{Proprietà}
+
+\begin{theorem}[Linearità]
+  Siano $f,g\in\mathcal{R}\left( I \right)$ e $a,b\in\reals$. Vale la seguente proprietà:
+  $$\int_I af+bg=a\int_If+b\int_Ig$$
+\end{theorem}
+
+\begin{theorem}[Positività]
+  Sia $f\in\mathcal{R}\left( I \right)$, tale che $f\ge0$. Vale la seguente proprietà:
+  $$\int_If\ge0$$
+\end{theorem}
+
+\begin{theorem}[Monotonia]
+  Siano $f,g\in\mathcal{R}\left( I \right)$, tali che $f\left( x \right)\le g\left( x \right)\ \forall x\in I$. Vale la seguente proprietà:
+  $$\int_If\le\int_Ig$$
+\end{theorem}
+
+\begin{theorem}[Annullamento]
+  Sia $f\in\mathcal{C}\left( I \right)\subset \mathcal{R}\left( I \right)$, tale che $f\left( x \right)\ge0\ \forall x\in I$. Vale la seguente proprietà:
+  $$\int_If=0\impl f\left( x \right)=0\quad \forall x\in I$$
+\end{theorem}
+
+\begin{theorem}[Additività rispetto all'intervallo di integrazione]
+  Siano $a,b,c\in\reals:a<b<c$ e $f\in\mathcal{R}\left( \intv{a}{b} \right)\cap \mathcal{R}\left( \intv{b}{c} \right)$. Allora:
+  $$f\in\mathcal{R}\left( \intv{a}{c} \right)$$
+  $$\int_a^cf=\int_a^bf+\int_b^cf$$
+  % TODO: grafico 
+\end{theorem}
+
+\begin{definition}[Orientazione]
+  Se $b<a$ si definisce
+  $$\int_a^bf\walrus-\int_b^af$$
+\end{definition}
+
+\begin{observation}
+  In forza della definizione di orientazione, la proprietà di additività continua a valere qualunque sia l'ordine di $a,b,c$.
+\end{observation}
+
+\subsection*{Interpretazioni di integrale}
+
+\begin{example}
+  Sia $v:\intv{t_1}{t_2}\to\reals$ la velocità istantanea di una particella che si muove.
+  Lo spostamento tra i due tempi $t_1$ e $t_2$ è dato da:
+  $$\int_{t_1}^{t_2}v\left( t \right)\,dt$$
+  La distanza percorsa tra $t_1$ e $t_2$ è data da:
+  $$\int_{t_1}^{t_2}\abs{v\left( t \right)}\,dt$$
+\end{example}
+\begin{example}
+  Sia $p\in\mathcal{R}\left( I \right)$, tale che $p\left( x \right)\ge0\ \forall x\in I$.
+  Se $$\int_Ip\left( x \right)\,dx=1$$ la funzione $p$ è densità di probabilità. Allora $\forall J\subset I$ l'integrale
+  $$\int_Jp\left( x \right)\,dx$$
+  è la probabilità che dell'evento in $J$.
+\end{example}
+\begin{example}
+  Sia $p\in\mathcal{R}\left( I \right)$, tale che $p\left( x \right)\ge0\ \forall x\in I$ e, inoltre:
+  $$\int_Ip\left( x \right)\,dx=1$$
+  
+  L'entropia di Shannon, o di Von Neumann, è:
+  $$H\left( p \right)\walrus -\int_Ip\left( x \right)\ln p\left( x \right)\,dx$$
+  che rappresenta il contenuto informativo di $p$.
+  
+  L'entropia relativa, invece, è:
+  $$H\left( p,q \right)\walrus \int_Ip\ln p-\int_Ip\ln q=\int_Ip\ln\left( \frac{p}{q} \right)$$
+  tanto più grande è $H\left( p,q \right)$, tanto più facile è distinguere le informazioni sul sistema contenute nelle distribuzioni $p$ e $q$.
+\end{example}
+
+\subsection{Regole di integrazione}
+
+\begin{theorem}[Integrazione per parti]
+  Siano $f,g\in\mathcal{C}\left( \intv{a}{b} \right)$ derivabili in $\intv{a}{b}$, tali che $f',g'\in\mathcal{C}\left( \intv{a}{b} \right)$.
+  Allora:
+  $$\int_a^bf'g=fg\Big|_a^b-\int_a^bfg'$$
+\end{theorem}
+\begin{proof}
+  Per la regola di Leibnitz di derivazione di prodotti, si ha:
+  $$\left( fg \right)'=f'g+fg'$$
+  $$\int_a^b\left( fg \right)'=\int_a^bf'g+fg'=\int_a^bf'g+\int_a^bfg'$$
+  Per il I teorema del calcolo integrale, si ha:
+  $$\int_a^b\left( fg \right)'=\int_a^bf'g+\int_a^bfg'$$
+\end{proof}
+
+\begin{example}
+  $$\int_0^1xe^x\,dx$$
+  \begin{center}
+    \begin{tblr}{c|c|c}
+          & D   & I     \\
+      \hline
+      $+$ & $x$ & $e^x$ \\
+      $-$ & $1$ & $e^x$ \\
+      $+$ & $0$ & $e^x$ \\
+    \end{tblr}
+  \end{center}
+  $$\int_0^1xe^x\,dx=\left( xe^x-e^x \right)\Big|_0^1=\left( e-e \right)-\left( -1 \right)=1$$
+\end{example}
+
+\begin{example}
+  $$\int_0^{2\pi}\sin^2x\,dx$$
+  \begin{center}
+    \begin{tblr}{c|c|c}
+          & D        & I         \\
+      \hline
+      $+$ & $\sin x$ & $\sin x$  \\
+      $-$ & $\cos x$ & $-\cos x$ \\
+    \end{tblr}
+  \end{center}
+  \begin{align*}
+    \int\sin^2x\,dx & =-\sin x\cos x+\int \cos^2x\,dx          \\
+                    & =-\sin x\cos x+\int 1-\sin^2x\,dx        \\
+                    & =-\sin x\cos x+\int1\,dx-\int\sin^2x\,dx \\
+                    & =-\sin x\cos x+x-\int\sin^2x\,dx         
+  \end{align*}
+  $$2\int\sin^2x\,dx=x-\sin x\cos x+c$$
+  $$\int\sin^2x\,dx=\frac{x-\sin x\cos x}{2}+c$$
+  $$\int_0^{2\pi}\sin^2x\,dx=\frac{x-\sin x\cos x}{2}\Big|_0^{2\pi}=\frac{2\pi}{2}=\pi$$
+\end{example}
+
+
+\begin{theorem}[Integrazione per sostituzione]
+  Siano $f\in\mathcal{C}\left( \intv{a}{b} \right)\subset\mathcal{R}\left( \intv{a}{b} \right)$ e $\phi:\intv{c}{d}\to\intv{a}{b}$ derivabile, tale che $\phi'\in\mathcal{C}\left( \intv{c}{d} \right)$ sia strettamente monotona crescente e, inoltre:
+  $$\phi\left( c \right)=a\quad\phi\left( d \right)=b$$
+  Allora vale:
+  $$\int_a^bf\left( y \right)\,dy=\int_c^df\left( \phi\left( x \right) \right)\phi'\left( x \right)\,dx$$
+\end{theorem}
+\begin{proof}
+  Sia $F:\intv{a}{b}\to\reals$ una primitiva di $f$, cosicché, per il I teorema fondamentale del calcolo:
+  $$\int_a^bf\left( y \right)\,dy=F\left( b \right)-F\left( a \right)$$
+  Sia $G\walrus F\circ \phi:\intv{c}{d}\to\reals$; per il teorema della derivata composta, si ha:
+  $$G'=\left( F'\circ \phi \right)\phi'$$
+  ossia:
+  $$G'\left( x \right)=F'\left( \phi\left( x \right) \right)\phi'\left( x \right)=f\left( \phi\left( x \right) \right)\phi'\left( x \right)$$
+  Pertanto $G'$ è una primitiva di $\left( f\circ \phi \right)\phi'$, e quindi, per il I teorema fondamentale del calcolo:
+  $$\int_c^df\left( \phi\left( x \right) \right)\phi'\left( x \right)\,dx=G\left( d \right)-G\left( c \right)=F\left( \phi\left( d \right) \right)-F\left( \phi\left( c \right) \right)=F\left( b \right)-F\left( a \right)=\int_a^bf\left( y \right)\,dy$$
+\end{proof}
+
+\begin{example}
+  $$I=\int_0^{\ln\sqrt{3}}\frac{1}{e^x+e^{-x}}\,dx$$
+  $$\phi\left( x \right)=y=e^x$$
+  $$dy=\phi'\left( x \right)\,dx=e^x\,dx$$
+  $$dx=\left( e^x \right)^{-1}\,dy=y^{-1}\,dy$$
+  $$\intv{c}{d}=\intv{0}{\ln\sqrt{3}}$$
+  $$\intv{a}{b}=\intv{\phi\left( c \right)}{\phi\left( d \right)}=\intv{1}{\sqrt{3}}$$
+  $$I=\int_1^{\sqrt{3}}\frac{1}{y+y^{-1}}\cdot\frac{1}{y}\,dy=\int_1^{\sqrt{3}}\frac{1}{1+y^2}\,dy=\atan y\Big|_1^{\sqrt{3}}=\frac{\pi}{3}-\frac{\pi}{4}=\frac{\pi}{12}$$
+\end{example}
+
+\subsection{II teorema fondamentale del calcolo integrale}
+
+\begin{theorem}[Media integrale]
+  Sia $f\in\mathcal{C}\left( \intv{a}{b} \right)\subset\mathcal{R}\left( \intv{a}{b} \right)$. Allora $\exists\ x_0\in\intv{a}{b}$, tale che:
+  $$\frac{1}{b-a}\int_a^bf=f\left( x_0 \right)\iff \int_a^bf=f\left( x_0 \right)\cdot\left( b-a \right)$$
+  L'espressione $\frac{1}{b-a}\int_a^bf$ prende il nome di \textbf{media integrale}.
+  % TODO: grafico; curva con area sottostante colorata; punto della curva da cui parte una parallela all'asse delle x, cui si colora la parte sottostante: le due aree sono uguali
+\end{theorem}
+\begin{proof}
+  Per il teorema di Weierstrass, $f$ ammette\footnote{assume} estremi assoluti su $\intv{a}{b}$:
+  $$m\le f\left( x \right)\le M$$
+  Per la monotonia, si ha:
+  $$m\left( b-a \right)=\int_a^bm\le \int_a^bf\le \int_a^bM=M\left( b-a \right)$$
+  $$m\le \frac{1}{b-a}\int_a^bf\le M$$
+  Per il teorema dei valori intermedi, si ha che:
+  $$\exists\ x_0\in\intv{a}{b}:\frac{1}{b-a}\int_a^bf=f\left( x_0 \right)$$
+\end{proof}
+
+\begin{example}
+  $$f\left( x \right)=\sin x\qquad x\in\intv{0}{2\pi}$$
+  $$\frac{1}{2\pi}\int_0^{2\pi}\sin x\,dx=-\frac{1}{2\pi}\cos x\Big|_0^{2\pi}=-\frac{1}{2\pi}\left( 1-1 \right)=0$$
+  % TODO: grafico; sin da 0 a 2pi e colorare l'area integrale
+\end{example}
+
+\begin{example}
+  $$
+    f\left( x \right)=
+    \begin{cases}
+      1  & x\in\intv{0}{1}   \\
+      -1 & x\in\rintv{-1}{0} \\
+    \end{cases}
+  $$
+  % TODO: disegna la funzione
+  $$\frac{1}{2}\int_{-1}^1f\left( x \right)\,dx=\frac{1}{2}\left( \int_{-1}^0\left( -1 \right)\,dx+\int_0^11\,dx \right)=\frac{1}{2}\left( \left( -1 \right)\cdot1+1\cdot1 \right)=0\neq f\left( x \right)\ \forall x\in\intv{-1}{1}$$
+\end{example}
+
+\begin{theorem}[II teorema fondamentale del calcolo]
+  Siano $f\in\mathcal{R}\left( \intv{a}{b} \right)$ e $F:\intv{a}{b}\to\reals$, detta \textbf{funzione integrale} di $f$:
+  $$F\left( x \right)\walrus\int_a^xf=\int_a^xf\left( y \right)\,dy$$
+  Allora, se $f$ è limitata, allora $F$ è continua, e, se $f$ è continua, allora $F$ è derivabile in $\ointv{a}{b}$ e, in particolare, $F'\left( x \right)=f\left( x \right)$, con $x\in\ointv{a}{b}$, cioè:
+  $$\frac{d}{dx}\int_a^xf=f\left( x \right)\quad x\in\ointv{a}{b}$$
+\end{theorem}
+\begin{proof}
+  Se $f$ è limitata, allora $\exists\ M\ge0:\abs{f\left( x \right)}\le M\ \forall x\in\intv{a}{b}$, da cui:
+  $$F\left( x+h \right)-F\left( x \right)=\int_a^{x+h}f-\int_a^xf=\int_x^{x+h}f$$
+  $$\abs{F\left( x+h \right)-F\left( x \right)}=\abs{\int_a^{x+h}f-\int_a^xf}=\abs{\int_x^{x+h}f}\le \int_x^{x+h}\abs{f}\le\int_x^{x+h}M=M\cdot\abs{h}$$
+  $$M\cdot\abs{h}\xrightarrow{h\to0} 0\impl \lim_{h\to0}\abs{F\left( x+h \right)-F\left( x \right)}=0$$
+  Pertanto:
+  $$\lim_{h\to0}F\left( x+h\right)=F\left( x \right)$$
+  e, quindi, in virtù del fatto che $x$ può essere scelta arbitrariamente in $\intv{a}{b}$, $F\in\mathcal{C}\left( \intv{a}{b} \right)$.
+  
+  $$\frac{F\left( x+h \right)-F\left( x \right)}{h}=\frac{1}{h}\int_x^{x+h}f$$
+  Per il teorema della media integrale, per un opportuno $y\left( h \right):\abs{y\left( h \right)-x}\le\abs{\left( x+h \right)-x}=\abs{h}$, si ha:
+  $$\frac{1}{h}\int_x^{x+h}f=f\left( y\left( x \right) \right)$$
+  Quindi $\lim y\left( h \right)=x$ e, poiché $f$ è continua in $x$, si ha:
+  $$\lim_{h\to0}\frac{F\left( x+h \right)-F\left( x \right)}{h}=\lim_{h\to0}f\left( y\left( h \right) \right)=f\left( \lim_{h\to0}y\left( h \right) \right)=f\left( x \right)$$
+  % TODO: grafico; curva f, con punti a<x<b; colorare area F(x)=\int_a^x f (area sotto f tra a e x); indicare x+h con h>0 e colorare l'area F(x+h)=\int_a^{x+h} f (area sotto f da a a x+h)
+\end{proof}
+\begin{observation}
+  Il I teorema fondamentale del calcolo si può esprimere nel seguente modo:
+  $$\int_a^xF'=F\left( x \right)-F\left( a \right)\iff F\left( x \right)=F\left( a \right)+\int_a^xF'$$
+\end{observation}
+
+\begin{lemma}[Integrabilità di funzioni a salti]
+  Se $f:\intv{a}{b}\to\reals$ è continua salvo al più in numero finito di punti in cui ha salti, allora $f\in\mathcal{R}\left( \intv{a}{b} \right)$.
+\end{lemma}
+\begin{proof}
+  Siano $x_1,\dots,x_n\in\ointv{a}{b}$ i punti  di salto, allora $f\in\mathcal{C}\left( \intv{x_k}{x_{k+1}} \right)\impl f\in\mathcal{R}\left( \intv{x_k}{x_{k+1}} \right)\ \forall k\in\rintv{1}{n}$. Per l'additività, si ha:
+  $$\int_a^bf=\sum_{k=1}^{n-1}\int_{x_k}^{x_{k+1}}f$$
+\end{proof}
+
+\begin{definition}[Integrale di funzioni su insiemi non limitati]
+  Sia $f:\rintv{a}{+\infty}\to\reals$. $f$ è integrabile su $\rintv{a}{+\infty}$ se $\abs{f}\in\mathcal{R}\left( \intv{a}{b} \right)\ \forall\ b>a$ e $\exists\ \lim_{b}\int_a^b\abs{f}$.
+  Allora $\exists\ \lim_{b\to+\infty}\int_a^bf$, $f$ si dice integrabile su $\rintv{a}{+\infty}$ e il suo integrale è definito come:
+  $$\int_a^{+\infty}f\walrus\lim_{b\to+\infty}\int_a^bf$$
+\end{definition}
+
+\begin{example}
+  $$I_\alpha\walrus\int_1^{+\infty}\frac{1}{x^\alpha}\qquad \a>0$$
+  $$f_\alpha\left( x \right)=x^{-\alpha}$$
+  $$
+    \int_1^bx^{-\alpha}\,dx=
+    \begin{cases}
+      \ln x\Big|_1^b=\ln b                                                     & \alpha=1    \\
+      \frac{x^{-\alpha+1}}{-\alpha+1}\Big|_1^b=\frac{b^{1-\alpha}-1}{1-\alpha} & \alpha\neq1 \\
+    \end{cases}
+  $$
+  $$
+    \lim_{b\to+\infty}\int_1^bx^{-\alpha}\,dx=
+    \begin{cases}
+      +\infty            & \alpha=1 \\
+      +\infty            & \alpha<1 \\
+      \frac{1}{\alpha-1} & \alpha>1 \\
+    \end{cases}
+  $$
+  $$\left( f_\alpha\in\mathcal{R}\left( \rintv{1}{+\infty} \right)\iff \alpha>1 \right) \impl I_\alpha=\frac{1}{\alpha-1}$$
+\end{example}
+
+\begin{definition}[Integrale di funzioni non limitate]
+  Sia $f:\lintv{a}{b}\to\reals$. $f$ è integrabile su $\lintv{a}{b}$ se $\abs{f}\in\mathcal{R}\left( \intv{a+\epsilon}{b} \right)\ \forall\epsilon>0$ e $\exists\ \lim_{\epsilon\to0}\int_{a+\epsilon}^b\abs{f}$.
+  In tal caso il suo integrale è definito come:
+  $$\int_a^bf\walrus\lim_{\epsilon\to0}\int_{a+\epsilon}^bf$$
+\end{definition}
+
+\begin{example}
+  $$J_\beta\walrus\int_0^1\frac{1}{x^\beta}\qquad\b>0$$
+  $$f_\beta\left( x \right)=x^{-\beta}$$
+  $$
+    \int_\epsilon^1x^{-\beta}\,dx=
+    \begin{cases}
+      \ln x\Big|_\epsilon^1=-\ln\epsilon                                                & \beta=1    \\
+      \frac{x^{-\beta+1}}{1-\beta}\Big|_\epsilon^1=\frac{1-\epsilon^{1-\beta}}{1-\beta} & \beta\neq1 \\
+    \end{cases}
+  $$
+  $$
+    \lim_{\epsilon\to0}\int_\epsilon^1x^{-\beta}\,dx=
+    \begin{cases}
+      +\infty           & \beta=1 \\
+      +\infty           & \beta>1 \\
+      \frac{1}{1-\beta} & \beta<1 \\
+    \end{cases}
+  $$
+  $$\left( f_\beta\in\mathcal{R}\left( \intv{0}{1} \right)\iff \beta<1 \right) \impl J_\beta=\frac{1}{1-\beta}$$
+\end{example}
+
+\begin{definition}[Funzione integrale]
+  Sia $f:\ointv{a}{b}\to\reals$ e $x_0\in\ointv{a}{b}$. Si definisce funzione integrale la funzione $F_{x_0}:D\left( F_{x_0} \right)\to\reals$, definita come:
+  $$F_{x_0}\left( x \right)\walrus \int_{x_0}^xf\left( y \right)\,dy$$
+  dove $D\left( F_{x_0} \right)$ è il più grande intervallo dove $f$ è integrabile, contenente $x_0$.
+\end{definition}
+
+\begin{observation}
+  Per il II teorema fondamentale del calcolo, se $f$ è limitata, allora $F_{x_0}$ è continua, e, se $f$ è continua, allora $F_{x_0}$ è derivabile e $F_{x_0}$ è una primitiva di $f$:
+  $$F_{x_0}'\left( x \right)=f\left( x \right)$$
+\end{observation}
+
+\begin{example}
+  $$f\left( x \right)=\frac{1}{\sqrt[3]{x\left( x-1 \right)}}$$
+  $$F_{\nicefrac{1}{2}}\left( x \right)=\int_{\nicefrac{1}{2}}^xf\left( y \right)\,dy$$
+  $$f\in\mathcal{C}\left( \reals\setminus\left\{ 0,1 \right\} \right)$$
+  $$f\left( x \right)\stackrel{x\to0}{\sim}-\frac{1}{\sqrt[3]{x}}$$
+  $$f\left( x \right)\xrightarrow{x\to1}\frac{1}{\sqrt[3]{x-1}}$$
+  Pertanto\footnote{per quanto dimostrato prima}, $f$ è integrabile sia in un intorno di $x=0$ sia in un intorno di $x=1$, da cui $F_{\nicefrac{1}{2}}\in\mathcal{R}\left( \reals \right)$.
+  % TODO: fare grafico della funzione e relativo integrale
+\end{example}
+
+\begin{example}
+  $$f\left( x \right)=\frac{1}{\sqrt[3]{x}\left( x-1 \right)}$$
+  $$F_{\nicefrac{1}{2}}\left( x \right)=\int_{\nicefrac{1}{2}}^xf\left( y \right)\,dy$$
+  $$f\left( x \right)\stackrel{x\to0}{\sim}-\frac{1}{\sqrt[3]{x}}$$
+  $$f\left( x \right)\stackrel{x\to1}{\sim}\frac{1}{x-1}$$
+  Pertanto, $f$ è integrabile in un intorno di $x=0$ ma non in un intorno di $x=1$, da cui $F_{\nicefrac{1}{2}}\in\mathcal{R}\left( \ointv{-\infty}{1} \right)$.
+\end{example}
+
+\begin{example}
+  $$f\left( x \right)=\frac{1}{\sqrt[3]{x}\left( x-1 \right)}$$
+  $$F_2\left( x \right)=\int_2^xf\left( x \right)\,dx$$
+  $$f\left( x \right)\stackrel{x\to0}{\sim}-\frac{1}{\sqrt[3]{x}}$$
+  $$f\left( x \right)\stackrel{x\to1}{\sim}\frac{1}{x-1}$$
+  Pertanto, $f$ è integrabile in un intorno di $x=0$ ma non in un intorno di $x=1$, da cui $F_2\in\mathcal{R}\left( \ointv{1}{+\infty} \right)$.
+\end{example}
+
+\begin{observation}
+  \emph{Derivata di funzione integrale composta}
+  
+  Sia $G$ la funzione integrale di $f$, definita come:
+  $$G\left( x \right)\walrus\int_a^{\phi\left( x \right)}f\left( y \right)\,dy$$
+  Sia $F$ la funzione integrale di $f$:
+  $$F\left( x \right)\walrus\int_a^xf\left( y \right)\,dy$$
+  Allora:
+  $$G\left( x \right)=F\left( \phi\left( x \right) \right)$$
+  Da cui segue:
+  $$G'\left( x \right)=F'\left( \phi\left( x \right) \right)\phi'\left( x \right)=f\left( \phi\left( x \right) \right)\phi\left( x \right)$$
+\end{observation}
