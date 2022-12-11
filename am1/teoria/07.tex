@@ -1,0 +1,515 @@
+\section{Serie numeriche}
+
+% \paragraph*{Motivazione}
+% $$I=\intv{0}{1}=\bigcup_{n=0}^\infty I_n$$
+% $$I_0=\intv{0}{\nicefrac{1}{2}}$$
+% $$I_1=\intv{\nicefrac{1}{2}}{\nicefrac{1}{2}+\nicefrac{1}{4}}$$
+% $$I_2=\intv{\nicefrac{1}{2}+\nicefrac{1}{4}}{\nicefrac{1}{2}+\nicefrac{1}{4}+\nicefrac{1}{8}}$$
+% % TODO: disegnare i pezzetti
+% $$\abs{I}=1$$
+% $$\abs{I_n}=2^{-\left( n+1 \right)}$$
+% $$1=\abs{I_0}+\abs{I_1}+\cdots+\abs{I_n}+\cdots=\sum_{n=0}^\infty\abs{I_n}$$
+\begin{definition}[Serie numerica]
+  Sia $\left\{ a_n \right\}_{n=0}^\infty\subset\reals$ una successione. Si definisce un'altra successione $\left\{ s_N \right\}_{N=0}^\infty$, detta delle somme parziali:
+  $$s_N\walrus \sum_{n=0}^Na_n=a_0+a_1+\cdots+a_N$$
+  
+  Se la successione $\left\{ s_N \right\}$ ammette limite, si dice che la serie definita dai coefficienti $\left\{ a_n \right\}$ converge. 
+  Se $\left\{ s_N \right\}$ converge a $\pm\infty$, si dice che la successione diverge.  
+  Se $\left\{ s_N \right\}$ non ammette limite si dice che la serie è indeterminata.
+  
+  $$\sum_{n=0}^\infty a_n\walrus\lim_{N\to+\infty}s_N=\lim_{N\to+\infty}\sum_{n=0}^Na_n$$
+\end{definition}
+
+Nella pratica, tuttavia, si usa il simbolo:
+$$\sum_{n=0}^\infty a_n$$
+per denotare tutto ciò, anche quando la serie non converge.
+
+\begin{example}
+  $$\sum_{n=1}^\infty\frac{1}{2^n}=1$$
+  $$s_N=\sum_{n=1}^N\frac{1}{2^n}=\frac{1}{2}+\frac{1}{4}+\cdots+\frac{1}{2^N}=\frac{2^{N-1}+2^{N-2}+\cdots+1}{2^N}=\frac{2^N-1}{2^N}$$
+  $$\lim_{N\to\infty}s_N=\lim_{N\to\infty}\frac{2^N-1}{2^N}=\lim_{N\to\infty}\left( \frac{2^N}{2^N}+\frac{1}{2^N} \right)=1+0=1$$
+\end{example}
+
+\begin{example}
+  $$a_n\ge0\quad \forall n\in\rintv{0}{\infty}$$
+  $$f:\rintv{0}{+\infty}\to\reals\qquad f\left( x \right)=a_n\quad x\in\rintv{n}{n+1}$$
+  $$\sum_{n=0}^\infty a_n=\int_0^\infty f\left( x \right)\,dx$$
+  % TODO: grafico; funzione curva, ridotta a scalini
+\end{example}
+
+\begin{lemma}[Serie di Mengoli]
+  $$\sum_{n=1}^\infty\frac{1}{n\left( n+1 \right) }=1$$
+\end{lemma}
+\begin{proof}
+  $$a_n=\frac{1}{n\left( n+1 \right)}\qquad n\ge1$$
+  $$s_N=\sum_{n=1}^N\frac{1}{n\left( n+1 \right)}=\sum_{n=1}^N\left( \frac{1}{n}-\frac{1}{n+1} \right)=1-\frac{1}{N+1}$$
+  $$\sum_{n=0}^\infty\frac{1}{n\left( n+1 \right)}=\lim_{N\to+\infty}s_N=\lim_{N\to+\infty}\left( 1-\frac{1}{N+1} \right)=1$$
+\end{proof}
+
+\begin{example}
+  $$\sum_{n=1}^\infty\ln\left( \frac{n+1}{n} \right)=\sum_{n=1}^\infty\left( \ln\left( n+1 \right)-\ln n \right)$$
+  $$s_N=\sum_{n=1}^N\left( \ln\left( n+1 \right)-\ln n \right)=\ln\left( N+1 \right)-\ln 1=\ln\left( N+1 \right)$$
+  $$\sum_{n=1}^\infty\ln\left( \frac{n+1}{n} \right)=\lim_{N\to+\infty}\ln\left( N+1 \right)=+\infty$$
+\end{example}
+
+\begin{example}
+  $$\sum_{n=0}^\infty\left( -1 \right)^n$$
+  $$
+    s_N=\sum_{n=0}^N\left( -1 \right)^n=\left( -1 \right)^0+\left( -1 \right)^1+\left( -1 \right)^2+\cdots+\left( -1 \right)^N=
+    \begin{cases}
+      1 & N\equiv 0 \mod{2} \\
+      0 & N\equiv 1 \mod{2} \\
+    \end{cases}
+  $$
+  $$\nexists \lim_{N\to+\infty}s_N$$
+\end{example}
+
+\begin{theorem}[Serie geometrica]
+  Sia $\reals\ni q\ge0$.
+  $$
+    \sum_{n=0}^\infty q^n=
+    \begin{cases}
+      +\infty       & q\ge1    \\
+      \frac{1}{1-q} & 0\le q<1 \\
+    \end{cases}
+  $$
+\end{theorem}
+\begin{proof}
+  $$q=1\impl \sum_{n=0}^\infty q^n=1+1+\cdots=+\infty$$
+  $$
+    q\neq1
+    \impl s_N=\sum_{n=0}^N q^n=\frac{1-q^{N+1}}{1-q}
+    \impl \sum_{n=0}^\infty q^n=
+    \lim_{N\to+\infty}s_N=
+    \begin{cases}
+      +\infty       & q>1      \\
+      \frac{1}{1-q} & 0\le q<1 \\
+    \end{cases}
+  $$
+\end{proof}
+
+\begin{observation}
+  Il carattere di una serie (la sua convergenza, la sua divergenza o la sua non determinatezza) non è alterato se si trascurano un numero finito di termini:
+  $$\sum_{n=n_0}^\infty a_n$$ ha lo stesso carattere di $$\sum_{n=n_0+k}^\infty a_n$$
+  Infatti, si nota che:
+  $$\sum_{n=n_0}^Na_n=\sum_{n=n_0+k}^Na_n+\sum_{n=n_0}^{n_0+k-1}a_n$$
+\end{observation}
+
+\begin{observation}
+  Raramente si riesce a determinare esattamente la somma di una serie convergente.
+\end{observation}
+
+\subsection{Proprietà}
+
+\begin{theorem}[Linearità]
+  Siano $\left\{ a_n \right\},\left\{ b_n \right\}$ successioni e $a,b\in\reals$. Vale la seguente relazione:
+  $$\sum_n\left( \alpha a_n+\beta b_n \right)=\alpha\sum_na_n+\beta\sum_nb_n$$
+  In particolare, se due delle serie cui sopra convergono anche la terza converge. Di contro, se $\sum_na_n$ converge e $\sum_nb_n$ non converge, allora $\sum_n\left( \alpha a_n+\beta b_n \right)$ non converge.
+\end{theorem}
+
+\begin{theorem}[Confronto]
+  Se $0\le a_n\le b_n\ \forall n$, allora:
+  \begin{itemize}[label=--]
+    \item se $\sum_nb_n$ converge, anche $\sum_na_n$ converge e, in particolare $$\sum_na_n\le\sum_nb_n$$
+    \item se $\sum_na_n$ diverge, anche $\sum_nb_n$ diverge, poiché le somme parziali di $a_n$ sono più piccole di quelle di $b_n$.
+  \end{itemize}
+\end{theorem}
+
+\begin{theorem}[Confronto asintotico]
+  Siano $\left\{ a_n \right\},\left\{ b_n \right\}$ successioni, tali che $0\le a_n,0\le b_n$ e $a_n\sim b_n$ per $n\to+\infty$. Allora:
+  $$\reals\ni\sum_na_n\iff \sum_nb_n\in \reals$$
+  oppure:
+  $$\infty=\sum_na_n\iff\sum_nb_n=\infty$$
+\end{theorem}
+\begin{proof}
+  $$a_n\sim b_n\iff \lim_{n}\frac{a_n}{b_n}=1$$
+  $$\forall\epsilon>0\ \exists\ N:n\ge N\impl\abs{\frac{a_n}{b_n}-1}<\epsilon$$
+  $$\Updownarrow$$
+  $$-\epsilon<\frac{a_n}{b_n}-1<+\epsilon$$
+  $$\Updownarrow$$
+  $$1-\epsilon<\frac{a_n}{b_n}<1+\epsilon$$
+  $$\Updownarrow$$
+  $$\left( 1-\epsilon \right)b_n<a_n<\left( 1+\epsilon \right)b_n$$
+  Pertanto, per il teorema del confronto, $\sum_na_n$ ha lo stesso carattere di $\sum_nb_n$
+\end{proof}
+
+\begin{theorem}
+  Condizione necessaria affinché $\sum_na_n$ converga è che $\lim_na_n=0$.
+\end{theorem}
+\begin{proof}
+  $$a_N\walrus s_N-s_{N-1}$$
+  Se $\sum_na_n$ converge, allora $\exists\ \lim_Ns_N=\lim_Ns_{N-1}$ e quindi:
+  $$\lim_Na_N=\lim_N\left( s_N-s_{N-1} \right)=\left( \lim_Ns_N \right)-\left( \lim_Ns_{N-1} \right)=0$$
+\end{proof}
+
+\begin{example}
+  $$\sum_{n=1}^\infty\frac{1}{n^2}=1+\frac{1}{4}+\frac{1}{9}+\cdots$$
+  $$a_n=\frac{1}{n^2}\stackrel{n\to\infty}{\sim}\frac{1}{n\left( n+1 \right)}=b_n$$
+  Per il criterio del confronto asintotico $\sum\frac{1}{n}$ converge.
+\end{example}
+
+\begin{observation}
+  La condizione di cui sopra è \emph{necessaria}, ma non sufficiente.
+\end{observation}
+
+\begin{example}
+  \emph{Serie armonica}
+  $$\sum_{n=1}^\infty\frac{1}{n}=1+\frac{1}{2}+\frac{1}{3}+\cdots$$
+  $$a_n=\frac{1}{n}\xrightarrow{n\to\infty}0$$
+  La condizione necessaria è verificata.
+  Considerata la funzione $f$, definita nel seguente modo:
+  $$f\left( x \right)\walrus\ln\left( 1+x \right)$$
+  Si ha che:
+  $$f'\left( x \right)=\left( 1+x \right)^{-1}$$
+  $$f''\left( x \right)=-\left( 1+x \right)^{-2}$$
+  Poiché $f''\left( x \right)<0$, $f$ è concava, ossia il suo grafico è al di sotto delle sue tangenti. In particolare, $f'\left( 0 \right)=1$:
+  % TODO: grafico di ln(x+1) con tangente in x=0
+  Pertanto:
+  $$\ln\left( 1+x \right)\le x\iff\ln\left( 1+\frac{1}{n} \right)\le \frac{1}{n}\iff\ln\left( \frac{n+1}{n} \right)\le \frac{1}{n}$$
+  $$\sum_{n=1}^N\ln\left( \frac{n+1}{n} \right)\le\sum_{n=1}^N\frac{1}{n}$$
+  Da cui:
+  $$+\infty\le\sum_{n=1}^N\frac{1}{n}\impl \sum_{n=1}^N\frac{1}{n}=+\infty$$
+  Pertanto, la serie armonica diverge per il criterio del confronto.
+\end{example}
+
+\begin{example}
+  $$\sum_{n=1}^\infty\frac{1}{n^\alpha}\qquad\alpha\ge2$$
+  $$\frac{1}{n^\alpha}\le\frac{1}{n^2}$$
+  $$\sum_{n=1}^\infty \frac{1}{n^\alpha}\le\sum_{n=1}^\infty\frac{1}{n^2}<+\infty$$
+  In particolare, $\sum n^{-\alpha}$ converge.
+\end{example}
+
+\begin{example}
+  $$\sum_{n=0}^\infty\left( \sqrt{n+1}-\sqrt{n} \right)=\sum_{n=0}^\infty\frac{\left( \sqrt{n+1}-\sqrt{n} \right)\left( \sqrt{n+1}+\sqrt{n} \right)}{\left( \sqrt{n+1}+\sqrt{n} \right)}=\sum_{n=0}^\infty\frac{1}{\sqrt{n+1}+\sqrt{n}}$$
+  $$a_n=\frac{1}{\sqrt{n+1}+\sqrt{n}}\sim \frac{1}{2\sqrt{n}}$$
+  $$\frac{1}{n}\le \frac{1}{2\sqrt{n}}$$
+  $$+\infty=\sum_n\frac{1}{n}\le\sum_n\frac{1}{2\sqrt{n}}$$
+  Per il teorema del confronto asintotico, la serie diverge.
+\end{example}
+
+\begin{example}
+  $$\sum_{n\ge1}\frac{\sqrt[n]{e}-1}{n}$$
+  $$a_n=\frac{\sqrt[n]{e}-1}{n}=\frac{1}{n}\left( e^{\nicefrac{1}{n}}-1 \right)\sim \frac{1}{n}\cdot \frac{1}{n}=\frac{1}{n^2}$$
+  Pertanto, per il teorema del confronto asintotico, la serie converge.
+\end{example}
+
+\begin{theorem}[Confronto integrale]
+  Siano $\left\{ a_n \right\}$ e una funzione $f:\rintv{0}{\infty}\to\rintv{0}{\infty}\in\mathcal{R}\left( \rintv{0}{\infty} \right)$, tali che $a_n\ge0$ e $f$ decrescente.
+  Se $a_n\sim f\left( n \right)$ per $n\to+\infty$, allora $\sum a_n$ converge.
+\end{theorem}
+\begin{proof}
+  $$x\in\rintv{n}{n+1}\impl f\left( x \right)\ge f\left( n+1 \right)$$
+  $$+\infty>\int_0^\infty f\left( x \right)\,dx\ge\sum_{n=0}^\infty f\left( n+1 \right)$$
+  % TODO: grafico di 1/x scalinato a intervalli regolari; colorare area sotto gli scalini
+  Quindi $\sum f\left( n+1 \right)$ è convergente e, dato che $a_n\sim f\left( n+1 \right)$, anche $\sum a_n$ è convergente.
+\end{proof}
+
+\begin{example}
+  $$\sum_{n\ge1}\frac{1}{n^\alpha}\qquad\alpha\in\ointv{1}{2}$$
+  $$f\left( x \right)=\frac{1}{x^\alpha}\iff f\left( n \right)=\frac{1}{n^\alpha}$$
+  Poiché $f$ è integrabile su $\ointv{1}{\infty}$ per $\alpha>1$, per il teorema del confronto integrale, si ha che:
+  $$\sum_{n\ge1}\frac{1}{n^\alpha}\in\reals$$
+\end{example}
+
+\begin{theorem}[Criterio della radice]
+  Sia $\left\{ a_n \right\}$, tale che $0\le a_n$ ed
+  $$\exists\ \l\walrus\lim_n\sqrt[n]{a_n}\in\intv{0}{\infty}$$
+  Allora:
+  \begin{itemize}
+    \item se $0\le\l<1$, la serie $\sum a_n$ converge;
+    \item se $\l>1$, la serie $\sum a_n$ diverge;
+    \item se $\l=1$, nulla si può dire sula carattere di $\sum a_n$.
+  \end{itemize}
+\end{theorem}
+\begin{proof}
+  Dalle ipotesi segue che:
+  $$\forall \epsilon>0\ \exists\ N:n\ge N\impl\abs{\sqrt[n]{a_n}-\l}<\epsilon$$
+  $$\Updownarrow$$
+  $$-\epsilon<\sqrt[n]{a_n}-\l<+\epsilon\iff\l-\epsilon<\sqrt[n]{a_n}<\l+\epsilon$$
+  In virtù del fatto che $\epsilon$ è arbitrariamente piccolo, si sceglie $0<\epsilon<\l$, per cui si ha:
+  $$\left( \l-\epsilon \right)^n<a_n<\left( \l+\epsilon \right)^n$$
+  da cui:
+  $$\sum_n\left( \l-\epsilon \right)^n<\sum_na_n<\sum_n\left( \l+\epsilon \right)^n$$
+  Se $\l<1$, scegliendo $\epsilon:\l+\epsilon<1$ la serie $\sum\left( \l+\epsilon \right)^n$ converge; quindi, per il teorema del confronto, anche $\sum a_n$ converge.
+  
+  \noindent Se $\l>1$, scegliendo $\epsilon:\l-\epsilon>1$ la serie $\sum\left( \l-\epsilon \right)^n$ diverge; quindi, per il teorema del confronto, anche $\sum a_n$ diverge.
+\end{proof}
+
+\begin{example}
+  $$\sum_{n\ge1}n^{-\alpha}\qquad a_n=n^{-\alpha}$$
+  $$\sqrt{a_n}=a_n^{\nicefrac{1}{n}}=n^{-\nicefrac{\alpha}{n}}=e^{-\nicefrac{\alpha}{n}\ln n}\xrightarrow{n\to\infty}1\quad \forall\a>0$$
+  Pertanto $\sum n^{-\alpha}$ converge se $\alpha>1$ e, viceversa, diverge se $0<\alpha\le 1$.
+\end{example}
+
+\begin{example}
+  $$\sum_{n\ge1}\frac{n}{2^n}\qquad a_n=\frac{n}{2^n}$$
+  $$a_n^{\nicefrac{1}{n}}=\frac{n^{\nicefrac{1}{n}}}{2}=\frac{e^{\nicefrac{\ln n}{n}}}{2}\to \frac{1}{2}<1$$
+  Pertanto la serie converge.
+\end{example}
+
+\begin{theorem}[Criterio del rapporto]
+  Sia $\left\{ a_n \right\}$, tale che $0\le a_n$ ed
+  $$\exists\ \l\walrus \lim_n\frac{a_{n+1}}{a_n}\in\intv{0}{\infty}$$
+  Allora:
+  \begin{itemize}
+    \item se $0\le\l<1$, la serie $\sum a_n$ converge;
+    \item se $\l>1$, la serie $\sum a_n$ diverge;
+    \item se $\l=1$, nulla si può dire sula carattere di $\sum a_n$.
+  \end{itemize}
+\end{theorem}
+\begin{proof}
+  Dalle ipotesi segue che:
+  $$\forall \epsilon\ \exists\ N:n\ge N\impl\abs{\frac{a_{n+1}}{a_n}-\l}<\epsilon$$
+  $$\Updownarrow$$
+  $$-\epsilon<\frac{a_{n+1}}{a_n}-\l<+\epsilon\iff\l-\epsilon<\frac{a_{n+1}}{a_n}<\l+\epsilon$$
+  In virtù del fatto che $\epsilon$ è arbitrariamente piccolo, si sceglie $0<\epsilon<\l$.
+  Poiché $a_n\ge0$, si ha:
+  $$\left( \l-\epsilon \right)a_n<a_{n+1}<\left( \l+\epsilon \right)a_n$$
+  Se $\l<1$, scegliendo $\epsilon:\l+\epsilon<1$, si ottiene: $$a_{n+1}<\left( \l+\epsilon \right)a_n<\left( \l+\epsilon \right)\left( \l+\epsilon \right)a_{n-1}<\cdots<\left( \l+\epsilon \right)^{n+1}a_0$$ quindi si sta confrontando la serie con una serie $\sum\left( \l+\epsilon \right)^n$ geometrica convergente e, per il criterio del confronto, $\sum a_n$ è convergente.
+  
+  \noindent Se $\l>1$, scegliendo $\epsilon:\l-\epsilon>1$, si ottiene: $$a_{n+1}>\left( \l-\epsilon \right)a_n>\left( \l-\epsilon \right)^2a_{n-1}>\cdots>\left( \l-\epsilon \right)^{n+1}a_0$$ quindi si sta confrontando la serie con una serie $\sum\left( \l-\epsilon \right)^n$ geometrica divergente e, per il criterio del confronto, $\sum a_n$ è divergente.
+\end{proof}
+
+\begin{example}
+  \emph{Serie esponenziale}
+  
+  Sia $x\ge0$ fissato.
+  $$\sum_{n=0}^\infty\frac{x^n}{n!}$$
+  $$a_n=\frac{x^n}{n!}\ge0$$
+  $$\frac{a_{n+1}}{a_n}=\frac{x^{n+1}}{\left( n+1 \right)!}\cdot \frac{n!}{x^n}=x\cdot\frac{1}{n+1}\xrightarrow{n\to\infty}0=\l$$
+  Per il criterio del rapporto, la serie converge.
+  
+  In più, applicando il teorema di Taylor con resto di Lagrange, si ottiene:
+  $$e^x=\lim_{N\to+\infty}\sum_{n=0}^N\frac{x^n}{n!}=\sum_{n=0}^\infty\frac{x^n}{n!}\quad \forall x\ge0$$
+\end{example}
+
+\begin{example}
+  $$\sum_{n\ge1}n!\cdot\left( \frac{b}{n} \right)^n\qquad b>0$$
+  $$a_n=n!\cdot\left( \frac{b}{n} \right)^n$$
+  $$\frac{a_{n+1}}{a_n}=\frac{\left( n+1 \right)!}{n!}\cdot\left( \frac{b}{n+1} \right)^{n+1}\cdot\left( \frac{n}{b} \right)^n=b\cdot\left( n+1 \right)\cdot \frac{1}{n+1}\cdot\left( \frac{n}{n+1} \right)^n=\frac{b}{\left( 1+\frac{1}{n} \right)^n}\xrightarrow{\infty}\frac{b}{e}$$
+  La serie converge se $b<e$, in quanto $\nicefrac{b}{e}<1$. La serie diverge se $b>e$, in quanto $\nicefrac{b}{e}>1$.
+  Se $b=e$, usare la formula di Stirling. % TODO: da continuare
+\end{example}
+
+\begin{observation}
+  Per le serie a termini non negativi $a_n\ge0$ le somme parziali $s_N$ costituiscono una successione $\left\{ s_N \right\}\subset\reals$ monotona crescente, che ha limite finito o $+\infty$: tali serie, quindi, non possono essere indeterminate.
+\end{observation}
+
+\begin{definition}[Convergenza assoluta]
+  La serie $\sum a_n$ è detta assolutamente convergente se la serie $\sum\abs{a_n}$ converge.
+\end{definition}
+
+\begin{theorem}
+  Se $\sum a_n$ converge assolutamente, allora converge semplicemente e, in particolare:
+  $$\abs{\sum_na_n}\le\sum_n\abs{a_n}$$
+\end{theorem}
+\begin{proof}
+  Si considerano le somme parziali dei termini positivi e di quelli negativi separatamente:
+  $$s_N^+\walrus \sum_{n=0}^Na_n:a_n\ge0\qquad s_N^-\walrus \sum_{n=0}^N\left( -a_n \right):a_n\le0$$
+  $$s_N^+\ge0\qquad s_N^-\ge0$$
+  $$s_N=s_N^+-s_N^-$$
+  Per le somme parziali dei termini positivi si osserva che:
+  $$s_N^+=\sum_{\substack{n=0\\a_n\ge0}}^N\abs{a_n}\le\sum_{n=0}^N\abs{a_n}<+\infty$$
+  Essendo $\left\{ s_N^+ \right\}$ monotona crescente e superiormente limitata, per il criterio di convergenza delle successioni monotone limitate, si ha:
+  $$\exists\ s^+\walrus\lim_{N\to+\infty}s_N^+\le\sum_{n=0}^\infty\abs{a_n}<+\infty$$
+  Per le somme parziali dei termini negativi si osserva che:
+  $$s_N^-=\sum_{\substack{n=0\\a_n\le0}}^N\abs{a_n}\le\sum_{n=0}^N\abs{a_n}<+\infty$$
+  Essendo $\left\{ s_N^- \right\}$ monotona crescente e superiormente limitata, per il criterio di convergenza delle successioni monotone limitate, si ha:
+  $$\exists\ s^-\walrus\lim_{N\to+\infty}s_N^-\le\sum_{n=0}^\infty\abs{a_n}<+\infty$$
+  Per le proprietà dei limiti, si ha:
+  $$\exists\ \lim_{N\to+\infty}s_N=\lim_{N\to+\infty}\left( s_N^+-s_N^- \right)=\lim_{N\to+\infty}s_N^+-\lim_{N\to+\infty}s_N^-=s^+-s^-\in\reals$$
+\end{proof}
+
+\begin{example}
+  $$\sum_{n\ge1}\frac{\sin n}{n^2}$$
+  $$a_n=\frac{\sin n}{n^2}$$
+  $$\abs{a_n}=\abs{\frac{\sin n}{n^2}}\le\frac{1}{n^2}$$
+  Per il teorema del confronto, si ottiene:
+  $$\sum_{n=1}^\infty\abs{a_n}\le\sum_{n=1}^\infty\frac{1}{n^2}<+\infty$$
+  Pertanto, $\sum a_n$ converge assolutamente e, per il teorema di cui sopra, anche semplicemente.
+\end{example}
+
+\begin{theorem}[Criterio di Leibnitz]
+  Sia data una serie nella seguente forma:
+  $$\sum_{n=0}^\infty\left( -1 \right)^na_n$$
+  Se $a_n\ge0$ e $\lim a_n=0$ e $\left\{ a_n \right\}$ è definitivamente decrescente\footnote{$\exists\ n_0\ge0:n>n_0\impl a_n\ge a_{n+1}$}, allora la serie converge:
+  $$\exists\ s\walrus \lim_{N\to+\infty}s_N=\sum_{n=0}^\infty\left( -1 \right)^na_n\in\reals$$
+  Inoltre $s_{2N}\ge s\ge s_{2N+1}\ \forall N\ge0$, con $\left\{ s_{2N} \right\}$ decrescente e $\left\{ s_{2N+1} \right\}$ crescente.
+  In più:
+  $$R_N\walrus \sum_{n=N}^\infty\left( -1 \right)^na_n$$
+  è una serie convergente e $\abs{R_N}\le a_N\ \forall N\ge0$.
+\end{theorem}
+\begin{proof}
+  Poiché $\lim \abs{\left( -1 \right)^na_n}=\lim \abs{a_n}=0$ la condizione necessaria della convergenza è verificata.
+  
+  \noindent Considerata la successione $\left\{ s_{2N} \right\}$, si nota che essa è decrescente:
+  \begin{align*}
+    s_0 & =a_0\ge0                                                           \\
+    s_2 & =\underbrace{a_0}_{s_0}+\underbrace{a_2-a_1}_{\le0}\le s_0         \\
+    s_4 & =\underbrace{a_0-a_1+a_2}_{s_2}+\underbrace{a_4-a_3}_{\le0}\le s_2 \\
+        & \vdots                                                             
+  \end{align*}
+  
+  \noindent Considerata la successione $\left\{ s_{2N+1} \right\}$, si nota che essa è crescente:
+  \begin{align*}
+    s_1 & =a_0-a_1\ge0                                                           \\
+    s_3 & =\underbrace{a_0-a_1}_{s_1}+\underbrace{a_2-a_3}_{\ge0}\ge s_1         \\
+    s_5 & =\underbrace{a_0-a_1+a_2-a_3}_{s_3}+\underbrace{a_4-a_5}_{\ge0}\ge s_3 \\
+        & \vdots                                                                 
+  \end{align*}
+  Inoltre:
+  $$s_{2N+1}=s_{2N}-a_{2N+1}\quad\forall N\ge0$$
+  $$s_1\le s_3\le \cdots\le s_{2N+1}\le s_{2N}\le \cdots \le s_2\le s_0$$
+  Pertanto, le successioni $\left\{ s_{2N} \right\}$ e $\left\{ s_{2N+1} \right\}$ sono monotone e limitate e, per il teorema di convergenza delle successioni monotone limitate:
+  $$\exists\ \lim_{N}s_{2N}\qquad \exists\ \lim_{N}s_{2N+1}$$
+  Inoltre:
+  $$\lim_N\left( s_{2N+1}-s_{2N} \right)=\lim_N\left( -a_{2N+1} \right)=0$$
+  $$\Updownarrow$$
+  $$\reals\ni s\walrus\lim_Ns_{2N}=\lim_Ns_{2N+1}$$
+  Vale a dire:
+  $$\forall \epsilon>0\ \exists\ M_p\left( \epsilon \right)\ge0:2N\ge M_p\left( \epsilon \right)\impl\abs{s_{2N}-s}<\epsilon$$
+  $$\forall \epsilon>0\ \exists\ M_d\left( \epsilon \right)\ge0:2N+1\ge M_d\left( \epsilon \right)\impl\abs{s_{2N+1}-s}<\epsilon$$
+  Ponendo $M\left( \epsilon \right)\walrus \max\left\{ M_p\left( \epsilon \right),M_d\left( \epsilon \right) \right\}$, si ha:
+  $$\forall \epsilon>0\ \exists\ M\left( \epsilon \right)\ge0:N\ge M\left( \epsilon \right)\impl\abs{s_N-s}<\epsilon$$
+  ossia:
+  $$\exists\ \lim_{N}s_N=s$$
+  In particolare:
+  $$s_{2N+1}\le s\le s_{2N}\iff s_{2N+1}\le \sum_{n=0}^\infty\left( -1 \right)^na_n\le s_{2N}$$
+  
+  Per quanto riguarda il resto:
+  $$R_N=\sum_{n=N}^\infty\left( -1 \right)^na_n=\sum_{n=0}^\infty\left( -1 \right)^na_n-\sum_{n=0}^{N-1}\left( -1 \right)^na_n=s-s_{N-1}$$
+  $$\lim_NR_N=\lim_N\left( s-s_{N-1} \right)=s-\lim_Ns_{N-1}=s-s=0$$
+  Usando quanto ottenuto prima:
+  $$s_{2N-1}\le s\le s_{2N}\qquad s_{2N+1}\le s\le s_{2N}$$
+  Da cui:
+  $$0\le s-s_{2N-1}\le s_{2N}-s_{2N-1}=a_{2N}\qquad 0\le s_{2N}-s\le s_{2N}-s_{2N+1}=a_{2N+1}$$
+  In ogni caso $\abs{s_N-s}\le a_N$, sia per $N$ pari sia per $N$ dispari, per cui:
+  $$\abs{R_N}\le a_{N-1}\quad \forall N\ge0$$
+\end{proof}
+
+\begin{example}
+  $$\sum_{n=1}^\infty\frac{\left( -1 \right)^n}{n}$$
+  $a_n=\nicefrac{1}{n}\ge0$ è decrescente e $\lim_na_n=0$. Allora, per il criterio di Leibnitz, la serie converge.
+  Tuttavia la serie non converge assolutamente:
+  $$\sum_{n=1}^\infty\abs{\frac{\left( -1 \right)^n}{n}}=\sum_{n=1}^\infty\frac{1}{n}=+\infty$$
+\end{example}
+
+\begin{example}
+  $$\sum_{n=2}^\infty\left( -1 \right)^n\frac{\ln n}{n}$$
+  $$a_n=\frac{\ln n}{n}$$
+  $$a_n\ge0\quad \forall n\ge2$$
+  $$\lim_na_n=\lim_n\frac{\ln n}{n}=0$$
+  Per determinare se $\left\{ a_n \right\}$ è definitivamente descrescente, si usa la funzione ausiliaria:
+  $$f\left( x \right)\walrus \frac{\ln x}{x}\qquad f\left( n \right)=\frac{\ln n}{n}=a_n\qquad x\in\reals,n\in\mathbb{N}\setminus\left\{ 0,1 \right\}$$
+  $f$ è derivabile poiché combinazione di funzioni derivabili:
+  $$f'\left( x \right)=\frac{\nicefrac{1}{x}\cdot x-\ln x\cdot 1}{x^2}=\frac{1-\ln x}{x^2}$$
+  $$f'\left( x \right)\le0\iff \ln x\ge 1\iff x\ge e$$
+  $f$ è decrescente su $\rintv{e}{+\infty}$, per cui $\left\{ a_n \right\}$ è decrescente per $n\ge e$, ossia per $n\ge3$.
+  Per il criterio di Leibnitz, la serie converge semplicemente.
+\end{example}
+
+\begin{example}
+  $$\sum_{n=1}^\infty\left( -1 \right)^n\frac{\sqrt{n}+\left( -1 \right)^n}{n}=\sum_{n=1}^\infty\left( \frac{\left( -1 \right)^n}{\sqrt{n}}+\frac{1}{n} \right)$$
+  La serie $\sum\frac{\left( -1 \right)^n}{\sqrt{n}}$ converge semplicemente per il criterio di Leibnitz (vedi esempio), ma $\sum \frac{1}{n}$ non converge.
+  Quindi, la serie originale non converge. 
+  
+  Infatti, se fosse convergente, si avrebbe:
+  $$\sum_{n=1}^\infty\frac{1}{n}=\sum_{n=1}^\infty\left( -1 \right)^n\frac{\sqrt{n}+\left( -1 \right)^n}{n}-\sum_{n=1}^\infty\frac{\left( -1 \right)^n}{\sqrt{n}}$$
+  e quindi la serie armonica sarebbe convergente, per linearità.
+  Inoltre:
+  $$\frac{\sqrt{n}+\left( -1 \right)^n}{n}\ge0$$
+  $$\lim_n\frac{\sqrt{n}+\left( -1 \right)^n}{n}=0$$
+  $$\frac{\sqrt{n+1}+\left( -1 \right)^n}{n+1}\nleq \frac{\sqrt{n}+\left( -1 \right)^n}{n}\quad \forall n\ge1$$
+  Pertanto non tutte le ipotesi del criterio di Leibnitz sono soddisfatte.
+\end{example}
+
+\subsection{Serie di Taylor}
+
+\begin{definition}[Serie di Taylor]
+  Sia $f\in \mathcal{C}^\infty\left( \ointv{a}{b} \right)$, ossia $f$ è derivabile un numero arbitrario di volte, e $x_0\in\ointv{a}{b}$.
+  La serie di Taylor di $f$ in $x_0$ è:
+  $$\sum_{n=0}^\infty\frac{f^{\left( n \right)}\left( x_0 \right)}{n!}\left( x-x_0 \right)^n=\lim_{N\to\infty}\sum_{n=0}^N\frac{f^{\left( n \right)}\left( x_0 \right)}{n!}\left( x-x_0 \right)^n=\lim_{N\to\infty}T_{x_0,N}^f\left( x \right)$$
+\end{definition}
+\begin{observation}
+  La serie di Taylor di $f$ converge e il suo valore è $f\left( x \right)$.
+\end{observation}
+\begin{proof}
+  Per il teorema di Taylor con il resto di Lagrange:
+  $$f\left( x \right)=T_N\left( x \right)+R_N\left( x \right)\qquad R_N\left( x \right)=\frac{f^{\left( N+1 \right)}\left( c \right)}{\left( N+1 \right)!}\left( x-x_0 \right)^{N+1}$$
+  dove $\abs{c-x_0}<\abs{x-x_0}$.
+  
+  Sia $\reals \ni M_N\walrus \sup\limits_{x\in\ointv{a}{b}} \abs{f^{\left( N \right)}\left( x \right)}$. Si osserva che:
+  $$\abs{f\left( x \right)-T_N\left( x \right)}=\abs{R_N\left( x \right)}\le\frac{M_{N+1}}{\left( N+1 \right)!}\left( b-a \right)^{N+1}\quad \forall x\in\ointv{a}{b}$$
+  Quindi:
+  $$\lim_{N\to\infty}\frac{M_{N+1}}{\left( N+1 \right)!}\left( b-a \right)^{N+1}=0\impl f\left( x \right)=T_N\left( x \right)$$
+  vale a dire che la serie di Taylor converge e la sua somma è proprio $f\left( x \right)$:
+  $$\sum_{n=0}^\infty\frac{f^{\left( n \right)}\left( x_0 \right)}{n!}\left( x-x_0 \right)^n=f\left( x \right)\quad \forall x\in\ointv{a}{b}$$
+  La condizione sufficiente è verificata, per la formula di Stirling, se $M_N\le k^N\ k\in\reals^+$.
+\end{proof}
+
+\begin{example}
+  $$f\left( x \right)=e^x\qquad x_0=0$$
+  $$f^{\left( n \right)}\left( x \right)=e^x\quad \forall n\ge0$$
+  $$f^{\left( n \right)}\left( x_0 \right)=e^0=1\quad \forall n\ge0$$
+  $$M_N\walrus \sup_{x\in\ointv{a}{b}}\abs{f^{\left( n \right)}\left( x \right)}=1\quad \forall N\ge0,\forall\ \ointv{a}{b}\subset\reals$$
+  $$e^x=\sum_{n=0}^\infty\frac{x^n}{n!}$$
+  $$e^1=\sum_{n=0}^\infty\frac{1}{n!}\qquad e^{-1}=\frac{1}{e}=\sum_{n=0}^\infty\frac{\left( -1 \right)^n}{n!}$$
+\end{example}
+
+\begin{example}
+  $$f\left( x \right)=\sin x\qquad x_0=0$$
+  $$
+    f^{\left( n \right)}=
+    \begin{cases}
+      \sin x  & n\equiv 0\mod{4} \\
+      \cos x  & n\equiv 1\mod{4} \\
+      -\sin x & n\equiv 2\mod{4} \\
+      -\cos x & n\equiv 3\mod{4} \\
+    \end{cases}
+  $$
+  $$M_N=1\quad \forall N\ge0$$
+  $$\sin x=\sum_{n=0}^\infty\left( -1 \right)^n\frac{x^{2n+1}}{\left( 2n+1 \right)!}$$
+\end{example}
+
+\begin{example}
+  $$f\left( x \right)=\cos x\qquad x_0=0$$
+  $$
+    f^{\left( n \right)}=
+    \begin{cases}
+      \cos x  & n\equiv 0\mod{4} \\
+      -\sin x & n\equiv 1\mod{4} \\
+      -\cos x & n\equiv 2\mod{4} \\
+      \sin x  & n\equiv 3\mod{4} \\
+    \end{cases}
+  $$
+  $$M_N=1\quad \forall N\ge0$$
+  $$\cos x=\sum_{n=0}^\infty\left( -1 \right)^n\frac{x^{2n}}{\left( 2n \right)!}$$
+\end{example}
+
+\begin{example}
+  $$f\left( x \right)=\ln\left( 1+x \right)\qquad x_0=0$$
+  $$f^{\left( n \right)}\left( x \right)=\left( -1 \right)^{n-1}\left( n-1 \right)!\left( 1+x \right)^{-n}$$
+  $$M_N\le \left( N-1 \right)!\left( 1+a \right)^{-N}\quad \forall x\in\ointv{a}{b}\subset\ointv{-1}{+\infty}$$
+  $$\ln\left( 1+x \right)=\sum_{n=1}^\infty\left( -1 \right)^{n-1}\frac{x^n}{n}=-\sum_{n=1}^\infty\left( -1 \right)^n\frac{x^n}{n}$$
+\end{example}
+
+\begin{example}
+  $$\frac{1}{1-x}=\sum_{n=0}^\infty x^n\qquad\abs{x}<1$$
+\end{example}
+
+\begin{theorem}[Formula di Eulero]
+  Sia $\t\in\reals$. Vale la seguente identità:
+  $$e^{i\t}=\cos\t+i \sin\t$$
+\end{theorem}
+\begin{proof}
+  $$e^{z}=\sum_{n=0}^\infty\frac{z^n}{n!}\qquad z\in\complex$$
+  $$\lim_n\abs{e^z-\sum_{n=0}^N\frac{z^n}{n!}}=0$$
+  Sia $z=i\t$. Allora:
+  \begin{align*}
+    e^{z} & =e^{i\t}                                                                                                                                            \\
+          & =\sum_{n=0}^\infty\frac{\left( i\t \right)^n}{n!}                                                                                                   \\
+          & =\sum_{n=0}^\infty\frac{\left( i\t \right)^{2n}}{\left( 2n \right)!}+\sum_{n=0}^\infty\frac{\left( i\t \right)^{2n+1}}{\left( 2n+1 \right)!}        \\
+          & =\sum_{n=0}^\infty\left( -1 \right)^n\frac{\t^{2n}}{\left( 2n \right)!}+i\sum_{n=0}^\infty\left( -1 \right)^n\frac{\t^{2n+1}}{\left( 2n+1 \right)!} \\
+          & =\cos\t+i\sin\t                                                                                                                                     
+  \end{align*}
+\end{proof}
