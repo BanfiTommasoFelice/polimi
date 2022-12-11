@@ -1,7 +1,7 @@
-\documentclass[a4paper,12pt]{article}
+\documentclass[a4paper,12pt,twoside]{article}
 
 \usepackage[italian]{babel}
-\usepackage[a4paper, left=18mm, right=18mm, top=20mm, bottom=20mm]{geometry}
+\usepackage[a4paper, left=18mm, right=18mm, top=25mm, bottom=20mm]{geometry}
 \usepackage{amssymb}
 \usepackage{mathtools}
 \usepackage{interval}
@@ -16,6 +16,13 @@
 \usepackage{verbatim}
 \usepackage{tabularray}
 \usepackage{bold-extra}
+\usepackage{colonequals}
+\usepackage{titling}
+\usepackage{fancyhdr}
+\usepackage{ifthen}
+\usepackage{accents}
+\usepackage{xcolor}
+\usepackage[many]{tcolorbox}
 
 \hypersetup{
   colorlinks=true,
@@ -40,6 +47,39 @@
 \setitemize{noitemsep,topsep=3pt,parsep=0pt,partopsep=0pt}
 \setenumerate{noitemsep,topsep=3pt,parsep=0pt,partopsep=0pt}
 
+\renewcommand{\sectionmark}[1]{\markboth{\textbf{#1}}{}}
+\renewcommand{\subsectionmark}[1]{\markright{\thesubsection\ \ \emph{#1}}}
+\setlength{\headheight}{15pt}
+
+\tcbuselibrary{breakable}
+\tcbuselibrary{external}
+\tcbEXTERNALIZE
+\tcbset{
+    arc=0pt,
+    outer arc=0pt,
+    breakable=true,
+}
+\newtcolorbox{obsbox}{
+    colback=white,
+    colframe=black,
+    boxrule=1pt,
+    left=5pt,
+    right=5pt,
+    top=5pt,
+    bottom=5pt,
+}
+\definecolor{98fb98}{HTML}{98fb98}
+\newtcolorbox{exbox}{
+    colback=98fb98!40,
+    colframe=white,
+    boxrule=1pt,
+    left=5pt,
+    right=5pt,
+    top=5pt,
+    bottom=5pt,
+    arc=5pt,
+}
+
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
 \newtheorem{theorem}{Teorema}
@@ -52,6 +92,7 @@
 \newcommand{\acos}{\arccos}
 \newcommand{\atan}{\arctan}
 \newcommand{\impl}{\Rightarrow}
+\newcommand{\rimpl}{\Leftarrow}
 \setitemize{noitemsep,topsep=3pt,parsep=0pt,partopsep=0pt}
 \setenumerate{noitemsep,topsep=3pt,parsep=0pt,partopsep=0pt}
 \newcommand{\triang}[1]{\overset{\triangle}{#1}}
@@ -71,6 +112,17 @@
 \DeclareMathOperator{\im}{Im}
 \renewcommand{\r}{\rho}
 \renewcommand{\t}{\theta}
+\DeclareMathOperator{\sgn}{sgn}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\underbar}[1]{\underaccent{\bar}{#1}}
+\makeatletter
+\let\oldint\int
+\renewcommand{\int}{
+  \if@display \oldint\limits
+  \else \oldint 
+  \fi
+}
+\makeatother
 
 \intervalconfig{soft open fences}
 \newcommand{\intv}[2]{\interval[scaled]{#1}{#2}}
@@ -79,11 +131,13 @@
 \newcommand{\rintv}[2]{\rinterval[scaled]{#1}{#2}}
 
 \newenvironment{example}
-{\par\noindent{\small\bf Esempio}\hspace{0.5em}}
-{\hfill$\nsim$}
+{\begin{exbox}\par\noindent\textbf{Esempio}\hspace{0.5em}}
+{\hfill\end{exbox}}
 \newenvironment{observation}
-{\par\noindent{\small\bf Osservazione}\hspace{0.5em}}
-{\hfill}
+{\begin{obsbox}\par\noindent\textbf{Osservazione}\hspace{0.5em}}
+{\hfill\end{obsbox}}
+
+\usetikzlibrary{external}
 
 \allowdisplaybreaks
 
@@ -95,12 +149,33 @@
   \emph{}
 \end{center}
 \newpage
+\newpage
+\
+\newpage
 \pagenumbering{roman}
 \tableofcontents
 \newpage
+\pagenumbering{gobble}
+\newpage
+\
+\newpage
 \pagenumbering{arabic}
+
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+\fancyhead[RO,LE]{\thepage}
+\fancyhead[LO,RE]{\leftmark}
+\fancyfoot[LO,RE]{\footnotesize\theauthor\ \textsuperscript{\copyright}}
+
+% \tikzexternalize[prefix=figs/]
+
 \include{01.tex}
 \include{02.tex}
 \include{03.tex}
 \include{04.tex}
+\include{05.tex}
+\include{06.tex}
+\include{07.tex}
+
 \end{document}
