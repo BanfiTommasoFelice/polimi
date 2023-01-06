@@ -7,6 +7,7 @@ supponga che esistano numeri ripetuti tra i 10 inseriti.
 
 #define N 10
 
+#include <bitset.h>
 #include <err.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -48,24 +49,32 @@ int knapsack(int W, int n, int *weight, int *values) {
   return w;
 }
 
-int cmp(const void *a, const void *b) { return *(int *)a - *(int *)b; }
+size_t gray_next(bitset_t *bs, int *set) {
+  size_t idx;
+  if (bitset_count(bs) % 2)
+    idx = bitset_first(bs) + 1;
+  else
+    idx = 0;
+  if (idx >= bs->n) idx = bs->n - 1;
+  if (set) *set = bitset_test(bs, idx);
+  bitset_flip(bs, idx);
+  return idx;
+}
 
 int combinations(int n, int *v, int k) {
-  int i, j, s, c, z;
-  qsort(v, n, sizeof(int), cmp);
-  i = 0;
-  s = 0;
-  c = 0;
-  z = 0;
-  while (v[i] == 0) {
-    z++;
-    i++;
-  }
-  j = i;
-  while (j < n) {
-    while (s > k && i < j) s -= v[i++];
-    if (s == k) c++;
-    s += v[j++];
-  }
-  return c * (1 << z);
+  int sum, cnt, removed;
+  size_t idx;
+  bitset_t *selected;
+  cnt = sum = 0;
+  selected  = bitset_new(n);
+  do {
+    idx = gray_next(selected, &removed);
+    if (removed)
+      sum -= v[idx];
+    else
+      sum += v[idx];
+    if (sum == k) cnt++;
+  } while (bitset_any(selected));
+  bitset_free(selected);
+  return cnt;
 }
